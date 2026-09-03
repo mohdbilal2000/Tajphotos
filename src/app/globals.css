@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------------------------------------
+   Design tokens — "Marble & Marigold" system.
+   Paper/ivory ground, ink text, Mughal red primary, marigold accent, lake-blue support.
+   All colours are exposed to Tailwind via @theme so utilities like bg-primary / text-muted work.
+------------------------------------------------------------------------------------------------ */
+@theme {
+  --color-bg: #faf7f2;          /* ivory marble ground */
+  --color-surface: #ffffff;     /* cards */
+  --color-surface-2: #f2ece2;   /* warm sandstone tint */
+  --color-ink: #1c1a17;         /* 16.25:1 on bg */
+  --color-muted: #5b554d;       /* 6.89:1 on bg */
+  --color-border: #e6ddd0;
+  --color-primary: #1f3a5f;     /* indigo — trust colour, 10.75:1 on bg; white on it 11.48:1 */
+  --color-primary-hover: #17304f;
+  --color-primary-fg: #ffffff;
+  --color-accent: #8e3f26;      /* Agra sandstone — 6.80:1 on bg; ivory on it 6.80:1 */
+  --color-accent-hover: #7a3520;
+  --color-accent-fg: #faf7f2;
+  --color-highlight: #e8b63a;   /* marigold — rules/underlines/icons on ink only, 9.25:1 on ink; NEVER as text on light (1.76:1) */
+  --color-jaipur: #c4707a;      /* Jaipur page tint, 10–15% alpha on surfaces */
+  --color-pichola: #2e6f7e;     /* Udaipur page tint */
+  --color-success: #2f6b3a;
+  --color-warning: #a6541b;
+  --color-error: #a32d2d;
+  --color-whatsapp: #25d366;
+  --color-whatsapp-ink: #075e54; /* WhatsApp dark teal — white text 7.7:1 */
+
+  --font-display: var(--font-fraunces), "Georgia", "Times New Roman", serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+  --radius-3xl: 1.75rem;
+
+  --shadow-soft: 0 1px 2px rgb(28 26 23 / 0.06), 0 8px 24px -8px rgb(28 26 23 / 0.10);
+  --shadow-lift: 0 2px 4px rgb(28 26 23 / 0.08), 0 20px 40px -16px rgb(28 26 23 / 0.28);
+
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-marquee: marquee 40s linear infinite;
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+}
+
+@layer base {
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body { @apply bg-bg text-ink font-sans antialiased; text-rendering: optimizeLegibility; }
+  ::selection { background: color-mix(in oklab, var(--color-highlight) 55%, white); }
+  h1, h2, h3, h4 { @apply font-display tracking-tight text-balance; font-variation-settings: "opsz" 32, "SOFT" 20; }
+  :focus-visible { @apply outline-2 outline-offset-[3px] outline-primary rounded-sm; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
+  img { @apply text-transparent; }
+}
+
+@layer components {
+  .container-site { @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8; }
+  .link { @apply text-primary underline decoration-primary/40 underline-offset-[3px] transition-colors hover:decoration-primary; }
+  .eyebrow { @apply text-xs font-semibold uppercase tracking-[0.18em] text-accent; }
+  .card { @apply rounded-2xl border border-border bg-white/70 shadow-soft; }
+  /* Tailwind v4's @apply can't reference another @apply-defined custom class, so each button
+     variant repeats the shared base declarations (kept in one place here as plain CSS custom
+     properties would be another option, but this reads more clearly for four short variants). */
+  .btn-primary, .btn-secondary, .btn-ghost, .btn-whatsapp {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-all duration-200 will-change-transform focus-visible:outline-2 disabled:opacity-60 disabled:pointer-events-none;
+  }
+  .btn-primary { @apply bg-primary text-primary-fg shadow-soft hover:bg-primary-hover hover:-translate-y-px active:translate-y-0; }
+  .btn-secondary { @apply border border-border bg-white/80 text-ink hover:border-ink/30 hover:bg-white; }
+  .btn-ghost { @apply text-ink hover:bg-surface; }
+  .btn-whatsapp { @apply bg-whatsapp-ink text-white hover:brightness-110 hover:-translate-y-px; }
+  .btn-lg { @apply px-7 py-4 text-base; }
+
+  /* Long-form content typography (used by RichText) */
+  .prose-site { @apply text-[1.0625rem] leading-[1.75] text-ink/90; }
+  .prose-site > * + * { @apply mt-5; }
+  .prose-site h2 { @apply mt-12 text-2xl font-semibold text-ink sm:text-3xl; }
+  .prose-site h3 { @apply mt-8 text-xl font-semibold text-ink; }
+  .prose-site h2 + *, .prose-site h3 + * { @apply mt-3; }
+  .prose-site ul { @apply list-disc pl-6 space-y-2 marker:text-accent; }
+  .prose-site ol { @apply list-decimal pl-6 space-y-2 marker:font-semibold marker:text-accent; }
+  .prose-site blockquote { @apply border-l-4 border-accent pl-5 font-display text-xl italic text-ink/80; }
+  .prose-site blockquote footer { @apply mt-2 text-sm not-italic text-muted font-sans; }
+  .prose-site strong { @apply font-semibold text-ink; }
+
+  /* Reveal-on-scroll without JS: animation-timeline where supported, otherwise visible */
+  .reveal { animation: var(--animate-fade-up); }
+  @supports (animation-timeline: view()) {
+    .reveal { animation-timeline: view(); animation-range: entry 0% entry 30%; animation-fill-mode: both; }
+  }
+}
+
+@utility text-shadow-hero { text-shadow: 0 2px 24px rgb(0 0 0 / 0.45), 0 1px 2px rgb(0 0 0 / 0.5); }
+@utility scrollbar-none { scrollbar-width: none; &::-webkit-scrollbar { display: none; } }
