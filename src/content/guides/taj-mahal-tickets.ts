@@ -20,7 +20,7 @@ const guide: Guide = {
     { type: "h2", text: "Where Do I Book Taj Mahal Tickets Online?" },
     { type: "p", text: "Book official Taj Mahal tickets at asi.payumoney.com, the Archaeological Survey of India's authorised payment portal. Select your visitor category, date and time slot, then pay online to receive an e-ticket. Show this e-ticket with valid photo ID (passport for foreigners) at the gate. Avoid third-party resellers, which often add inflated commissions to the same ticket." },
     { type: "h2", text: "What Are the Taj Mahal Opening Hours?" },
-    { type: "p", text: "The Taj Mahal opens 30 minutes before sunrise and closes 30 minutes before sunset, every day except Friday. Exact times shift with the seasons — roughly 6:00 AM to 6:30 PM in winter and 6:00 AM to 7:00 PM in summer. Check the current sunrise and sunset time before planning an early visit for the best light." },
+    { type: "p", text: "The Taj Mahal opens 30 minutes before sunrise and closes 30 minutes before sunset, every day except Friday. Exact times shift with the seasons — roughly 6:30 AM to 6:30 PM in winter and 6:00 AM to 7:00 PM in summer. Check the current sunrise and sunset time before planning an early visit for the best light." },
     { type: "h2", text: "Is the Taj Mahal Closed on Fridays?" },
     { type: "p", text: "Yes, the Taj Mahal is closed to regular sightseeing every Friday. The only exception is local Muslims attending Friday prayers at the mosque inside the complex. Plan same-day Delhi-Agra trips, including travel on the Gatimaan Express, for Saturday through Thursday, since the train also does not run on Fridays." },
     { type: "h2", text: "How Long Can I Stay Inside the Taj Mahal?" },
