@@ -12,7 +12,7 @@ export function CtaCard({ title, text, tourSlug, label, className }: { title: st
       <div aria-hidden className="pointer-events-none absolute -bottom-24 -left-10 size-64 rounded-full bg-accent/30 blur-3xl" />
       <div className="relative grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
         <div>
-          <p className="eyebrow text-accent">Plan with a local</p>
+          <p className="eyebrow text-highlight">Plan with a local</p>
           <h3 className="mt-2 font-display text-2xl font-semibold sm:text-3xl">{title}</h3>
           {text && (
             <p className="mt-3 max-w-xl text-bg/80 leading-relaxed">

@@ -3,15 +3,20 @@
  * resolves, every image id referenced exists, every FAQ has both q and a, and a few sanity checks.
  * Run after any content change: node scripts/lint-content.mjs
  */
+import fs from "node:fs";
+import path from "node:path";
 import { tours } from "../src/content/tours/index.ts";
 import { destinations } from "../src/content/destinations/index.ts";
 import { guides } from "../src/content/guides/index.ts";
-import { images } from "../src/content/images.ts";
 
 const tourSlugs = new Set(tours.map((t) => t.slug));
 const guideSlugs = new Set(guides.map((g) => g.slug));
 const destSlugs = new Set(destinations.map((d) => d.slug));
-const imageIds = new Set(Object.keys(images));
+// Read image ids from the asset directory rather than importing content/images.ts, since that
+// file statically imports .jpg files — a Next.js-specific asset loader tsx/Node can't resolve.
+const imageIds = new Set(
+  fs.readdirSync(path.resolve(import.meta.dirname, "../src/assets/images")).map((f) => f.replace(/\.[^.]+$/, "")),
+);
 
 const errors = [];
 const warn = (msg) => errors.push(msg);

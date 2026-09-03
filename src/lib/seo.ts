@@ -58,7 +58,7 @@ export function organizationJsonLd(): JsonLd {
     legalName: site.legalName,
     alternateName: "Taj Photos",
     url: site.url,
-    logo: { "@type": "ImageObject", url: absoluteUrl("/icon.png"), width: 512, height: 512 },
+    logo: { "@type": "ImageObject", url: absoluteUrl("/icon-512.png"), width: 512, height: 512 },
     image: absoluteUrl("/opengraph-image"),
     description: site.description,
     foundingDate: String(site.foundingYear),

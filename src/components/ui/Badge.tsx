@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 
 export function Badge({ children, tone = "accent", className }: { children: ReactNode; tone?: "accent" | "primary" | "neutral" | "success" | "glass"; className?: string }) {
   const tones = {
-    accent: "bg-accent text-accent-ink",
+    accent: "bg-accent text-accent-fg",
     primary: "bg-primary text-primary-fg",
     neutral: "bg-surface-2 text-ink",
     success: "bg-success/10 text-success",

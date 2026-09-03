@@ -41,7 +41,7 @@ const homeFaqs = [
 ];
 
 export default function Home() {
-  const hero = getImage("taj-mahal-sunrise-01");
+  const hero = getImage("taj-mahal-sunrise-1");
   return (
     <>
       <JsonLd data={{ "@context": "https://schema.org", "@type": "WebPage", name: metadata.title, url: site.url, description: site.description }} />
@@ -102,7 +102,7 @@ export default function Home() {
             <ButtonLink href="/tours#photography" variant="secondary" className="mt-6 bg-white text-ink hover:bg-white/90">See photography tours <ArrowRight className="size-4" aria-hidden /></ButtonLink>
           </div>
           <div className="grid grid-cols-3 gap-3">
-            {["taj-mahal-couple-silhouette", "taj-mahal-detail-inlay", "taj-mahal-sunrise-02"].map((id, i) => {
+            {["taj-mahal-couple-1", "taj-mahal-detail-1", "taj-mahal-sunrise-2"].map((id, i) => {
               const img = getImage(id);
               return (
                 <div key={id} className={`relative overflow-hidden rounded-2xl ${i === 0 ? "col-span-3 aspect-[16/10]" : "aspect-square"}`}>

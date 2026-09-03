@@ -10,7 +10,7 @@ import { TourCardRow } from "@/components/tours/TourCard";
 import { ArticleCard } from "@/components/guides/ArticleCard";
 import { CtaCard } from "@/components/sections/CtaCard";
 import { JsonLd } from "@/components/JsonLd";
-import { buildMetadata, articleJsonLd, faqJsonLd, breadcrumbJsonLd, graph } from "@/lib/seo";
+import { buildMetadata, articleJsonLd, faqJsonLd, graph } from "@/lib/seo";
 import { absoluteUrl, blockWordCount, formatDate, readingTime } from "@/lib/utils";
 import { CalendarClock, RefreshCcw } from "lucide-react";
 
@@ -43,7 +43,6 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
         data={graph(
           articleJsonLd(g, { image: heroImg.src.src, author: { name: author.name, url: absoluteUrl(`/about#${author.slug}`), jobTitle: author.role } }),
           faqJsonLd(g.faqs),
-          breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Guides", path: "/guides" }, { name: g.title, path: `/guides/${g.slug}` }]),
         )}
       />
 
