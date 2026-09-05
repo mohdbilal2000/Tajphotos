@@ -19,6 +19,9 @@ export function StickyMobileBar({ tour }: { tour: Tour }) {
           <MessageCircle className="size-4" aria-hidden /> Check availability
         </WhatsAppLink>
       </div>
+      {/* Parity with the desktop sidebar's identical line — mobile visitors got no availability
+          reassurance at all since this bar is the only booking UI most of them ever see. */}
+      <p className="mt-1.5 text-center text-[0.7rem] text-muted">Next available: check on WhatsApp</p>
     </div>
   );
 }

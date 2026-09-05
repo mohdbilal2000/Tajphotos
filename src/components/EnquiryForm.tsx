@@ -13,6 +13,18 @@ const initialState: EnquiryState = { status: "idle" };
 const budgets = ["Budget-friendly", "Mid-range comfort", "Luxury", "Not sure yet"];
 const hotels = ["3★", "4★", "5★ / boutique heritage", "Mix, tell us your style"];
 
+// Only destinations/name/contact-method/contact are actually required (per the Zod schema in
+// actions.ts), but every field rendered at equal visual weight — Baymard's enquiry-form research
+// found users skip required fields more often when optional ones aren't marked as such, since
+// nothing distinguishes "must answer" from "nice to have." Marking both, not just one, is the fix.
+const RequiredMark = () => (
+  <span className="font-normal text-error">
+    <span aria-hidden>*</span>
+    <span className="sr-only">(required)</span>
+  </span>
+);
+const OptionalMark = () => <span className="font-normal text-muted">(optional)</span>;
+
 export function EnquiryForm({ defaultDestination, sourcePage }: { defaultDestination?: string; sourcePage?: string }) {
   const [state, formAction, pending] = useActionState(submitEnquiry, initialState);
   const [contactMethod, setContactMethod] = useState<"whatsapp" | "email">("whatsapp");
@@ -43,8 +55,8 @@ export function EnquiryForm({ defaultDestination, sourcePage }: { defaultDestina
       <input type="text" name="company" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
 
       <fieldset>
-        <legend className="text-sm font-semibold text-ink">Where would you like to go?</legend>
-        <div className="mt-3 flex flex-wrap gap-2">
+        <legend className="text-sm font-semibold text-ink">Where would you like to go? <RequiredMark /></legend>
+        <div className="mt-3 flex flex-wrap gap-2" aria-describedby={err("destinations") ? "destinations-error" : undefined} aria-invalid={err("destinations") ? true : undefined}>
           {destinations.map((d) => (
             <label key={d.slug} className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-border px-3.5 py-2 text-sm has-checked:border-primary has-checked:bg-primary/5 has-checked:text-primary">
               <input type="checkbox" name="destinations" value={d.name} defaultChecked={d.slug === defaultDestination} className="accent-primary" />
@@ -52,29 +64,29 @@ export function EnquiryForm({ defaultDestination, sourcePage }: { defaultDestina
             </label>
           ))}
         </div>
-        {err("destinations") && <p className="mt-1.5 text-sm text-error">{err("destinations")}</p>}
+        {err("destinations") && <p id="destinations-error" role="alert" className="mt-1.5 text-sm text-error">{err("destinations")}</p>}
       </fieldset>
 
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
-          <label htmlFor="travelDates" className="text-sm font-semibold text-ink">Travel dates (flexible is fine)</label>
-          <input id="travelDates" name="travelDates" type="text" placeholder="e.g. Late November 2026, 10 days" className="mt-1.5 w-full rounded-xl border border-border px-3.5 py-2.5 text-sm" />
+          <label htmlFor="travelDates" className="text-sm font-semibold text-ink">Travel dates <OptionalMark /></label>
+          <input id="travelDates" name="travelDates" type="text" placeholder="e.g. Late November 2026, 10 days (flexible is fine)" className="mt-1.5 w-full rounded-xl border border-border px-3.5 py-2.5 text-sm" />
         </div>
         <div>
-          <label htmlFor="travellers" className="text-sm font-semibold text-ink">Travellers</label>
+          <label htmlFor="travellers" className="text-sm font-semibold text-ink">Travellers <OptionalMark /></label>
           <input id="travellers" name="travellers" type="text" placeholder="e.g. 2 adults" className="mt-1.5 w-full rounded-xl border border-border px-3.5 py-2.5 text-sm" />
         </div>
       </div>
 
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
-          <label htmlFor="budget" className="text-sm font-semibold text-ink">Budget style</label>
+          <label htmlFor="budget" className="text-sm font-semibold text-ink">Budget style <OptionalMark /></label>
           <select id="budget" name="budget" className="mt-1.5 w-full rounded-xl border border-border bg-white px-3.5 py-2.5 text-sm">
             {budgets.map((b) => <option key={b}>{b}</option>)}
           </select>
         </div>
         <div>
-          <label htmlFor="hotelTier" className="text-sm font-semibold text-ink">Hotel style</label>
+          <label htmlFor="hotelTier" className="text-sm font-semibold text-ink">Hotel style <OptionalMark /></label>
           <select id="hotelTier" name="hotelTier" className="mt-1.5 w-full rounded-xl border border-border bg-white px-3.5 py-2.5 text-sm">
             {hotels.map((h) => <option key={h}>{h}</option>)}
           </select>
@@ -82,23 +94,31 @@ export function EnquiryForm({ defaultDestination, sourcePage }: { defaultDestina
       </div>
 
       <div>
-        <label htmlFor="interests" className="text-sm font-semibold text-ink">Interests (optional)</label>
+        <label htmlFor="interests" className="text-sm font-semibold text-ink">Interests <OptionalMark /></label>
         <input id="interests" name="interests" type="text" placeholder="Photography, food, history, wildlife…" className="mt-1.5 w-full rounded-xl border border-border px-3.5 py-2.5 text-sm" />
       </div>
 
       <div>
-        <label htmlFor="message" className="text-sm font-semibold text-ink">Anything else we should know?</label>
+        <label htmlFor="message" className="text-sm font-semibold text-ink">Anything else we should know? <OptionalMark /></label>
         <textarea id="message" name="message" rows={3} className="mt-1.5 w-full rounded-xl border border-border px-3.5 py-2.5 text-sm" />
       </div>
 
       <div className="grid gap-5 border-t border-border pt-5 sm:grid-cols-2">
         <div>
-          <label htmlFor="name" className="text-sm font-semibold text-ink">Your name</label>
-          <input id="name" name="name" type="text" required className="mt-1.5 w-full rounded-xl border border-border px-3.5 py-2.5 text-sm" />
-          {err("name") && <p className="mt-1.5 text-sm text-error">{err("name")}</p>}
+          <label htmlFor="name" className="text-sm font-semibold text-ink">Your name <RequiredMark /></label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            required
+            aria-invalid={err("name") ? true : undefined}
+            aria-describedby={err("name") ? "name-error" : undefined}
+            className="mt-1.5 w-full rounded-xl border border-border px-3.5 py-2.5 text-sm"
+          />
+          {err("name") && <p id="name-error" role="alert" className="mt-1.5 text-sm text-error">{err("name")}</p>}
         </div>
         <div>
-          <span className="text-sm font-semibold text-ink">Best way to reach you</span>
+          <span className="text-sm font-semibold text-ink">Best way to reach you <RequiredMark /></span>
           <div className="mt-1.5 flex gap-2">
             {(["whatsapp", "email"] as const).map((m) => (
               <label key={m} className="inline-flex flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-xl border border-border px-3 py-2.5 text-sm has-checked:border-primary has-checked:bg-primary/5 has-checked:text-primary">
@@ -110,16 +130,18 @@ export function EnquiryForm({ defaultDestination, sourcePage }: { defaultDestina
         </div>
       </div>
       <div>
-        <label htmlFor="contact" className="text-sm font-semibold text-ink">{contactMethod === "whatsapp" ? "WhatsApp number (with country code)" : "Email address"}</label>
+        <label htmlFor="contact" className="text-sm font-semibold text-ink">{contactMethod === "whatsapp" ? "WhatsApp number (with country code)" : "Email address"} <RequiredMark /></label>
         <input
           id="contact"
           name="contact"
           type={contactMethod === "email" ? "email" : "tel"}
           required
+          aria-invalid={err("contact") ? true : undefined}
+          aria-describedby={err("contact") ? "contact-error" : undefined}
           placeholder={contactMethod === "whatsapp" ? "+1 555 123 4567" : "you@example.com"}
           className="mt-1.5 w-full rounded-xl border border-border px-3.5 py-2.5 text-sm"
         />
-        {err("contact") && <p className="mt-1.5 text-sm text-error">{err("contact")}</p>}
+        {err("contact") && <p id="contact-error" role="alert" className="mt-1.5 text-sm text-error">{err("contact")}</p>}
       </div>
 
       <label className="flex items-start gap-2.5 text-sm text-muted">

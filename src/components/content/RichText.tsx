@@ -185,7 +185,7 @@ function BlockView({ block }: { block: Block }): ReactNode {
     case "faq":
       return <FaqList items={block.items} className="not-prose my-6" />;
     case "cta":
-      return <CtaCard title={block.title} text={block.text} tourSlug={block.tour} label={block.label} className="not-prose my-8" />;
+      return <CtaCard title={block.title} text={block.text} tourSlug={block.tour} label={block.label} className="not-prose my-8" headingLevel="h3" />;
     default:
       return null;
   }

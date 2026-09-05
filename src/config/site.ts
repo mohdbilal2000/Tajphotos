@@ -40,7 +40,11 @@ export const site = {
   priceRange: "$$",
   currencies: ["USD", "INR", "EUR", "GBP"] as const,
   /** Static indicative FX rates for the price toggle (update quarterly). Prices are quoted in USD. */
-  fxRates: { USD: 1, INR: 84, EUR: 0.92, GBP: 0.78 } as Record<"USD" | "INR" | "EUR" | "GBP", number>,
+  // Updated 2026-09-06 against live market rates (was materially stale: INR had drifted ~11-13%
+  // low and EUR/GBP ~5-7% high, distorting every converted price shown on the site). Static and
+  // indicative by design — re-check quarterly, not live-fetched, so a converted price never
+  // depends on a third-party API being up.
+  fxRates: { USD: 1, INR: 95, EUR: 0.86, GBP: 0.74 } as Record<"USD" | "INR" | "EUR" | "GBP", number>,
   social: {
     // TODO: fill real profiles — they become schema.org sameAs links (entity signals for Google/AI engines)
     instagram: "https://www.instagram.com/tajphotos",

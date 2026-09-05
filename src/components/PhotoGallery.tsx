@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { X, ChevronLeft, ChevronRight, Camera } from "lucide-react";
 import type { ImageId } from "@/content/types";
 import { getImage } from "@/content/images";
@@ -9,6 +9,47 @@ export function PhotoGallery({ images }: { images: ImageId[] }) {
   const [openAt, setOpenAt] = useState<number | null>(null);
   const visible = images.slice(0, 5);
   const remaining = images.length - visible.length;
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
+  const triggerRef = useRef<HTMLElement | null>(null);
+  const touchStartX = useRef<number | null>(null);
+
+  // WCAG 2.1 SC 2.1.1 (Keyboard) + the WAI-ARIA dialog pattern: a modal needs Escape to close,
+  // its own arrow-key navigation, a scroll-locked background, and focus moved inside on open and
+  // back to the trigger on close — none of which came for free from `role="dialog"` alone.
+  useEffect(() => {
+    if (openAt === null) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    closeBtnRef.current?.focus();
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpenAt(null);
+      else if (e.key === "ArrowLeft") setOpenAt((i) => (i === null ? i : (i - 1 + images.length) % images.length));
+      else if (e.key === "ArrowRight") setOpenAt((i) => (i === null ? i : (i + 1) % images.length));
+      else if (e.key === "Tab") {
+        // Minimal focus trap: only close/prev/next are focusable inside the dialog, so wrapping
+        // between the first and last is enough — no need for a full focusable-elements query.
+        const focusable = Array.from(document.querySelectorAll<HTMLElement>("[data-gallery-focusable]"));
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = previousOverflow;
+      triggerRef.current?.focus();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [openAt !== null, images.length]);
 
   return (
     <>
@@ -19,7 +60,10 @@ export function PhotoGallery({ images }: { images: ImageId[] }) {
             <button
               key={id}
               type="button"
-              onClick={() => setOpenAt(i)}
+              onClick={(e) => {
+                triggerRef.current = e.currentTarget;
+                setOpenAt(i);
+              }}
               className={`relative overflow-hidden ${i === 0 ? "col-span-2 row-span-2" : "col-span-1 row-span-1"} group`}
               aria-label={`Open photo: ${img.alt}`}
             >
@@ -35,9 +79,21 @@ export function PhotoGallery({ images }: { images: ImageId[] }) {
       </div>
 
       {openAt !== null && (
-        <div role="dialog" aria-modal="true" aria-label="Photo gallery" className="fixed inset-0 z-[100] flex flex-col bg-ink/95 backdrop-blur">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Photo gallery"
+          className="fixed inset-0 z-[100] flex touch-pan-y flex-col bg-ink/95 backdrop-blur"
+          onTouchStart={(e) => (touchStartX.current = e.touches[0].clientX)}
+          onTouchEnd={(e) => {
+            if (touchStartX.current === null) return;
+            const dx = e.changedTouches[0].clientX - touchStartX.current;
+            if (Math.abs(dx) > 50) setOpenAt((i) => (i === null ? i : dx > 0 ? (i - 1 + images.length) % images.length : (i + 1) % images.length));
+            touchStartX.current = null;
+          }}
+        >
           <div className="flex justify-end p-4">
-            <button type="button" onClick={() => setOpenAt(null)} aria-label="Close gallery" className="rounded-full bg-white/10 p-2 text-white hover:bg-white/20">
+            <button type="button" ref={closeBtnRef} data-gallery-focusable onClick={() => setOpenAt(null)} aria-label="Close gallery" className="rounded-full bg-white/10 p-2 text-white hover:bg-white/20">
               <X className="size-6" aria-hidden />
             </button>
           </div>
@@ -55,10 +111,10 @@ export function PhotoGallery({ images }: { images: ImageId[] }) {
             })()}
             {images.length > 1 && (
               <>
-                <button type="button" onClick={() => setOpenAt((openAt - 1 + images.length) % images.length)} aria-label="Previous photo" className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-2.5 text-white hover:bg-white/20 sm:left-6">
+                <button type="button" data-gallery-focusable onClick={() => setOpenAt((openAt - 1 + images.length) % images.length)} aria-label="Previous photo" className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-2.5 text-white hover:bg-white/20 sm:left-6">
                   <ChevronLeft className="size-6" aria-hidden />
                 </button>
-                <button type="button" onClick={() => setOpenAt((openAt + 1) % images.length)} aria-label="Next photo" className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-2.5 text-white hover:bg-white/20 sm:right-6">
+                <button type="button" data-gallery-focusable onClick={() => setOpenAt((openAt + 1) % images.length)} aria-label="Next photo" className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-2.5 text-white hover:bg-white/20 sm:right-6">
                   <ChevronRight className="size-6" aria-hidden />
                 </button>
               </>

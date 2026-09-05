@@ -14,7 +14,7 @@ export function BookingCard({ tour }: { tour: Tour }) {
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="text-xs uppercase tracking-wide text-muted">From</p>
-          <p className="font-display text-3xl font-semibold text-accent"><Price usd={tour.priceFrom.usd} /></p>
+          <p className="font-display text-3xl font-semibold text-accent"><Price usd={tour.priceFrom.usd} showUsdReference /></p>
           <p className="text-xs text-muted">{tour.priceNote}</p>
         </div>
         <CurrencySwitcher />

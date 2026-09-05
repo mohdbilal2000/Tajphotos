@@ -56,6 +56,8 @@ export async function sendEnquiry(payload: EnquiryPayload) {
   }
 
   const from = process.env.RESEND_FROM_EMAIL ?? `${site.name} <enquiries@${new URL(site.url).hostname}>`;
+  // This is the email that actually gets the lead to the team — its failure is the one that
+  // should surface as a submission error, since the enquiry genuinely wasn't received.
   await resend.emails.send({
     from,
     to: site.contact.email,
@@ -64,13 +66,21 @@ export async function sendEnquiry(payload: EnquiryPayload) {
     text: summary,
   });
 
+  // The traveller-facing auto-reply is a courtesy on top of an already-captured lead — isolated
+  // in its own try/catch so a transient failure here (a bad email address, Resend hiccup) doesn't
+  // tell a visitor whose enquiry WAS received that "something went wrong," which risked prompting
+  // a confused duplicate resubmission for no reason.
   if (payload.contactMethod === "email") {
-    await resend.emails.send({
-      from,
-      to: payload.contact,
-      subject: `We received your trip enquiry — ${site.name}`,
-      text: `Hi ${payload.name},\n\nThanks for reaching out to ${site.name}! We've received your enquiry and will reply within a few hours with a tailored itinerary and price (${site.contact.hoursNote}).\n\nIn the meantime, you can reach us on WhatsApp at ${site.contact.phoneDisplay} for a faster response.\n\n${site.legalName}\n${site.contact.email}`,
-    });
+    try {
+      await resend.emails.send({
+        from,
+        to: payload.contact,
+        subject: `We received your trip enquiry — ${site.name}`,
+        text: `Hi ${payload.name},\n\nThanks for reaching out to ${site.name}! We've received your enquiry and will reply within a few hours with a tailored itinerary and price (${site.contact.hoursNote}).\n\nIn the meantime, you can reach us on WhatsApp at ${site.contact.phoneDisplay} for a faster response.\n\n${site.legalName}\n${site.contact.email}`,
+      });
+    } catch (err) {
+      console.error("[mail] traveller auto-reply failed (enquiry itself was still delivered)", err);
+    }
   }
 
   return { ok: true, delivered: true };
