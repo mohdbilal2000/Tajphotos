@@ -10,6 +10,30 @@ practice, Core Web Vitals, and the competitive/UX landscape for this niche. That
 competitor teardown, verified destination facts, imagery sourcing) informed every decision below but
 isn't part of this repository — ask for the reports if you want them again.
 
+## ⚠️ Before you launch — placeholder content that must be replaced
+
+This ships as a fully working, realistic-looking site so it's easy to review and deploy — which means
+some of what's convincing about it is invented and **must not go live unedited**:
+
+- **The team on `/about` is entirely fictional** (`src/content/team.ts`). "Imran Khan," "Rahul Sharma"
+  and "Priya Verma," their years of experience, and their credentials — including a specific
+  Ministry of Tourism guide licence claim — are placeholder people, not real staff. Replace with your
+  actual team, their real names, and only credentials they actually hold. Attaching a real licence
+  number to a fictional person is a false claim, not a stylistic placeholder.
+- **The "Registered and recognised" checkmarks are unconfirmed** (`site.credentials` in
+  `src/config/site.ts`, rendered on `/about` and in the footer of every page). Verify each one before
+  launch (Ministry of Tourism recognition, GST registration, etc.) and delete any that don't apply to
+  you — a licensing claim on a live public site is a specific, checkable claim, not marketing copy.
+- **`site.stats`** (travellers hosted, years operating, countries) are placeholder numbers marked
+  `// TODO` in `src/config/site.ts` — replace with your real figures. The star rating specifically
+  (`site.stats.rating`) is already safe by default: it's gated behind `ratingVerified: false` and won't
+  render anywhere (StatStrip, the homepage hero, the Open Graph image, or AggregateRating schema) until
+  you set it to `true` with a real number from Google/TripAdvisor — don't flip that flag until it is one.
+- **Contact details** (WhatsApp number, phone, email, office address, social profiles) are placeholders
+  — replace every `NEXT_PUBLIC_*` contact env var and the `site.address`/`site.social` fields.
+- **`src/content/reviews.ts` is an empty array on purpose.** Don't fill it with invented testimonials —
+  see the "Reviews" section below for how to collect and add real ones.
+
 ## Stack
 
 - **Next.js 16.3** App Router, Turbopack, TypeScript, `typedRoutes`
