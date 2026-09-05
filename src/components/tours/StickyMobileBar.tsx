@@ -9,7 +9,7 @@ import { site } from "@/config/site";
 export function StickyMobileBar({ tour }: { tour: Tour }) {
   const message = `Hi ${site.name}! I'd like to check availability for "${tour.title}". My dates: ___. Number of travellers: ___.`;
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-white/95 px-4 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-3 shadow-lift backdrop-blur lg:hidden">
+    <div id="sticky-mobile-bar" className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-white/95 px-4 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-3 shadow-lift backdrop-blur lg:hidden">
       <div className="flex items-center justify-between gap-3">
         <div>
           <p className="text-[0.65rem] uppercase tracking-wide text-muted">From</p>

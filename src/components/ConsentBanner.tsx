@@ -59,7 +59,7 @@ export function ConsentBanner() {
   if (!visible) return null;
 
   return (
-    <div role="dialog" aria-label="Cookie consent" className="fixed inset-x-0 bottom-0 z-[90] border-t border-border bg-white/97 p-4 shadow-lift backdrop-blur sm:p-5">
+    <div id="consent-banner" role="dialog" aria-label="Cookie consent" className="fixed inset-x-0 bottom-0 z-[90] border-t border-border bg-white/97 p-4 shadow-lift backdrop-blur sm:p-5">
       <div className="container-site flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-sm text-ink/85">
           We use cookies for analytics to improve this site. Read our <Link href="/privacy" className="link">privacy policy</Link>. You can change your choice at any time.

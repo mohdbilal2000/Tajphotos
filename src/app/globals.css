@@ -101,3 +101,19 @@
 
 @utility text-shadow-hero { text-shadow: 0 2px 24px rgb(0 0 0 / 0.45), 0 1px 2px rgb(0 0 0 / 0.5); }
 @utility scrollbar-none { scrollbar-width: none; &::-webkit-scrollbar { display: none; } }
+
+/*
+ * Three fixed-position, page-independent UI pieces compete for the same bottom-of-screen real
+ * estate below the `lg` breakpoint (1024px, matching StickyMobileBar's own `lg:hidden`): the
+ * global WhatsApp float, tour pages' StickyMobileBar, and the cookie consent banner. Without this,
+ * the consent banner (highest z-index, since it's a blocking dialog) sits directly on top of and
+ * fully hides the primary booking CTA on a visitor's very first page load — exactly the
+ * highest-intent moment — and the WhatsApp float renders redundantly alongside the sticky bar's
+ * own WhatsApp CTA (and briefly overlaps it outright between 640-1024px, where the float's `sm:`
+ * position kicks in but the sticky bar is still shown). `:has()` lets both fixes live here, next
+ * to each other, instead of threading page-type awareness through the root layout.
+ */
+@media (max-width: 63.99875rem) {
+  body:has(#sticky-mobile-bar) .whatsapp-float { display: none; }
+  body:has(#sticky-mobile-bar) #consent-banner { bottom: calc(env(safe-area-inset-bottom) + 4.5rem); }
+}
