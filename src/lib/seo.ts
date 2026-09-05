@@ -147,6 +147,10 @@ export function tourJsonLd(tour: Tour, opts: { image: string; destinationNames: 
       priceCurrency: "USD",
       priceSpecification: { "@type": "UnitPriceSpecification", price: tour.priceFrom.usd, priceCurrency: "USD", unitText: "per person" },
       availability: "https://schema.org/InStock",
+      // Search/AI-answer consumers of this field need a freshness signal on a price that can move
+      // with fuel/hotel/monument-ticket costs; a rolling ~120-day window (refreshed on every
+      // rebuild/deploy) is more honest than an unbounded implicit "forever" price.
+      priceValidUntil: priceValidUntil(),
       validFrom: tour.datePublished,
       category: "Tour",
       seller: { "@id": ORG_ID },
@@ -211,6 +215,13 @@ export function articleJsonLd(g: Guide, opts: { image: string; author: { name: s
 /** Wrap several nodes in one @graph so pages emit a single script tag. */
 export function graph(...nodes: JsonLd[]) {
   return { "@context": "https://schema.org", "@graph": nodes };
+}
+
+/** A rolling ~120-day price-validity horizon for Offer schema, computed at render/build time. */
+export function priceValidUntil(days = 120) {
+  const d = new Date();
+  d.setDate(d.getDate() + days);
+  return d.toISOString().slice(0, 10);
 }
 
 /** Remove our lightweight inline markup for plain-text schema fields. */

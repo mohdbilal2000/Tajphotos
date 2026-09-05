@@ -5,6 +5,7 @@ import { EnquiryForm } from "@/components/EnquiryForm";
 import { TrustWall } from "@/components/sections/TrustWall";
 import { FaqList } from "@/components/content/RichText";
 import { WhatsAppLink } from "@/components/WhatsAppLink";
+import { TrackedContactLink } from "@/components/TrackedContactLink";
 import { site, defaultWhatsappMessage } from "@/config/site";
 import { buildMetadata } from "@/lib/seo";
 import { MessageCircle, Mail, Phone } from "lucide-react";
@@ -34,8 +35,8 @@ export default function PlanMyTripPage() {
               <p className="font-semibold text-ink">Prefer to talk?</p>
               <div className="mt-4 space-y-3 text-sm">
                 <WhatsAppLink message={defaultWhatsappMessage} event="whatsapp_click_contact_sidebar" className="flex items-center gap-2 font-medium text-whatsapp-ink"><MessageCircle className="size-4" aria-hidden /> WhatsApp us</WhatsAppLink>
-                <a href={`tel:${site.contact.phoneE164}`} className="flex items-center gap-2 text-ink/85 hover:text-ink"><Phone className="size-4 text-primary" aria-hidden /> {site.contact.phoneDisplay}</a>
-                <a href={`mailto:${site.contact.email}`} className="flex items-center gap-2 text-ink/85 hover:text-ink"><Mail className="size-4 text-primary" aria-hidden /> {site.contact.email}</a>
+                <TrackedContactLink event="tel_click" href={`tel:${site.contact.phoneE164}`} className="flex items-center gap-2 text-ink/85 hover:text-ink"><Phone className="size-4 text-primary" aria-hidden /> {site.contact.phoneDisplay}</TrackedContactLink>
+                <TrackedContactLink event="email_click" href={`mailto:${site.contact.email}`} className="flex items-center gap-2 text-ink/85 hover:text-ink"><Mail className="size-4 text-primary" aria-hidden /> {site.contact.email}</TrackedContactLink>
               </div>
             </div>
             <div>

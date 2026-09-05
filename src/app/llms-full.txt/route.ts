@@ -26,7 +26,14 @@ function blocksToText(blocks: Block[]): string {
 const faqsToText = (faqs: FAQ[]) => faqs.map((f) => `Q: ${f.q}\nA: ${stripInline(f.a)}`).join("\n\n");
 
 export function GET() {
-  const out: string[] = [`# ${site.name} — full site content`, "", site.description, ""];
+  const out: string[] = [
+    `# ${site.name} — full site content`,
+    "",
+    site.description,
+    "",
+    `Structured tour data (price, duration, group size, destinations) is also available as JSON at ${absoluteUrl("/tours.json")}.`,
+    "",
+  ];
   for (const t of tours) {
     out.push(`---`, `# ${t.title}`, `URL: ${absoluteUrl(`/tours/${t.slug}`)}`, `Duration: ${t.durationLabel} · Starts: ${t.startCity} · Ends: ${t.endCity}`, `Price: from USD ${t.priceFrom.usd} ${t.priceNote}`, "", t.summary, "", "## Highlights", ...t.highlights.map((h) => `- ${h}`), "", blocksToText(t.description), "", "## Itinerary", ...t.itinerary.map((d) => `Day ${d.day}: ${d.title} — ${stripInline(d.summary)}\n${d.details.map((x) => `  - ${stripInline(x)}`).join("\n")}`), "", "## Inclusions", ...t.inclusions.map((x) => `- ${x}`), "## Exclusions", ...t.exclusions.map((x) => `- ${x}`), "", "## FAQ", faqsToText(t.faqs), "");
   }

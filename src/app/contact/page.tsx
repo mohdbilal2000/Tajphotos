@@ -3,6 +3,7 @@ import { MessageCircle, Mail, Phone, MapPin, Clock } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { WhatsAppLink } from "@/components/WhatsAppLink";
+import { TrackedContactLink } from "@/components/TrackedContactLink";
 import { ButtonLink } from "@/components/ui/Button";
 import { site, defaultWhatsappMessage } from "@/config/site";
 import { buildMetadata } from "@/lib/seo";
@@ -24,12 +25,12 @@ export default function ContactPage() {
           <div className="rounded-2xl border border-border bg-surface p-6">
             <Phone className="size-6 text-primary" aria-hidden />
             <p className="mt-3 font-semibold text-ink">Phone</p>
-            <a href={`tel:${site.contact.phoneE164}`} className="mt-1 block text-sm text-muted hover:text-ink">{site.contact.phoneDisplay}</a>
+            <TrackedContactLink event="tel_click" href={`tel:${site.contact.phoneE164}`} className="mt-1 block text-sm text-muted hover:text-ink">{site.contact.phoneDisplay}</TrackedContactLink>
           </div>
           <div className="rounded-2xl border border-border bg-surface p-6">
             <Mail className="size-6 text-primary" aria-hidden />
             <p className="mt-3 font-semibold text-ink">Email</p>
-            <a href={`mailto:${site.contact.email}`} className="mt-1 block text-sm text-muted hover:text-ink">{site.contact.email}</a>
+            <TrackedContactLink event="email_click" href={`mailto:${site.contact.email}`} className="mt-1 block text-sm text-muted hover:text-ink">{site.contact.email}</TrackedContactLink>
           </div>
           <div className="rounded-2xl border border-border bg-surface p-6">
             <MapPin className="size-6 text-primary" aria-hidden />

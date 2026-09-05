@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { InstagramIcon, FacebookIcon, YoutubeIcon } from "@/components/ui/BrandIcons";
+import { TrackedContactLink } from "@/components/TrackedContactLink";
 import { site } from "@/config/site";
 import { tours, destinations, latestGuides } from "@/content";
 
@@ -16,8 +17,8 @@ export function Footer() {
           <p className="mt-3 max-w-sm text-muted leading-relaxed">{site.tagline}. Registered in Agra, Uttar Pradesh, India.</p>
           <ul className="mt-5 space-y-2 text-muted">
             <li className="flex items-start gap-2"><MapPin className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden /><span>{site.address.streetAddress}, {site.address.addressLocality} {site.address.postalCode}, India</span></li>
-            <li className="flex items-center gap-2"><Phone className="size-4 shrink-0 text-primary" aria-hidden /><a href={`tel:${site.contact.phoneE164}`} className="hover:text-ink">{site.contact.phoneDisplay}</a></li>
-            <li className="flex items-center gap-2"><Mail className="size-4 shrink-0 text-primary" aria-hidden /><a href={`mailto:${site.contact.email}`} className="hover:text-ink">{site.contact.email}</a></li>
+            <li className="flex items-center gap-2"><Phone className="size-4 shrink-0 text-primary" aria-hidden /><TrackedContactLink event="tel_click" href={`tel:${site.contact.phoneE164}`} className="hover:text-ink">{site.contact.phoneDisplay}</TrackedContactLink></li>
+            <li className="flex items-center gap-2"><Mail className="size-4 shrink-0 text-primary" aria-hidden /><TrackedContactLink event="email_click" href={`mailto:${site.contact.email}`} className="hover:text-ink">{site.contact.email}</TrackedContactLink></li>
           </ul>
           <div className="mt-5 flex gap-3">
             {site.social.instagram && <a href={site.social.instagram} aria-label="Instagram" className="rounded-full border border-border p-2 hover:bg-white" target="_blank" rel="noopener noreferrer"><InstagramIcon /></a>}

@@ -5,6 +5,14 @@ import { site, type Currency } from "@/config/site";
 const STORAGE_KEY = "tp_currency";
 const CurrencyCtx = createContext<{ currency: Currency; setCurrency: (c: Currency) => void; convert: (usd: number) => number; format: (usd: number) => string } | null>(null);
 
+// CONSTRAINT — keep this file's price value real during SSR with no client-only dependency:
+// GPTBot, ClaudeBot, PerplexityBot, OAI-SearchBot, ChatGPT-User and Perplexity-User are documented
+// or empirically shown not to execute JavaScript, so whatever this component renders on the server
+// (the "USD" default via a static site.fxRates table) is the only price those crawlers ever see. If
+// this ever moves to a live-fetched FX rate, it MUST keep a server-computed fallback value — never
+// gate the initial render behind a client-only useEffect/fetch with no SSR result, or every AI
+// crawler this site is built to be cited by will see a blank or stale price. Price.tsx and
+// PriceTable.tsx inherit this same constraint by consuming this context.
 export function CurrencyProvider({ children }: { children: ReactNode }) {
   const [currency, setCurrencyState] = useState<Currency>("USD");
 

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { Menu, X, MessageCircle, ChevronDown, Phone } from "lucide-react";
 import { site, defaultWhatsappMessage } from "@/config/site";
 import { WhatsAppLink } from "@/components/WhatsAppLink";
+import { TrackedContactLink } from "@/components/TrackedContactLink";
 import { cn } from "@/lib/utils";
 
 const nav = [
@@ -83,9 +84,9 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <a href={`tel:${site.contact.phoneE164}`} className="hidden items-center gap-1.5 rounded-full px-3 py-2 text-sm font-medium text-ink hover:bg-surface xl:flex" aria-label={`Call ${site.contact.phoneDisplay}`}>
+          <TrackedContactLink event="tel_click" href={`tel:${site.contact.phoneE164}`} className="hidden items-center gap-1.5 rounded-full px-3 py-2 text-sm font-medium text-ink hover:bg-surface xl:flex" aria-label={`Call ${site.contact.phoneDisplay}`}>
             <Phone className="size-4 text-primary" aria-hidden /> {site.contact.phoneDisplay}
-          </a>
+          </TrackedContactLink>
           <WhatsAppLink message={defaultWhatsappMessage} event="whatsapp_click_header" className="btn-whatsapp hidden px-4 py-2.5 sm:inline-flex">
             <MessageCircle className="size-4" aria-hidden /> WhatsApp
           </WhatsAppLink>
@@ -117,7 +118,7 @@ export function Header() {
             <WhatsAppLink message={defaultWhatsappMessage} event="whatsapp_click_menu" className="btn-whatsapp"><MessageCircle className="size-4" aria-hidden /> WhatsApp</WhatsAppLink>
             <Link href="/plan-my-trip" className="btn-primary">Plan my trip</Link>
           </div>
-          <a href={`tel:${site.contact.phoneE164}`} className="mt-4 flex items-center justify-center gap-2 text-sm text-muted"><Phone className="size-4" aria-hidden /> Call {site.contact.phoneDisplay}</a>
+          <TrackedContactLink event="tel_click" href={`tel:${site.contact.phoneE164}`} className="mt-4 flex items-center justify-center gap-2 text-sm text-muted"><Phone className="size-4" aria-hidden /> Call {site.contact.phoneDisplay}</TrackedContactLink>
         </div>
       </div>
     </header>
