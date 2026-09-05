@@ -122,6 +122,14 @@ export function EnquiryForm({ defaultDestination, sourcePage }: { defaultDestina
         {err("contact") && <p className="mt-1.5 text-sm text-error">{err("contact")}</p>}
       </div>
 
+      <label className="flex items-start gap-2.5 text-sm text-muted">
+        <input type="checkbox" name="marketingOptIn" className="mt-0.5 accent-primary" />
+        <span>
+          Also send me occasional trip-planning tips by email (not required — this is separate from your itinerary reply). See our{" "}
+          <a href="/privacy" className="link">privacy policy</a>.
+        </span>
+      </label>
+
       {state.status === "error" && state.message && (
         <p role="alert" className="rounded-xl bg-error/10 px-4 py-3 text-sm text-error">{state.message}</p>
       )}

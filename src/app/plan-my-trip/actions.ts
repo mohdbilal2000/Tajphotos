@@ -15,6 +15,8 @@ const schema = z.object({
   interests: z.string().trim().optional(),
   message: z.string().trim().optional(),
   page: z.string().trim().optional(),
+  // Checkbox inputs send "on" when checked and are absent from FormData when unchecked.
+  marketingOptIn: z.literal("on").optional().transform((v) => v === "on"),
   // honeypot: real visitors never fill this hidden field
   company: z.string().max(0).optional(),
 });
@@ -39,6 +41,7 @@ export async function submitEnquiry(_prev: EnquiryState, formData: FormData): Pr
     interests: formData.get("interests") ?? undefined,
     message: formData.get("message") ?? undefined,
     page: formData.get("page") ?? undefined,
+    marketingOptIn: formData.get("marketingOptIn") ?? undefined,
     company: formData.get("company") ?? "",
   };
 
@@ -52,7 +55,11 @@ export async function submitEnquiry(_prev: EnquiryState, formData: FormData): Pr
   }
 
   try {
-    await sendEnquiry(parsed.data);
+    await sendEnquiry({
+      ...parsed.data,
+      // Stamped server-side, never trusted from client input, so there's a defensible consent record.
+      marketingOptInAt: parsed.data.marketingOptIn ? new Date().toISOString() : undefined,
+    });
     return { status: "success", message: "Thanks! We usually reply within a few hours — check WhatsApp or your email." };
   } catch (err) {
     console.error("[plan-my-trip] failed to send enquiry", err);

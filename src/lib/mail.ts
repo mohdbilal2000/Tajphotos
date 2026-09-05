@@ -16,6 +16,15 @@ export interface EnquiryPayload {
   interests?: string;
   message?: string;
   page?: string; // which tour/page they enquired from
+  /**
+   * India's DPDP Act (and GDPR) require explicit, purpose-specific, timestamped consent for
+   * marketing use of contact details — an inbound enquiry alone doesn't license later outbound
+   * "trip-planning tips" emails, which the privacy policy promises are opt-in. `marketingOptInAt`
+   * is stamped server-side in the Server Action (never trusted from client input) at the moment
+   * the box was checked, so there's a defensible record of when consent was given.
+   */
+  marketingOptIn: boolean;
+  marketingOptInAt?: string;
 }
 
 /**
@@ -36,6 +45,7 @@ export async function sendEnquiry(payload: EnquiryPayload) {
     payload.interests && `Interests: ${payload.interests}`,
     payload.page && `Enquired from: ${payload.page}`,
     payload.message && `Message: ${payload.message}`,
+    `Marketing opt-in: ${payload.marketingOptIn ? `yes (${payload.marketingOptInAt})` : "no"}`,
   ]
     .filter(Boolean)
     .join("\n");
