@@ -39,7 +39,13 @@ export function Hero({
           </WhatsAppLink>
         </div>
         <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-white/85">
-          <span className="inline-flex items-center gap-1.5"><Star className="size-4 fill-current text-highlight" aria-hidden /> {site.stats.rating.value} ({site.stats.rating.count.toLocaleString()} reviews)</span>
+          {/* Same rule as StatStrip/AggregateRating JSON-LD: never show a specific star rating
+              and review count as a confident claim until site.stats.ratingVerified is a real,
+              independently-checkable number — this is the most prominent spot on the whole site,
+              so it's the last place to let a placeholder read as a real trust signal. */}
+          {site.stats.ratingVerified && (
+            <span className="inline-flex items-center gap-1.5"><Star className="size-4 fill-current text-highlight" aria-hidden /> {site.stats.rating.value} ({site.stats.rating.count.toLocaleString()} reviews)</span>
+          )}
           <span>Free cancellation</span>
           <span>{site.contact.hoursNote}</span>
         </div>

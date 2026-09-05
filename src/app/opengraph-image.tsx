@@ -18,7 +18,11 @@ export default function OgImage() {
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", fontSize: 24, color: "#d9a441", fontFamily: "sans-serif" }}>
           <span>tajphotos.com</span>
-          <span>Rated {site.stats.rating.value}/5 · {site.stats.travellersServed} travellers</span>
+          {/* Same rule as StatStrip/Hero/AggregateRating JSON-LD: never bake a specific star
+              rating into a confident claim until site.stats.ratingVerified is real — this image
+              gets cached by every platform it's shared on, so a placeholder number here is the
+              hardest of all of them to walk back once shipped. */}
+          <span>{site.stats.ratingVerified ? `Rated ${site.stats.rating.value}/5 · ` : ""}{site.stats.travellersServed} travellers</span>
         </div>
       </div>
     ),
