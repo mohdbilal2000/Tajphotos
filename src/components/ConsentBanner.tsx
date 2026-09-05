@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 
@@ -35,6 +35,7 @@ function applyConsent(value: Consent) {
  */
 export function ConsentBanner() {
   const [visible, setVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Default consent is set even earlier, via a beforeInteractive script in layout.tsx —
@@ -50,6 +51,24 @@ export function ConsentBanner() {
     }
   }, []);
 
+  useEffect(() => {
+    // The banner's real height varies with text wrap (viewport width, locale), so the WhatsApp
+    // float (globals.css, .whatsapp-float) reads a measured --consent-banner-h custom property
+    // instead of a guessed offset — otherwise it either overlaps the banner at some widths or
+    // leaves an ugly gap at others. Cleared on unmount so the float falls back to its resting
+    // position the instant a choice is made (the banner unmounts on choose()).
+    if (!visible || !ref.current) return;
+    const el = ref.current;
+    const set = () => document.documentElement.style.setProperty("--consent-banner-h", `${el.offsetHeight}px`);
+    set();
+    const ro = new ResizeObserver(set);
+    ro.observe(el);
+    return () => {
+      ro.disconnect();
+      document.documentElement.style.removeProperty("--consent-banner-h");
+    };
+  }, [visible]);
+
   const choose = (value: Consent) => {
     try { localStorage.setItem(STORAGE_KEY, value); } catch {}
     applyConsent(value);
@@ -59,7 +78,7 @@ export function ConsentBanner() {
   if (!visible) return null;
 
   return (
-    <div id="consent-banner" role="dialog" aria-label="Cookie consent" className="fixed inset-x-0 bottom-0 z-[90] border-t border-border bg-white/97 p-4 shadow-lift backdrop-blur sm:p-5">
+    <div ref={ref} id="consent-banner" role="dialog" aria-label="Cookie consent" className="fixed inset-x-0 bottom-0 z-[90] border-t border-border bg-white/97 p-4 shadow-lift backdrop-blur sm:p-5">
       <div className="container-site flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-sm text-ink/85">
           We use cookies for analytics to improve this site. Read our <Link href="/privacy" className="link">privacy policy</Link>. You can change your choice at any time.

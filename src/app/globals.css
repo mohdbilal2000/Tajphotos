@@ -103,16 +103,31 @@
 @utility scrollbar-none { scrollbar-width: none; &::-webkit-scrollbar { display: none; } }
 
 /*
- * Three fixed-position, page-independent UI pieces compete for the same bottom-of-screen real
- * estate below the `lg` breakpoint (1024px, matching StickyMobileBar's own `lg:hidden`): the
- * global WhatsApp float, tour pages' StickyMobileBar, and the cookie consent banner. Without this,
- * the consent banner (highest z-index, since it's a blocking dialog) sits directly on top of and
- * fully hides the primary booking CTA on a visitor's very first page load — exactly the
- * highest-intent moment — and the WhatsApp float renders redundantly alongside the sticky bar's
- * own WhatsApp CTA (and briefly overlaps it outright between 640-1024px, where the float's `sm:`
- * position kicks in but the sticky bar is still shown). `:has()` lets both fixes live here, next
- * to each other, instead of threading page-type awareness through the root layout.
+ * Fixed-position UI pieces competing for the same bottom-of-screen real estate: the cookie
+ * consent banner (ConsentBanner.tsx, highest z-index as a blocking dialog), the global WhatsApp
+ * float (WhatsAppFloat.tsx), and — below the `lg` breakpoint on tour pages only — StickyMobileBar.
+ * Without this, the consent banner sits directly on top of and fully hides BOTH of those on
+ * every visitor's very first page load, on every page, until they dismiss it — exactly the
+ * highest-intent moment to have a working WhatsApp/booking CTA. Two independent fixes:
+ *
+ * 1. (all pages, all widths) ConsentBanner measures its own real height via ResizeObserver — its
+ *    text wraps differently across viewport widths, so a guessed offset would either gap or
+ *    overlap — and publishes it as --consent-banner-h; the WhatsApp float reads that variable so
+ *    it always rests just above the banner instead of underneath it.
+ * 2. (below `lg`, tour pages only) The float renders redundantly alongside StickyMobileBar's own
+ *    WhatsApp CTA (and between 640-1024px would sit directly on top of it, since the float's own
+ *    `sm:` position doesn't know the bar exists) — hidden via :has() rather than threading
+ *    page-type awareness through the root layout; the banner is likewise pushed above the bar.
  */
+:root { --consent-banner-h: 0px; }
+
+.whatsapp-float {
+  bottom: calc(env(safe-area-inset-bottom) + 4.75rem + var(--consent-banner-h)) !important;
+}
+@media (min-width: 40rem) {
+  .whatsapp-float { bottom: calc(1.5rem + var(--consent-banner-h)) !important; }
+}
+
 @media (max-width: 63.99875rem) {
   body:has(#sticky-mobile-bar) .whatsapp-float { display: none; }
   body:has(#sticky-mobile-bar) #consent-banner { bottom: calc(env(safe-area-inset-bottom) + 4.5rem); }
