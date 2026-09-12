@@ -7,25 +7,50 @@ import { site, defaultWhatsappMessage } from "@/config/site";
 import { WhatsAppLink } from "@/components/WhatsAppLink";
 import { TrackedContactLink } from "@/components/TrackedContactLink";
 import { cn } from "@/lib/utils";
+import { brand } from "@/config/brand";
+import { publishes } from "@/lib/sections";
 
+/**
+ * Built per brand: a site that does not publish a section must not link to it, since the route
+ * guard in `src/lib/sections.ts` 404s it. Order is kept stable so the four sites share a
+ * navigation rhythm even where their contents differ.
+ */
 const nav = [
-  {
-    label: "Tours",
-    href: "/tours",
-    children: [
-      { label: "Golden Triangle tours", href: "/tours#golden-triangle", blurb: "Delhi · Agra · Jaipur, 3–7 days" },
-      { label: "Same-day Taj Mahal from Delhi", href: "/tours#same-day", blurb: "By car or Gatimaan Express" },
-      { label: "Taj Mahal photoshoots", href: "/tours#photography", blurb: "Pro photographer at sunrise" },
-      { label: "Agra tours", href: "/tours#agra", blurb: "Taj, Agra Fort, Fatehpur Sikri" },
-      { label: "Jaipur & Rajasthan", href: "/tours#jaipur", blurb: "Amber Fort to Udaipur lakes" },
-      { label: "Cars & transfers", href: "/tours#transfer", blurb: "Private chauffeur-driven cars" },
-    ],
-  },
-  { label: "Destinations", href: "/destinations" },
-  { label: "Travel guides", href: "/guides" },
+  // Each branch is `as const` rather than the whole array being `satisfies`-typed: literal href
+  // types are what `typedRoutes` checks against, and an optional `children?` would defeat the
+  // `"children" in item` narrowing used to render the dropdown below.
+  ...(publishes("tours")
+    ? ([
+        {
+          label: "Tours",
+          href: "/tours",
+          children: [
+            { label: "Golden Triangle tours", href: "/tours#golden-triangle", blurb: "Delhi · Agra · Jaipur, 3–7 days" },
+            { label: "Same-day Taj Mahal from Delhi", href: "/tours#same-day", blurb: "By car or Gatimaan Express" },
+            { label: "Taj Mahal photoshoots", href: "/tours#photography", blurb: "Pro photographer at sunrise" },
+            { label: "Agra tours", href: "/tours#agra", blurb: "Taj, Agra Fort, Fatehpur Sikri" },
+            { label: "Jaipur & Rajasthan", href: "/tours#jaipur", blurb: "Amber Fort to Udaipur lakes" },
+            { label: "Cars & transfers", href: "/tours#transfer", blurb: "Private chauffeur-driven cars" },
+          ],
+        },
+      ] as const)
+    : ([] as const)),
+  ...(publishes("destinations") ? ([{ label: "Destinations", href: "/destinations" }] as const) : ([] as const)),
+  ...(publishes("guides") ? ([{ label: "Travel guides", href: "/guides" }] as const) : ([] as const)),
   { label: "Reviews", href: "/reviews" },
   { label: "About", href: "/about" },
 ] as const;
+
+/**
+ * The brand name with its final word accented — "Taj Mahal **Photographs**". Derived rather than
+ * hard-coded per brand so adding a brand needs no change here, and so the four wordmarks stay
+ * visibly related while naming different businesses.
+ */
+const wordmark = (() => {
+  const parts = site.name.trim().split(" ");
+  const tail = parts.pop() ?? site.name;
+  return { lead: parts.length ? `${parts.join(" ")} ` : "", tail };
+})();
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -54,7 +79,8 @@ export function Header() {
     <header className={cn("sticky top-0 z-50 border-b transition-colors", scrolled || open ? "border-border bg-bg/90 backdrop-blur-md" : "border-transparent bg-bg/70 backdrop-blur-sm")}>
       <div className="container-site flex h-16 items-center justify-between gap-4 lg:h-[4.5rem]">
         <Link href="/" className="font-display text-[1.45rem] font-semibold tracking-tight text-ink" aria-label={`${site.name} home`}>
-          Taj<span className="text-primary">Photos</span>
+          {wordmark.lead}
+          <span className="text-primary">{wordmark.tail}</span>
         </Link>
 
         <nav aria-label="Main" className="hidden items-center gap-1 lg:flex">
@@ -90,7 +116,7 @@ export function Header() {
           <WhatsAppLink message={defaultWhatsappMessage} event="whatsapp_click_header" className="btn-whatsapp hidden px-4 py-2.5 sm:inline-flex">
             <MessageCircle className="size-4" aria-hidden /> WhatsApp
           </WhatsAppLink>
-          <Link href="/plan-my-trip" className="btn-primary hidden px-4 py-2.5 md:inline-flex">Plan my trip</Link>
+          <Link href="/quote" className="btn-primary hidden px-4 py-2.5 md:inline-flex">{brand.quote.cta}</Link>
           <button type="button" onClick={() => setOpen((v) => !v)} aria-expanded={open} aria-controls="mobile-nav" aria-label={open ? "Close menu" : "Open menu"} className="rounded-full p-2 hover:bg-surface lg:hidden">
             {open ? <X className="size-6" aria-hidden /> : <Menu className="size-6" aria-hidden />}
           </button>
@@ -116,7 +142,7 @@ export function Header() {
           </ul>
           <div className="mt-5 grid grid-cols-2 gap-3">
             <WhatsAppLink message={defaultWhatsappMessage} event="whatsapp_click_menu" className="btn-whatsapp"><MessageCircle className="size-4" aria-hidden /> WhatsApp</WhatsAppLink>
-            <Link href="/plan-my-trip" className="btn-primary">Plan my trip</Link>
+            <Link href="/quote" className="btn-primary">{brand.quote.cta}</Link>
           </div>
           <TrackedContactLink event="tel_click" href={`tel:${site.contact.phoneE164}`} className="mt-4 flex items-center justify-center gap-2 text-sm text-muted"><Phone className="size-4" aria-hidden /> Call {site.contact.phoneDisplay}</TrackedContactLink>
         </div>

@@ -1,4 +1,5 @@
 import { clsx, type ClassValue } from "clsx";
+import { siteUrl } from "@/config/brand";
 import { twMerge } from "tailwind-merge";
 
 /** Merge Tailwind classes safely. */
@@ -6,8 +7,16 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-/** Build an absolute URL on the site origin. */
-export function absoluteUrl(path = "/", base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://tajphotos.com") {
+/**
+ * Build an absolute URL on the active brand's origin.
+ *
+ * The origin MUST come from the brand resolver, not a hard-coded default. Every canonical tag,
+ * sitemap entry, OG url and JSON-LD `@id` on the site flows through here, so a fallback pinned to
+ * one brand's domain would have three of the four brands telling Google their pages live on the
+ * flagship — the strongest possible signal that all four sites are one site, which is the exact
+ * opposite of what the brand split is for.
+ */
+export function absoluteUrl(path = "/", base = siteUrl) {
   const origin = base.replace(/\/$/, "");
   return path.startsWith("http") ? path : `${origin}${path.startsWith("/") ? path : `/${path}`}`;
 }
@@ -20,15 +29,6 @@ export function slugify(text: string) {
     .replace(/[̀-ͯ]/g, "")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
-}
-
-/** Format a price in a currency with no decimals. */
-export function formatPrice(amount: number, currency: "USD" | "INR" | "EUR" | "GBP" = "USD") {
-  return new Intl.NumberFormat(currency === "INR" ? "en-IN" : "en-US", {
-    style: "currency",
-    currency,
-    maximumFractionDigits: 0,
-  }).format(amount);
 }
 
 /** Estimate reading time in minutes from a word count. */

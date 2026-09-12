@@ -2,6 +2,7 @@ import type { Guide } from "@/content/types";
 
 const guide: Guide = {
   slug: "golden-triangle-tour-cost",
+  brands: ["tajphotos"],
   title: "How Much Does a Golden Triangle Tour Cost in 2026?",
   summary: "A Golden Triangle tour costs $35-70 per day budget, $80-150 mid-range, and $180-400+ luxury per person, driven by hotel class, car type and guides.",
   category: "planning",

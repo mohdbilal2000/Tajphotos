@@ -140,8 +140,25 @@ export interface Destination {
 
 export type GuideCategory = "planning" | "taj-mahal" | "agra" | "delhi" | "jaipur" | "udaipur" | "rajasthan" | "photography" | "practical";
 
+/**
+ * Which brands publish a given piece of content.
+ *
+ * The content library is shared by all four brands, which makes unscoped guides the portfolio's
+ * biggest duplicate-content exposure: the same article on four domains under one owner is the
+ * pattern that gets a brand group treated as a spam network, and it also puts off-topic pages on
+ * sites that do not sell what they describe (a Golden Triangle costing guide has no business on
+ * a portrait-photography site).
+ *
+ * Omitting the field means "every brand", which is correct only for genuinely universal
+ * reference material — Taj Mahal opening hours, camera rules, visa requirements — that each
+ * brand's visitors ask about regardless of what they are buying.
+ */
+export type BrandAudience = "tajphotos" | "tajphotoshoots" | "tajphototours" | "tajphotographs";
+
 export interface Guide {
-  slug: string; // URL: /guides/[slug]
+  slug: string;
+  /** Brands that publish this guide. Omit for universally relevant reference material. */
+  brands?: BrandAudience[]; // URL: /guides/[slug]
   title: string; // H1 ≤ 65 chars, question or "how to" form where natural
   summary: string; // meta description, answer-first
   category: GuideCategory;

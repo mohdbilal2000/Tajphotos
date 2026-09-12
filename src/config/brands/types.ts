@@ -107,6 +107,16 @@ export interface Brand {
   palette: BrandPalette;
   style: BrandStyle;
 
+  /**
+   * schema.org types for this brand's Organization node, most specific first.
+   *
+   * These genuinely differ: a tour operator and an image-licensing business are not the same
+   * class of entity, and declaring all four as `TourOperator` because the flagship is one both
+   * misdescribes them and hands Google four identical entities in one niche — the exact signal
+   * the brand split exists to avoid.
+   */
+  schemaTypes: string[];
+
   /** Which content sections this brand publishes. Absent sections are removed from nav + sitemap. */
   sections: {
     tours: boolean;
@@ -117,9 +127,15 @@ export interface Brand {
 
   /**
    * Rates are never published on any of these sites — every job is scoped and quoted
-   * individually, so a public number would be wrong in both directions. Kept as an explicit
-   * flag rather than deleting the price components, so a brand can opt back in later without
-   * a rewrite.
+   * individually, so a public number would be wrong in both directions: it would overcharge the
+   * simple bookings and quietly exclude what was actually asked for.
+   *
+   * This gates the machine-readable surfaces that would otherwise contradict the pages —
+   * Offer/priceSpecification in JSON-LD, `tours.json`, and the llms.txt feeds. Schema that
+   * carries a price the page does not show is both a structured-data violation and, more
+   * practically, a number an AI answer engine will quote back to a customer as if it were
+   * binding. The price UI itself was removed rather than hidden behind this flag; if a brand
+   * ever opts back in, restore those components from git history.
    */
   showPrices: boolean;
 

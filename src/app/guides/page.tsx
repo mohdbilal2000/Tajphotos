@@ -4,6 +4,7 @@ import { Section } from "@/components/ui/Section";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { ArticleCard } from "@/components/guides/ArticleCard";
 import { buildMetadata } from "@/lib/seo";
+import { requireSection } from "@/lib/sections";
 
 export const metadata: Metadata = buildMetadata({
   title: "Travel Guides — Tickets, Timings & Practical Tips",
@@ -12,6 +13,7 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default function GuidesPage() {
+  requireSection("guides");
   const ordered = latestGuides(guides.length);
   return (
     <>

@@ -1,9 +1,18 @@
 import { tours } from "@/content/tours";
 import { destinations } from "@/content/destinations";
-import { guides } from "@/content/guides";
+import { guides as allGuides } from "@/content/guides";
 import type { Tour, Destination, Guide, TourCategory } from "@/content/types";
+import { publishes, publishedSectionPaths } from "@/lib/sections";
+import { brand } from "@/config/brand";
 
-export { tours, destinations, guides };
+/**
+ * Guides scoped to the active brand (see `Guide.brands`). Filtered here, at the single point
+ * every page, the sitemap and both llms feeds read from, so a brand cannot accidentally publish
+ * an article written for one of its siblings.
+ */
+export const guides = allGuides.filter((g) => !g.brands || g.brands.includes(brand.key as NonNullable<Guide["brands"]>[number]));
+
+export { tours, destinations };
 export { team, getTeamMember } from "@/content/team";
 export { reviews, reviewsForTour } from "@/content/reviews";
 
@@ -36,13 +45,19 @@ export const relatedGuides = (slugs: string[]) => slugs.map(getGuide).filter((g)
 export const latestContentDate = () =>
   [...tours, ...destinations, ...guides].map((c) => c.dateModified).sort().at(-1) ?? new Date().toISOString().slice(0, 10);
 
-/** Static list of all crawlable routes (used by sitemap + llms.txt). */
+/**
+ * Static list of all crawlable routes (used by sitemap + llms.txt).
+ *
+ * Scoped to the sections the active brand publishes: the content library is shared across the
+ * four brands, but advertising a section a brand does not sell would put near-identical pages on
+ * four domains under one owner. See `src/lib/sections.ts`.
+ */
 export function allRoutes() {
-  const staticPages = ["/", "/tours", "/destinations", "/guides", "/plan-my-trip", "/about", "/contact", "/reviews", "/faq", "/credits", "/privacy", "/terms"];
+  const staticPages = ["/", ...publishedSectionPaths(), "/quote", "/about", "/contact", "/reviews", "/faq", "/credits", "/privacy", "/terms"];
   return {
     staticPages,
-    tourPaths: tours.map((t) => `/tours/${t.slug}`),
-    destinationPaths: destinations.map((d) => `/destinations/${d.slug}`),
-    guidePaths: guides.map((g) => `/guides/${g.slug}`),
+    tourPaths: publishes("tours") ? tours.map((t) => `/tours/${t.slug}`) : [],
+    destinationPaths: publishes("destinations") ? destinations.map((d) => `/destinations/${d.slug}`) : [],
+    guidePaths: publishes("guides") ? guides.map((g) => `/guides/${g.slug}`) : [],
   };
 }

@@ -41,6 +41,7 @@ const brand: Brand = {
     highlight: "#d9a441",
     themeColor: "#fdf8f6",
   },
+  schemaTypes: ["ProfessionalService", "LocalBusiness", "Organization"],
   style: { hero: "full-bleed", card: "overlay", radius: "soft", headings: "serif-romantic", density: "spacious" },
 
   sections: { tours: false, destinations: false, guides: true, gallery: true },

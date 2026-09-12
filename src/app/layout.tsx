@@ -11,7 +11,6 @@ import { fontClassNames, fontCssVars } from "@/config/fonts";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFloat } from "@/components/layout/WhatsAppFloat";
-import { CurrencyProvider } from "@/context/CurrencyContext";
 import { JsonLd } from "@/components/JsonLd";
 import { graph, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 
@@ -69,13 +68,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-fg">
           Skip to content
         </a>
-        <CurrencyProvider>
-          <Header />
-          <main id="main" className="flex-1">{children}</main>
-          <Footer />
-          <WhatsAppFloat />
-          <ConsentBanner />
-        </CurrencyProvider>
+        <Header />
+        <main id="main" className="flex-1">{children}</main>
+        <Footer />
+        <WhatsAppFloat />
+        <ConsentBanner />
         <Analytics />
         <SpeedInsights />
         {site.analytics.gaId && <GoogleAnalytics gaId={site.analytics.gaId} />}

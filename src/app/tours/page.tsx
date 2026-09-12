@@ -7,6 +7,7 @@ import { Section, SectionHeader } from "@/components/ui/Section";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { TourCard } from "@/components/tours/TourCard";
 import { buildMetadata } from "@/lib/seo";
+import { requireSection } from "@/lib/sections";
 
 export const metadata: Metadata = buildMetadata({
   title: "All Tours — Golden Triangle, Taj Mahal, Jaipur & Udaipur",
@@ -24,6 +25,7 @@ function matchesQuery(t: Tour, q: string) {
 }
 
 export default async function ToursPage({ searchParams }: PageProps<"/tours">) {
+  requireSection("tours");
   const { q } = await searchParams;
   const query = typeof q === "string" ? q.trim() : "";
   const results = query ? tours.filter((t) => matchesQuery(t, query)) : null;

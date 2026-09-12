@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Section } from "@/components/ui/Section";
 import { ButtonLink } from "@/components/ui/Button";
+import { brand } from "@/config/brand";
 
 export default function NotFound() {
   return (
@@ -10,7 +11,7 @@ export default function NotFound() {
       <p className="mx-auto mt-4 max-w-md text-lg text-muted">The link may be old or mistyped. Here are the places travellers usually want next.</p>
       <div className="mt-8 flex flex-wrap justify-center gap-3">
         <ButtonLink href="/tours">Browse tours</ButtonLink>
-        <ButtonLink href="/plan-my-trip" variant="secondary">Plan my trip</ButtonLink>
+        <ButtonLink href="/quote" variant="secondary">{brand.quote.cta}</ButtonLink>
       </div>
       <p className="mt-8 text-sm text-muted">Or go back to the <Link href="/" className="link">homepage</Link>.</p>
     </Section>

@@ -5,7 +5,7 @@ const tour: Tour = {
   title: "Agra City Tour: Taj Mahal, Agra Fort & Baby Taj in One Day",
   shortTitle: "Agra City Tour",
   tagline: "See the Taj Mahal, Agra Fort and Baby Taj in one full day with a licensed guide.",
-  summary: "A full-day Agra city tour covers the Taj Mahal, Agra Fort, Itimad-ud-Daulah and Mehtab Bagh with a licensed guide, from USD 45 per person.",
+  summary: "A full-day Agra city tour covers the Taj Mahal, Agra Fort, Itimad-ud-Daulah and Mehtab Bagh with a licensed guide, private car and all four entry tickets included.",
   category: "agra",
   durationDays: 1,
   durationLabel: "1 day",

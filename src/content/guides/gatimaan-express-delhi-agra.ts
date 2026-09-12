@@ -2,6 +2,7 @@ import type { Guide } from "@/content/types";
 
 const guide: Guide = {
   slug: "gatimaan-express-delhi-agra",
+  brands: ["tajphotos", "tajphototours"],
   title: "What Are Gatimaan Express Delhi-Agra Timings and Fares?",
   summary: "India's fastest train, the Gatimaan Express, covers Delhi-Agra in 1h40m at up to 160 km/h. Full timings, fares, classes, and station tips inside.",
   category: "practical",

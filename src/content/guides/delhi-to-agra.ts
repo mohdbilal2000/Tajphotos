@@ -2,6 +2,7 @@ import type { Guide } from "@/content/types";
 
 const guide: Guide = {
   slug: "delhi-to-agra",
+  brands: ["tajphotos", "tajphototours"],
   title: "How to Get from Delhi to Agra: Car vs Train Compared",
   summary: "The Gatimaan Express is fastest at 1h40m, a private car takes 3-4 hours door to door, and regular trains cost less but take longer to reach Agra.",
   category: "practical",

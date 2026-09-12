@@ -15,7 +15,7 @@ import { site } from "@/config/site";
  * worth burying in the default rule.
  */
 export default function robots(): MetadataRoute.Robots {
-  const disallow = ["/api/", "/thank-you", "/_next/", "/plan-my-trip/success"];
+  const disallow = ["/api/", "/thank-you", "/_next/", "/quote/success"];
   return {
     rules: [
       { userAgent: "*", allow: "/", disallow },

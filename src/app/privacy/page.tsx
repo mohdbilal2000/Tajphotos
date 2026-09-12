@@ -14,7 +14,7 @@ export default function PrivacyPage() {
         <div className="prose-site max-w-[720px]">
           <p><em>Last updated: 3 September 2026. TODO: have this reviewed by a lawyer familiar with India&apos;s DPDP Act 2023 and, if you serve EU visitors, UK/EU GDPR, before launch.</em></p>
           <h2>What we collect</h2>
-          <p>When you use our plan-my-trip form, we collect your name, contact details, travel dates, and anything else you choose to share, in order to reply with an itinerary and price. We use Google Analytics and Microsoft Clarity to understand how visitors use this site, and Vercel Analytics for performance monitoring.</p>
+          <p>When you use our quote request form, we collect your name, contact details and the answers you give about what you need, in order to reply with a quote. We use Google Analytics and Microsoft Clarity to understand how visitors use this site, and Vercel Analytics for performance monitoring.</p>
           <h2>How we use it</h2>
           <p>We use your enquiry details only to plan and deliver your trip, and to follow up about it. We do not sell your data. We may email you occasional trip-planning tips if you agree to it; you can unsubscribe at any time.</p>
           <h2>Cookies</h2>

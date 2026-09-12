@@ -2,6 +2,7 @@ import type { Guide } from "@/content/types";
 
 const guide: Guide = {
   slug: "taj-mahal-night-viewing-dates",
+  brands: ["tajphototours", "tajphotographs", "tajphotos"],
   title: "How to See the Taj Mahal by Moonlight: 2026-27 Dates & Prices",
   summary: "Taj Mahal night viewing runs 5 nights a month around the full moon, 8:30 PM-12:30 AM, ₹750 for foreigners. See the confirmed 2026-27 dates and how to book.",
   category: "taj-mahal",

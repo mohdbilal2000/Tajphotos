@@ -2,6 +2,7 @@ import type { Guide } from "@/content/types";
 
 const guide: Guide = {
   slug: "taj-mahal-camera-rules",
+  brands: ["tajphototours", "tajphotographs", "tajphotoshoots"],
   title: "Taj Mahal Camera Rules: What You Can and Can't Bring",
   summary: "Phones and handheld cameras are allowed at the Taj Mahal, but tripods, drones, and video cameras are banned, and photography is barred inside the mausoleum.",
   category: "taj-mahal",

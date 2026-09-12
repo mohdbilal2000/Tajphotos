@@ -2,6 +2,7 @@ import type { Guide } from "@/content/types";
 
 const guide: Guide = {
   slug: "what-to-wear-taj-mahal",
+  brands: ["tajphotoshoots", "tajphotos"],
   title: "What to Wear to the Taj Mahal: Dress Code & Shoes",
   summary: "There's no official dress code at the Taj Mahal, but modest clothing covering shoulders and knees, plus comfortable shoes, works best for the visit.",
   category: "practical",

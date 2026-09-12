@@ -42,6 +42,7 @@ const brand: Brand = {
     highlight: "#e3a11c",
     themeColor: "#f4f5f6",
   },
+  schemaTypes: ["TouristInformationCenter", "TravelAgency", "LocalBusiness", "Organization"],
   style: { hero: "gallery-grid", card: "sharp", radius: "none", headings: "sans-industrial", density: "dense" },
 
   sections: { tours: true, destinations: true, guides: true, gallery: true },

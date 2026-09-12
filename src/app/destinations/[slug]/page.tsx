@@ -13,8 +13,13 @@ import { CtaCard } from "@/components/sections/CtaCard";
 import { JsonLd } from "@/components/JsonLd";
 import { buildMetadata, destinationJsonLd, faqJsonLd, graph } from "@/lib/seo";
 import { getImage as img } from "@/content/images";
+import { requireSection, publishes } from "@/lib/sections";
 
 export function generateStaticParams() {
+  // Nothing to prerender when this brand does not publish the section — the route guard in the
+  // page 404s it anyway, and prerendering pages destined to 404 wastes build time and ships them
+  // into the deployment where a stray link could still surface them.
+  if (!publishes("destinations")) return [];
   return destinations.map((d) => ({ slug: d.slug }));
 }
 
@@ -26,6 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 export default async function DestinationPage({ params }: { params: Promise<{ slug: string }> }) {
+  requireSection("destinations");
   const { slug } = await params;
   const d = getDestination(slug);
   if (!d) notFound();

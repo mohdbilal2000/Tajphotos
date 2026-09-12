@@ -13,8 +13,13 @@ import { JsonLd } from "@/components/JsonLd";
 import { buildMetadata, articleJsonLd, faqJsonLd, graph } from "@/lib/seo";
 import { absoluteUrl, blockWordCount, formatDate, readingTime } from "@/lib/utils";
 import { CalendarClock, RefreshCcw } from "lucide-react";
+import { requireSection, publishes } from "@/lib/sections";
 
 export function generateStaticParams() {
+  // Nothing to prerender when this brand does not publish the section — the route guard in the
+  // page 404s it anyway, and prerendering pages destined to 404 wastes build time and ships them
+  // into the deployment where a stray link could still surface them.
+  if (!publishes("guides")) return [];
   return guides.map((g) => ({ slug: g.slug }));
 }
 
@@ -27,6 +32,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 export default async function GuidePage({ params }: { params: Promise<{ slug: string }> }) {
+  requireSection("guides");
   const { slug } = await params;
   const g = getGuide(slug);
   if (!g) notFound();

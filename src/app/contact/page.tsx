@@ -7,8 +7,9 @@ import { TrackedContactLink } from "@/components/TrackedContactLink";
 import { ButtonLink } from "@/components/ui/Button";
 import { site, defaultWhatsappMessage } from "@/config/site";
 import { buildMetadata } from "@/lib/seo";
+import { brand } from "@/config/brand";
 
-export const metadata: Metadata = buildMetadata({ title: "Contact Us", description: `Reach ${site.name} by WhatsApp, phone or email — or use our trip-planning form.`, path: "/contact" });
+export const metadata: Metadata = buildMetadata({ title: "Contact Us", description: `Reach ${site.name} by WhatsApp, phone or email — or send us the details and we will quote it.`, path: "/contact" });
 
 export default function ContactPage() {
   return (
@@ -39,7 +40,7 @@ export default function ContactPage() {
           </div>
         </div>
         <div className="mt-8 flex items-center gap-2 text-sm text-muted"><Clock className="size-4" aria-hidden /> {site.contact.hoursNote}</div>
-        <div className="mt-10"><ButtonLink href="/plan-my-trip">Use the trip-planning form instead</ButtonLink></div>
+        <div className="mt-10"><ButtonLink href="/quote">{brand.quote.cta}</ButtonLink></div>
       </Section>
     </>
   );

@@ -2,6 +2,7 @@ import type { Guide } from "@/content/types";
 
 const guide: Guide = {
   slug: "golden-triangle-itinerary",
+  brands: ["tajphotos", "tajphototours"],
   title: "How Many Days Do You Need for the Golden Triangle?",
   summary: "Four days covers Delhi, Agra and Jaipur at a comfortable pace; 6-7 days lets you add Fatehpur Sikri, Ranthambore or Udaipur without rushing.",
   category: "planning",

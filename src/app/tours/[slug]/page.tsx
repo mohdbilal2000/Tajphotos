@@ -9,7 +9,6 @@ import { PhotoGallery } from "@/components/PhotoGallery";
 import { ChipRow } from "@/components/tours/ChipRow";
 import { ItineraryTimeline } from "@/components/tours/ItineraryTimeline";
 import { IncludedExcluded } from "@/components/tours/IncludedExcluded";
-import { PriceTable } from "@/components/tours/PriceTable";
 import { BookingCard } from "@/components/tours/BookingCard";
 import { StickyMobileBar } from "@/components/tours/StickyMobileBar";
 import { RichText, FaqList } from "@/components/content/RichText";
@@ -20,8 +19,13 @@ import { CtaCard } from "@/components/sections/CtaCard";
 import { JsonLd } from "@/components/JsonLd";
 import { buildMetadata, tourJsonLd, faqJsonLd, graph } from "@/lib/seo";
 import { Stars } from "@/components/ui/Stars";
+import { requireSection, publishes } from "@/lib/sections";
 
 export function generateStaticParams() {
+  // Nothing to prerender when this brand does not publish the section — the route guard in the
+  // page 404s it anyway, and prerendering pages destined to 404 wastes build time and ships them
+  // into the deployment where a stray link could still surface them.
+  if (!publishes("tours")) return [];
   return tours.map((t) => ({ slug: t.slug }));
 }
 
@@ -43,6 +47,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 export default async function TourPage({ params }: { params: Promise<{ slug: string }> }) {
+  requireSection("tours");
   const { slug } = await params;
   const tour = getTour(slug);
   if (!tour) notFound();
@@ -99,14 +104,6 @@ export default async function TourPage({ params }: { params: Promise<{ slug: str
             <h2 className="text-2xl font-semibold sm:text-3xl">What&apos;s included</h2>
             <IncludedExcluded inclusions={tour.inclusions} exclusions={tour.exclusions} className="mt-6" />
           </div>
-
-          {tour.priceTiers && (
-            <div>
-              <h2 className="text-2xl font-semibold sm:text-3xl">Pricing by group size</h2>
-              <p className="mt-2 text-sm text-muted">{tour.priceNote}</p>
-              <PriceTable tiers={tour.priceTiers} className="mt-6" />
-            </div>
-          )}
 
           {tourReviews.length > 0 && (
             <div>

@@ -3,6 +3,7 @@ import { tours, destinations, guides } from "@/content";
 import { absoluteUrl } from "@/lib/utils";
 import { stripInline } from "@/lib/seo";
 import type { Block, FAQ } from "@/content/types";
+import { publishes } from "@/lib/sections";
 
 function blocksToText(blocks: Block[]): string {
   return blocks
@@ -31,16 +32,16 @@ export function GET() {
     "",
     site.description,
     "",
-    `Structured tour data (price, duration, group size, destinations) is also available as JSON at ${absoluteUrl("/tours.json")}.`,
+    `Structured tour data (duration, group size, destinations) is also available as JSON at ${absoluteUrl("/tours.json")}. No rates are published: every job is quoted individually — request one at ${absoluteUrl("/quote")}.`,
     "",
   ];
-  for (const t of tours) {
-    out.push(`---`, `# ${t.title}`, `URL: ${absoluteUrl(`/tours/${t.slug}`)}`, `Duration: ${t.durationLabel} · Starts: ${t.startCity} · Ends: ${t.endCity}`, `Price: from USD ${t.priceFrom.usd} ${t.priceNote}`, "", t.summary, "", "## Highlights", ...t.highlights.map((h) => `- ${h}`), "", blocksToText(t.description), "", "## Itinerary", ...t.itinerary.map((d) => `Day ${d.day}: ${d.title} — ${stripInline(d.summary)}\n${d.details.map((x) => `  - ${stripInline(x)}`).join("\n")}`), "", "## Inclusions", ...t.inclusions.map((x) => `- ${x}`), "## Exclusions", ...t.exclusions.map((x) => `- ${x}`), "", "## FAQ", faqsToText(t.faqs), "");
+  for (const t of publishes("tours") ? tours : []) {
+    out.push(`---`, `# ${t.title}`, `URL: ${absoluteUrl(`/tours/${t.slug}`)}`, `Duration: ${t.durationLabel} · Starts: ${t.startCity} · Ends: ${t.endCity}`, `Price: quoted individually — depends on dates, group size and requirements. Request one at ${absoluteUrl("/quote")}`, "", t.summary, "", "## Highlights", ...t.highlights.map((h) => `- ${h}`), "", blocksToText(t.description), "", "## Itinerary", ...t.itinerary.map((d) => `Day ${d.day}: ${d.title} — ${stripInline(d.summary)}\n${d.details.map((x) => `  - ${stripInline(x)}`).join("\n")}`), "", "## Inclusions", ...t.inclusions.map((x) => `- ${x}`), "## Exclusions", ...t.exclusions.map((x) => `- ${x}`), "", "## FAQ", faqsToText(t.faqs), "");
   }
-  for (const d of destinations) {
+  for (const d of publishes("destinations") ? destinations : []) {
     out.push(`---`, `# ${d.title}`, `URL: ${absoluteUrl(`/destinations/${d.slug}`)}`, "", d.summary, "", ...d.quickFacts.map((q) => `${q.label}: ${stripInline(q.value)}`), "", blocksToText(d.intro), "", "## Top attractions", ...d.attractions.map((a) => `- ${a.name}: ${stripInline(a.summary)}${a.timings ? ` Timings: ${a.timings}.` : ""}${a.tickets ? ` Tickets: ${a.tickets}.` : ""}`), "", "## Best time to visit", blocksToText(d.bestTime), "", "## Getting there", blocksToText(d.gettingThere), "", "## FAQ", faqsToText(d.faqs), "");
   }
-  for (const g of guides) {
+  for (const g of publishes("guides") ? guides : []) {
     out.push(`---`, `# ${g.title}`, `URL: ${absoluteUrl(`/guides/${g.slug}`)}`, `Updated: ${g.dateModified}`, "", g.summary, "", "Key takeaways:", ...g.keyTakeaways.map((k) => `- ${stripInline(k)}`), "", blocksToText(g.body), "", "## FAQ", faqsToText(g.faqs), "");
   }
   return new Response(out.join("\n"), { headers: { "content-type": "text/plain; charset=utf-8", "cache-control": "public, max-age=3600, s-maxage=86400" } });

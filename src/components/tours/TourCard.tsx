@@ -4,7 +4,7 @@ import { Clock, Users, Star } from "lucide-react";
 import type { Tour } from "@/content/types";
 import { getImage } from "@/content/images";
 import { Badge } from "@/components/ui/Badge";
-import { Price } from "@/components/ui/Price";
+import { QuoteBadge } from "@/components/ui/QuoteBadge";
 import { cn } from "@/lib/utils";
 
 export function TourCard({ tour, className, priority }: { tour: Tour; className?: string; priority?: boolean }) {
@@ -40,10 +40,7 @@ export function TourCard({ tour, className, priority }: { tour: Tour; className?
         </div>
         <p className="line-clamp-2 text-sm text-muted">{tour.tagline}</p>
         <div className="mt-auto flex items-end justify-between pt-2">
-          <div>
-            <p className="text-[0.7rem] uppercase tracking-wide text-muted">From</p>
-            <p className="text-xl font-semibold text-accent"><Price usd={tour.priceFrom.usd} /> <span className="text-xs font-normal text-muted">/ person</span></p>
-          </div>
+          <QuoteBadge />
           <span className="text-sm font-semibold text-primary underline decoration-primary/40 underline-offset-4 group-hover:decoration-primary">View tour</span>
         </div>
       </div>

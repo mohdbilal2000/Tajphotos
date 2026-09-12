@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { site, sameAs } from "@/config/site";
+import { brand, PARENT, hasPhone } from "@/config/brand";
 import { absoluteUrl } from "@/lib/utils";
 import type { FAQ, Tour, Destination, Guide, Review } from "@/content/types";
 
@@ -52,18 +53,29 @@ const WEBSITE_ID = `${site.url}/#website`;
 
 export function organizationJsonLd(): JsonLd {
   return {
-    "@type": ["TravelAgency", "TourOperator", "LocalBusiness", "Organization"],
+    // Per-brand (see `brand.schemaTypes`): a photographic image library is not a TourOperator,
+    // and declaring all four brands as the same class of entity would both misdescribe three of
+    // them and present Google with four identical entities in one niche.
+    "@type": brand.schemaTypes,
     "@id": ORG_ID,
     name: site.name,
     legalName: site.legalName,
-    alternateName: "Taj Photos",
     url: site.url,
+    /**
+     * The disclosed parent. All four brands are one legal entity, and saying so in the entity
+     * graph is what makes this a declared brand portfolio rather than an undisclosed network —
+     * the distinction Google's site-reputation policy actually turns on.
+     */
+    parentOrganization: { "@type": "Organization", name: PARENT.name, url: PARENT.url },
+    /** What separates this brand from its siblings, stated for answer engines in one sentence. */
+    slogan: brand.tagline,
+    knowsAbout: [brand.product],
     logo: { "@type": "ImageObject", url: absoluteUrl("/icon-512.png"), width: 512, height: 512 },
     image: absoluteUrl("/opengraph-image"),
     description: site.description,
     foundingDate: String(site.foundingYear),
-    telephone: site.contact.phoneE164,
-    email: site.contact.email,
+    ...(hasPhone ? { telephone: site.contact.phoneE164 } : {}),
+    ...(site.contact.email ? { email: site.contact.email } : {}),
     address: { "@type": "PostalAddress", ...site.address },
     geo: { "@type": "GeoCoordinates", ...site.geo },
     areaServed: ["Agra", "Delhi", "Jaipur", "Udaipur", "Rajasthan", "Uttar Pradesh", "India"].map((name) => ({ "@type": "Place", name })),
@@ -76,7 +88,9 @@ export function organizationJsonLd(): JsonLd {
       const range = order.slice(order.indexOf(from), order.indexOf(to ?? from) + 1).map((d) => map[d]);
       return { "@type": "OpeningHoursSpecification", dayOfWeek: range, opens, closes };
     }),
-    priceRange: site.priceRange,
+    // `priceRange` is deliberately omitted while no rate is published: an "$$" band is itself a
+    // price claim, and it is the one field consumers most often surface as though it were one.
+    ...(site.showPrices ? { priceRange: site.priceRange } : {}),
     currenciesAccepted: "INR, USD, EUR, GBP",
     paymentAccepted: "Cash, Credit Card, Bank Transfer, UPI, PayPal",
     knowsLanguage: ["en", "hi"],
@@ -86,7 +100,17 @@ export function organizationJsonLd(): JsonLd {
     ...(site.stats.ratingVerified
       ? { aggregateRating: { "@type": "AggregateRating", ratingValue: site.stats.rating.value, reviewCount: site.stats.rating.count, bestRating: 5, worstRating: 1 } }
       : {}),
-    contactPoint: [{ "@type": "ContactPoint", contactType: "reservations", telephone: site.contact.phoneE164, email: site.contact.email, availableLanguage: ["English", "Hindi"], areaServed: "Worldwide" }],
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "reservations",
+        ...(hasPhone ? { telephone: site.contact.phoneE164 } : {}),
+        ...(site.contact.email ? { email: site.contact.email } : {}),
+        url: absoluteUrl("/quote"),
+        availableLanguage: ["English", "Hindi"],
+        areaServed: "Worldwide",
+      },
+    ],
   };
 }
 
@@ -140,20 +164,32 @@ export function tourJsonLd(tour: Tour, opts: { image: string; destinationNames: 
       })),
     },
     subjectOf: opts.destinationNames.map((name) => ({ "@type": "Place", name })),
+    // With no published rate (see `brand.showPrices`), the Offer carries availability and the
+    // quote endpoint but NO price. Emitting a number the page doesn't show is a structured-data
+    // violation, and more practically it is a figure an AI answer engine will quote back to a
+    // customer as though it were binding. `priceSpecification` is omitted entirely rather than
+    // set to 0, which reads as "free". The rolling `priceValidUntil` window that used to guard
+    // price freshness goes with it — there is no price left to date-stamp.
     offers: {
       "@type": "Offer",
       url,
-      price: tour.priceFrom.usd,
-      priceCurrency: "USD",
-      priceSpecification: { "@type": "UnitPriceSpecification", price: tour.priceFrom.usd, priceCurrency: "USD", unitText: "per person" },
       availability: "https://schema.org/InStock",
-      // Search/AI-answer consumers of this field need a freshness signal on a price that can move
-      // with fuel/hotel/monument-ticket costs; a rolling ~120-day window (refreshed on every
-      // rebuild/deploy) is more honest than an unbounded implicit "forever" price.
-      priceValidUntil: priceValidUntil(),
       validFrom: tour.datePublished,
       category: "Tour",
       seller: { "@id": ORG_ID },
+      ...(site.showPrices
+        ? {
+            price: tour.priceFrom.usd,
+            priceCurrency: "USD",
+            priceSpecification: { "@type": "UnitPriceSpecification", price: tour.priceFrom.usd, priceCurrency: "USD", unitText: "per person" },
+            priceValidUntil: priceValidUntil(),
+          }
+        : {
+            // Tells a consumer the price exists but must be requested, and where to request it,
+            // rather than leaving them to infer a missing field means "unknown" or "free".
+            description: "Priced individually to your dates, group size and requirements — request a quote for an exact price.",
+            potentialAction: { "@type": "https://schema.org/BuyAction", target: absoluteUrl("/quote") },
+          }),
     },
     // Same rule as above: tour.rating only ever comes from real imported reviews (see reviewsForTour),
     // never fabricated — safe to emit whenever it's present.

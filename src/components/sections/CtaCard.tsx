@@ -4,6 +4,7 @@ import { WhatsAppLink } from "@/components/WhatsAppLink";
 import { site } from "@/config/site";
 import { InlineText } from "@/components/content/RichText";
 import { cn } from "@/lib/utils";
+import { brand } from "@/config/brand";
 
 export function CtaCard({
   title,
@@ -44,8 +45,8 @@ export function CtaCard({
           <WhatsAppLink message={`Hi ${site.name}! I'm interested in ${tourSlug ? `the ${tourSlug.replace(/-/g, " ")}` : "planning a trip"}. Could you help?`} className="btn-whatsapp" event="whatsapp_click_cta">
             <MessageCircle className="size-4" aria-hidden /> Chat on WhatsApp
           </WhatsAppLink>
-          <ButtonLink href={tourSlug ? (`/tours/${tourSlug}` as "/tours") : "/plan-my-trip"} variant="secondary">
-            {label ?? (tourSlug ? "See this tour" : "Plan my trip")} <ArrowRight className="size-4" aria-hidden />
+          <ButtonLink href={tourSlug ? (`/tours/${tourSlug}` as "/tours") : "/quote"} variant="secondary">
+            {label ?? (tourSlug ? "See this tour" : brand.quote.cta)} <ArrowRight className="size-4" aria-hidden />
           </ButtonLink>
         </div>
       </div>

@@ -4,6 +4,7 @@ import { Section } from "@/components/ui/Section";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { DestinationCard } from "@/components/destinations/DestinationCard";
 import { buildMetadata } from "@/lib/seo";
+import { requireSection } from "@/lib/sections";
 
 export const metadata: Metadata = buildMetadata({
   title: "Destinations — Agra, Delhi, Jaipur, Udaipur & Rajasthan",
@@ -12,6 +13,7 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default function DestinationsPage() {
+  requireSection("destinations");
   return (
     <>
       <div className="border-b border-border bg-surface py-6"><div className="container-site"><Breadcrumbs items={[{ name: "Destinations", path: "/destinations" }]} /><h1 className="mt-2 text-3xl font-semibold sm:text-4xl">Destinations</h1></div></div>

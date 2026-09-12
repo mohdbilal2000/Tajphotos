@@ -1,8 +1,9 @@
 import { tours } from "@/content";
 import { site, whatsappLink } from "@/config/site";
 import { absoluteUrl } from "@/lib/utils";
-import { priceValidUntil } from "@/lib/seo";
 import { getImage } from "@/content/images";
+import { brand, PARENT } from "@/config/brand";
+import { publishes } from "@/lib/sections";
 
 /**
  * A flat, machine-readable feed of every tour: slug, price (all supported currencies), duration,
@@ -12,17 +13,24 @@ import { getImage } from "@/content/images";
  * protocol (OpenAI ACP, Google AP2/UCP) currently models that "get back to me with a quote" shape,
  * so this feed's job is legibility and hand-off, not machine-completable checkout: an agent (or a
  * human's copy-paste) that reads this can accurately describe a tour and route the traveller to
- * WhatsApp or /plan-my-trip, rather than reconstructing intent from 16 separate marketing pages.
+ * WhatsApp or /quote, rather than reconstructing intent from 16 separate marketing pages.
  * Linked from llms-full.txt; not yet linked from robots.txt/sitemap since it's a data file, not a
  * page — reconsider if a specific agent/aggregator asks for it there.
  */
 export function GET() {
   const feed = {
-    business: { name: site.name, url: site.url, description: site.description, whatsapp: whatsappLink(), enquiryFormUrl: absoluteUrl("/plan-my-trip") },
+    business: {
+      name: site.name,
+      url: site.url,
+      description: site.description,
+      sells: brand.product,
+      partOf: { name: PARENT.name, url: PARENT.url },
+      whatsapp: whatsappLink(),
+      quoteFormUrl: absoluteUrl("/quote"),
+      pricing: "on-request",
+    },
     generatedAt: new Date().toISOString(),
-    priceValidUntil: priceValidUntil(),
-    currency: "USD",
-    tours: tours.map((t) => ({
+    tours: (publishes("tours") ? tours : []).map((t) => ({
       slug: t.slug,
       title: t.title,
       url: absoluteUrl(`/tours/${t.slug}`),
@@ -34,14 +42,16 @@ export function GET() {
       startCity: t.startCity,
       endCity: t.endCity,
       destinations: t.destinations,
-      priceFromUsd: t.priceFrom.usd,
-      priceNote: t.priceNote,
-      priceTiers: t.priceTiers ?? null,
+      // No rate is published anywhere on this site (see `brand.showPrices`), and this feed exists
+      // precisely so an agent quotes the business accurately — emitting a number here that the
+      // pages do not show is the single most damaging thing this file could do.
+      pricing: "on-request",
+      pricingNote: "Quoted individually to dates, group size, duration and requirements.",
       image: absoluteUrl(getImage(t.heroImage).src.src),
       enquiryAction: {
-        description: "Prices vary by group size, season and hotel category and are confirmed by a person, not booked instantly — message us to get an exact quote.",
+        description: "Priced individually and confirmed by a person, not booked instantly. Group size, dates, duration and requirements all change the cost — send those and you get an exact quote, usually the same day.",
         whatsapp: whatsappLink(`Hi ${site.name}! I'm interested in "${t.title}" (${absoluteUrl(`/tours/${t.slug}`)}). Could you share availability and an exact price?`),
-        enquiryForm: absoluteUrl("/plan-my-trip"),
+        quoteForm: absoluteUrl("/quote"),
       },
     })),
   };

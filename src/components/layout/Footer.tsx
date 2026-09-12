@@ -3,7 +3,10 @@ import { Mail, Phone, MapPin } from "lucide-react";
 import { InstagramIcon, FacebookIcon, YoutubeIcon } from "@/components/ui/BrandIcons";
 import { TrackedContactLink } from "@/components/TrackedContactLink";
 import { site } from "@/config/site";
+import { PARENT, siblingBrands } from "@/config/brand";
+import { publishes } from "@/lib/sections";
 import { tours, destinations, latestGuides } from "@/content";
+import { brand } from "@/config/brand";
 
 const year = 2026;
 
@@ -26,38 +29,52 @@ export function Footer() {
             {site.social.youtube && <a href={site.social.youtube} aria-label="YouTube" className="rounded-full border border-border p-2 hover:bg-white" target="_blank" rel="noopener noreferrer"><YoutubeIcon /></a>}
           </div>
         </div>
-        <div>
-          <p className="font-semibold text-ink">Popular tours</p>
-          <ul className="mt-3 space-y-2 text-muted">
-            {topTours.map((t) => (
-              <li key={t.slug}><Link href={`/tours/${t.slug}` as "/tours"} className="hover:text-ink">{t.shortTitle ?? t.title}</Link></li>
-            ))}
-            <li><Link href="/tours" className="font-medium text-primary hover:underline">All tours →</Link></li>
-          </ul>
-        </div>
-        <div>
-          <p className="font-semibold text-ink">Destinations</p>
-          <ul className="mt-3 space-y-2 text-muted">
-            {destinations.map((d) => (
-              <li key={d.slug}><Link href={`/destinations/${d.slug}` as "/destinations"} className="hover:text-ink">{d.name}</Link></li>
-            ))}
-          </ul>
-          <p className="mt-6 font-semibold text-ink">Latest guides</p>
-          <ul className="mt-3 space-y-2 text-muted">
-            {latestGuides(4).map((g) => (
-              <li key={g.slug}><Link href={`/guides/${g.slug}` as "/guides"} className="hover:text-ink">{g.title}</Link></li>
-            ))}
-          </ul>
-        </div>
+        {/* Sections a brand does not publish are 404s (src/lib/sections.ts), so they must not be
+            linked here either — a footer is the most-crawled block on any site. */}
+        {publishes("tours") && (
+          <div>
+            <p className="font-semibold text-ink">Popular tours</p>
+            <ul className="mt-3 space-y-2 text-muted">
+              {topTours.map((t) => (
+                <li key={t.slug}><Link href={`/tours/${t.slug}` as "/tours"} className="hover:text-ink">{t.shortTitle ?? t.title}</Link></li>
+              ))}
+              <li><Link href="/tours" className="font-medium text-primary hover:underline">All tours →</Link></li>
+            </ul>
+          </div>
+        )}
+        {(publishes("destinations") || publishes("guides")) && (
+          <div>
+            {publishes("destinations") && (
+              <>
+                <p className="font-semibold text-ink">Destinations</p>
+                <ul className="mt-3 space-y-2 text-muted">
+                  {destinations.map((d) => (
+                    <li key={d.slug}><Link href={`/destinations/${d.slug}` as "/destinations"} className="hover:text-ink">{d.name}</Link></li>
+                  ))}
+                </ul>
+              </>
+            )}
+            {publishes("guides") && (
+              <>
+                <p className={publishes("destinations") ? "mt-6 font-semibold text-ink" : "font-semibold text-ink"}>Latest guides</p>
+                <ul className="mt-3 space-y-2 text-muted">
+                  {latestGuides(4).map((g) => (
+                    <li key={g.slug}><Link href={`/guides/${g.slug}` as "/guides"} className="hover:text-ink">{g.title}</Link></li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </div>
+        )}
         <div>
           <p className="font-semibold text-ink">Company</p>
           <ul className="mt-3 space-y-2 text-muted">
             <li><Link href="/about" className="hover:text-ink">About us</Link></li>
             <li><Link href="/reviews" className="hover:text-ink">Reviews</Link></li>
             <li><Link href="/faq" className="hover:text-ink">FAQ</Link></li>
-            <li><Link href="/plan-my-trip" className="hover:text-ink">Plan my trip</Link></li>
+            <li><Link href="/quote" className="hover:text-ink">{brand.quote.cta}</Link></li>
             <li><Link href="/contact" className="hover:text-ink">Contact</Link></li>
-            <li><Link href="/guides" className="hover:text-ink">Travel guides</Link></li>
+            {publishes("guides") && <li><Link href="/guides" className="hover:text-ink">Travel guides</Link></li>}
             <li><Link href="/privacy" className="hover:text-ink">Privacy policy</Link></li>
             <li><Link href="/terms" className="hover:text-ink">Terms &amp; cancellation</Link></li>
             <li><Link href="/credits" className="hover:text-ink">Photo credits</Link></li>
@@ -69,10 +86,36 @@ export function Footer() {
           </ul>
         </div>
       </div>
+      {/* The sibling brands, named and linked.
+          These are the referral paths that let each site stay narrow — someone who wants to be
+          photographed does not belong on the photo-tour site, and saying so beats upselling them.
+          It is also the disclosure that keeps a brand portfolio legitimate: four related sites
+          under one owner that openly link to each other and to their parent read as a declared
+          group, which is a normal business structure. The same four hiding from each other is
+          what Google's site-reputation policy is built to catch. */}
+      <div className="border-t border-border">
+        <div className="container-site py-6">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Also from {PARENT.name}</p>
+          <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-xs text-muted">
+            {siblingBrands.map((b) => (
+              <li key={b.key}>
+                <a href={`https://${b.domain}`} className="hover:text-ink" rel="noopener">
+                  <span className="font-medium text-ink/80">{b.name}</span> — {b.product.replace(/\.$/, "")}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
       <div className="border-t border-border">
         <div className="container-site flex flex-col gap-2 py-5 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
-          <p>© {year} {site.legalName}. All rights reserved.</p>
-          <p>Prices in USD per person unless stated. Monument tickets subject to change by the Archaeological Survey of India.</p>
+          <p>
+            © {year} {site.legalName}. All rights reserved. {PARENT.disclosure}, registered in Agra, Uttar Pradesh, India.
+          </p>
+          <p>
+            Every booking is quoted individually — we publish no fixed rates. Monument tickets are set by the
+            Archaeological Survey of India and subject to change.
+          </p>
         </div>
       </div>
     </footer>

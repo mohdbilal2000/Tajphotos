@@ -18,6 +18,7 @@ import { FaqList } from "@/components/content/RichText";
 import { ButtonLink } from "@/components/ui/Button";
 import { JsonLd } from "@/components/JsonLd";
 import { buildMetadata } from "@/lib/seo";
+import { brand } from "@/config/brand";
 
 export const metadata: Metadata = buildMetadata({
   title: `${site.name} — Golden Triangle Tours & Taj Mahal Photography, by Agra Locals`,
@@ -160,7 +161,7 @@ export default function Home() {
       </Section>
 
       <Section>
-        <CtaCard title="Tell us where you'd like to go" text="Free to ask, no obligation — we'll reply with a real itinerary and honest price." label="Plan my trip" />
+        <CtaCard title="Tell us where you'd like to go" text="Free to ask, no obligation — we'll reply with a real itinerary and honest price." label={brand.quote.cta} />
       </Section>
 
       {/* Static category anchors so /tours#golden-triangle etc. exist even before hydration */}
