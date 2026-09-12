@@ -10,7 +10,7 @@ import type { Brand } from "./types";
 const brand: Brand = {
   key: "tajphotos",
   domain: "tajphotos.com",
-  redirectDomains: ["tajphotos.in"],
+  redirectDomains: [],
 
   name: "Taj Photos",
   legalName: "Taj Photos — a Techleaf brand",

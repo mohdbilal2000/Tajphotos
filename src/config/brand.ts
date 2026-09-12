@@ -4,6 +4,7 @@ import tajphotos from "./brands/tajphotos";
 import tajphotoshoots from "./brands/tajphotoshoots";
 import tajphototours from "./brands/tajphototours";
 import tajphotographs from "./brands/tajphotographs";
+import tajbackpackers from "./brands/tajbackpackers";
 
 export type { Brand, BrandKey, QuoteQuestion, QuoteOption } from "./brands/types";
 export { PARENT };
@@ -13,6 +14,7 @@ export const brands: Record<BrandKey, Brand> = {
   tajphotoshoots,
   tajphototours,
   tajphotographs,
+  tajbackpackers,
 };
 
 export const brandList = Object.values(brands);

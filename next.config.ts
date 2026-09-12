@@ -42,8 +42,10 @@ const htmlLimitedBots = new RegExp(`${NEXT_DEFAULT_HTML_LIMITED_BOTS.source}|${A
  * fine: the outcome is identical and this stays as the in-repo source of truth.
  */
 function ccTldRedirects() {
+  // NOTE: tajphotos.in is deliberately absent — it now serves the backpacker brand (shared
+  // small-group departures), which is a different product with its own content, not a copy of
+  // the flagship. Only genuinely duplicate ccTLDs redirect.
   const IN_TO_COM: Record<string, string> = {
-    "tajphotos.in": "https://tajphotos.com",
     "tajphototours.in": "https://tajphototours.com",
     "tajmahalphotographs.in": "https://tajmahalphotographs.com",
   };

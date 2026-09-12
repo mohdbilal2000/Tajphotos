@@ -9,6 +9,14 @@ same repo and branch, distinguished only by the `NEXT_PUBLIC_BRAND` build-time v
 | taj-photoshoots | `tajphotoshoots` | `tajmahalphotoshoots.com` | — | Portrait shoots (client is photographed) |
 | taj-photo-tours | `tajphototours` | `tajphototours.com` | `tajphototours.in` | Photo tours (client holds the camera) |
 | taj-photographs | `tajphotographs` | `tajmahalphotographs.com` | `tajmahalphotographs.in` | Prints, licences, photographic reference |
+| taj-day-trips | `tajbackpackers` | `tajphotos.in` (see note) | — | Shared small-group day trips (backpackers) |
+
+> **The backpacker brand's domain is a compromise, not a design.** `tajphotos.in` was being held
+> as a defensive redirect, and a `.in` ccTLD genuinely suits the one audience that is usually
+> already in India when it searches. But "Taj Photos" is the flagship's name, and reusing it for
+> a budget shared-tour product will confuse both customers and the entity graph. Buying a
+> dedicated name is a one-line change in `src/config/brands/tajbackpackers.ts` plus a domain
+> attach in Vercel.
 
 Two domains are deliberately **not** in this repo:
 
@@ -18,7 +26,7 @@ Two domains are deliberately **not** in this repo:
 
 ## 1. Create each Vercel project
 
-Import this repository four times. For each project:
+Import this repository five times. For each project:
 
 - **Build command / framework**: defaults (Next.js) are correct.
 - **Production branch**: the same branch for all four.
@@ -34,7 +42,7 @@ turn features on.
 
 | Variable | Required | Notes |
 |---|---|---|
-| `NEXT_PUBLIC_BRAND` | **Yes** | One of `tajphotos`, `tajphotoshoots`, `tajphototours`, `tajphotographs`. |
+| `NEXT_PUBLIC_BRAND` | **Yes** | One of `tajphotos`, `tajphotoshoots`, `tajphototours`, `tajphotographs`, `tajbackpackers`. |
 | `RESEND_API_KEY` | **Before launch** | Without it, the quote form **fails loudly in production** rather than silently dropping a lead. Get it from resend.com. |
 | `RESEND_FROM_EMAIL` | Recommended | e.g. `Taj Photo Tours <quotes@tajphototours.com>`. The sending domain must be verified in Resend. Defaults to `quotes@<brand domain>`. |
 | `NEXT_PUBLIC_EMAIL` | Recommended | The brand inbox quote requests go to. Defaults to `hello@<brand domain>`. |
@@ -46,7 +54,7 @@ turn features on.
 | `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`, `NEXT_PUBLIC_BING_SITE_VERIFICATION` | Optional | Search Console / Bing Webmaster verification. |
 | `INDEXNOW_KEY` | Optional | Powers `/api/indexnow`. |
 
-The same WhatsApp number can be used across all four brands — it reaches you either way, and the
+The same WhatsApp number can be used across all five brands — it reaches you either way, and the
 quote email records which brand the request came from.
 
 ## 3. Domains and DNS (GoDaddy → Vercel)
@@ -87,12 +95,39 @@ These are the things that are wrong in the repo right now and need real values. 
 5. **Photography.** Every brand currently draws from the same 30 shared images. Distinct imagery
    per brand is the single highest-value remaining task — see the warning below.
 
-## 5. The one thing that will sink all four sites if you get it wrong
+## 5. Two account-level problems to fix before launch
 
-These four sites share a codebase, an owner and a subject. That is fine and normal. What is not
+### Vercel is on the Hobby plan
+
+Both teams (`techishealthy`, `bilals-projects`) are on **Hobby**, which Vercel's terms restrict to
+non-commercial use. Five sites taking paid bookings is unambiguously commercial. The risk is not a
+polite email — it is enforcement against the account, which would take every site down at once,
+including ones unrelated to this project. Move to Pro before pointing any real domain at these.
+
+### There are already ~10 Taj/Agra travel sites in this account
+
+Listed on Vercel today: `tajagraguide`, `indiventure-travellers`, `tajguidessf` (x2),
+`agratourguide`, `voyageurs-en-inde`, `ma-travels`, `travellano`, `madshif-travel-creator`,
+`travel-trove-experience` — plus `taj-mahal-photography`, which is live and earning.
+
+Adding five more makes **fifteen sites in one niche under one owner**. That is a materially
+different risk from the five this repo was designed around, and it is the thing most likely to
+undo all of this work. Before launching, go through that list and for each one either (a) keep it
+because it sells something genuinely distinct and is actively maintained, or (b) 301 it into the
+brand that covers it and shut it down. Consolidating dead sites into live ones also passes their
+link equity forward instead of stranding it.
+
+Be specific about what "distinct" means: a different service, a different audience, and different
+photographs, people and reviews. A French-language site (`voyageurs-en-inde`) is a legitimately
+distinct property. Three variations on "Agra tour guide" are not.
+
+## 6. The one thing that will sink every site if you get it wrong
+
+These sites share a codebase, an owner and a subject. That is fine and normal. What is not
 fine is four sites that are *the same site four times* — Google's site-reputation and doorway
 policies are built for exactly that pattern, and the failure mode is not one site ranking badly,
-it is all four being demoted together, plus the association reaching `tajmahalphotography.com`.
+it is all of them being demoted together, plus the association reaching `tajmahalphotography.com` —
+the one that is already earning.
 
 The code already enforces the structural half of the separation:
 
@@ -106,7 +141,7 @@ The code already enforces the structural half of the separation:
 
 What the code **cannot** do for you:
 
-- **Distinct photographs per brand.** Shared hero and gallery images across four domains is a
+- **Distinct photographs per brand.** Shared hero and gallery images across several domains is a
   duplicate signal no amount of different copy offsets. This matters more than any other item
   on this list.
 - **Distinct people.** Each brand needs its own named photographers or guides with real bios.
@@ -116,11 +151,11 @@ What the code **cannot** do for you:
   the most reliable way to get all of them suspended. Verify one profile, for the flagship,
   unless you genuinely have separate staffed premises.
 
-## 6. Local development
+## 7. Local development
 
 ```bash
 pnpm install
-NEXT_PUBLIC_BRAND=tajphototours pnpm dev      # any of the four brand keys
+NEXT_PUBLIC_BRAND=tajphototours pnpm dev      # any of the five brand keys
 ```
 
 Checks, all of which must pass before a deploy:
@@ -129,20 +164,20 @@ Checks, all of which must pass before a deploy:
 pnpm typecheck
 pnpm lint
 pnpm content:lint                              # content model + image manifest
-for B in tajphotos tajphotoshoots tajphototours tajphotographs; do
+for B in tajphotos tajphotoshoots tajphototours tajphotographs tajbackpackers; do
   NEXT_PUBLIC_BRAND=$B pnpm build || echo "FAILED: $B"
 done
 ```
 
-Building all four matters: a change that only breaks the brands you were not looking at is the
-most likely failure mode in this repo, because three of them are never exercised by a default
+Building all five matters: a change that only breaks the brands you were not looking at is the
+most likely failure mode in this repo, because four of them are never exercised by a default
 `pnpm build`.
 
-## 7. Adding a brand later
+## 8. Adding a brand later
 
 Add a file under `src/config/brands/`, register it in `src/config/brand.ts`, add a font pairing
 in `src/config/fonts.ts`, and create a Vercel project with the new `NEXT_PUBLIC_BRAND`. Nothing
 else in the application needs to change.
 
 Before you do: a fifth near-identical site is a cost, not a free option. Add one only when it
-sells something the existing four genuinely do not.
+sells something the existing ones genuinely do not.

@@ -153,7 +153,7 @@ export type GuideCategory = "planning" | "taj-mahal" | "agra" | "delhi" | "jaipu
  * reference material — Taj Mahal opening hours, camera rules, visa requirements — that each
  * brand's visitors ask about regardless of what they are buying.
  */
-export type BrandAudience = "tajphotos" | "tajphotoshoots" | "tajphototours" | "tajphotographs";
+export type BrandAudience = "tajphotos" | "tajphotoshoots" | "tajphototours" | "tajphotographs" | "tajbackpackers";
 
 export interface Guide {
   slug: string;

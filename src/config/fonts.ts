@@ -1,4 +1,4 @@
-import { Fraunces, Manrope, Cormorant_Garamond, Jost, Archivo, Inter, Spectral } from "next/font/google";
+import { Fraunces, Manrope, Cormorant_Garamond, Jost, Archivo, Inter, Spectral, Outfit } from "next/font/google";
 import { brand } from "@/config/brand";
 
 /**
@@ -34,6 +34,8 @@ const jost = Jost({ subsets: ["latin"], variable: "--font-body-src", display: "s
 const archivo = Archivo({ subsets: ["latin"], variable: "--font-display-src", display: "swap", weight: "variable", preload: false });
 const inter = Inter({ subsets: ["latin"], variable: "--font-body-src", display: "swap", preload: false });
 
+const outfit = Outfit({ subsets: ["latin"], variable: "--font-display-src", display: "swap", weight: "variable", preload: false });
+
 const spectral = Spectral({ subsets: ["latin"], variable: "--font-display-src", display: "swap", weight: ["400", "600"], preload: false });
 
 const pairs = {
@@ -41,6 +43,7 @@ const pairs = {
   tajphotoshoots: { display: cormorant, body: jost, displayStack: '"Georgia", "Times New Roman", serif' },
   tajphototours: { display: archivo, body: inter, displayStack: "ui-sans-serif, system-ui, sans-serif" },
   tajphotographs: { display: spectral, body: inter, displayStack: '"Georgia", "Times New Roman", serif' },
+  tajbackpackers: { display: outfit, body: inter, displayStack: "ui-sans-serif, system-ui, sans-serif" },
 } as const;
 
 const pair = pairs[brand.key];
@@ -58,6 +61,7 @@ const headingStyles: Record<typeof brand.style.headings, Record<string, string>>
   "serif-romantic": { "--brand-h-weight": "500", "--brand-h-tracking": "-0.005em", "--brand-h-opsz": "normal" },
   "sans-industrial": { "--brand-h-weight": "700", "--brand-h-tracking": "-0.035em", "--brand-h-opsz": "normal" },
   "serif-gallery": { "--brand-h-weight": "500", "--brand-h-tracking": "-0.01em", "--brand-h-opsz": "normal" },
+  "sans-friendly": { "--brand-h-weight": "600", "--brand-h-tracking": "-0.02em", "--brand-h-opsz": "normal" },
 };
 
 export const fontCssVars = {

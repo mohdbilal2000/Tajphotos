@@ -16,7 +16,7 @@
  * penalised. This also means one GST registration and one set of accounts, not four.
  */
 
-export type BrandKey = "tajphotos" | "tajphotoshoots" | "tajphototours" | "tajphotographs";
+export type BrandKey = "tajphotos" | "tajphotoshoots" | "tajphototours" | "tajphotographs" | "tajbackpackers";
 
 /** A palette is a full override of the design tokens declared in globals.css `@theme`. */
 export interface BrandPalette {
@@ -50,7 +50,7 @@ export interface BrandStyle {
   /** Corner radius scale multiplier applied to the shared radius tokens. */
   radius: "none" | "soft" | "pill";
   /** Display-font expression: sets weight/tracking/case for headings. */
-  headings: "serif-editorial" | "serif-romantic" | "sans-industrial" | "serif-gallery";
+  headings: "serif-editorial" | "serif-romantic" | "sans-industrial" | "serif-gallery" | "sans-friendly";
   /** Whether listing pages default to a dense grid or a spacious single column. */
   density: "dense" | "spacious";
 }
