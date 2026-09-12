@@ -44,6 +44,40 @@ const brand: Brand = {
   schemaTypes: ["ProfessionalService", "LocalBusiness", "Organization"],
   style: { hero: "full-bleed", card: "overlay", radius: "soft", headings: "serif-romantic", density: "spacious" },
 
+  home: {
+    heroEyebrow: "Agra photographers · Sunrise slots",
+    heroTitle: "Your photos at the Taj Mahal, taken properly",
+    heroSubtitle:
+      "Couples, proposals, families and solo portraits — shot at sunrise by a photographer who lives in Agra and knows exactly where the light falls and when the crowds arrive.",
+    heroImage: "taj-mahal-couple-1",
+    whyEyebrow: "Why shoot with us",
+    whyTitle: "You get one morning. We only get one chance too.",
+    whyPoints: [
+      { icon: "sun", title: "We book the light, not the hour", text: "The first 40 minutes after the gates open is the whole shoot. We plan around it." },
+      { icon: "heart", title: "Proposals shot from a distance", text: "You will not see us until you want to. Nobody else will know either." },
+      { icon: "image", title: "Edited, not just delivered", text: "Hand-edited frames, not a dump of raw files you have to sift through." },
+      { icon: "clock", title: "Some shots before you fly", text: "Ask and we will turn a first set around while you are still in India." },
+    ],
+    showcaseEyebrow: "Sunrise, every time",
+    showcaseTitle: "The difference is forty minutes, and knowing where to stand",
+    showcaseText:
+      "The same monument photographs completely differently at 06:10 and at 09:00 — one is soft and nearly empty, the other is flat light and a thousand people in your frame. We build the whole shoot around the first window, because it does not come back.",
+    showcaseImages: ["taj-mahal-couple-1", "taj-mahal-sunrise-2", "taj-mahal-detail-1"],
+    steps: [
+      { t: "Tell us the occasion and date", d: "Sunrise slots are limited, so the date drives everything else." },
+      { t: "We plan the shoot and quote it", d: "Which spots, in what order, and what you get back — with a price." },
+      { t: "Turn up and be photographed", d: "We handle the timing, the angles and the crowds. You just show up." },
+    ],
+    faqs: [
+      { q: "Can we shoot inside the Taj Mahal complex?", a: "Yes, across the gardens, the platform and the riverside terrace. Photography is not permitted inside the main mausoleum chamber, and tripods, monopods and drones are banned anywhere in the complex — so a shoot is planned entirely around handheld work in natural light." },
+      { q: "What time do we need to start?", a: "Pickup is usually around 05:30-06:00 so you are at the gate before it opens. The soft light and the thin crowds both last roughly the first 40 minutes, and that window is genuinely the difference between good photos and ordinary ones." },
+      { q: "Do you do surprise proposals?", a: "Often. We shoot from a distance with a longer lens so nothing gives it away, then step in afterwards for portraits once she has said yes. Tell us the plan and we will work out sightlines and a signal in advance." },
+      { q: "Why isn't there a price list?", a: "Shoots vary more than people expect — one portrait session at sunrise and a two-hour multi-location pre-wedding shoot are different jobs. Tell us the occasion, the date and how many people, and we will quote exactly that, free and with no obligation." },
+    ],
+    ctaTitle: "Tell us about your shoot",
+    ctaText: "A photographer replies with the best light slot for your date and an exact price.",
+  },
+
   sections: { tours: false, destinations: false, guides: true, gallery: true },
   showPrices: false,
 

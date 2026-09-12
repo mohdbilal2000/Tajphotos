@@ -83,6 +83,38 @@ export interface QuoteQuestion {
   help?: string;
 }
 
+/** Icons available to brand homepage copy, mapped to lucide components in src/app/page.tsx. */
+export type BrandIconKey = "camera" | "userCheck" | "car" | "shield" | "sun" | "heart" | "image" | "award" | "clock" | "mapPin";
+
+/**
+ * Homepage copy, per brand.
+ *
+ * The homepage is the page that has to prove these are four different businesses. Shared
+ * components are invisible to a crawler, but shared *words* are not — four homepages opening
+ * with the same headline about Golden Triangle tours is the near-duplicate signal, whatever the
+ * palette does. Even the hero image differs per brand, so no two sites lead with the same
+ * photograph.
+ */
+export interface BrandHome {
+  heroEyebrow: string;
+  heroTitle: string;
+  heroSubtitle: string;
+  /** ImageId from src/content/images.ts — each brand leads with a different photograph. */
+  heroImage: string;
+  whyEyebrow: string;
+  whyTitle: string;
+  whyPoints: { icon: BrandIconKey; title: string; text: string }[];
+  /** Full-bleed showcase panel: its own headline, copy and three images per brand. */
+  showcaseEyebrow: string;
+  showcaseTitle: string;
+  showcaseText: string;
+  showcaseImages: [string, string, string];
+  steps: { t: string; d: string }[];
+  faqs: { q: string; a: string }[];
+  ctaTitle: string;
+  ctaText: string;
+}
+
 export interface Brand {
   key: BrandKey;
   /** Apex domain, no protocol. The `.in` counterpart (if any) 301s here — see next.config.ts. */
@@ -116,6 +148,8 @@ export interface Brand {
    * the brand split exists to avoid.
    */
   schemaTypes: string[];
+
+  home: BrandHome;
 
   /** Which content sections this brand publishes. Absent sections are removed from nav + sitemap. */
   sections: {

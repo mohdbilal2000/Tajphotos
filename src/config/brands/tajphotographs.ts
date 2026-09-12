@@ -47,7 +47,45 @@ const brand: Brand = {
   schemaTypes: ["ProfessionalService", "LocalBusiness", "Organization"],
   style: { hero: "editorial", card: "frame", radius: "none", headings: "serif-gallery", density: "spacious" },
 
-  sections: { tours: false, destinations: true, guides: true, gallery: true },
+  home: {
+    heroEyebrow: "Prints · Licensing · A working reference",
+    heroTitle: "The Taj Mahal, photographed properly — and everything we learned doing it",
+    heroSubtitle:
+      "Fine-art prints and image licences from photographers based in Agra, alongside a free, genuinely useful reference: where to stand, what the rules are, and what each month's light actually looks like.",
+    heroImage: "taj-mahal-wide-1",
+    whyEyebrow: "Why here",
+    whyTitle: "Photographs made on the ground, not bought from a stock library",
+    whyPoints: [
+      { icon: "image", title: "Shot by people who live here", text: "Every frame made in Agra, across years and every season." },
+      { icon: "award", title: "Archival prints", text: "Printed on archival paper and shipped worldwide, tracked." },
+      { icon: "shield", title: "Licensing done plainly", text: "Editorial and commercial, scoped to your actual use. No surprise renewals." },
+      { icon: "mapPin", title: "A free reference that isn't SEO filler", text: "Photo spots, camera rules, ticket timings, month-by-month light." },
+    ],
+    showcaseEyebrow: "From the archive",
+    showcaseTitle: "Years of mornings, in one place",
+    showcaseText:
+      "Every frame here was made on the ground in Agra, across seasons, weather and light most visitors never see — winter fog, monsoon cloud, the five moonlit nights a month the site opens after dark. Available as archival prints and as licensed images.",
+    showcaseImages: ["taj-mahal-wide-1", "taj-mahal-moonlight-1", "agra-itimad-1"],
+    steps: [
+      { t: "Tell us the image and the use", d: "A print for a wall and a licence for a print run are priced differently." },
+      { t: "We quote it, usually same day", d: "Licences depend on medium, territory and run length, so we scope each one." },
+      { t: "Delivered or shipped", d: "Files on approval; prints packed flat or rolled and tracked to your door." },
+    ],
+    faqs: [
+      { q: "Do I need a licence to use one of these photographs?", a: "For anything beyond private viewing, yes. Editorial use in a book, article or documentary and commercial use in advertising or packaging are licensed separately and priced differently, because what a licence costs depends on medium, territory, run length and duration." },
+      { q: "Can I photograph the Taj Mahal commercially myself?", a: "Only with permission. The Archaeological Survey of India requires advance permission for commercial photography and filming, normally filed at least 15 days ahead, and tripods and drones are prohibited inside the complex regardless. Our camera-rules guide covers what is and is not allowed in detail." },
+      { q: "What is the best month for a clear photograph of the monument?", a: "October, November, February and March. December and January mornings are frequently lost to dense fog, and the pre-monsoon months from April bring haze and heat that flatten the marble. Sunrise is the strongest light in every one of those months." },
+      { q: "Why isn't there a price list?", a: "A print price depends on size and finish; a licence price depends on how, where and for how long the image will be used. Both are quick to quote once we know that, and we usually come back the same working day." },
+    ],
+    ctaTitle: "Tell us what you need the image for",
+    ctaText: "Prints, editorial licences and commercial licences are all quoted individually.",
+  },
+
+  // No destinations section: the shared destination pages are written in trip-planning voice
+  // ("the gateway to your Golden Triangle trip"), which is another brand's sentence. This brand's
+  // reference content is the photographic guides — spots, rules, month-by-month light — and
+  // narrowing it further is the point rather than a cost.
+  sections: { tours: false, destinations: false, guides: true, gallery: true },
   showPrices: false,
 
   quote: {

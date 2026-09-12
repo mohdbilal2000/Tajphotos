@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Camera, ShieldCheck, Car, UserCheck } from "lucide-react";
+import { ArrowRight, Camera, ShieldCheck, Car, UserCheck, Sun, Heart, ImageIcon, Award, Clock3, MapPin } from "lucide-react";
 import { site } from "@/config/site";
 import { tours, destinations, latestGuides, reviews, featuredTours, tourCategories } from "@/content";
 import { getImage } from "@/content/images";
@@ -19,12 +19,28 @@ import { ButtonLink } from "@/components/ui/Button";
 import { JsonLd } from "@/components/JsonLd";
 import { buildMetadata } from "@/lib/seo";
 import { brand } from "@/config/brand";
+import { publishes } from "@/lib/sections";
+import type { BrandIconKey } from "@/config/brands/types";
 
 export const metadata: Metadata = buildMetadata({
-  title: `${site.name} — Golden Triangle Tours & Taj Mahal Photography, by Agra Locals`,
+  title: `${site.name} — ${brand.tagline}`,
   description: site.description,
   path: "/",
 });
+
+/** Lucide components for the icon keys brand homepage copy is allowed to use. */
+const ICONS: Record<BrandIconKey, typeof Camera> = {
+  camera: Camera,
+  userCheck: UserCheck,
+  car: Car,
+  shield: ShieldCheck,
+  sun: Sun,
+  heart: Heart,
+  image: ImageIcon,
+  award: Award,
+  clock: Clock3,
+  mapPin: MapPin,
+};
 
 const chooser = [
   { title: "Same-day Taj from Delhi", slug: "same-day", blurb: "Sunrise to sunset, back for dinner" },
@@ -34,26 +50,25 @@ const chooser = [
   { title: "Private car & driver", slug: "transfer", blurb: "Go at your own pace, no shopping stops" },
 ];
 
-const homeFaqs = [
-  { q: "Is the Taj Mahal closed on Fridays?", a: "Yes. The Taj Mahal is closed to tourists every Friday, though local Muslims may enter for prayers. We route Friday visitors to Agra Fort, Mehtab Bagh and Fatehpur Sikri instead, or suggest a nearby day." },
-  { q: "How far is Agra from Delhi, and how do you get there?", a: "Agra is about 230 km from Delhi, roughly 3–4 hours by private car on the Yamuna Expressway, or 1 hour 40 minutes on the Gatimaan Express train (which does not run on Fridays)." },
-  { q: "Do you really include a professional photographer?", a: "On our photography and sunrise tours, yes — a local photographer walks with you at the Taj Mahal and hands over edited photos afterwards. It's optional on standard tours and can always be added." },
-  { q: "Is it safe to book directly instead of through a marketplace?", a: "We're a registered Agra-based operator with licensed guides and named team members, not an anonymous listing. You can reach us on WhatsApp before paying anything, and we take a modest deposit with the balance due on arrival." },
-];
+
 
 export default function Home() {
-  const hero = getImage("taj-mahal-sunrise-1");
+  // Each brand leads with a different photograph — four homepages opening on the same image is
+  // a near-duplicate signal in its own right, and the strongest one a person actually notices.
+  const hero = getImage(brand.home.heroImage);
   return (
     <>
       <JsonLd data={{ "@context": "https://schema.org", "@type": "WebPage", name: metadata.title, url: site.url, description: site.description }} />
       <Hero
         image={hero.src}
         alt={hero.alt}
-        eyebrow="Agra-based · Licensed local guides"
-        title="Private Taj Mahal & Golden Triangle tours, photographed beautifully"
-        subtitle="Same-day trips from Delhi, sunrise tours and tailor-made Rajasthan journeys — with a professional photographer on request and no shopping-stop detours, ever."
+        eyebrow={brand.home.heroEyebrow}
+        title={brand.home.heroTitle}
+        subtitle={brand.home.heroSubtitle}
       />
 
+      {publishes("tours") && (
+        <>
       <Section>
         <SectionHeader eyebrow="Choose your trip" title="Where would you like to start?" align="center" className="mx-auto" />
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
@@ -74,22 +89,22 @@ export default function Home() {
         <TourCardRow tours={(featuredTours().length ? featuredTours() : tours).slice(0, 6)} className="mt-10" />
         <div className="mt-8 text-center"><ButtonLink href="/tours" variant="secondary">Browse all tours <ArrowRight className="size-4" aria-hidden /></ButtonLink></div>
       </Section>
+        </>
+      )}
 
       <Section>
-        <SectionHeader eyebrow="Why Taj Photos" title="A small team that actually shows up" />
+        <SectionHeader eyebrow={brand.home.whyEyebrow} title={brand.home.whyTitle} />
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            { icon: Camera, title: "Own photographer", text: "Not an add-on afterthought — photography is what we started with." },
-            { icon: UserCheck, title: "Licensed guides", text: "Ministry of Tourism registered, not a driver moonlighting as a guide." },
-            { icon: Car, title: "Cars under 3 years old", text: "Air-conditioned, seatbelts checked, no roadside surprises." },
-            { icon: ShieldCheck, title: "No shopping stops", text: "We're not paid commission to detour you through emporiums." },
-          ].map((f) => (
-            <div key={f.title} className="rounded-2xl border border-border bg-surface p-6">
-              <f.icon className="size-6 text-primary" aria-hidden />
-              <p className="mt-3 font-semibold text-ink">{f.title}</p>
-              <p className="mt-1.5 text-sm text-muted">{f.text}</p>
-            </div>
-          ))}
+          {brand.home.whyPoints.map((f) => {
+            const Icon = ICONS[f.icon];
+            return (
+              <div key={f.title} className="rounded-2xl border border-border bg-surface p-6">
+                <Icon className="size-6 text-primary" aria-hidden />
+                <p className="mt-3 font-semibold text-ink">{f.title}</p>
+                <p className="mt-1.5 text-sm text-muted">{f.text}</p>
+              </div>
+            );
+          })}
         </div>
         <StatStrip className="mt-14 grid grid-cols-2 gap-8 border-t border-border pt-10 sm:grid-cols-4" />
       </Section>
@@ -97,13 +112,15 @@ export default function Home() {
       <Section tone="ink" className="overflow-hidden">
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <div>
-            <p className="eyebrow text-highlight">Taj Mahal photography</p>
-            <h2 className="mt-3 text-3xl font-semibold sm:text-4xl">Every edited photo, done by someone who knows the light</h2>
-            <p className="mt-4 max-w-lg text-white/80 leading-relaxed">Our photographers know exactly where the golden light lands on the marble each month, and how to get you the shot without the crowds. Sunrise, couples, families, proposals — we&apos;ve done it hundreds of times.</p>
-            <ButtonLink href="/tours#photography" variant="secondary" className="mt-6 bg-white text-ink hover:bg-white/90">See photography tours <ArrowRight className="size-4" aria-hidden /></ButtonLink>
+            <p className="eyebrow text-highlight">{brand.home.showcaseEyebrow}</p>
+            <h2 className="mt-3 text-3xl font-semibold sm:text-4xl">{brand.home.showcaseTitle}</h2>
+            <p className="mt-4 max-w-lg text-white/80 leading-relaxed">{brand.home.showcaseText}</p>
+            {/* Points at /quote rather than a tour anchor: two brands publish no tours at all, and
+                this is the panel most likely to be the last thing read before someone converts. */}
+            <ButtonLink href="/quote" variant="secondary" className="mt-6 bg-white text-ink hover:bg-white/90">{brand.quote.cta} <ArrowRight className="size-4" aria-hidden /></ButtonLink>
           </div>
           <div className="grid grid-cols-3 gap-3">
-            {["taj-mahal-couple-1", "taj-mahal-detail-1", "taj-mahal-sunrise-2"].map((id, i) => {
+            {brand.home.showcaseImages.map((id, i) => {
               const img = getImage(id);
               return (
                 <div key={id} className={`relative overflow-hidden rounded-2xl ${i === 0 ? "col-span-3 aspect-[16/10]" : "aspect-square"}`}>
@@ -123,23 +140,21 @@ export default function Home() {
         </Section>
       )}
 
-      <Section>
-        <SectionHeader eyebrow="Destinations" title="Where we take you" />
-        <div className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4">
-          {destinations.map((d) => <DestinationCard key={d.slug} destination={d} />)}
-        </div>
-      </Section>
+      {publishes("destinations") && (
+        <Section>
+          <SectionHeader eyebrow="Destinations" title="Where we take you" />
+          <div className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4">
+            {destinations.map((d) => <DestinationCard key={d.slug} destination={d} />)}
+          </div>
+        </Section>
+      )}
 
       <Section tone="surface">
-        <SectionHeader eyebrow="How it works" title="Three steps to your itinerary" />
+        <SectionHeader eyebrow="How it works" title={`Three steps to your ${brand.key === "tajphotographs" ? "print or licence" : "quote"}`} />
         <ol className="mt-10 grid gap-6 sm:grid-cols-3">
-          {[
-            { n: "1", t: "Tell us your dates", d: "A two-minute WhatsApp message or form — no account needed." },
-            { n: "2", t: "Get a price in ~15 minutes", d: "A real itinerary from a real person, during our hours." },
-            { n: "3", t: "Confirm with a small deposit", d: "Pay the rest on arrival. Free cancellation up to 48 hours before." },
-          ].map((s) => (
-            <li key={s.n} className="rounded-2xl border border-border bg-white p-6">
-              <span className="font-display text-3xl font-semibold text-accent">{s.n}</span>
+          {brand.home.steps.map((s, i) => (
+            <li key={s.t} className="rounded-2xl border border-border bg-white p-6">
+              <span className="font-display text-3xl font-semibold text-accent">{i + 1}</span>
               <p className="mt-2 font-semibold text-ink">{s.t}</p>
               <p className="mt-1.5 text-sm text-muted">{s.d}</p>
             </li>
@@ -157,15 +172,15 @@ export default function Home() {
 
       <Section tone="surface">
         <SectionHeader eyebrow="FAQ" title="Common questions" align="center" className="mx-auto" />
-        <FaqList items={homeFaqs} className="mx-auto mt-10 max-w-3xl" />
+        <FaqList items={brand.home.faqs} className="mx-auto mt-10 max-w-3xl" />
       </Section>
 
       <Section>
-        <CtaCard title="Tell us where you'd like to go" text="Free to ask, no obligation — we'll reply with a real itinerary and honest price." label={brand.quote.cta} />
+        <CtaCard title={brand.home.ctaTitle} text={brand.home.ctaText} label={brand.quote.cta} />
       </Section>
 
       {/* Static category anchors so /tours#golden-triangle etc. exist even before hydration */}
-      <div className="sr-only">{tourCategories.map((c) => <span key={c.key} id={c.key} />)}</div>
+      {publishes("tours") && <div className="sr-only">{tourCategories.map((c) => <span key={c.key} id={c.key} />)}</div>}
     </>
   );
 }

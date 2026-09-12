@@ -44,6 +44,40 @@ const brand: Brand = {
   schemaTypes: ["TravelAgency", "TourOperator", "LocalBusiness", "Organization"],
   style: { hero: "split", card: "rounded", radius: "pill", headings: "serif-editorial", density: "dense" },
 
+  home: {
+    heroEyebrow: "Agra-based · Licensed local guides",
+    heroTitle: "Private Taj Mahal and Golden Triangle trips, run by people who live here",
+    heroSubtitle:
+      "Same-day trips from Delhi, sunrise at the Taj, and tailor-made Rajasthan journeys — one local contact for the guide, the car, the tickets and the hotels. No shopping-stop detours, ever.",
+    heroImage: "taj-mahal-sunrise-1",
+    whyEyebrow: "Why book direct",
+    whyTitle: "A small team that actually shows up",
+    whyPoints: [
+      { icon: "userCheck", title: "Licensed guides", text: "Ministry of Tourism registered, not a driver moonlighting as a guide." },
+      { icon: "car", title: "Cars under 3 years old", text: "Air-conditioned, seatbelts checked, no roadside surprises." },
+      { icon: "shield", title: "No shopping stops", text: "We are not paid commission to detour you through emporiums." },
+      { icon: "camera", title: "Photographer on request", text: "Added to any tour when you want the day properly photographed." },
+    ],
+    showcaseEyebrow: "One contact, not five bookings",
+    showcaseTitle: "The guide, the car, the tickets and the hotel — arranged by one person",
+    showcaseText:
+      "Most first trips to India go wrong in the gaps between bookings: the driver who does not know the guide, the ticket nobody bought, the hotel an hour from where you needed to be. We hold all of it, so there are no gaps to fall through.",
+    showcaseImages: ["taj-mahal-wide-1", "india-private-car-1", "agra-fort-1"],
+    steps: [
+      { t: "Tell us your dates", d: "A two-minute form or a WhatsApp message. No account, no card." },
+      { t: "Get a real itinerary", d: "Day by day, from a person in Agra — with an exact price for it." },
+      { t: "Confirm with a small deposit", d: "Balance on arrival. Free cancellation up to 48 hours before." },
+    ],
+    faqs: [
+      { q: "Is the Taj Mahal closed on Fridays?", a: "Yes. The Taj Mahal is closed to tourists every Friday, though local Muslims may enter for prayers. We route Friday visitors to Agra Fort, Mehtab Bagh and Fatehpur Sikri instead, or suggest a nearby day." },
+      { q: "How far is Agra from Delhi, and how do you get there?", a: "Agra is about 230 km from Delhi, roughly 3-4 hours by private car on the Yamuna Expressway, or 1 hour 40 minutes on the Gatimaan Express train, which does not run on Fridays." },
+      { q: "Why don't you publish prices?", a: "Because what a trip costs depends on your dates, group size, how many days and which hotels — a list price would overcharge the simple trips and quietly exclude what you asked for. Send us the details and you get an exact quote, usually the same day." },
+      { q: "Is it safe to book directly instead of through a marketplace?", a: "We are a registered Agra-based operator with licensed guides and named team members, not an anonymous listing. You can reach us on WhatsApp before paying anything, and we take a modest deposit with the balance due on arrival." },
+    ],
+    ctaTitle: "Tell us where you'd like to go",
+    ctaText: "Free to ask, no obligation — we reply with a real itinerary and an exact price.",
+  },
+
   sections: { tours: true, destinations: true, guides: true, gallery: false },
   showPrices: false,
 
