@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...(publishes("destinations") ? [{ url: absoluteUrl("/destinations"), lastModified: latest, changeFrequency: "monthly" as const, priority: 0.8 }] : []),
     ...(publishes("guides") ? [{ url: absoluteUrl("/guides"), lastModified: latest, changeFrequency: "weekly" as const, priority: 0.8 }] : []),
     { url: absoluteUrl("/quote"), lastModified: latest, changeFrequency: "monthly", priority: 0.9 },
+    { url: absoluteUrl("/services"), lastModified: latest, changeFrequency: "monthly", priority: 0.7 },
     { url: absoluteUrl("/about"), lastModified: latest, changeFrequency: "monthly", priority: 0.6 },
     { url: absoluteUrl("/contact"), lastModified: latest, changeFrequency: "yearly", priority: 0.6 },
     { url: absoluteUrl("/reviews"), lastModified: latest, changeFrequency: "weekly", priority: 0.6 },

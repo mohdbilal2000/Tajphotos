@@ -53,7 +53,7 @@ export const latestContentDate = () =>
  * four domains under one owner. See `src/lib/sections.ts`.
  */
 export function allRoutes() {
-  const staticPages = ["/", ...publishedSectionPaths(), "/quote", "/about", "/contact", "/reviews", "/faq", "/credits", "/privacy", "/terms"];
+  const staticPages = ["/", ...publishedSectionPaths(), "/quote", "/services", "/about", "/contact", "/reviews", "/faq", "/credits", "/privacy", "/terms"];
   return {
     staticPages,
     tourPaths: publishes("tours") ? tours.map((t) => `/tours/${t.slug}`) : [],

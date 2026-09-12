@@ -3,7 +3,8 @@ import { Mail, Phone, MapPin } from "lucide-react";
 import { InstagramIcon, FacebookIcon, YoutubeIcon } from "@/components/ui/BrandIcons";
 import { TrackedContactLink } from "@/components/TrackedContactLink";
 import { site } from "@/config/site";
-import { PARENT, siblingBrands } from "@/config/brand";
+import { PARENT } from "@/config/brand";
+import { allGroupSites, parentService } from "@/config/network";
 import { publishes } from "@/lib/sections";
 import { tours, destinations, latestGuides } from "@/content";
 import { brand } from "@/config/brand";
@@ -70,6 +71,7 @@ export function Footer() {
           <p className="font-semibold text-ink">Company</p>
           <ul className="mt-3 space-y-2 text-muted">
             <li><Link href="/about" className="hover:text-ink">About us</Link></li>
+            <li><Link href="/services" className="hover:text-ink">Everything we do</Link></li>
             <li><Link href="/reviews" className="hover:text-ink">Reviews</Link></li>
             <li><Link href="/faq" className="hover:text-ink">FAQ</Link></li>
             <li><Link href="/quote" className="hover:text-ink">{brand.quote.cta}</Link></li>
@@ -97,10 +99,10 @@ export function Footer() {
         <div className="container-site py-6">
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Also from {PARENT.name}</p>
           <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-xs text-muted">
-            {siblingBrands.map((b) => (
-              <li key={b.key}>
+            {allGroupSites.map((b) => (
+              <li key={b.domain}>
                 <a href={`https://${b.domain}`} className="hover:text-ink" rel="noopener">
-                  <span className="font-medium text-ink/80">{b.name}</span> — {b.product.replace(/\.$/, "")}
+                  <span className="font-medium text-ink/80">{b.name}</span> — {b.sells.replace(/\.$/, "")}
                 </a>
               </li>
             ))}
@@ -111,6 +113,15 @@ export function Footer() {
         <div className="container-site flex flex-col gap-2 py-5 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {year} {site.legalName}. All rights reserved. {PARENT.disclosure}, registered in Agra, Uttar Pradesh, India.
+            {parentService.enabled && (
+              <>
+                {" "}
+                <a href={parentService.url} rel="noopener" className="hover:text-ink">
+                  {PARENT.name} builds websites from {parentService.from}
+                </a>
+                .
+              </>
+            )}
           </p>
           <p>
             Every booking is quoted individually — we publish no fixed rates. Monument tickets are set by the

@@ -104,22 +104,26 @@ non-commercial use. Five sites taking paid bookings is unambiguously commercial.
 polite email — it is enforcement against the account, which would take every site down at once,
 including ones unrelated to this project. Move to Pro before pointing any real domain at these.
 
-### There are already ~10 Taj/Agra travel sites in this account
+### Know which sites in the Vercel account are actually yours
 
-Listed on Vercel today: `tajagraguide`, `indiventure-travellers`, `tajguidessf` (x2),
-`agratourguide`, `voyageurs-en-inde`, `ma-travels`, `travellano`, `madshif-travel-creator`,
-`travel-trove-experience` — plus `taj-mahal-photography`, which is live and earning.
+The Vercel account hosts a number of Taj/Agra travel projects built for other people —
+`voyageurs-en-inde`, `travellano`, `ma-travels`, `tajguidessf`, `tajagraguide` and
+`indiventure-travellers` are **not** this business and must not be treated as part of it.
 
-Adding five more makes **fifteen sites in one niche under one owner**. That is a materially
-different risk from the five this repo was designed around, and it is the thing most likely to
-undo all of this work. Before launching, go through that list and for each one either (a) keep it
-because it sells something genuinely distinct and is actively maintained, or (b) 301 it into the
-brand that covers it and shut it down. Consolidating dead sites into live ones also passes their
-link equity forward instead of stranding it.
+That distinction matters, because Google does not see Vercel accounts. What associates sites with
+each other is shared whois, a shared postal address or phone number, a shared analytics ID, and
+interlinking. So two rules follow:
 
-Be specific about what "distinct" means: a different service, a different audience, and different
-photographs, people and reviews. A French-language site (`voyageurs-en-inde`) is a legitimately
-distinct property. Three variations on "Agra tour guide" are not.
+- **Never cross-link to a site that is not yours.** The referral block in the footer and on
+  `/services` is generated from `src/config/network.ts` — keep that file to genuinely owned
+  businesses only. Linking a client's or a relative's site into the group is what would
+  manufacture the association that does not currently exist.
+- **Never reuse identifiers across them.** A shared `NEXT_PUBLIC_GA_ID`, phone number or office
+  address across otherwise unrelated sites ties them together far more strongly than any link.
+
+The genuinely owned group is this repo's five brands plus `tajmahalphotography.com`,
+`asiabylocals.com` and `guideindiatours.com` — around eight sites, which is an ordinary portfolio
+for one operator and is disclosed openly on every one of them.
 
 ## 6. The one thing that will sink every site if you get it wrong
 

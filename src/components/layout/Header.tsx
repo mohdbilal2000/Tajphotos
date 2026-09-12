@@ -39,6 +39,7 @@ const nav = [
   ...(publishes("guides") ? ([{ label: "Travel guides", href: "/guides" }] as const) : ([] as const)),
   { label: "Reviews", href: "/reviews" },
   { label: "About", href: "/about" },
+  { label: "Everything we do", href: "/services" },
 ] as const;
 
 /**
