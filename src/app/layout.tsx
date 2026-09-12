@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Manrope } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleAnalytics } from "@next/third-parties/google";
@@ -7,6 +6,8 @@ import Script from "next/script";
 import { ConsentBanner } from "@/components/ConsentBanner";
 import "./globals.css";
 import { site } from "@/config/site";
+import { brand, brandCssVars } from "@/config/brand";
+import { fontClassNames, fontCssVars } from "@/config/fonts";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFloat } from "@/components/layout/WhatsAppFloat";
@@ -14,19 +15,13 @@ import { CurrencyProvider } from "@/context/CurrencyContext";
 import { JsonLd } from "@/components/JsonLd";
 import { graph, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  variable: "--font-fraunces",
-  display: "swap",
-  axes: ["opsz", "SOFT"],
-  weight: "variable",
-});
-const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", display: "swap" });
-
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — Golden Triangle Tours & Taj Mahal Photography, by Agra Locals`,
+    // Each brand sells a different thing, so the homepage title is the brand's own tagline
+    // rather than a portfolio-wide boilerplate — four sites sharing one title template is
+    // precisely the near-duplicate signal the brand split exists to avoid.
+    default: `${site.name} — ${brand.tagline}`,
     template: `%s | ${site.name}`,
   },
   description: site.description,
@@ -48,7 +43,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#faf7f2",
+  themeColor: brand.palette.themeColor,
   colorScheme: "light",
   width: "device-width",
   initialScale: 1,
@@ -56,7 +51,11 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${manrope.variable} h-full`}>
+    // The brand palette and typography ride on the <html> element as inline custom properties:
+    // element-level styles outrank Tailwind v4's `@theme` :root declarations without depending on
+    // stylesheet order, and they are in the first bytes of the SSR'd HTML, so there is no flash
+    // of the default brand's colours before hydration.
+    <html lang="en" className={`${fontClassNames} h-full`} style={{ ...brandCssVars, ...fontCssVars }} data-brand={brand.key}>
       <body className="flex min-h-full flex-col">
         {/* Consent Mode v2 default — must run before any analytics script (GA4/Clarity), so it is
             beforeInteractive and defaults everything to denied until ConsentBanner applies a choice. */}

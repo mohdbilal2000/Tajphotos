@@ -27,8 +27,11 @@
   --color-whatsapp: #25d366;
   --color-whatsapp-ink: #075e54; /* WhatsApp dark teal — white text 7.7:1 */
 
-  --font-display: var(--font-fraunces), "Georgia", "Times New Roman", serif;
-  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  /* Both families are supplied per brand by src/config/fonts.ts, which sets --font-display-src
+     and --font-body-src on <html>. The fallback stack differs per brand too (a grotesque brand
+     should not fall back to Georgia), so it arrives as --brand-display-fallback. */
+  --font-display: var(--font-display-src), var(--brand-display-fallback, "Georgia", "Times New Roman", serif);
+  --font-sans: var(--font-body-src), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
   --radius-xl: 1rem;
   --radius-2xl: 1.25rem;
@@ -54,7 +57,15 @@
   html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
   body { @apply bg-bg text-ink font-sans antialiased; text-rendering: optimizeLegibility; }
   ::selection { background: color-mix(in oklab, var(--color-highlight) 55%, white); }
-  h1, h2, h3, h4 { @apply font-display tracking-tight text-balance; font-variation-settings: "opsz" 32, "SOFT" 20; }
+  /* Weight/tracking/optical-size come from the active brand (see fontCssVars in config/fonts.ts)
+     so the same heading markup renders as four distinct typographic voices. Defaults here match
+     the flagship, so a brand that sets none of them is still correct. */
+  h1, h2, h3, h4 {
+    @apply font-display text-balance;
+    font-weight: var(--brand-h-weight, 600);
+    letter-spacing: var(--brand-h-tracking, -0.02em);
+    font-variation-settings: var(--brand-h-opsz, normal);
+  }
   :focus-visible { @apply outline-2 outline-offset-[3px] outline-primary rounded-sm; }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -72,7 +83,10 @@
      variant repeats the shared base declarations (kept in one place here as plain CSS custom
      properties would be another option, but this reads more clearly for four short variants). */
   .btn-primary, .btn-secondary, .btn-ghost, .btn-whatsapp {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-all duration-200 will-change-transform focus-visible:outline-2 disabled:opacity-60 disabled:pointer-events-none;
+    @apply inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-semibold transition-all duration-200 will-change-transform focus-visible:outline-2 disabled:opacity-60 disabled:pointer-events-none;
+    /* Not `rounded-full`: button silhouette is one of the strongest brand cues on the page, so
+       the radius is a per-brand token (config/brand.ts radiusVars) — pill, soft, or near-square. */
+    border-radius: var(--brand-btn-radius, 9999px);
   }
   .btn-primary { @apply bg-primary text-primary-fg shadow-soft hover:bg-primary-hover hover:-translate-y-px active:translate-y-0; }
   .btn-secondary { @apply border border-border bg-white/80 text-ink hover:border-ink/30 hover:bg-white; }

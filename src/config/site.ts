@@ -1,34 +1,42 @@
 /**
- * Single source of truth for brand, contact and business identity.
- * Everything here is used by the UI, structured data (JSON-LD), sitemap, llms.txt and metadata,
- * so editing this file updates the whole site consistently (important for SEO/AEO entity signals).
+ * Brand-derived site identity.
  *
- * Values marked TODO are placeholders — replace them before launch.
- * Public env vars override the contact details without a code change.
+ * This is a thin, stable facade over `@/config/brand` — the four brands each build from this
+ * same codebase (see `src/config/brands/types.ts`), so everything brand-specific is resolved
+ * there and re-shaped here into the single `site` object the UI, JSON-LD, sitemap, llms.txt and
+ * metadata have always consumed. Adding a brand therefore touches `src/config/brands/` only.
+ *
+ * Values marked TODO are still placeholders — replace them before launch.
  */
 
-const env = (key: string, fallback: string) => process.env[key] ?? fallback;
+import { brand, siteUrl, hasPhone, PARENT } from "@/config/brand";
+
+export { brand, siteUrl, hasWhatsApp, hasPhone, whatsappLink, siblingBrands, PARENT } from "@/config/brand";
+
+const env = (key: string | undefined, fallback: string) => (key && key.trim()) || fallback;
 
 export const site = {
-  name: "TajPhotos",
-  legalName: "TajPhotos Tours & Travels",
-  tagline: "Golden Triangle tours & Taj Mahal photography experiences, run by Agra locals",
-  description:
-    "Private Taj Mahal, Agra, Delhi, Jaipur and Udaipur tours with licensed local guides, professional photographers and safe chauffeur-driven cars. Tailor-made Golden Triangle itineraries from Delhi.",
-  url: env("NEXT_PUBLIC_SITE_URL", "https://tajphotos.com"),
+  name: brand.name,
+  legalName: brand.legalName,
+  tagline: brand.tagline,
+  description: brand.description,
+  url: siteUrl,
   locale: "en_IN",
   language: "en",
   foundingYear: 2016, // TODO: confirm
+  /** The one sentence that separates this brand from its siblings — used in copy and schema. */
+  product: brand.product,
+  audience: brand.audience,
   contact: {
-    // TODO: replace with real numbers before launch (E.164 format without "+" for WhatsApp links)
-    whatsapp: env("NEXT_PUBLIC_WHATSAPP_NUMBER", "919999999999"),
-    phoneDisplay: env("NEXT_PUBLIC_PHONE_DISPLAY", "+91 99999 99999"),
-    phoneE164: env("NEXT_PUBLIC_PHONE_E164", "+919999999999"),
-    email: env("NEXT_PUBLIC_EMAIL", "hello@tajphotos.com"),
+    ...brand.contact,
     hoursNote: "We reply on WhatsApp within minutes, 7 days a week (7 AM – 11 PM IST)",
   },
   address: {
-    // TODO: real office address (used for LocalBusiness schema + Google Business Profile consistency)
+    // TODO: real office address (used for LocalBusiness schema + Google Business Profile consistency).
+    // NOTE: all four brands share one legal entity and one office. That means they cannot each
+    // hold a separate Google Business Profile at this address — multiple GBPs on one address in
+    // one category is the single most reliable way to get all of them suspended. Verify one
+    // profile, for the flagship, unless genuinely distinct staffed premises exist.
     streetAddress: "Fatehabad Road, Tajganj",
     addressLocality: "Agra",
     addressRegion: "Uttar Pradesh",
@@ -39,25 +47,26 @@ export const site = {
   openingHours: ["Mo-Su 07:00-23:00"],
   priceRange: "$$",
   currencies: ["USD", "INR", "EUR", "GBP"] as const,
-  /** Static indicative FX rates for the price toggle (update quarterly). Prices are quoted in USD. */
-  // Updated 2026-09-06 against live market rates (was materially stale: INR had drifted ~11-13%
-  // low and EUR/GBP ~5-7% high, distorting every converted price shown on the site). Static and
-  // indicative by design — re-check quarterly, not live-fetched, so a converted price never
-  // depends on a third-party API being up.
+  /**
+   * Static indicative FX rates. Retained for any future price display, but note that
+   * `brand.showPrices` is false across the whole portfolio: nothing is quoted publicly, because
+   * every job is scoped individually. Re-check quarterly if a brand ever opts back in.
+   */
   fxRates: { USD: 1, INR: 95, EUR: 0.86, GBP: 0.74 } as Record<"USD" | "INR" | "EUR" | "GBP", number>,
+  showPrices: brand.showPrices,
   social: {
-    // TODO: fill real profiles — they become schema.org sameAs links (entity signals for Google/AI engines)
-    instagram: "https://www.instagram.com/tajphotos",
-    facebook: "https://www.facebook.com/tajphotos",
-    youtube: "https://www.youtube.com/@tajphotos",
-    tripadvisor: "",
+    instagram: brand.social.instagram ?? "",
+    facebook: brand.social.facebook ?? "",
+    youtube: brand.social.youtube ?? "",
+    pinterest: brand.social.pinterest ?? "",
+    tripadvisor: brand.social.tripadvisor ?? "",
     googleBusiness: "",
     x: "",
-    pinterest: "",
     linkedin: "",
   },
+  parent: PARENT,
   credentials: [
-    // TODO: confirm each before launch; remove any that do not apply
+    // TODO: confirm each before launch; remove any that do not apply.
     { label: "Licensed local guides (Ministry of Tourism, Govt. of India)", short: "Licensed guides" },
     { label: "Registered Agra-based tour operator", short: "Registered operator" },
     { label: "GST-registered business", short: "GST registered" },
@@ -69,28 +78,29 @@ export const site = {
     rating: { value: 4.9, count: 1_150, source: "Google & TripAdvisor" },
     countries: "60+",
     // Google's self-serving-reviews policy: only emit AggregateRating JSON-LD once this rating
-    // is a real, independently-verifiable figure (e.g. pulled from your Google Business Profile
-    // or TripAdvisor listing) — never mark up your own placeholder/testimonial numbers as schema.
+    // is a real, independently-verifiable figure — never mark up placeholder numbers as schema.
     ratingVerified: false,
   },
   verification: {
-    google: env("NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION", ""),
-    bing: env("NEXT_PUBLIC_BING_SITE_VERIFICATION", ""),
+    google: env(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION, ""),
+    bing: env(process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION, ""),
   },
   analytics: {
-    gaId: env("NEXT_PUBLIC_GA_ID", ""),
-    clarityId: env("NEXT_PUBLIC_CLARITY_ID", ""),
+    gaId: env(process.env.NEXT_PUBLIC_GA_ID, ""),
+    clarityId: env(process.env.NEXT_PUBLIC_CLARITY_ID, ""),
   },
 } as const;
 
 export type Currency = (typeof site.currencies)[number];
 
-export const sameAs = Object.values(site.social).filter(Boolean) as string[];
+export const sameAs = [
+  ...Object.values(site.social).filter(Boolean),
+  // The parent company is a legitimate `sameAs` edge: it is how the entity graph learns these
+  // four brands are one disclosed business rather than an undisclosed network.
+  PARENT.url,
+] as string[];
 
-/** wa.me deep link with a prefilled, URL-encoded message. */
-export function whatsappLink(message?: string) {
-  const base = `https://wa.me/${site.contact.whatsapp}`;
-  return message ? `${base}?text=${encodeURIComponent(message)}` : base;
-}
+export const defaultWhatsappMessage = `Hi ${site.name}! I'd like a quote — could you help?`;
 
-export const defaultWhatsappMessage = `Hi ${site.name}! I'm planning a trip to India and would like help with an itinerary.`;
+/** True when there is any reachable contact channel at all; guards empty contact blocks. */
+export const hasDirectContact = hasPhone || Boolean(site.contact.email);

@@ -1,4 +1,5 @@
 import { site, whatsappLink } from "@/config/site";
+import { absoluteUrl } from "@/lib/utils";
 
 /**
  * A stable, memorable link (tajphotos.com/review) to hand out on WhatsApp after every trip —
@@ -10,6 +11,13 @@ import { site, whatsappLink } from "@/config/site";
  * local-search ranking weight.
  */
 export function GET() {
-  const destination = site.social.tripadvisor || site.social.googleBusiness || whatsappLink(`Hi ${site.name}! I had a great trip and would love to leave you a review — where should I post it?`);
+  // Falls through to /contact rather than assuming a WhatsApp number exists: whatsappLink()
+  // returns null on a deployment with no number configured, and a redirect to an invalid URL
+  // would throw a 500 on what is meant to be the friendliest link the business hands out.
+  const destination =
+    site.social.tripadvisor ||
+    site.social.googleBusiness ||
+    whatsappLink(`Hi ${site.name}! I had a great trip and would love to leave you a review — where should I post it?`) ||
+    absoluteUrl("/contact");
   return Response.redirect(destination, 302);
 }
