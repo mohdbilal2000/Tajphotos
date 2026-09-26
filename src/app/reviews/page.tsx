@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Section } from "@/components/ui/Section";
-import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { PageHeader } from "@/components/layout/PageHeader";
 import { TestimonialGrid } from "@/components/sections/Testimonial";
 import { StatStrip } from "@/components/sections/StatStrip";
 import { CtaCard } from "@/components/sections/CtaCard";
@@ -19,7 +19,11 @@ export const metadata: Metadata = buildMetadata({
 export default function ReviewsPage() {
   return (
     <>
-      <div className="border-b border-border bg-surface py-8"><div className="container-site"><Breadcrumbs items={[{ name: "Reviews", path: "/reviews" }]} /><h1 className="mt-2 text-3xl font-semibold sm:text-4xl">Traveller reviews</h1></div></div>
+      <PageHeader
+        crumbs={[{ name: "Reviews", path: "/reviews" }]}
+        eyebrow="Reviews"
+        title="Traveller reviews"
+      />
       <Section><StatStrip /></Section>
       <Section tone="surface">
         {reviews.length > 0 ? <TestimonialGrid reviews={reviews} /> : (

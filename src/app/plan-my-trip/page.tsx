@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Section } from "@/components/ui/Section";
-import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { PageHeader } from "@/components/layout/PageHeader";
 import { EnquiryForm } from "@/components/EnquiryForm";
 import { TrustWall } from "@/components/sections/TrustWall";
 import { FaqList } from "@/components/content/RichText";
@@ -26,7 +26,12 @@ const faqs = [
 export default function PlanMyTripPage() {
   return (
     <>
-      <div className="border-b border-border bg-surface py-8"><div className="container-site"><Breadcrumbs items={[{ name: "Plan my trip", path: "/plan-my-trip" }]} /><h1 className="mt-2 max-w-2xl text-3xl font-semibold sm:text-4xl">Tell us about your trip — get an itinerary and price in a few hours</h1><p className="mt-3 max-w-xl text-muted">{site.contact.hoursNote}. No obligation, no spam.</p></div></div>
+      <PageHeader
+        crumbs={[{ name: "Plan my trip", path: "/plan-my-trip" }]}
+        eyebrow="Enquire"
+        title="Tell us about your trip"
+        text={`${site.contact.hoursNote}. A real day-by-day itinerary and an honest price, from a person. No account, no card, no obligation.`}
+      />
       <Section>
         <div className="grid gap-10 lg:grid-cols-[1fr_20rem]">
           <EnquiryForm sourcePage="/plan-my-trip" />

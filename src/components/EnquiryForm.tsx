@@ -58,7 +58,7 @@ export function EnquiryForm({ defaultDestination, sourcePage }: { defaultDestina
         <legend className="text-sm font-semibold text-ink">Where would you like to go? <RequiredMark /></legend>
         <div className="mt-3 flex flex-wrap gap-2" aria-describedby={err("destinations") ? "destinations-error" : undefined} aria-invalid={err("destinations") ? true : undefined}>
           {destinations.map((d) => (
-            <label key={d.slug} className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-border px-3.5 py-2 text-sm has-checked:border-primary has-checked:bg-primary/5 has-checked:text-primary">
+            <label key={d.slug} className="inline-flex cursor-pointer items-center gap-2 border border-border px-3.5 py-2 text-sm has-checked:border-primary has-checked:bg-primary/5 has-checked:text-primary">
               <input type="checkbox" name="destinations" value={d.name} defaultChecked={d.slug === defaultDestination} className="accent-primary" />
               {d.name}
             </label>

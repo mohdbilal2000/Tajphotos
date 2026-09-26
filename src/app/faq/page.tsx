@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Section } from "@/components/ui/Section";
-import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { PageHeader } from "@/components/layout/PageHeader";
 import { FaqList } from "@/components/content/RichText";
 import { JsonLd } from "@/components/JsonLd";
 import { buildMetadata, faqJsonLd } from "@/lib/seo";
@@ -21,7 +21,12 @@ export default function FaqPage() {
   return (
     <>
       <JsonLd data={{ "@context": "https://schema.org", ...faqJsonLd(faqs) }} />
-      <div className="border-b border-border bg-surface py-8"><div className="container-site"><Breadcrumbs items={[{ name: "FAQ", path: "/faq" }]} /><h1 className="mt-2 text-3xl font-semibold sm:text-4xl">Frequently asked questions</h1></div></div>
+      <PageHeader
+        crumbs={[{ name: "FAQ", path: "/faq" }]}
+        eyebrow="Questions"
+        title="Frequently asked questions"
+        text="Tickets, timings, closures, safety, payments and cancellations — answered in the first sentence."
+      />
       <Section><FaqList items={faqs} className="mx-auto max-w-3xl" /></Section>
     </>
   );

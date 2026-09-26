@@ -8,7 +8,7 @@ export function ItineraryTimeline({ days, className }: { days: ItineraryDay[]; c
     <ol className={`relative space-y-8 border-l border-border pl-8 sm:pl-10 ${className ?? ""}`}>
       {days.map((d) => (
         <li key={d.day} className="relative">
-          <span className="absolute -left-[calc(2rem+1px)] flex size-8 items-center justify-center rounded-full bg-primary font-display text-sm font-semibold text-primary-fg sm:-left-[calc(2.5rem+1px)] sm:size-10">
+          <span className="absolute -left-[calc(2rem+1px)] flex size-8 items-center justify-center bg-primary font-display text-sm font-normal text-primary-fg sm:-left-[calc(2.5rem+1px)] sm:size-10">
             {d.day}
           </span>
           <p className="text-xs font-semibold uppercase tracking-wide text-accent">{multiDay ? `Day ${d.day}` : "Your day"}</p>

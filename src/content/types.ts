@@ -182,3 +182,67 @@ export interface TeamMember {
   credentials?: string[];
   sameAs?: string[];
 }
+
+/* ------------------------------- Stays & services ------------------------------- */
+
+/**
+ * Our own categorisation of the properties we book — not a star rating and not a claim the hotel
+ * makes about itself. "palace" means a genuine former royal residence now run as a hotel;
+ * "heritage" a historic building (haveli, colonial-era hotel, restored fort); "contemporary" a
+ * purpose-built modern luxury hotel; "boutique" a small owner-run property.
+ */
+export type StayTier = "palace" | "heritage" | "contemporary" | "boutique";
+
+export interface Stay {
+  slug: string;
+  name: string;
+  city: string;
+  /** Destination slug, where we have a destination page for the city. */
+  destination?: string;
+  tier: StayTier;
+  /** One sentence on why it is worth the money. */
+  oneLine: string;
+  /**
+   * Two or three sentences of verifiable, checkable description — architecture, history, location.
+   * Never a rate, never a star count, never a claim of affiliation. See the note in stays.ts.
+   */
+  detail: Inline;
+  /** The one detail guests actually remember. */
+  signature: string;
+  image: ImageId;
+  bestFor: string[];
+}
+
+export type ServiceCategory = "transport" | "access" | "photography" | "concierge" | "arrival";
+
+/**
+ * How reliably we can deliver something, stated honestly rather than as "always available":
+ * - "daily": every day of the year.
+ * - "except-friday": every day except Friday (anything inside the Taj Mahal).
+ * - "seasonal": tied to a season or the lunar calendar (night viewing, tiger safaris).
+ * - "on-request": depends on third-party availability on your dates, so we confirm before you pay.
+ */
+export type Availability = "daily" | "except-friday" | "seasonal" | "on-request";
+
+export interface Service {
+  slug: string;
+  name: string;
+  category: ServiceCategory;
+  what: Inline;
+  /** How far ahead we need to know, in plain words. */
+  leadTime: string;
+  availability: Availability;
+  /** Set when the service is part of the tour price rather than an extra. */
+  includedInTours?: boolean;
+  note?: Inline;
+}
+
+export interface FleetVehicle {
+  slug: string;
+  name: string;
+  /** Passengers we would actually seat in it with luggage, not the registration capacity. */
+  seats: string;
+  luggage: string;
+  bestFor: string;
+  note?: Inline;
+}

@@ -25,7 +25,7 @@ export function PriceTable({ tiers, note, className }: { tiers: PriceTier[]; not
                 <td className="px-4 py-3 text-ink/90">
                   <span className="inline-flex items-center gap-2">
                     {t.label}
-                    {popular && <span className="rounded-full bg-accent px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wide text-accent-fg">Most popular</span>}
+                    {popular && <span className="bg-accent px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-accent-fg">Most popular</span>}
                   </span>
                   {t.note && <span className="block text-xs text-muted">{t.note}</span>}
                 </td>

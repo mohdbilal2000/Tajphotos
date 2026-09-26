@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { MessageCircle, Mail, Phone, MapPin, Clock } from "lucide-react";
 import { Section } from "@/components/ui/Section";
-import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { PageHeader } from "@/components/layout/PageHeader";
 import { WhatsAppLink } from "@/components/WhatsAppLink";
 import { TrackedContactLink } from "@/components/TrackedContactLink";
 import { ButtonLink } from "@/components/ui/Button";
@@ -13,7 +13,12 @@ export const metadata: Metadata = buildMetadata({ title: "Contact Us", descripti
 export default function ContactPage() {
   return (
     <>
-      <div className="border-b border-border bg-surface py-8"><div className="container-site"><Breadcrumbs items={[{ name: "Contact", path: "/contact" }]} /><h1 className="mt-2 text-3xl font-semibold sm:text-4xl">Contact us</h1></div></div>
+      <PageHeader
+        crumbs={[{ name: "Contact", path: "/contact" }]}
+        eyebrow="Get in touch"
+        title="Contact us"
+        text="WhatsApp is fastest and gets you a person, not a ticket number."
+      />
       <Section>
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div className="rounded-2xl border border-border bg-surface p-6">

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Manrope } from "next/font/google";
+import { Newsreader, Archivo } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleAnalytics } from "@next/third-parties/google";
@@ -14,14 +14,34 @@ import { CurrencyProvider } from "@/context/CurrencyContext";
 import { JsonLd } from "@/components/JsonLd";
 import { graph, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 
-const fraunces = Fraunces({
+/**
+ * Type pairing: an editorial serif for display, a neutral grotesk for everything else.
+ *
+ * Newsreader carries an `opsz` axis, which is the reason to choose it over a static serif — the
+ * same family sets a 6rem hero without the hairlines blowing out and a 1.25rem sub-head without
+ * them disappearing, provided nothing pins the axis by hand (see globals.css). Italic is loaded
+ * because the founder's letter and the pull-quotes use it as a voice, not as emphasis.
+ *
+ * It replaced Bodoni Moda, which was the first choice and looked better in the hero. Its Google
+ * Fonts `latin` subset ships without U+002D, U+2013, U+2014 or U+002B: the @font-face unicode-range
+ * still *claims* those codepoints, so the browser never falls through to another subset and simply
+ * renders nothing. Headings like "Delhi–Agra", "4-Day Tour" and stats like "12,000+" lost their
+ * punctuation site-wide, silently. If you swap this font again, render the replacement's PRELOADED
+ * subset against a dash/plus test string before shipping — a missing glyph in a display face does
+ * not throw, it just quietly deletes characters from your headlines.
+ *
+ * Both are variable fonts, self-hosted at build time by next/font (no runtime Google request),
+ * subset to latin, so the whole type system is two woff2 files.
+ */
+const display = Newsreader({
   subsets: ["latin"],
-  variable: "--font-fraunces",
+  variable: "--font-display-serif",
   display: "swap",
-  axes: ["opsz", "SOFT"],
+  axes: ["opsz"],
   weight: "variable",
+  style: ["normal", "italic"],
 });
-const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", display: "swap" });
+const archivo = Archivo({ subsets: ["latin"], variable: "--font-archivo", display: "swap", weight: "variable" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -48,7 +68,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#faf7f2",
+  themeColor: "#f4f1ec",
   colorScheme: "light",
   width: "device-width",
   initialScale: 1,
@@ -56,7 +76,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${manrope.variable} h-full`}>
+    <html lang="en" className={`${display.variable} ${archivo.variable} h-full`}>
       <body className="flex min-h-full flex-col">
         {/* Consent Mode v2 default — must run before any analytics script (GA4/Clarity), so it is
             beforeInteractive and defaults everything to denied until ConsentBanner applies a choice. */}
@@ -67,7 +87,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', wait_for_update: 500 });
         `}</Script>
         <JsonLd data={graph(organizationJsonLd(), websiteJsonLd())} />
-        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-fg">
+        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-primary focus:px-4 focus:py-2 focus:text-label focus:font-semibold focus:uppercase focus:text-primary-fg">
           Skip to content
         </a>
         <CurrencyProvider>

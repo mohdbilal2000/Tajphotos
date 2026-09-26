@@ -10,6 +10,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const statics: MetadataRoute.Sitemap = [
     { url: absoluteUrl("/"), lastModified: latest, changeFrequency: "weekly", priority: 1 },
     { url: absoluteUrl("/tours"), lastModified: latest, changeFrequency: "weekly", priority: 0.9 },
+    { url: absoluteUrl("/stays"), lastModified: latest, changeFrequency: "monthly", priority: 0.8 },
+    { url: absoluteUrl("/services"), lastModified: latest, changeFrequency: "monthly", priority: 0.8 },
     { url: absoluteUrl("/destinations"), lastModified: latest, changeFrequency: "monthly", priority: 0.8 },
     { url: absoluteUrl("/guides"), lastModified: latest, changeFrequency: "weekly", priority: 0.8 },
     { url: absoluteUrl("/plan-my-trip"), lastModified: latest, changeFrequency: "monthly", priority: 0.9 },

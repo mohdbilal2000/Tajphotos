@@ -1,19 +1,24 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
 import type { Destination } from "@/content/types";
 import { getImage } from "@/content/images";
 import { cn } from "@/lib/utils";
 
+/**
+ * A tall plate with the place name set on the image. The gradient is a single foot wash rather than
+ * a full-frame scrim, so the top two thirds of the photograph stay a photograph.
+ */
 export function DestinationCard({ destination, className }: { destination: Destination; className?: string }) {
   const img = getImage(destination.heroImage);
   return (
-    <Link href={`/destinations/${destination.slug}`} className={cn("group relative isolate flex aspect-[3/4] flex-col justify-end overflow-hidden rounded-2xl", className)}>
-      <Image src={img.src} alt={img.alt} placeholder="blur" sizes="(min-width: 1024px) 300px, 45vw" className="absolute inset-0 -z-10 size-full object-cover transition-transform duration-500 group-hover:scale-105" />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent" />
+    <Link href={`/destinations/${destination.slug}`} className={cn("group relative isolate flex aspect-[3/4] flex-col justify-end overflow-hidden", className)}>
+      <div className="figure absolute inset-0 -z-10">
+        <Image src={img.src} alt={img.alt} placeholder="blur" sizes="(min-width: 1024px) 24vw, 45vw" />
+      </div>
+      <div aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-2/3 bg-gradient-to-t from-ink/90 via-ink/25 to-transparent" />
       <div className="p-5 text-white">
-        <p className="font-display text-2xl font-semibold">{destination.name}</p>
-        <p className="mt-1 flex items-center gap-1 text-sm text-white/85">{destination.tagline} <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden /></p>
+        <p className="font-display text-3xl font-normal leading-none">{destination.name}</p>
+        <p className="mt-2.5 border-t border-white/25 pt-2.5 text-xs leading-relaxed text-white/80">{destination.tagline}</p>
       </div>
     </Link>
   );

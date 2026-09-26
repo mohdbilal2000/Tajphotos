@@ -31,14 +31,25 @@ some of what's convincing about it is invented and **must not go live unedited**
   you set it to `true` with a real number from Google/TripAdvisor — don't flip that flag until it is one.
 - **Contact details** (WhatsApp number, phone, email, office address, social profiles) are placeholders
   — replace every `NEXT_PUBLIC_*` contact env var and the `site.address`/`site.social` fields.
+- **The founder's letter on the homepage is written in a fictional person's voice**
+  (`src/components/sections/FounderNote.tsx`, signed by `team[0]`). It is the most persuasive block
+  on the site precisely because it is specific and first-person — which makes it the worst possible
+  thing to ship unedited. The real founder should rewrite it in their own words before launch, or the
+  section should be removed. A signed letter from someone who does not exist is not a placeholder.
+- **The hotels on `/stays` are real; the photographs are not of them.** `src/content/stays.ts` lists
+  genuine, operating properties described only with checkable facts, and asserts no affiliation — but
+  the shipped imagery is licence-safe *city* photography, so every plate is captioned with what the
+  picture actually shows. Replace with real property imagery only if you have the hotel's written
+  permission, and keep the captions. Never add rates or star ratings to that file (the reasons are in
+  its header comment).
 - **`src/content/reviews.ts` is an empty array on purpose.** Don't fill it with invented testimonials —
   see the "Reviews" section below for how to collect and add real ones.
 
 ## Stack
 
 - **Next.js 16.3** App Router, Turbopack, TypeScript, `typedRoutes`
-- **Tailwind CSS v4** (`@theme` tokens — see `src/app/globals.css` for the full "Marble & Marigold" palette)
-- **Fraunces** (display) + **Manrope** (body/UI), via `next/font/google`
+- **Tailwind CSS v4** (`@theme` tokens — see `src/app/globals.css` for the full "Paper, Ink & Marble" system)
+- **Newsreader** (display, with its optical-size axis) + **Archivo** (body/UI), via `next/font/google`
 - Content as typed TypeScript data (`src/content/`) — no CMS, no database; fast, type-checked, git-diffable
 - `next/image` with static imports (AVIF/WebP, automatic blur placeholders)
 - Server Actions + `useActionState` for the enquiry form, emailed via [Resend](https://resend.com) (free tier)
@@ -63,6 +74,12 @@ Tours, destinations and guides are plain TypeScript objects, not a CMS:
 - `src/content/tours/<slug>.ts` — export default a `Tour` (see `src/content/types.ts` for the full shape)
 - `src/content/destinations/<slug>.ts` — a `Destination`
 - `src/content/guides/<slug>.ts` — a `Guide`
+- `src/content/stays.ts` — the hotels we book, rendered at `/stays` (read its header comment first:
+  real properties, checkable facts only, no rates, no star ratings, no claim of affiliation)
+- `src/content/services.ts` — services and the **fleet**, rendered at `/services`. The `availability`
+  field is deliberately honest rather than promotional: `except-friday` for anything inside the Taj
+  Mahal, `seasonal` for night viewing, `on-request` for anything depending on a third party's
+  inventory. Numbers are pulled from `facts.ts` so they can't drift.
 
 After adding, removing or renaming a file, regenerate the barrel index:
 
@@ -112,11 +129,33 @@ throughout the site; the form is the fallback for visitors who prefer it.
   content deploy (Google doesn't use IndexNow — rely on the sitemap + Search Console for it)
 - `app/feed.xml` — RSS of guides
 
-### Design system
+### Design system — "Paper, Ink & Marble"
 
-Full research-backed spec (palettes with computed WCAG contrast, type pairings, spacing/motion tokens,
-component inventory, page wireframes, copy patterns) is in the research reports under
-`competitors-ux.md`. The implemented tokens live in `src/app/globals.css`.
+An editorial system rather than a card system, on the premise that this is a photography-led business
+and the interface should be a quiet paper frame around large images and short, confident type. The
+rules are enforced by the tokens themselves in `src/app/globals.css`, which is where to read the full
+rationale and the measured contrast ratios:
+
+- **Almost no radius.** `--radius-*` are 1–4px, not 16–28px. Square edges read as print.
+- **Almost no shadow.** Depth comes from image scale and whitespace. `--shadow-soft` is a hairline;
+  `--shadow-lift` is reserved for things that genuinely float (the WhatsApp button, the mobile bar).
+- **Structure from 1px rules**, the way a magazine grid works — not from borders-plus-fills-plus-shadows.
+- **One accent, used sparingly.** Agra sandstone `#8a3b22` for micro-labels and markers, Mughal green
+  `#1b3a34` for interaction, brass `#c9a227` on ink grounds only (it fails contrast on paper).
+- **Two typefaces.** Newsreader for display — chosen for its optical-size axis, so the same family
+  sets a 6rem hero and a 1.25rem sub-head correctly; never pin `opsz` by hand. Archivo for everything
+  else. Micro-labels are 11px, uppercase, 0.22em tracking. Before swapping the display face, read the
+  comment above the font loaders in `src/app/layout.tsx` — the previous choice silently dropped every
+  hyphen, dash and plus sign on the site.
+- **Motion is slow.** Image hover is 900ms to 1.03×; scroll reveals use `animation-timeline: view()`
+  with no JavaScript at all, and everything collapses under `prefers-reduced-motion`.
+
+Token *names* were kept stable across the redesign (`bg`, `surface`, `ink`, `muted`, `border`,
+`primary`, `accent`, `highlight`), so utilities like `bg-surface` and `rounded-2xl` inherited the new
+language without editing every file.
+
+Earlier research (palettes with computed WCAG contrast, type pairings, spacing/motion tokens, component
+inventory, page wireframes, copy patterns) is in the research reports under `competitors-ux.md`.
 
 ## Quality checks
 

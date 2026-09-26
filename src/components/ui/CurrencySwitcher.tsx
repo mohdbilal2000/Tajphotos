@@ -14,7 +14,7 @@ export function CurrencySwitcher({ className }: { className?: string }) {
         id={id}
         value={currency}
         onChange={(e) => setCurrency(e.target.value as typeof currency)}
-        className="rounded-full border border-border bg-white px-3 py-1.5 text-sm font-medium text-ink"
+        className="border border-border bg-surface px-3 py-1.5 text-xs font-medium uppercase tracking-wider text-ink"
       >
         {site.currencies.map((c) => (
           <option key={c} value={c}>{c}</option>

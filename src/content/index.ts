@@ -5,6 +5,8 @@ import type { Tour, Destination, Guide, TourCategory } from "@/content/types";
 
 export { tours, destinations, guides };
 export { team, getTeamMember } from "@/content/team";
+export { stays, getStay, staysForCity, staysForDestination, stayTierLabel, staysDisclosure } from "@/content/stays";
+export { services, fleet, servicesByCategory, serviceCategories, availabilityLabel, availabilityNote } from "@/content/services";
 export { reviews, reviewsForTour } from "@/content/reviews";
 
 export const tourCategories: { key: TourCategory; label: string; blurb: string }[] = [
@@ -38,7 +40,7 @@ export const latestContentDate = () =>
 
 /** Static list of all crawlable routes (used by sitemap + llms.txt). */
 export function allRoutes() {
-  const staticPages = ["/", "/tours", "/destinations", "/guides", "/plan-my-trip", "/about", "/contact", "/reviews", "/faq", "/credits", "/privacy", "/terms"];
+  const staticPages = ["/", "/tours", "/stays", "/services", "/destinations", "/guides", "/plan-my-trip", "/about", "/contact", "/reviews", "/faq", "/credits", "/privacy", "/terms"];
   return {
     staticPages,
     tourPaths: tours.map((t) => `/tours/${t.slug}`),

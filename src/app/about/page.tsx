@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Section, SectionHeader } from "@/components/ui/Section";
-import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { PageHeader } from "@/components/layout/PageHeader";
 import { TeamCard } from "@/components/TeamCard";
 import { TrustWall } from "@/components/sections/TrustWall";
 import { StatStrip } from "@/components/sections/StatStrip";
@@ -18,7 +18,11 @@ export const metadata: Metadata = buildMetadata({
 export default function AboutPage() {
   return (
     <>
-      <div className="border-b border-border bg-surface py-8"><div className="container-site"><Breadcrumbs items={[{ name: "About", path: "/about" }]} /><h1 className="mt-2 max-w-2xl text-3xl font-semibold sm:text-4xl">A small Agra team of guides, drivers and photographers</h1></div></div>
+      <PageHeader
+        crumbs={[{ name: "About", path: "/about" }]}
+        eyebrow="Who we are"
+        title="A small Agra team of guides, drivers and photographers"
+      />
 
       <Section>
         <div className="max-w-2xl space-y-4 text-lg leading-relaxed text-ink/85">

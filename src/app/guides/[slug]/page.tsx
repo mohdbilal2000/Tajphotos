@@ -47,7 +47,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
       />
 
       <div className="relative flex min-h-[46vh] items-end overflow-hidden bg-ink">
-        <Image src={heroImg.src} alt={heroImg.alt} priority sizes="100vw" className="absolute inset-0 -z-20 size-full object-cover" />
+        <Image src={heroImg.src} alt={heroImg.alt} preload fetchPriority="high" sizes="100vw" className="absolute inset-0 -z-20 size-full object-cover" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/50 to-ink/10" />
         <div className="container-site relative py-10 text-white">
           <Breadcrumbs items={[{ name: "Guides", path: "/guides" }, { name: g.title, path: `/guides/${g.slug}` }]} light />

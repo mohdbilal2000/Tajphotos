@@ -1,47 +1,82 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------------------------------------
-   Design tokens — "Marble & Marigold" system.
-   Paper/ivory ground, ink text, Mughal red primary, marigold accent, lake-blue support.
-   All colours are exposed to Tailwind via @theme so utilities like bg-primary / text-muted work.
+   Design tokens — "Paper, Ink & Marble".
+
+   An editorial system, not a card system. The premise: this is a photography-led business, so the
+   interface is a quiet paper frame around large images and short, confident type. That means, as a
+   deliberate rule rather than an aesthetic accident:
+
+   - Almost no radius (--radius-* are 2-4px, not 16-28px). Square edges read as print; pill-shaped
+     everything reads as a template.
+   - Almost no shadow. Depth comes from image scale and generous whitespace, not drop shadows.
+     --shadow-soft is a hairline; --shadow-lift is only used where something genuinely floats
+     (the WhatsApp float, the mobile booking bar).
+   - Structure comes from 1px rules (--color-border) and a baseline rhythm, the way a magazine grid
+     does. Cards, where they survive at all, are an image with type under it — no chrome.
+   - One accent, used sparingly: Agra sandstone on paper. Mughal green carries interaction (links,
+     buttons); brass appears only on ink grounds, never as text on paper (it fails contrast there).
+
+   Token NAMES are kept stable from the previous system (bg/surface/ink/muted/border/primary/accent/
+   highlight/...), so every `bg-surface`, `text-muted`, `rounded-2xl` etc. across the site inherits
+   the new language without a sweep of every file. Contrast ratios below are measured against
+   --color-bg unless stated.
 ------------------------------------------------------------------------------------------------ */
 @theme {
-  --color-bg: #faf7f2;          /* ivory marble ground */
-  --color-surface: #ffffff;     /* cards */
-  --color-surface-2: #f2ece2;   /* warm sandstone tint */
-  --color-ink: #1c1a17;         /* 16.25:1 on bg */
-  --color-muted: #5b554d;       /* 6.89:1 on bg */
-  --color-border: #e6ddd0;
-  --color-primary: #1f3a5f;     /* indigo — trust colour, 10.75:1 on bg; white on it 11.48:1 */
-  --color-primary-hover: #17304f;
-  --color-primary-fg: #ffffff;
-  --color-accent: #8e3f26;      /* Agra sandstone — 6.80:1 on bg; ivory on it 6.80:1 */
-  --color-accent-hover: #7a3520;
-  --color-accent-fg: #faf7f2;
-  --color-highlight: #e8b63a;   /* marigold — rules/underlines/icons on ink only, 9.25:1 on ink; NEVER as text on light (1.76:1) */
-  --color-jaipur: #c4707a;      /* Jaipur page tint, 10–15% alpha on surfaces */
-  --color-pichola: #2e6f7e;     /* Udaipur page tint */
-  --color-success: #2f6b3a;
-  --color-warning: #a6541b;
-  --color-error: #a32d2d;
+  --color-bg: #f4f1ec;          /* warm paper */
+  --color-surface: #fbf9f6;     /* raised paper — used where a panel must separate from the ground */
+  --color-surface-2: #eae4da;   /* sandstone tint */
+  --color-ink: #141210;         /* 16.9:1 on bg */
+  --color-muted: #58524a;       /* 7.0:1 on bg */
+  --color-border: #ddd5c8;      /* hairline rules */
+  --color-primary: #1b3a34;     /* Mughal green — interaction; 10.6:1 on bg, white on it 9.9:1 */
+  --color-primary-hover: #122924;
+  --color-primary-fg: #fbf9f6;
+  --color-accent: #8a3b22;      /* Agra sandstone — labels, rules, markers; 6.4:1 on bg */
+  --color-accent-hover: #73301b;
+  --color-accent-fg: #f8f5f0;
+  --color-highlight: #c9a227;   /* brass — ONLY on ink grounds (8.6:1 on ink); never text on paper (2.0:1) */
+  --color-jaipur: #b0616b;      /* per-destination page tints, used at 10-15% alpha */
+  --color-pichola: #2b6875;
+  --color-success: #2b5f36;
+  --color-warning: #8f4a17;
+  --color-error: #93292a;
   --color-whatsapp: #25d366;
-  --color-whatsapp-ink: #075e54; /* WhatsApp dark teal — white text 7.7:1 */
+  --color-whatsapp-ink: #075e54; /* white text 7.7:1 */
 
-  --font-display: var(--font-fraunces), "Georgia", "Times New Roman", serif;
-  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-display-serif), "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
-  --radius-xl: 1rem;
-  --radius-2xl: 1.25rem;
-  --radius-3xl: 1.75rem;
+  /* Fluid display sizes. Editorial headlines want to be genuinely large on a laptop and still
+     readable on a 360px phone, which a fixed ladder of sm:/lg: variants never quite manages. */
+  --text-display-1: clamp(2.75rem, 7.2vw, 6.5rem);
+  --text-display-1--line-height: 0.96;
+  --text-display-1--letter-spacing: -0.025em;
+  --text-display-2: clamp(2.125rem, 4.6vw, 3.75rem);
+  --text-display-2--line-height: 1.02;
+  --text-display-2--letter-spacing: -0.02em;
+  --text-display-3: clamp(1.625rem, 2.6vw, 2.375rem);
+  --text-display-3--line-height: 1.12;
+  --text-display-3--letter-spacing: -0.015em;
+  --text-label: 0.6875rem;
+  --text-label--line-height: 1.1;
+  --text-label--letter-spacing: 0.22em;
 
-  --shadow-soft: 0 1px 2px rgb(28 26 23 / 0.06), 0 8px 24px -8px rgb(28 26 23 / 0.10);
-  --shadow-lift: 0 2px 4px rgb(28 26 23 / 0.08), 0 20px 40px -16px rgb(28 26 23 / 0.28);
+  --radius-sm: 1px;
+  --radius-md: 2px;
+  --radius-lg: 2px;
+  --radius-xl: 2px;
+  --radius-2xl: 3px;
+  --radius-3xl: 4px;
 
-  --animate-fade-up: fade-up 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-  --animate-marquee: marquee 40s linear infinite;
+  --shadow-soft: 0 1px 2px rgb(20 18 16 / 0.04);
+  --shadow-lift: 0 18px 48px -28px rgb(20 18 16 / 0.45);
+
+  --animate-fade-up: fade-up 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-marquee: marquee 48s linear infinite;
 
   @keyframes fade-up {
-    from { opacity: 0; transform: translateY(12px); }
+    from { opacity: 0; transform: translateY(18px); }
     to { opacity: 1; transform: translateY(0); }
   }
   @keyframes marquee {
@@ -52,55 +87,110 @@
 
 @layer base {
   html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-  body { @apply bg-bg text-ink font-sans antialiased; text-rendering: optimizeLegibility; }
-  ::selection { background: color-mix(in oklab, var(--color-highlight) 55%, white); }
-  h1, h2, h3, h4 { @apply font-display tracking-tight text-balance; font-variation-settings: "opsz" 32, "SOFT" 20; }
-  :focus-visible { @apply outline-2 outline-offset-[3px] outline-primary rounded-sm; }
+  body {
+    @apply bg-bg text-ink font-sans antialiased;
+    text-rendering: optimizeLegibility;
+    letter-spacing: -0.006em;
+  }
+
+  /*
+   * Paper grain. A flat #f4f1ec fill is the single most template-looking thing about a warm-neutral
+   * site; a very faint fibre texture is what makes it read as stock rather than as a CSS colour.
+   * Inline SVG (one feTurbulence, ~300 bytes, no network request), fixed so it doesn't repaint on
+   * scroll, pointer-events:none so it never intercepts a click, and dropped entirely for anyone who
+   * asked for reduced motion-adjacent calm or is printing.
+   */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.4;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.09'/%3E%3C/svg%3E");
+  }
+  @media print { body::after { display: none; } }
+
+  /* No hardcoded `font-variation-settings: "opsz" N` here. Bodoni Moda carries an optical-size
+     axis, and pinning it to a display value makes a 1.25rem sub-heading render with hairlines
+     meant for 4rem — thin to the point of breaking up on a normal screen. `font-optical-sizing:
+     auto` (the default) lets the axis follow the rendered size, which is the entire reason to
+     load an opsz font. */
+  h1, h2, h3, h4 { @apply font-display tracking-tight text-balance; }
+  h5, h6 { @apply font-sans; }
+  ::selection { background: color-mix(in oklab, var(--color-accent) 22%, white); }
+  :focus-visible { @apply outline-2 outline-offset-[3px] outline-accent rounded-none; }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
   }
   img { @apply text-transparent; }
+  hr { @apply border-border; }
 }
 
 @layer components {
-  .container-site { @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8; }
-  .link { @apply text-primary underline decoration-primary/40 underline-offset-[3px] transition-colors hover:decoration-primary; }
-  .eyebrow { @apply text-xs font-semibold uppercase tracking-[0.18em] text-accent; }
-  .card { @apply rounded-2xl border border-border bg-white/70 shadow-soft; }
-  /* Tailwind v4's @apply can't reference another @apply-defined custom class, so each button
-     variant repeats the shared base declarations (kept in one place here as plain CSS custom
-     properties would be another option, but this reads more clearly for four short variants). */
+  .container-site { @apply mx-auto w-full max-w-[86rem] px-5 sm:px-8 lg:px-12; }
+  /* A narrower measure for anything that is mostly words. 68ch is the readable ceiling. */
+  .container-read { @apply mx-auto w-full max-w-[46rem] px-5 sm:px-8; }
+
+  .link { @apply text-primary underline decoration-primary/35 underline-offset-[5px] transition-colors hover:decoration-primary; }
+
+  /* The micro-label that opens most sections: small, wide-tracked, uppercase, sandstone. */
+  .eyebrow { @apply font-sans text-label font-semibold uppercase text-accent; }
+
+  /* Kept for compatibility with pages not individually restyled — now a hairline-ruled panel
+     rather than a rounded, shadowed card. */
+  .card { @apply rounded-none border border-border bg-surface; }
+
+  /* Buttons. Square, uppercase, wide-tracked — a printed button, not an app button. Tailwind v4's
+     @apply can't reference another @apply-defined class, so the shared base repeats per variant. */
   .btn-primary, .btn-secondary, .btn-ghost, .btn-whatsapp {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-all duration-200 will-change-transform focus-visible:outline-2 disabled:opacity-60 disabled:pointer-events-none;
+    @apply inline-flex items-center justify-center gap-2 rounded-none px-6 py-3.5 text-label font-semibold uppercase transition-colors duration-200 focus-visible:outline-2 disabled:opacity-55 disabled:pointer-events-none;
   }
-  .btn-primary { @apply bg-primary text-primary-fg shadow-soft hover:bg-primary-hover hover:-translate-y-px active:translate-y-0; }
-  .btn-secondary { @apply border border-border bg-white/80 text-ink hover:border-ink/30 hover:bg-white; }
-  .btn-ghost { @apply text-ink hover:bg-surface; }
-  .btn-whatsapp { @apply bg-whatsapp-ink text-white hover:brightness-110 hover:-translate-y-px; }
-  .btn-lg { @apply px-7 py-4 text-base; }
+  .btn-primary { @apply bg-primary text-primary-fg hover:bg-primary-hover; }
+  .btn-secondary { @apply border border-ink/25 bg-transparent text-ink hover:border-ink hover:bg-ink hover:text-bg; }
+  .btn-ghost { @apply text-ink underline decoration-ink/25 underline-offset-[6px] hover:decoration-ink; }
+  .btn-whatsapp { @apply bg-whatsapp-ink text-white hover:brightness-110; }
+  .btn-lg { @apply px-8 py-4.5; }
+
+  /* An arrow link: the quiet default CTA of an editorial layout. */
+  .arrow-link {
+    @apply inline-flex items-center gap-2 text-label font-semibold uppercase text-ink transition-colors hover:text-accent;
+  }
+  .arrow-link svg { @apply transition-transform duration-300; }
+  .arrow-link:hover svg { @apply translate-x-1; }
+
+  /* Image frame: crops, and scales very slowly on hover. Slow is the point — a 300ms 1.06x pop is
+     the tell of a template; 900ms to 1.03x reads as film. */
+  .figure { @apply relative overflow-hidden bg-surface-2; }
+  .figure img { @apply size-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)]; }
+  .group:hover .figure img, .figure:hover img { @apply scale-[1.035]; }
 
   /* Long-form content typography (used by RichText) */
-  .prose-site { @apply text-[1.0625rem] leading-[1.75] text-ink/90; }
+  .prose-site { @apply text-[1.0625rem] leading-[1.8] text-ink/85; }
   .prose-site > * + * { @apply mt-5; }
-  .prose-site h2 { @apply mt-12 text-2xl font-semibold text-ink sm:text-3xl; }
-  .prose-site h3 { @apply mt-8 text-xl font-semibold text-ink; }
-  .prose-site h2 + *, .prose-site h3 + * { @apply mt-3; }
-  .prose-site ul { @apply list-disc pl-6 space-y-2 marker:text-accent; }
-  .prose-site ol { @apply list-decimal pl-6 space-y-2 marker:font-semibold marker:text-accent; }
-  .prose-site blockquote { @apply border-l-4 border-accent pl-5 font-display text-xl italic text-ink/80; }
-  .prose-site blockquote footer { @apply mt-2 text-sm not-italic text-muted font-sans; }
+  .prose-site h2 { @apply mt-14 text-display-3 font-normal text-ink; }
+  .prose-site h3 { @apply mt-9 font-display text-2xl font-normal text-ink; }
+  .prose-site h2 + *, .prose-site h3 + * { @apply mt-4; }
+  .prose-site ul { @apply list-none space-y-2.5 pl-0; }
+  .prose-site ul > li { @apply relative pl-5 before:absolute before:left-0 before:top-[0.85em] before:h-px before:w-2.5 before:bg-accent before:content-['']; }
+  .prose-site ol { @apply list-decimal space-y-2.5 pl-6 marker:font-semibold marker:text-accent; }
+  .prose-site blockquote { @apply border-l-0 pl-0 font-display text-2xl italic leading-snug text-ink; }
+  .prose-site blockquote footer { @apply mt-3 font-sans text-label font-semibold uppercase not-italic text-muted; }
   .prose-site strong { @apply font-semibold text-ink; }
+  .prose-site a { @apply text-primary underline decoration-primary/35 underline-offset-[5px] hover:decoration-primary; }
 
-  /* Reveal-on-scroll without JS: animation-timeline where supported, otherwise visible */
+  /* Reveal-on-scroll without JS: animation-timeline where supported, otherwise simply visible. */
   .reveal { animation: var(--animate-fade-up); }
   @supports (animation-timeline: view()) {
-    .reveal { animation-timeline: view(); animation-range: entry 0% entry 30%; animation-fill-mode: both; }
+    .reveal { animation-timeline: view(); animation-range: entry 0% entry 38%; animation-fill-mode: both; }
   }
 }
 
-@utility text-shadow-hero { text-shadow: 0 2px 24px rgb(0 0 0 / 0.45), 0 1px 2px rgb(0 0 0 / 0.5); }
+@utility text-shadow-hero { text-shadow: 0 1px 2px rgb(0 0 0 / 0.42), 0 24px 60px rgb(0 0 0 / 0.3); }
 @utility scrollbar-none { scrollbar-width: none; &::-webkit-scrollbar { display: none; } }
+/* Vertical label for the editorial margin notes. */
+@utility writing-vertical { writing-mode: vertical-rl; text-orientation: mixed; }
 
 /*
  * Fixed-position UI pieces competing for the same bottom-of-screen real estate: the cookie

@@ -1,4 +1,5 @@
 import { site } from "@/config/site";
+import { cn } from "@/lib/utils";
 
 export function StatStrip({ className }: { className?: string }) {
   const stats = [
@@ -10,17 +11,17 @@ export function StatStrip({ className }: { className?: string }) {
     // real reviews in the codebase, is exactly the fabricated-social-proof problem this flag
     // exists to prevent on the schema side; it needs to prevent it here too.
     ...(site.stats.ratingVerified
-      ? [{ value: `★ ${site.stats.rating.value}`, label: `${site.stats.rating.count.toLocaleString()} reviews` }]
+      ? [{ value: `${site.stats.rating.value}`, label: `${site.stats.rating.count.toLocaleString()} reviews` }]
       : []),
-    { value: site.stats.countries, label: "Countries visited from" },
+    { value: site.stats.countries, label: "Countries travelled from" },
   ];
   return (
-    <dl className={className ? className : "grid grid-cols-2 gap-6 sm:grid-cols-4"}>
+    <dl className={cn("grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-4", className)}>
       {stats.map((s) => (
-        <div key={s.label} className="text-center sm:text-left">
+        <div key={s.label} className="border-t border-border pt-5">
           <dt className="sr-only">{s.label}</dt>
-          <dd className="font-display text-3xl font-semibold text-ink sm:text-4xl">{s.value}</dd>
-          <dd className="mt-1 text-sm text-muted">{s.label}</dd>
+          <dd className="font-display text-[2.75rem] font-normal leading-[1.05] tracking-tight text-ink">{s.value}</dd>
+          <dd className="mt-3 text-label font-semibold uppercase text-muted">{s.label}</dd>
         </div>
       ))}
     </dl>

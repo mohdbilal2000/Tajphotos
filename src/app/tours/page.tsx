@@ -4,7 +4,7 @@ import { Search } from "lucide-react";
 import { tours, tourCategories, toursByCategory } from "@/content";
 import type { Tour } from "@/content/types";
 import { Section, SectionHeader } from "@/components/ui/Section";
-import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { PageHeader } from "@/components/layout/PageHeader";
 import { TourCard } from "@/components/tours/TourCard";
 import { buildMetadata } from "@/lib/seo";
 
@@ -30,26 +30,26 @@ export default async function ToursPage({ searchParams }: PageProps<"/tours">) {
 
   return (
     <>
-      <div className="border-b border-border bg-surface py-6">
-        <div className="container-site">
-          <Breadcrumbs items={[{ name: "Tours", path: "/tours" }]} />
-          <h1 className="mt-2 text-3xl font-semibold sm:text-4xl">All tours</h1>
-          <p className="mt-2 max-w-2xl text-muted">{tours.length} private, guided tours across Agra, Delhi, Jaipur and Rajasthan.</p>
-          <form action="/tours" className="mt-5 flex max-w-md items-center gap-2 rounded-full border border-border bg-white pl-4 pr-1.5 py-1.5 focus-within:border-ink/30">
-            <Search className="size-4 shrink-0 text-muted" aria-hidden />
-            <label htmlFor="tour-search" className="sr-only">Search tours</label>
-            <input
-              id="tour-search"
-              type="search"
-              name="q"
-              defaultValue={query}
-              placeholder="Search tours — e.g. sunrise, Jaipur, photography"
-              className="w-full bg-transparent text-sm outline-none placeholder:text-muted"
-            />
-            <button type="submit" className="btn-primary px-4 py-2 text-sm">Search</button>
-          </form>
-        </div>
-      </div>
+      <PageHeader
+        crumbs={[{ name: "Tours", path: "/tours" }]}
+        eyebrow="The journeys"
+        title="Every way we do this"
+        text={`${tours.length} private, guided tours across Agra, Delhi, Jaipur and Rajasthan — each one priced per person with the drives, closures and monument tickets written in.`}
+      >
+        <form action="/tours" className="mt-8 flex max-w-md items-center gap-2 border border-border bg-bg pl-4 py-1.5 pr-1.5 focus-within:border-ink/40">
+          <Search className="size-4 shrink-0 text-muted" aria-hidden />
+          <label htmlFor="tour-search" className="sr-only">Search tours</label>
+          <input
+            id="tour-search"
+            type="search"
+            name="q"
+            defaultValue={query}
+            placeholder="Search — sunrise, Jaipur, photography"
+            className="w-full bg-transparent text-sm outline-none placeholder:text-muted"
+          />
+          <button type="submit" className="btn-primary px-4 py-2.5">Search</button>
+        </form>
+      </PageHeader>
 
       {results ? (
         <Section>

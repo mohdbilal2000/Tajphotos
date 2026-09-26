@@ -8,7 +8,7 @@ export function TeamCard({ member }: { member: TeamMember }) {
   return (
     <div className="rounded-2xl border border-border bg-surface p-6">
       {img && (
-        <div className="relative mb-4 aspect-square w-24 overflow-hidden rounded-full">
+        <div className="figure relative mb-5 aspect-[4/5] w-28">
           <Image src={img.src} alt={img.alt} placeholder="blur" sizes="96px" className="size-full object-cover" />
         </div>
       )}

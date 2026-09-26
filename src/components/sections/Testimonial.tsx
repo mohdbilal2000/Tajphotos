@@ -1,16 +1,24 @@
-import { Stars } from "@/components/ui/Stars";
-import { formatDate } from "@/lib/utils";
+import { formatDate, cn } from "@/lib/utils";
 import type { Review } from "@/content/types";
-import { cn } from "@/lib/utils";
 
+/**
+ * A quotation, not a card. No box, no shadow, no avatar circle, and no star row — five gold stars
+ * repeated six times across a grid is decoration, and on a site with no verified aggregate rating
+ * it is decoration that overclaims. The rating stays available to screen readers and to the Review
+ * JSON-LD; what a reader sees is the sentence.
+ */
 export function TestimonialCard({ review, className }: { review: Review; className?: string }) {
   return (
-    <figure className={cn("flex h-full flex-col rounded-2xl border border-border bg-surface p-6", className)}>
-      <Stars value={review.rating} />
-      <blockquote className="mt-3 flex-1 text-ink/90 leading-relaxed">“{review.text}”</blockquote>
-      <figcaption className="mt-5 flex items-center justify-between text-sm">
-        <span className="font-medium text-ink">{review.name}, {review.country}</span>
-        <span className="text-muted">{formatDate(review.date)} · via {review.source}</span>
+    <figure className={cn("flex h-full flex-col border-t border-border pt-6", className)}>
+      <blockquote className="flex-1 font-display text-xl leading-snug text-ink">
+        <p>&ldquo;{review.text}&rdquo;</p>
+      </blockquote>
+      <figcaption className="mt-6 text-xs text-muted">
+        <span className="block text-label font-semibold uppercase text-ink">{review.name}</span>
+        <span className="mt-1.5 block">
+          {review.country} · {formatDate(review.date)} · via {review.source}
+          <span className="sr-only"> · rated {review.rating} out of 5</span>
+        </span>
       </figcaption>
     </figure>
   );
@@ -19,7 +27,7 @@ export function TestimonialCard({ review, className }: { review: Review; classNa
 export function TestimonialGrid({ reviews, className }: { reviews: Review[]; className?: string }) {
   if (!reviews.length) return null;
   return (
-    <div className={cn("grid gap-5 sm:grid-cols-2 lg:grid-cols-3", className)}>
+    <div className={cn("grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3", className)}>
       {reviews.slice(0, 6).map((r) => (
         <TestimonialCard key={r.id} review={r} />
       ))}

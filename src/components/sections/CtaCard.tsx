@@ -1,10 +1,16 @@
-import { MessageCircle, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { ButtonLink } from "@/components/ui/Button";
 import { WhatsAppLink } from "@/components/WhatsAppLink";
 import { site } from "@/config/site";
 import { InlineText } from "@/components/content/RichText";
 import { cn } from "@/lib/utils";
 
+/**
+ * The closing panel: ink ground, brass micro-label, one display line, two ways to start. The two
+ * blurred colour orbs the previous version used as decoration are gone — they were the single most
+ * "generated landing page" element on the site, and an ink panel with a hairline rail says premium
+ * on its own.
+ */
 export function CtaCard({
   title,
   text,
@@ -27,24 +33,22 @@ export function CtaCard({
   headingLevel?: "h2" | "h3";
 }) {
   return (
-    <aside className={cn("relative overflow-hidden rounded-3xl bg-ink px-6 py-8 text-bg sm:px-10 sm:py-10", className)}>
-      <div aria-hidden className="pointer-events-none absolute -right-20 -top-20 size-64 rounded-full bg-primary/40 blur-3xl" />
-      <div aria-hidden className="pointer-events-none absolute -bottom-24 -left-10 size-64 rounded-full bg-accent/30 blur-3xl" />
-      <div className="relative grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
+    <aside className={cn("bg-ink px-6 py-12 text-bg sm:px-12 sm:py-16", className)}>
+      <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
         <div>
-          <p className="eyebrow text-highlight">Plan with a local</p>
-          <Heading className="mt-2 font-display text-2xl font-semibold sm:text-3xl">{title}</Heading>
+          <p className="border-t border-white/25 pt-4 text-label font-semibold uppercase text-highlight">Plan it with a local</p>
+          <Heading className="mt-6 max-w-2xl font-display text-display-3 font-normal">{title}</Heading>
           {text && (
-            <p className="mt-3 max-w-xl text-bg/80 leading-relaxed">
+            <p className="mt-5 max-w-xl leading-relaxed text-bg/75">
               <InlineText text={text} />
             </p>
           )}
         </div>
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
           <WhatsAppLink message={`Hi ${site.name}! I'm interested in ${tourSlug ? `the ${tourSlug.replace(/-/g, " ")}` : "planning a trip"}. Could you help?`} className="btn-whatsapp" event="whatsapp_click_cta">
-            <MessageCircle className="size-4" aria-hidden /> Chat on WhatsApp
+            Chat on WhatsApp
           </WhatsAppLink>
-          <ButtonLink href={tourSlug ? (`/tours/${tourSlug}` as "/tours") : "/plan-my-trip"} variant="secondary">
+          <ButtonLink href={tourSlug ? (`/tours/${tourSlug}` as "/tours") : "/plan-my-trip"} variant="ghost" className="text-bg decoration-white/35 hover:decoration-white">
             {label ?? (tourSlug ? "See this tour" : "Plan my trip")} <ArrowRight className="size-4" aria-hidden />
           </ButtonLink>
         </div>

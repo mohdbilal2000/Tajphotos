@@ -13,7 +13,7 @@ export function ChipRow({ tour }: { tour: Tour }) {
   return (
     <ul className="flex flex-wrap gap-2">
       {chips.map((c) => (
-        <li key={c.label} className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-medium text-ink/85">
+        <li key={c.label} className="inline-flex items-center gap-1.5 border border-border bg-surface px-3 py-1.5 text-xs font-medium text-ink/85">
           <c.icon className="size-3.5 text-primary" aria-hidden /> {c.label}
         </li>
       ))}
