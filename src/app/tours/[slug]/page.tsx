@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/Badge";
 import { PhotoGallery } from "@/components/PhotoGallery";
 import { ChipRow } from "@/components/tours/ChipRow";
 import { ItineraryTimeline } from "@/components/tours/ItineraryTimeline";
+import { RouteMap } from "@/components/tours/RouteMap";
 import { IncludedExcluded } from "@/components/tours/IncludedExcluded";
 import { PriceTable } from "@/components/tours/PriceTable";
 import { BookingCard } from "@/components/tours/BookingCard";
@@ -89,6 +90,11 @@ export default async function TourPage({ params }: { params: Promise<{ slug: str
           </div>
 
           <RichText blocks={tour.description} />
+
+          <div>
+            <h2 className="text-2xl font-semibold sm:text-3xl">The route</h2>
+            <RouteMap tour={tour} className="mt-6" />
+          </div>
 
           <div>
             <h2 className="text-2xl font-semibold sm:text-3xl">Day-by-day itinerary</h2>

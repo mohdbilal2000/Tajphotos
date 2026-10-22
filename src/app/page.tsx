@@ -11,6 +11,7 @@ import { ExploreRails, type RailItem } from "@/components/sections/ExploreRails"
 import { GoldenTriangleMap, type MapCity } from "@/components/sections/GoldenTriangleMap";
 import { transport, tajMahal } from "@/content/facts";
 import { JourneyStory, type Chapter } from "@/components/sections/JourneyStory";
+import { TripFinder, type FinderTour } from "@/components/sections/TripFinder";
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { TourCard } from "@/components/tours/TourCard";
 import { TourTabs } from "@/components/tours/TourTabs";
@@ -169,6 +170,24 @@ export default function Home() {
       guide: guideLink("golden-triangle-tour-cost"), tour: tourLink("golden-triangle-tour-7-days-with-udaipur", "7 days with Udaipur"),
     },
   ];
+  // Trip finder data: interests derived from each tour's own category, badges and route.
+  const finderTours: FinderTour[] = tours.map((t) => {
+    const text = `${t.slug} ${(t.badges ?? []).join(" ")} ${t.category}`.toLowerCase();
+    const interests = [
+      (t.category === "photography" || /sunrise/.test(text)) && "sunrise",
+      ["golden-triangle", "same-day", "agra", "delhi", "jaipur"].includes(t.category) && "history",
+      (["udaipur", "rajasthan"].includes(t.category) || t.destinations.includes("udaipur")) && "palaces",
+      /ranthambore/.test(text) && "wildlife",
+      /moonlight|night/.test(text) && "night",
+    ].filter(Boolean) as string[];
+    const img = getImage(t.heroImage);
+    return {
+      slug: t.slug, name: t.shortTitle ?? t.title, tagline: t.tagline, usd: t.priceFrom.usd, durationLabel: t.durationLabel,
+      // a few tours store minutes in durationDays (e.g. a 30-minute photoshoot); anything implausible counts as a day trip
+      days: t.durationDays > 21 ? 1 : t.durationDays,
+      interests, image: img.src, alt: img.alt, udaipur: t.destinations.includes("udaipur"),
+    };
+  });
   const legs = `Delhi → Agra ${transport.delhiAgraCar.distanceKm} km · Agra → Jaipur ${transport.agraJaipur.distanceKm} km · Jaipur → Delhi ${transport.delhiJaipur.distanceKm} km`;
   const keyServices = services.filter((s) => ["taj-sunrise-entry", "taj-night-viewing", "private-car-driver", "licensed-guide", "hotel-booking"].includes(s.slug));
 
@@ -239,6 +258,18 @@ export default function Home() {
         />
         <div className="mt-14">
           <JourneyStory chapters={chapters} />
+        </div>
+      </Section>
+
+      {/* ----------------------------- Trip finder ---------------------------- */}
+      <Section tone="surface" id="finder">
+        <SectionHeader
+          eyebrow="Trip finder"
+          title={<>When, how long, <em className="text-accent">what you love.</em></>}
+          text="Three taps. You get the honest conditions for your month and the trips that actually fit."
+        />
+        <div className="mt-12">
+          <TripFinder tours={finderTours} />
         </div>
       </Section>
 

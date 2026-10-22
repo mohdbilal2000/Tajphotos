@@ -6,6 +6,7 @@ import type { Tour } from "@/content/types";
 import { getImage } from "@/content/images";
 import { destinations, guides } from "@/content";
 import { Tilt } from "@/components/ui/Tilt";
+import { ShortlistButton } from "@/components/shortlist/ShortlistButton";
 import { Price } from "@/components/ui/Price";
 import { WhatsAppLink } from "@/components/WhatsAppLink";
 import { site } from "@/config/site";
@@ -67,6 +68,7 @@ export function TourCard({ tour, className, preload }: { tour: Tour; className?:
             <Sparkles className="size-3 text-accent" aria-hidden /> {tour.badges[0]}
           </span>
         )}
+        <ShortlistButton item={{ slug: tour.slug, name, usd: tour.priceFrom.usd }} className="absolute right-3 top-3" />
         <span aria-hidden className="absolute bottom-3 right-3 inline-flex translate-y-2 items-center gap-1.5 rounded-full bg-white/90 px-3.5 py-2 text-xs font-semibold text-ink opacity-0 backdrop-blur transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
           View tour <ArrowUpRight className="size-3.5" />
         </span>

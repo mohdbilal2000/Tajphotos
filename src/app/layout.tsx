@@ -12,6 +12,8 @@ import { TopBar } from "@/components/layout/TopBar";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFloat } from "@/components/layout/WhatsAppFloat";
 import { CurrencyProvider } from "@/context/CurrencyContext";
+import { ShortlistProvider } from "@/context/ShortlistContext";
+import { ShortlistBar } from "@/components/shortlist/ShortlistBar";
 import { JsonLd } from "@/components/JsonLd";
 import { graph, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 
@@ -92,12 +94,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <CurrencyProvider>
+        <ShortlistProvider>
           <TopBar />
           <Header />
           <main id="main" className="flex-1">{children}</main>
           <Footer />
+          <ShortlistBar />
           <WhatsAppFloat />
           <ConsentBanner />
+        </ShortlistProvider>
         </CurrencyProvider>
         <Analytics />
         <SpeedInsights />

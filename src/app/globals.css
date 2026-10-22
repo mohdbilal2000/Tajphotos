@@ -207,14 +207,15 @@
  */
 :root { --consent-banner-h: 0px; }
 
-.whatsapp-float {
+.whatsapp-float, .shortlist-bar {
   bottom: calc(env(safe-area-inset-bottom) + 4.75rem + var(--consent-banner-h)) !important;
 }
 @media (min-width: 40rem) {
-  .whatsapp-float { bottom: calc(1.5rem + var(--consent-banner-h)) !important; }
+  .whatsapp-float, .shortlist-bar { bottom: calc(1.5rem + var(--consent-banner-h)) !important; }
 }
 
 @media (max-width: 63.99875rem) {
   body:has(#sticky-mobile-bar) .whatsapp-float { display: none; }
+  body:has(#sticky-mobile-bar) .shortlist-bar { bottom: calc(env(safe-area-inset-bottom) + 5rem) !important; }
   body:has(#sticky-mobile-bar) #consent-banner { bottom: calc(env(safe-area-inset-bottom) + 4.5rem); }
 }
