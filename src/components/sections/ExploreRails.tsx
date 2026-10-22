@@ -7,8 +7,8 @@ import { cn } from "@/lib/utils";
 export interface RailItem { href: string; title: string; caption: string; image: StaticImageData; alt: string }
 
 /**
- * Two auto-scrolling rails moving in opposite directions (the reference site's "Places that stay
- * with you" pattern). Pure CSS: each track renders its items twice and translates -50%, so the loop
+ * Two auto-scrolling rails moving in opposite directions ("Places that stay
+ * with you" section). Pure CSS: each track renders its items twice and translates -50%, so the loop
  * is seamless with no JavaScript. Hovering or focusing inside a rail pauses it; under
  * prefers-reduced-motion the animation stops and the rail becomes a normal horizontal scroller.
  * The duplicate copy is aria-hidden and untabbable so screen readers and keyboards meet each card once.
@@ -27,12 +27,12 @@ function Rail({ items, reverse }: { items: RailItem[]; reverse?: boolean }) {
               className="group relative isolate mr-4 block h-[13rem] w-[19rem] shrink-0 overflow-hidden rounded-[1.25rem] shadow-soft sm:h-[15rem] sm:w-[23rem]"
             >
               <Image src={it.image} alt={copy === 1 ? "" : it.alt} placeholder="blur" sizes="368px" className="absolute inset-0 -z-10 size-full object-cover transition-transform duration-[900ms] group-hover:scale-[1.06]" />
-              <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-ink/85 via-ink/20 to-transparent" />
+              <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-ink/90 from-15% via-ink/45 via-45% to-transparent" />
               <span aria-hidden className="absolute right-3 top-3 flex size-9 items-center justify-center rounded-full bg-white/20 text-white ring-1 ring-white/40 backdrop-blur transition group-hover:bg-white group-hover:text-ink">
                 <ArrowUpRight className="size-4" />
               </span>
               <div className="absolute inset-x-0 bottom-0 p-5 text-white">
-                <p className="line-clamp-2 text-[0.625rem] font-semibold uppercase leading-relaxed tracking-[0.16em] text-white/75">{it.caption}</p>
+                <p className="truncate text-[0.625rem] font-semibold uppercase tracking-[0.16em] text-white/80">{it.caption}</p>
                 <p className="mt-1.5 font-display text-[1.75rem] leading-none">{it.title}</p>
               </div>
             </Link>

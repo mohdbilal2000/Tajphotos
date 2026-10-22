@@ -3,13 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, CalendarCheck, Wallet, BadgeCheck, MessageCircle, MapPin } from "lucide-react";
 import { site } from "@/config/site";
-import { tours, destinations, latestGuides, reviews, featuredTours, tourCategories, toursByCategory, stays, services, fleet, staysDisclosure } from "@/content";
+import { guides, tours, destinations, latestGuides, reviews, featuredTours, tourCategories, toursByCategory, stays, services, fleet, staysDisclosure } from "@/content";
 import { getImage } from "@/content/images";
 import { Hero } from "@/components/sections/Hero";
 import { FounderNote } from "@/components/sections/FounderNote";
 import { ExploreRails, type RailItem } from "@/components/sections/ExploreRails";
 import { GoldenTriangleMap, type MapCity } from "@/components/sections/GoldenTriangleMap";
-import { transport } from "@/content/facts";
+import { transport, tajMahal } from "@/content/facts";
+import { JourneyStory, type Chapter } from "@/components/sections/JourneyStory";
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { TourCard } from "@/components/tours/TourCard";
 import { TourTabs } from "@/components/tours/TourTabs";
@@ -34,7 +35,7 @@ export const metadata: Metadata = buildMetadata({
 
 /**
  * Four promises, each one already made elsewhere on the site (terms, booking flow, contact hours) —
- * restated here as icon cards, the reference site's pattern. Nothing new is promised.
+ * restated here as icon cards. Nothing new is promised.
  */
 const promises = [
   { icon: CalendarCheck, title: "Free cancellation", body: "Cancel free up to 48 hours before most tours. The exact window is on every tour card." },
@@ -89,11 +90,15 @@ export default function Home() {
       const img = getImage(t.heroImage);
       return { href: `/tours#${c.key}`, title: c.label, caption: c.blurb, image: img.src, alt: img.alt };
     });
+  // Bottom rail: each city's photos, skipping any image already used on the top rail so the same
+  // picture never scrolls past twice. Caption is the region, not the long photo description.
+  const usedOnTop = new Set(railCategories.map((r) => r.image.src));
   const railDestinations: RailItem[] = destinations.flatMap((d) =>
-    [d.heroImage, ...d.gallery.slice(0, 1)].map((id) => {
-      const img = getImage(id);
-      return { href: `/destinations/${d.slug}`, title: d.name, caption: img.alt, image: img.src, alt: img.alt };
-    }),
+    [d.heroImage, ...d.gallery]
+      .map((id) => getImage(id))
+      .filter((img) => !usedOnTop.has(img.src.src))
+      .slice(0, 2)
+      .map((img) => ({ href: `/destinations/${d.slug}`, title: d.name, caption: d.region, image: img.src, alt: img.alt })),
   );
   const cityCaption: Record<string, string> = { delhi: "The capital", agra: "Eternal romance", jaipur: "Royal heritage" };
   const mapCities: MapCity[] = ["delhi", "agra", "jaipur"]
@@ -113,6 +118,57 @@ export default function Home() {
         lng: d.geo.longitude,
       };
     });
+  // The scroll story: one day at the Taj, then onward through the triangle. Every fact is pulled
+  // from facts.ts / content so it can't drift from the rest of the site; every chapter links to a
+  // city, a guide and a tour so the story doubles as navigation.
+  const guideLink = (slug: string) => {
+    const g = guides.find((x) => x.slug === slug);
+    return g ? { href: `/guides/${g.slug}`, label: g.title } : undefined;
+  };
+  const tourLink = (slug: string, label: string) => (tours.some((t) => t.slug === slug) ? { href: `/tours/${slug}`, label } : undefined);
+  const ch = (id: string) => getImage(id);
+  const chapters: Chapter[] = [
+    {
+      time: "5:30 AM", place: "Taj Mahal, Agra", title: "The gate opens before the sun does.",
+      body: "We are already in the queue when the east gate opens. The first twenty minutes are the only time the reflecting pool is empty and the marble turns pink before it turns white.",
+      fact: `${tajMahal.hours}. Closed every ${tajMahal.closedDay}. Entry allows ${tajMahal.visitTimeLimit}.`,
+      image: ch("taj-mahal-sunrise-2").src, alt: ch("taj-mahal-sunrise-2").alt,
+      destination: { href: "/destinations/agra", label: "Agra guide" },
+      guide: guideLink("best-time-to-visit-taj-mahal"), tour: tourLink("taj-mahal-sunrise-tour-from-delhi", "Sunrise tour"),
+    },
+    {
+      time: "9:00 AM", place: "Agra Fort", title: "The window Shah Jahan looked through.",
+      body: "Across the river bend, the red sandstone fort where the emperor who built the Taj spent his last years — with the dome framed in a marble window. Most day trips rush it. We don't.",
+      fact: "Agra Fort is a separate UNESCO World Heritage Site, a short drive from the Taj Mahal. Tickets are bought separately.",
+      image: ch("taj-mahal-couple-1").src, alt: ch("taj-mahal-couple-1").alt,
+      destination: { href: "/destinations/agra", label: "Agra guide" },
+      guide: guideLink("taj-mahal-tickets"), tour: tourLink("agra-city-tour", "Agra city tour"),
+    },
+    {
+      time: "Day 2", place: "Delhi", title: "Seven cities stacked into one.",
+      body: "Humayun's Tomb, often called the blueprint for the Taj. Old Delhi's lanes by cycle rickshaw. Then the fastest way back to Agra is a train, not the road.",
+      fact: `The ${transport.gatimaanExpress.train} runs Delhi to Agra in ${transport.gatimaanExpress.duration}. ${transport.gatimaanExpress.note}.`,
+      image: ch("delhi-humayun-tomb-1").src, alt: ch("delhi-humayun-tomb-1").alt,
+      destination: { href: "/destinations/delhi", label: "Delhi guide" },
+      guide: guideLink("gatimaan-express-delhi-agra"), tour: tourLink("delhi-full-day-city-tour", "Delhi day tour"),
+    },
+    {
+      time: "Day 3", place: "Jaipur", title: "The Pink City, from the windows of the wind.",
+      body: "Hawa Mahal at first light, Amber Fort by jeep, the bazaars after dark. The third corner of the Golden Triangle, and the one people wish they'd given another day.",
+      fact: `Agra to Jaipur is ${transport.agraJaipur.distanceKm} km by road — ${transport.agraJaipur.note.charAt(0).toLowerCase() + transport.agraJaipur.note.slice(1)}, and worth it.`,
+      image: ch("jaipur-hawa-mahal-1").src, alt: ch("jaipur-hawa-mahal-1").alt,
+      destination: { href: "/destinations/jaipur", label: "Jaipur guide" },
+      guide: guideLink("golden-triangle-itinerary"), tour: tourLink("golden-triangle-tour-4-days", "Golden Triangle, 4 days"),
+    },
+    {
+      time: "Day 6", place: "Udaipur", title: "And then, if you can, the lakes.",
+      body: "A palace on its own island, sunset from a boat on Lake Pichola. The week most people say they should have planned from the start.",
+      fact: "Udaipur is the usual Rajasthan extension after Jaipur — the 7-day Golden Triangle adds it with a Lake Pichola sunset cruise.",
+      image: ch("udaipur-lake-pichola-1").src, alt: ch("udaipur-lake-pichola-1").alt,
+      destination: { href: "/destinations/udaipur", label: "Udaipur guide" },
+      guide: guideLink("golden-triangle-tour-cost"), tour: tourLink("golden-triangle-tour-7-days-with-udaipur", "7 days with Udaipur"),
+    },
+  ];
   const legs = `Delhi → Agra ${transport.delhiAgraCar.distanceKm} km · Agra → Jaipur ${transport.agraJaipur.distanceKm} km · Jaipur → Delhi ${transport.delhiJaipur.distanceKm} km`;
   const keyServices = services.filter((s) => ["taj-sunrise-entry", "taj-night-viewing", "private-car-driver", "licensed-guide", "hotel-booking"].includes(s.slug));
 
@@ -171,6 +227,18 @@ export default function Home() {
               </Link>
             );
           })}
+        </div>
+      </Section>
+
+      {/* ------------------------------ The story ---------------------------- */}
+      <Section id="story">
+        <SectionHeader
+          eyebrow="Walk it with us"
+          title={<>One sunrise. <em className="text-accent">Then the whole triangle.</em></>}
+          text="Scroll through the trip the way it actually unfolds — every stop links to the city, the reading worth doing first, and the tour that goes there."
+        />
+        <div className="mt-14">
+          <JourneyStory chapters={chapters} />
         </div>
       </Section>
 

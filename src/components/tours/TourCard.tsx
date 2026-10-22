@@ -1,10 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Clock, MapPin, Star, Sparkles, ArrowRight, ArrowUpRight, BadgeCheck, CalendarCheck, Car, Ticket, Camera, MessageCircle } from "lucide-react";
+import { Clock, MapPin, Star, Sparkles, ArrowRight, ArrowUpRight, BadgeCheck, CalendarCheck, Car, Ticket, Camera, MessageCircle, BookOpen } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { Tour } from "@/content/types";
 import { getImage } from "@/content/images";
-import { destinations } from "@/content";
+import { destinations, guides } from "@/content";
+import { Tilt } from "@/components/ui/Tilt";
 import { Price } from "@/components/ui/Price";
 import { WhatsAppLink } from "@/components/WhatsAppLink";
 import { site } from "@/config/site";
@@ -30,7 +31,7 @@ function perksFor(tour: Tour): { icon: LucideIcon; label: string }[] {
 }
 
 /**
- * Journey card — layout pattern taken from the reference site's best component, content entirely ours:
+ * Journey card — our own implementation of the booking-card pattern, content entirely ours:
  * image with an icon badge and a hover "View tour" pill → duration (+ rating only when real) →
  * title → tagline → map-pin route → divider → derived benefits → "Starting from" price row with a
  * round arrow. The whole card is one click target via a stretched title link; the WhatsApp button
@@ -45,8 +46,12 @@ export function TourCard({ tour, className, preload }: { tour: Tour; className?:
     .join(" · ");
   const perks = perksFor(tour);
   const name = tour.shortTitle ?? tour.title;
+  // One related guide per card, so a tour is never a dead end: the reading that answers the
+  // questions people have before booking it (tickets, timings, what to wear).
+  const guide = tour.relatedGuides?.map((g) => guides.find((x) => x.slug === g)).find(Boolean);
   return (
-    <article className={cn("group relative flex flex-col overflow-hidden rounded-[1.375rem] border border-border/80 bg-surface shadow-soft transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1.5 hover:shadow-lift", className)}>
+    <Tilt className={className}>
+    <article className={cn("group relative flex h-full flex-col overflow-hidden rounded-[1.375rem] border border-border/80 bg-surface shadow-soft transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-lift")}>
       <div className="relative m-2 aspect-[4/3] overflow-hidden rounded-[1rem] bg-surface-2">
         <Image
           src={img.src}
@@ -101,6 +106,13 @@ export function TourCard({ tour, className, preload }: { tour: Tour; className?:
           </ul>
         )}
 
+        {guide && (
+          <Link href={`/guides/${guide.slug}`} className="relative z-10 mt-4 flex items-start gap-2 rounded-xl bg-bg px-3 py-2.5 text-xs leading-snug text-muted transition hover:text-ink">
+            <BookOpen className="mt-px size-3.5 shrink-0 text-accent" aria-hidden />
+            <span><span className="font-semibold text-ink">Read before you go:</span> {guide.title}</span>
+          </Link>
+        )}
+
         <div className="mt-auto flex items-end justify-between gap-3 pt-5">
           <div>
             <p className="text-[0.625rem] font-semibold uppercase tracking-[0.16em] text-muted">Starting from</p>
@@ -124,6 +136,7 @@ export function TourCard({ tour, className, preload }: { tour: Tour; className?:
         </div>
       </div>
     </article>
+    </Tilt>
   );
 }
 

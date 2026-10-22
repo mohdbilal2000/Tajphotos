@@ -3,7 +3,7 @@ import { site } from "@/config/site";
 import { TrackedContactLink } from "@/components/TrackedContactLink";
 
 /**
- * Thin utility strip above the masthead (pattern from the reference site): contact on the left, one
+ * Thin utility strip above the masthead: contact on the left, one
  * true service line in the middle, a location mark on the right. It scrolls away with the page; only
  * the masthead below it is sticky. The middle line is our own reply-time promise, not a promotion.
  */

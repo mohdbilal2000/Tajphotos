@@ -37,7 +37,7 @@ export function GoldenTriangleMap({ cities, legs }: { cities: MapCity[]; legs: s
 
   // Equirectangular projection of the bounding box into a padded 600x440 viewBox. Fine at this
   // scale (a few hundred km); north is up, so Jaipur lands west, Agra south-east of Delhi.
-  const W = 600, H = 440, PAD = 110;
+  const W = 600, H = 440, PAD = 125;
   const lats = cities.map((c) => c.lat), lngs = cities.map((c) => c.lng);
   const [minLat, maxLat, minLng, maxLng] = [Math.min(...lats), Math.max(...lats), Math.min(...lngs), Math.max(...lngs)];
   const pt = (c: MapCity) => ({
@@ -45,8 +45,15 @@ export function GoldenTriangleMap({ cities, legs }: { cities: MapCity[]; legs: s
     y: PAD + ((maxLat - c.lat) / (maxLat - minLat || 1)) * (H - PAD * 2),
   });
   const pts = cities.map(pt);
-  const loop = [...pts, pts[0]];
-  const path = loop.map((p, i) => (i === 0 ? `M ${p.x} ${p.y}` : `L ${p.x} ${p.y}`)).join(" ");
+  // Each leg is drawn separately and trimmed by GAP at both ends, so the route meets the edge of a
+  // city photo instead of running underneath it and through its label.
+  const GAP = 74;
+  const trim = (a: { x: number; y: number }, b: { x: number; y: number }) => {
+    const dx = b.x - a.x, dy = b.y - a.y, len = Math.hypot(dx, dy) || 1;
+    const k = Math.min(GAP, len / 2 - 1) / len;
+    return { x1: a.x + dx * k, y1: a.y + dy * k, x2: b.x - dx * k, y2: b.y - dy * k };
+  };
+  const legsXY = pts.map((p, i) => trim(p, pts[(i + 1) % pts.length]));
 
   const names = cities.map((c) => c.name);
   const dirUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(names[0] + ", India")}&destination=${encodeURIComponent(names[0] + ", India")}&waypoints=${encodeURIComponent(names.slice(1).map((n) => n + ", India").join("|"))}&travelmode=driving`;
@@ -89,8 +96,13 @@ export function GoldenTriangleMap({ cities, legs }: { cities: MapCity[]; legs: s
               </defs>
               <circle cx={W / 2} cy={H / 2} r={150} fill="none" stroke="white" strokeOpacity="0.06" />
               <circle cx={W / 2} cy={H / 2} r={210} fill="none" stroke="white" strokeOpacity="0.04" strokeDasharray="2 6" />
-              <path d={path} fill="none" stroke="url(#gt-route)" strokeWidth="2" strokeDasharray="6 7" strokeLinecap="round" className="motion-safe:animate-[dash_30s_linear_infinite]" />
-              <path d={`M ${pts[active === 0 ? 0 : active - 1].x} ${pts[active === 0 ? 0 : active - 1].y} L ${pts[active].x} ${pts[active].y}`} fill="none" stroke="#fff3cf" strokeWidth="3" strokeLinecap="round" />
+              {legsXY.map((l, i) => {
+                // the leg arriving at the selected city is drawn solid and bright
+                const arriving = (i + 1) % pts.length === active;
+                return (
+                  <line key={i} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke={arriving ? "#fff3cf" : "url(#gt-route)"} strokeWidth={arriving ? 3 : 2} strokeDasharray={arriving ? undefined : "6 7"} strokeLinecap="round" className={arriving ? undefined : "motion-safe:animate-[dash_30s_linear_infinite]"} />
+                );
+              })}
             </svg>
             {cities.map((c, i) => {
               const p = pts[i];
@@ -109,8 +121,10 @@ export function GoldenTriangleMap({ cities, legs }: { cities: MapCity[]; legs: s
                     <Image src={c.image} alt="" fill sizes="112px" className="object-cover" />
                   </span>
                   <span className="absolute -right-1.5 -top-1 flex size-5 items-center justify-center rounded-full bg-highlight text-[0.5625rem] font-bold text-ink ring-2 ring-ink sm:size-7 sm:text-[0.625rem]">0{i + 1}</span>
-                  <span className={cn("mt-1.5 block font-display text-sm leading-none transition sm:mt-2 sm:text-lg", on ? "text-highlight" : "text-white")}>{c.name}</span>
-                  <span className="mt-1 hidden text-[0.5625rem] font-semibold uppercase tracking-[0.2em] text-white/55 sm:block">{c.caption}</span>
+                  <span className="mt-1.5 inline-block rounded-full bg-ink/85 px-2.5 py-1 ring-1 ring-white/10 backdrop-blur sm:mt-2">
+                    <span className={cn("block font-display text-sm leading-none transition sm:text-lg", on ? "text-highlight" : "text-white")}>{c.name}</span>
+                    <span className="mt-1 hidden whitespace-nowrap text-[0.5625rem] font-semibold uppercase tracking-[0.2em] text-white/55 sm:block">{c.caption}</span>
+                  </span>
                 </button>
               );
             })}
