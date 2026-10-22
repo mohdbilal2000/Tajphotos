@@ -21,9 +21,9 @@ export const site = {
   foundingYear: 2016, // TODO: confirm
   contact: {
     // TODO: replace with real numbers before launch (E.164 format without "+" for WhatsApp links)
-    whatsapp: env("NEXT_PUBLIC_WHATSAPP_NUMBER", "919999999999"),
-    phoneDisplay: env("NEXT_PUBLIC_PHONE_DISPLAY", "+91 99999 99999"),
-    phoneE164: env("NEXT_PUBLIC_PHONE_E164", "+919999999999"),
+    whatsapp: env("NEXT_PUBLIC_WHATSAPP_NUMBER", "918909741833"),
+    phoneDisplay: env("NEXT_PUBLIC_PHONE_DISPLAY", "+91 89097 41833"),
+    phoneE164: env("NEXT_PUBLIC_PHONE_E164", "+918909741833"),
     email: env("NEXT_PUBLIC_EMAIL", "hello@tajphotos.com"),
     hoursNote: "We reply on WhatsApp within minutes, 7 days a week (7 AM – 11 PM IST)",
   },
