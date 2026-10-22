@@ -12,6 +12,7 @@ import { GoldenTriangleMap, type MapCity } from "@/components/sections/GoldenTri
 import { transport, tajMahal } from "@/content/facts";
 import { JourneyStory, type Chapter } from "@/components/sections/JourneyStory";
 import { TripFinder, type FinderTour } from "@/components/sections/TripFinder";
+import { SlideDeck } from "@/components/ui/SlideDeck";
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { TourCard } from "@/components/tours/TourCard";
 import { TourTabs } from "@/components/tours/TourTabs";
@@ -44,6 +45,16 @@ const promises = [
   { icon: BadgeCheck, title: "Licensed local guides", body: "Ministry of Tourism-licensed guides, not drivers doubling as guides. No commission stops, ever." },
   { icon: MessageCircle, title: "A reply in about 15 minutes", body: `A real person on WhatsApp, ${site.contact.hoursNote.match(/\((.*)\)/)?.[1] ?? "7 AM – 11 PM IST"}. No ticket numbers.` },
 ];
+
+/** Real spots and hours we take people to — captions describe the place, not invented guests. */
+const tajFeed = [
+  { id: "taj-mahal-sunrise-1", when: "5:45 AM", where: "Sunrise", note: "first light on the marble, before the coaches arrive" },
+  { id: "taj-mahal-wide-1", when: "7:00 AM", where: "The reflecting pool", note: "the front-on frame everyone comes for" },
+  { id: "taj-mahal-detail-1", when: "9:30 AM", where: "Pietra dura panels", note: "semi-precious stone inlay, close enough to touch" },
+  { id: "taj-mahal-couple-1", when: "1:00 PM", where: "Agra Fort", note: "the view Shah Jahan is said to have kept" },
+  { id: "taj-mahal-mist-1", when: "5:30 PM", where: "Mehtab Bagh", note: "across the Yamuna as the light softens" },
+  { id: "taj-mahal-moonlight-1", when: "Evening", where: "After hours", note: "the dome against the last of the sky" },
+].map((f) => ({ ...f, img: getImage(f.id) }));
 
 const steps = [
   { t: "Tell us the dates and the shape", d: "Two minutes on WhatsApp or the form. How long, how many, how hard you want to push, and whether sunrise is worth a 4:30 AM alarm to you." },
@@ -207,20 +218,55 @@ export default function Home() {
 
       {/* ------------------------------ Promises ----------------------------- */}
       <Section>
-        <p className="max-w-4xl font-display text-display-3 font-normal text-ink">
-          Most Golden Triangle pages look identical because most of them are resold. This one is
-          not — we drive it, guide it and photograph it ourselves, out of one small office in Agra.
-        </p>
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {promises.map((p) => (
-            <article key={p.title} className="group rounded-[1.375rem] border border-border bg-surface p-6 shadow-soft transition-all duration-500 hover:-translate-y-1 hover:shadow-lift">
-              <span className="flex size-11 items-center justify-center rounded-full bg-primary/8 text-primary ring-1 ring-primary/15 transition group-hover:bg-primary group-hover:text-primary-fg">
-                <p.icon className="size-5" aria-hidden />
-              </span>
-              <h2 className="mt-5 font-sans text-base font-semibold text-ink">{p.title}</h2>
-              <p className="mt-2 text-sm leading-relaxed text-muted">{p.body}</p>
-            </article>
-          ))}
+        <div className="grid items-start gap-10 lg:grid-cols-12 lg:gap-14">
+          <div className="min-w-0 lg:col-span-7">
+            <p className="eyebrow">Why book direct</p>
+            <p className="mt-4 max-w-2xl font-display text-3xl font-normal leading-tight text-ink sm:text-4xl">
+              Most Golden Triangle pages look identical because most are resold. We drive it, guide it
+              and photograph it ourselves, out of one small office in Agra.
+            </p>
+            <SlideDeck label="Our promises" autoplay={6000} bars="bottom" className="mt-10 text-ink">
+              {promises.map((p, i) => (
+                <article key={p.title} className="relative mr-1 flex min-h-[17rem] flex-col overflow-hidden rounded-[1.75rem] border border-border bg-surface p-7 shadow-soft sm:p-9 lg:min-h-[22rem]">
+                  <span className="flex size-12 items-center justify-center rounded-2xl bg-primary text-primary-fg">
+                    <p.icon className="size-5" aria-hidden />
+                  </span>
+                  <p className="mt-auto pt-8 text-xs font-semibold uppercase tracking-[0.2em] text-accent">Promise {String(i + 1).padStart(2, "0")} of {promises.length}</p>
+                  <h2 className="mt-2 font-display text-2xl font-normal text-ink sm:text-3xl">{p.title}</h2>
+                  <p className="mt-3 max-w-lg text-base leading-relaxed text-muted">{p.body}</p>
+                </article>
+              ))}
+            </SlideDeck>
+          </div>
+
+          <div className="min-w-0 lg:col-span-5">
+            <div className="rounded-[2rem] bg-ink p-4 text-bg shadow-lift sm:p-5">
+              <div className="mb-4 flex items-center gap-3 px-1">
+                <span className="flex size-10 items-center justify-center rounded-full bg-gradient-to-tr from-amber-400 via-rose-500 to-fuchsia-600 p-[2px]">
+                  <span className="flex size-full items-center justify-center rounded-full bg-ink font-display text-sm">T</span>
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="block text-sm font-semibold">tajphotos</span>
+                  <span className="block text-xs opacity-70">The Taj, hour by hour</span>
+                </span>
+                <a href={site.social.instagram} target="_blank" rel="noopener noreferrer" className="rounded-full bg-bg px-3.5 py-1.5 text-xs font-semibold text-ink transition hover:opacity-85">Follow</a>
+              </div>
+              <SlideDeck label="The Taj Mahal through the day" autoplay={4500}>
+                {tajFeed.map((f) => (
+                  <figure key={f.id} className="mr-1">
+                    <div className="relative aspect-[4/5] overflow-hidden rounded-[1.25rem]">
+                      <Image src={f.img.src} alt={f.img.alt} fill sizes="(min-width:1024px) 34vw, 92vw" placeholder="blur" className="object-cover" />
+                      <span className="absolute left-3 top-3 rounded-full bg-black/55 px-3 py-1 text-xs font-medium text-white backdrop-blur">{f.when}</span>
+                    </div>
+                    <figcaption className="px-1 pt-3 text-sm leading-relaxed">
+                      <span className="font-semibold">{f.where}</span> <span className="opacity-80">— {f.note}</span>
+                      <span className="mt-1 block text-[11px] opacity-50">Photo: {f.img.credit.author} / {f.img.credit.source}</span>
+                    </figcaption>
+                  </figure>
+                ))}
+              </SlideDeck>
+            </div>
+          </div>
         </div>
 
         <div className="mt-14 flex flex-wrap items-end justify-between gap-4">

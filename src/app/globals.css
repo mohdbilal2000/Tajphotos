@@ -219,3 +219,5 @@
   body:has(#sticky-mobile-bar) .shortlist-bar { bottom: calc(env(safe-area-inset-bottom) + 5rem) !important; }
   body:has(#sticky-mobile-bar) #consent-banner { bottom: calc(env(safe-area-inset-bottom) + 4.5rem); }
 }
+
+@keyframes deck-fill { from { width: 0; } to { width: 100%; } }
