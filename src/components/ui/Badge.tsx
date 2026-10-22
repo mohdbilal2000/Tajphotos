@@ -10,5 +10,5 @@ export function Badge({ children, tone = "accent", className }: { children: Reac
     success: "border-success/35 bg-success/8 text-success",
     glass: "border-white/35 bg-ink/45 text-white backdrop-blur-sm",
   };
-  return <span className={cn("inline-flex items-center gap-1.5 border px-2.5 py-1 text-[0.625rem] font-semibold uppercase tracking-[0.16em]", tones[tone], className)}>{children}</span>;
+  return <span className={cn("inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[0.6875rem] font-semibold", tones[tone], className)}>{children}</span>;
 }

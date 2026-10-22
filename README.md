@@ -129,26 +129,24 @@ throughout the site; the form is the fallback for visitors who prefer it.
   content deploy (Google doesn't use IndexNow — rely on the sitemap + Search Console for it)
 - `app/feed.xml` — RSS of guides
 
-### Design system — "Paper, Ink & Marble"
+### Design system — "Paper, Ink & Marble" (v2, booking cards)
 
-An editorial system rather than a card system, on the premise that this is a photography-led business
-and the interface should be a quiet paper frame around large images and short, confident type. The
-rules are enforced by the tokens themselves in `src/app/globals.css`, which is where to read the full
-rationale and the measured contrast ratios:
+Two layers, set out in the header of `src/app/globals.css`:
 
-- **Almost no radius.** `--radius-*` are 1–4px, not 16–28px. Square edges read as print.
-- **Almost no shadow.** Depth comes from image scale and whitespace. `--shadow-soft` is a hairline;
-  `--shadow-lift` is reserved for things that genuinely float (the WhatsApp button, the mobile bar).
-- **Structure from 1px rules**, the way a magazine grid works — not from borders-plus-fills-plus-shadows.
-- **One accent, used sparingly.** Agra sandstone `#8a3b22` for micro-labels and markers, Mughal green
-  `#1b3a34` for interaction, brass `#c9a227` on ink grounds only (it fails contrast on paper).
-- **Two typefaces.** Newsreader for display — chosen for its optical-size axis, so the same family
-  sets a 6rem hero and a 1.25rem sub-head correctly; never pin `opsz` by hand. Archivo for everything
-  else. Micro-labels are 11px, uppercase, 0.22em tracking. Before swapping the display face, read the
-  comment above the font loaders in `src/app/layout.tsx` — the previous choice silently dropped every
+- **Editorial frame.** Warm paper ground, Newsreader display headlines, generous whitespace, 1px rules
+  between sections, a first-person founder's letter. This is what makes the site read as a specific
+  company.
+- **Booking-site inventory.** Tours, stays, guides and destinations are rounded cards (`rounded-2xl`,
+  soft shadow that lifts on hover): image on top with pill badges, icon meta row, a truthful perk line
+  ("Free cancellation · 48h before", derived from each tour's `cancellation` text), and a price +
+  WhatsApp + View footer. The homepage groups them under category tabs (`TourTabs`, which only ships
+  the toggle to the client — the cards are server-rendered and stay crawlable), and the hero leads
+  with a search box that posts to `/tours?q=`.
+- **What the cards will not do:** show fabricated strike-through "was" prices or star ratings. Stars
+  render only when a tour has a real `rating`; there is no discount field.
+- **Two typefaces.** Newsreader (display) + Archivo (UI). Before swapping the display face, read the
+  comment above the font loaders in `src/app/layout.tsx` — a previous choice silently dropped every
   hyphen, dash and plus sign on the site.
-- **Motion is slow.** Image hover is 900ms to 1.03×; scroll reveals use `animation-timeline: view()`
-  with no JavaScript at all, and everything collapses under `prefers-reduced-motion`.
 
 Token *names* were kept stable across the redesign (`bg`, `surface`, `ink`, `muted`, `border`,
 `primary`, `accent`, `highlight`), so utilities like `bg-surface` and `rounded-2xl` inherited the new

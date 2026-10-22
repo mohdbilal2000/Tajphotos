@@ -33,7 +33,7 @@ export function CtaCard({
   headingLevel?: "h2" | "h3";
 }) {
   return (
-    <aside className={cn("bg-ink px-6 py-12 text-bg sm:px-12 sm:py-16", className)}>
+    <aside className={cn("overflow-hidden rounded-3xl bg-ink px-6 py-12 text-bg shadow-lift sm:px-12 sm:py-14", className)}>
       <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
         <div>
           <p className="border-t border-white/25 pt-4 text-label font-semibold uppercase text-highlight">Plan it with a local</p>
@@ -48,7 +48,7 @@ export function CtaCard({
           <WhatsAppLink message={`Hi ${site.name}! I'm interested in ${tourSlug ? `the ${tourSlug.replace(/-/g, " ")}` : "planning a trip"}. Could you help?`} className="btn-whatsapp" event="whatsapp_click_cta">
             Chat on WhatsApp
           </WhatsAppLink>
-          <ButtonLink href={tourSlug ? (`/tours/${tourSlug}` as "/tours") : "/plan-my-trip"} variant="ghost" className="text-bg decoration-white/35 hover:decoration-white">
+          <ButtonLink href={tourSlug ? (`/tours/${tourSlug}` as "/tours") : "/plan-my-trip"} variant="secondary" className="border-white/30 bg-white text-ink hover:border-white">
             {label ?? (tourSlug ? "See this tour" : "Plan my trip")} <ArrowRight className="size-4" aria-hidden />
           </ButtonLink>
         </div>

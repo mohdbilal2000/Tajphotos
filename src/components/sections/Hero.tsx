@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { Search, MessageCircle } from "lucide-react";
 import type { StaticImageData } from "next/image";
 import { WhatsAppLink } from "@/components/WhatsAppLink";
 import { defaultWhatsappMessage, site } from "@/config/site";
@@ -37,6 +37,12 @@ export function Hero({
   /** The bottom rail. Defaults to the three facts above. */
   meta?: { label: string; value: string }[];
 }) {
+  const quick = [
+    { label: "Same-day Taj", href: "/tours#same-day" },
+    { label: "Golden Triangle", href: "/tours#golden-triangle" },
+    { label: "Photoshoots", href: "/tours#photography" },
+    { label: primaryLabel, href: primaryHref },
+  ];
   const rail = meta ?? [
     { label: "Based in", value: "Tajganj, Agra" },
     { label: "Reply time", value: "About 15 minutes" },
@@ -63,12 +69,22 @@ export function Hero({
         <p className="text-shadow-hero text-label font-semibold uppercase text-white">{eyebrow}</p>
         <h1 className="mt-6 max-w-[22ch] text-display-1 font-normal text-shadow-hero">{title}</h1>
         <p className="mt-7 max-w-xl text-lg leading-relaxed text-white/85 sm:text-xl">{subtitle}</p>
-        <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
-          <Link href={primaryHref as "/tours"} className="btn-secondary border-white/45 text-white hover:border-white hover:bg-white hover:text-ink">
-            {primaryLabel} <ArrowRight className="size-4" aria-hidden />
-          </Link>
-          <WhatsAppLink message={defaultWhatsappMessage} event="whatsapp_click_hero" className="arrow-link text-white hover:text-highlight">
-            Or just ask on WhatsApp <ArrowRight className="size-4" aria-hidden />
+        {/* Search, the way booking sites lead: a plain GET form to /tours?q=, which already filters
+            server-side — so it works with JavaScript off and backs the SearchAction in the JSON-LD. */}
+        <form action="/tours" role="search" className="mt-9 flex w-full max-w-xl items-center gap-2 rounded-2xl bg-white p-2 pl-4 text-ink shadow-lift">
+          <Search className="size-5 shrink-0 text-muted" aria-hidden />
+          <label htmlFor="hero-search" className="sr-only">Search tours</label>
+          <input id="hero-search" type="search" name="q" placeholder="Try “sunrise”, “Jaipur” or “photoshoot”" className="min-w-0 flex-1 bg-transparent py-2 text-[0.9375rem] outline-none placeholder:text-muted" />
+          <button type="submit" className="btn-primary shrink-0 px-5 py-2.5">Search</button>
+        </form>
+        <div className="mt-4 flex flex-wrap items-center gap-2">
+          {quick.map((q) => (
+            <Link key={q.href} href={q.href as "/tours"} className="rounded-full border border-white/35 bg-white/10 px-3.5 py-1.5 text-xs font-medium text-white backdrop-blur-sm transition hover:bg-white hover:text-ink">
+              {q.label}
+            </Link>
+          ))}
+          <WhatsAppLink message={defaultWhatsappMessage} event="whatsapp_click_hero" className="inline-flex items-center gap-1.5 rounded-full bg-whatsapp-ink px-3.5 py-1.5 text-xs font-semibold text-white transition hover:brightness-110">
+            <MessageCircle className="size-3.5" aria-hidden /> Ask on WhatsApp
           </WhatsAppLink>
         </div>
       </div>

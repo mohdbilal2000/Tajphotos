@@ -80,7 +80,7 @@ export default function StaysPage() {
               calm room ten minutes from the gate, with the difference spent on the photography.
             </p>
           </div>
-          <div className="figure aspect-[4/3] w-full">
+          <div className="figure aspect-[4/3] w-full rounded-3xl shadow-lift">
             <Image src={hero.src} alt={hero.alt} placeholder="blur" preload fetchPriority="high" sizes="(min-width: 1024px) 44vw, 92vw" />
           </div>
         </div>
@@ -89,7 +89,7 @@ export default function StaysPage() {
       {/* How the tiers work, stated plainly, because "luxury" on its own means nothing. */}
       <Section className="pb-0">
         <SectionHeader eyebrow="How to read this list" title="Four kinds of building, not four star ratings" />
-        <dl className="mt-12 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+        <dl className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
           {(Object.keys(stayTierLabel) as (keyof typeof stayTierLabel)[]).map((tier) => (
             <div key={tier} className="bg-bg px-6 py-7">
               <dt className="text-label font-semibold uppercase text-accent">{tier}</dt>
@@ -110,7 +110,7 @@ export default function StaysPage() {
             <h2 className="font-display text-display-3 font-normal">{group.city}</h2>
             <p className="text-label font-semibold uppercase text-muted">{group.list.length} {group.list.length === 1 ? "property" : "properties"}</p>
           </div>
-          <div className="mt-12 grid gap-x-10 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {group.list.map((s, i) => (
               <StayCard key={s.slug} stay={s} eager={gi === 0 && i === 0} />
             ))}

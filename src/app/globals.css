@@ -1,26 +1,19 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------------------------------------
-   Design tokens — "Paper, Ink & Marble".
+   Design tokens — "Paper, Ink & Marble", v2 (booking-card UI).
 
-   An editorial system, not a card system. The premise: this is a photography-led business, so the
-   interface is a quiet paper frame around large images and short, confident type. That means, as a
-   deliberate rule rather than an aesthetic accident:
+   Two layers, deliberately different:
+   - The FRAME is editorial: warm paper, a display serif for headlines, generous whitespace, 1px
+     rules between sections. That's what makes it read as a specific company, not a template.
+   - The INVENTORY is booking-site: tours, stays, guides and destinations are rounded cards
+     (--radius-2xl), with a soft shadow that lifts on hover, image-top with pill badges, an icon meta
+     row, and a price + CTA footer. Travellers scan cards fast; this is the pattern they already know
+     from every booking site, so it is used where scanning matters and nowhere else.
 
-   - Almost no radius (--radius-* are 2-4px, not 16-28px). Square edges read as print; pill-shaped
-     everything reads as a template.
-   - Almost no shadow. Depth comes from image scale and generous whitespace, not drop shadows.
-     --shadow-soft is a hairline; --shadow-lift is only used where something genuinely floats
-     (the WhatsApp float, the mobile booking bar).
-   - Structure comes from 1px rules (--color-border) and a baseline rhythm, the way a magazine grid
-     does. Cards, where they survive at all, are an image with type under it — no chrome.
-   - One accent, used sparingly: Agra sandstone on paper. Mughal green carries interaction (links,
-     buttons); brass appears only on ink grounds, never as text on paper (it fails contrast there).
-
-   Token NAMES are kept stable from the previous system (bg/surface/ink/muted/border/primary/accent/
-   highlight/...), so every `bg-surface`, `text-muted`, `rounded-2xl` etc. across the site inherits
-   the new language without a sweep of every file. Contrast ratios below are measured against
-   --color-bg unless stated.
+   Colour: Mughal green carries interaction (buttons, active tabs); Agra sandstone marks labels and
+   location pins; brass appears on ink grounds only (it fails contrast on paper). Contrast ratios
+   below are measured against --color-bg unless stated. Token NAMES are stable across redesigns.
 ------------------------------------------------------------------------------------------------ */
 @theme {
   --color-bg: #f4f1ec;          /* warm paper */
@@ -62,15 +55,15 @@
   --text-label--line-height: 1.1;
   --text-label--letter-spacing: 0.22em;
 
-  --radius-sm: 1px;
-  --radius-md: 2px;
-  --radius-lg: 2px;
-  --radius-xl: 2px;
-  --radius-2xl: 3px;
-  --radius-3xl: 4px;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.625rem;
+  --radius-xl: 0.875rem;
+  --radius-2xl: 1.125rem;
+  --radius-3xl: 1.5rem;
 
-  --shadow-soft: 0 1px 2px rgb(20 18 16 / 0.04);
-  --shadow-lift: 0 18px 48px -28px rgb(20 18 16 / 0.45);
+  --shadow-soft: 0 1px 2px rgb(20 18 16 / 0.05), 0 6px 20px -10px rgb(20 18 16 / 0.14);
+  --shadow-lift: 0 2px 6px rgb(20 18 16 / 0.06), 0 22px 44px -18px rgb(20 18 16 / 0.32);
 
   --animate-fade-up: fade-up 1s cubic-bezier(0.16, 1, 0.3, 1) both;
   --animate-marquee: marquee 48s linear infinite;
@@ -119,7 +112,7 @@
   h1, h2, h3, h4 { @apply font-display tracking-tight text-balance; }
   h5, h6 { @apply font-sans; }
   ::selection { background: color-mix(in oklab, var(--color-accent) 22%, white); }
-  :focus-visible { @apply outline-2 outline-offset-[3px] outline-accent rounded-none; }
+  :focus-visible { @apply outline-2 outline-offset-[3px] outline-accent; }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
@@ -140,18 +133,18 @@
 
   /* Kept for compatibility with pages not individually restyled — now a hairline-ruled panel
      rather than a rounded, shadowed card. */
-  .card { @apply rounded-none border border-border bg-surface; }
+  .card { @apply rounded-2xl border border-border bg-surface shadow-soft; }
 
   /* Buttons. Square, uppercase, wide-tracked — a printed button, not an app button. Tailwind v4's
      @apply can't reference another @apply-defined class, so the shared base repeats per variant. */
   .btn-primary, .btn-secondary, .btn-ghost, .btn-whatsapp {
-    @apply inline-flex items-center justify-center gap-2 rounded-none px-6 py-3.5 text-label font-semibold uppercase transition-colors duration-200 focus-visible:outline-2 disabled:opacity-55 disabled:pointer-events-none;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition-all duration-200 focus-visible:outline-2 disabled:opacity-55 disabled:pointer-events-none;
   }
-  .btn-primary { @apply bg-primary text-primary-fg hover:bg-primary-hover; }
-  .btn-secondary { @apply border border-ink/25 bg-transparent text-ink hover:border-ink hover:bg-ink hover:text-bg; }
+  .btn-primary { @apply bg-primary text-primary-fg shadow-soft hover:-translate-y-px hover:bg-primary-hover; }
+  .btn-secondary { @apply border border-ink/20 bg-surface text-ink hover:border-ink/50; }
   .btn-ghost { @apply text-ink underline decoration-ink/25 underline-offset-[6px] hover:decoration-ink; }
-  .btn-whatsapp { @apply bg-whatsapp-ink text-white hover:brightness-110; }
-  .btn-lg { @apply px-8 py-4.5; }
+  .btn-whatsapp { @apply bg-whatsapp-ink text-white hover:-translate-y-px hover:brightness-110; }
+  .btn-lg { @apply px-7 py-4 text-base; }
 
   /* An arrow link: the quiet default CTA of an editorial layout. */
   .arrow-link {

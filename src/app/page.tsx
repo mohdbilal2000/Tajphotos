@@ -3,12 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { site } from "@/config/site";
-import { tours, destinations, latestGuides, reviews, featuredTours, tourCategories, stays, services, fleet, staysDisclosure } from "@/content";
+import { tours, destinations, latestGuides, reviews, featuredTours, tourCategories, toursByCategory, stays, services, fleet, staysDisclosure } from "@/content";
 import { getImage } from "@/content/images";
 import { Hero } from "@/components/sections/Hero";
 import { FounderNote } from "@/components/sections/FounderNote";
 import { Section, SectionHeader } from "@/components/ui/Section";
-import { JourneyIndex } from "@/components/tours/JourneyIndex";
+import { TourCard } from "@/components/tours/TourCard";
+import { TourTabs } from "@/components/tours/TourTabs";
 import { DestinationCard } from "@/components/destinations/DestinationCard";
 import { ArticleCard } from "@/components/guides/ArticleCard";
 import { StayCard } from "@/components/stays/StayCard";
@@ -58,6 +59,14 @@ const homeFaqs = [
   { q: "Is it safe to book directly instead of through a marketplace?", a: "We're a registered Agra-based operator with licensed guides and named team members, not an anonymous listing. You can reach us on WhatsApp before paying anything, and we take a modest deposit with the balance due on arrival." },
 ];
 
+function CardGrid({ list }: { list: typeof tours }) {
+  return (
+    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {list.map((t) => <TourCard key={t.slug} tour={t} />)}
+    </div>
+  );
+}
+
 export default function Home() {
   const hero = getImage("taj-mahal-sunrise-1");
   // A curated six that tells the whole story — a same-day taster, the photography pair, the two
@@ -97,7 +106,7 @@ export default function Home() {
           Most Golden Triangle pages look identical because most of them are resold. This one is
           not — we drive it, guide it and photograph it ourselves, out of one small office in Agra.
         </p>
-        <div className="mt-14 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-3">
+        <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-border bg-border shadow-soft md:grid-cols-3">
           {creed.map((c, i) => (
             <div key={c.head} className="bg-bg px-6 py-8 sm:px-8 sm:py-10">
               <p aria-hidden className="text-label font-semibold uppercase text-accent">{String(i + 1).padStart(2, "0")}</p>
@@ -109,14 +118,24 @@ export default function Home() {
       </Section>
 
       {/* ------------------------------ Journeys ----------------------------- */}
-      <Section tone="surface">
+      <Section tone="surface" id="journeys">
         <SectionHeader
           eyebrow="The journeys"
-          title="Six ways to do this properly"
+          title="Pick a trip, see the real price"
           text="Every one is private, guided and priced per person with the drives and monument tickets written into the plan — no per-pax surprise halfway down the page."
           aside={<Link href="/tours" className="arrow-link">All {tours.length} tours <ArrowRight className="size-4" aria-hidden /></Link>}
         />
-        <JourneyIndex tours={journeys} className="mt-14" />
+        <div className="mt-12">
+          <TourTabs
+            tabs={[
+              { key: "popular", label: "Most booked", count: journeys.length, content: <CardGrid list={journeys} /> },
+              ...tourCategories
+                .map((c) => ({ c, list: toursByCategory(c.key) }))
+                .filter(({ list }) => list.length > 0)
+                .map(({ c, list }) => ({ key: c.key, label: c.label, count: list.length, content: <CardGrid list={list} /> })),
+            ]}
+          />
+        </div>
       </Section>
 
       {/* ----------------------------- The letter ---------------------------- */}
@@ -150,7 +169,7 @@ export default function Home() {
             {(["taj-mahal-couple-1", "taj-mahal-detail-1", "taj-mahal-sunrise-2"] as const).map((id, i) => {
               const img = getImage(id);
               return (
-                <div key={id} className={`figure ${i === 0 ? "row-span-2 h-full min-h-[22rem]" : "aspect-[4/3]"}`}>
+                <div key={id} className={`figure rounded-2xl ${i === 0 ? "row-span-2 h-full min-h-[22rem]" : "aspect-[4/3]"}`}>
                   <Image src={img.src} alt={img.alt} placeholder="blur" sizes="(min-width: 1024px) 28vw, 45vw" />
                 </div>
               );
@@ -167,7 +186,7 @@ export default function Home() {
           text="A former royal residence on an island, a fort restored over years, or simply a very good room ten minutes from the gate. We hold it on your dates and confirm it before you pay anything."
           aside={<Link href="/stays" className="arrow-link">All {stays.length} hotels <ArrowRight className="size-4" aria-hidden /></Link>}
         />
-        <div className="mt-14 grid gap-x-10 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {featuredStays.map((s) => <StayCard key={s.slug} stay={s} />)}
         </div>
         <p className="mt-12 max-w-3xl border-t border-border pt-5 text-xs leading-relaxed text-muted">{staysDisclosure}</p>
@@ -212,7 +231,7 @@ export default function Home() {
       {/* ---------------------------- How it works --------------------------- */}
       <Section>
         <SectionHeader eyebrow="How it works" title="Three steps, no account, no card up front" />
-        <ol className="mt-14 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-3">
+        <ol className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-border bg-border shadow-soft sm:grid-cols-3">
           {steps.map((s, i) => (
             <li key={s.t} className="bg-bg px-6 py-8 sm:px-8 sm:py-10">
               <span aria-hidden className="font-display text-4xl font-normal leading-none text-accent">{String(i + 1).padStart(2, "0")}</span>
@@ -232,7 +251,7 @@ export default function Home() {
           title="The practical reading"
           aside={<Link href="/guides" className="arrow-link">All guides <ArrowRight className="size-4" aria-hidden /></Link>}
         />
-        <div className="mt-14 grid gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {latestGuides(3).map((g) => <ArticleCard key={g.slug} guide={g} />)}
         </div>
       </Section>

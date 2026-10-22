@@ -9,7 +9,7 @@ import type { Review } from "@/content/types";
  */
 export function TestimonialCard({ review, className }: { review: Review; className?: string }) {
   return (
-    <figure className={cn("flex h-full flex-col border-t border-border pt-6", className)}>
+    <figure className={cn("flex h-full flex-col rounded-2xl border border-border bg-surface p-6 shadow-soft", className)}>
       <blockquote className="flex-1 font-display text-xl leading-snug text-ink">
         <p>&ldquo;{review.text}&rdquo;</p>
       </blockquote>

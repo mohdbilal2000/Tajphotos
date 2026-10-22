@@ -84,7 +84,7 @@ export default function ServicesPage() {
               It is a shorter conversation if you know first.
             </p>
           </div>
-          <div className="figure aspect-[4/3] w-full">
+          <div className="figure aspect-[4/3] w-full rounded-3xl shadow-lift">
             <Image src={hero.src} alt={hero.alt} placeholder="blur" preload fetchPriority="high" sizes="(min-width: 1024px) 44vw, 92vw" />
           </div>
         </div>
@@ -93,7 +93,7 @@ export default function ServicesPage() {
       {/* Availability key — four states, explained once. */}
       <Section className="pb-0">
         <SectionHeader eyebrow="The key" title="Four answers, used honestly" />
-        <dl className="mt-12 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+        <dl className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
           {[
             { k: "daily" as const, d: "No date restriction at all. Cars, arrivals, and a person to call." },
             { k: "except-friday" as const, d: `Anything inside the Taj Mahal. It is closed to visitors every ${tajMahal.closedDay} and no operator can change that.` },
