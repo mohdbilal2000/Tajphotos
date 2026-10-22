@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, CalendarCheck, Wallet, BadgeCheck, MessageCircle, MapPin } from "lucide-react";
 import { site } from "@/config/site";
 import { tours, destinations, latestGuides, reviews, featuredTours, tourCategories, toursByCategory, stays, services, fleet, staysDisclosure } from "@/content";
 import { getImage } from "@/content/images";
 import { Hero } from "@/components/sections/Hero";
 import { FounderNote } from "@/components/sections/FounderNote";
+import { ExploreRails, type RailItem } from "@/components/sections/ExploreRails";
+import { GoldenTriangleMap, type MapCity } from "@/components/sections/GoldenTriangleMap";
+import { transport } from "@/content/facts";
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { TourCard } from "@/components/tours/TourCard";
 import { TourTabs } from "@/components/tours/TourTabs";
@@ -29,20 +32,15 @@ export const metadata: Metadata = buildMetadata({
   path: "/",
 });
 
-/** The three-column standfirst under the hero: what we do, what we refuse to do, what it costs to ask. */
-const creed = [
-  {
-    head: "We live here",
-    body: "Tajganj, a ten-minute walk from the East Gate. Our guides are Ministry of Tourism-licensed, not drivers doubling as guides, and the photographer was the first person this company employed.",
-  },
-  {
-    head: "No commission stops",
-    body: "No marble emporium, no carpet showroom, no gem workshop — not once, not as a \"quick stop\". We are not paid by them, so there is no reason to take you there and one very good reason not to.",
-  },
-  {
-    head: "Ask for nothing",
-    body: `Send a message and you get a real itinerary and an honest price from a person, usually within fifteen minutes during ${site.contact.hoursNote.match(/\((.*)\)/)?.[1] ?? "our hours"}. No account, no card, no obligation.`,
-  },
+/**
+ * Four promises, each one already made elsewhere on the site (terms, booking flow, contact hours) —
+ * restated here as icon cards, the reference site's pattern. Nothing new is promised.
+ */
+const promises = [
+  { icon: CalendarCheck, title: "Free cancellation", body: "Cancel free up to 48 hours before most tours. The exact window is on every tour card." },
+  { icon: Wallet, title: "Small deposit, balance on arrival", body: "A deposit holds your car, guide and hotels. The rest is paid in Agra, in cash, card or transfer." },
+  { icon: BadgeCheck, title: "Licensed local guides", body: "Ministry of Tourism-licensed guides, not drivers doubling as guides. No commission stops, ever." },
+  { icon: MessageCircle, title: "A reply in about 15 minutes", body: `A real person on WhatsApp, ${site.contact.hoursNote.match(/\((.*)\)/)?.[1] ?? "7 AM – 11 PM IST"}. No ticket numbers.` },
 ];
 
 const steps = [
@@ -84,6 +82,38 @@ export default function Home() {
   const curated = signature.map((slug) => tours.find((t) => t.slug === slug)).filter((t): t is NonNullable<typeof t> => Boolean(t));
   const journeys = (featuredTours().length ? featuredTours() : curated.length ? curated : tours).slice(0, 6);
   const featuredStays = [stays[0], stays[5], stays[7]].filter(Boolean);
+  const railCategories: RailItem[] = tourCategories
+    .map((c) => ({ c, t: toursByCategory(c.key)[0] }))
+    .filter(({ t }) => Boolean(t))
+    .map(({ c, t }) => {
+      const img = getImage(t.heroImage);
+      return { href: `/tours#${c.key}`, title: c.label, caption: c.blurb, image: img.src, alt: img.alt };
+    });
+  const railDestinations: RailItem[] = destinations.flatMap((d) =>
+    [d.heroImage, ...d.gallery.slice(0, 1)].map((id) => {
+      const img = getImage(id);
+      return { href: `/destinations/${d.slug}`, title: d.name, caption: img.alt, image: img.src, alt: img.alt };
+    }),
+  );
+  const cityCaption: Record<string, string> = { delhi: "The capital", agra: "Eternal romance", jaipur: "Royal heritage" };
+  const mapCities: MapCity[] = ["delhi", "agra", "jaipur"]
+    .map((slug) => destinations.find((d) => d.slug === slug))
+    .filter((d): d is NonNullable<typeof d> => Boolean(d))
+    .map((d) => {
+      const img = getImage(d.heroImage);
+      return {
+        slug: d.slug,
+        name: d.name,
+        caption: cityCaption[d.slug] ?? d.region,
+        tagline: d.tagline,
+        highlights: d.attractions.slice(0, 3).map((a) => a.name.replace(/\s*\(.*\)$/, "")),
+        image: img.src,
+        alt: img.alt,
+        lat: d.geo.latitude,
+        lng: d.geo.longitude,
+      };
+    });
+  const legs = `Delhi → Agra ${transport.delhiAgraCar.distanceKm} km · Agra → Jaipur ${transport.agraJaipur.distanceKm} km · Jaipur → Delhi ${transport.delhiJaipur.distanceKm} km`;
   const keyServices = services.filter((s) => ["taj-sunrise-entry", "taj-night-viewing", "private-car-driver", "licensed-guide", "hotel-booking"].includes(s.slug));
 
   return (
@@ -100,20 +130,47 @@ export default function Home() {
         primaryLabel="See the journeys"
       />
 
-      {/* ------------------------------- Creed ------------------------------- */}
+      {/* ------------------------------ Promises ----------------------------- */}
       <Section>
         <p className="max-w-4xl font-display text-display-3 font-normal text-ink">
           Most Golden Triangle pages look identical because most of them are resold. This one is
           not — we drive it, guide it and photograph it ourselves, out of one small office in Agra.
         </p>
-        <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-border bg-border shadow-soft md:grid-cols-3">
-          {creed.map((c, i) => (
-            <div key={c.head} className="bg-bg px-6 py-8 sm:px-8 sm:py-10">
-              <p aria-hidden className="text-label font-semibold uppercase text-accent">{String(i + 1).padStart(2, "0")}</p>
-              <h2 className="mt-5 font-display text-2xl font-normal text-ink">{c.head}</h2>
-              <p className="mt-3.5 text-sm leading-relaxed text-muted">{c.body}</p>
-            </div>
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {promises.map((p) => (
+            <article key={p.title} className="group rounded-[1.375rem] border border-border bg-surface p-6 shadow-soft transition-all duration-500 hover:-translate-y-1 hover:shadow-lift">
+              <span className="flex size-11 items-center justify-center rounded-full bg-primary/8 text-primary ring-1 ring-primary/15 transition group-hover:bg-primary group-hover:text-primary-fg">
+                <p.icon className="size-5" aria-hidden />
+              </span>
+              <h2 className="mt-5 font-sans text-base font-semibold text-ink">{p.title}</h2>
+              <p className="mt-2 text-sm leading-relaxed text-muted">{p.body}</p>
+            </article>
           ))}
+        </div>
+
+        <div className="mt-14 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="eyebrow">Where to</p>
+            <h2 className="mt-3 font-display text-3xl font-normal text-ink">Where would you like to go?</h2>
+          </div>
+          <Link href="/destinations" className="arrow-link">All destinations <ArrowRight className="size-4" aria-hidden /></Link>
+        </div>
+        <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {destinations.map((d) => {
+            const img = getImage(d.heroImage);
+            return (
+              <Link key={d.slug} href={`/destinations/${d.slug}` as "/destinations"} className="group flex min-w-0 items-center gap-3 rounded-full border border-border bg-surface p-1.5 pr-4 shadow-soft transition hover:-translate-y-0.5 hover:border-ink/25">
+                <span className="relative size-14 shrink-0 overflow-hidden rounded-full">
+                  <Image src={img.src} alt="" fill sizes="56px" className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="flex items-center gap-1 text-sm font-semibold text-ink"><MapPin className="size-3.5 text-accent" aria-hidden /> {d.name}</span>
+                  <span className="mt-0.5 block truncate text-xs text-muted">{d.tagline}</span>
+                </span>
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-bg text-ink transition group-hover:bg-primary group-hover:text-primary-fg"><ArrowUpRight className="size-4" aria-hidden /></span>
+              </Link>
+            );
+          })}
         </div>
       </Section>
 
@@ -135,6 +192,32 @@ export default function Home() {
                 .map(({ c, list }) => ({ key: c.key, label: c.label, count: list.length, content: <CardGrid list={list} /> })),
             ]}
           />
+        </div>
+      </Section>
+
+      {/* -------------------------- Places (rails) -------------------------- */}
+      <section id="places" className="overflow-hidden py-20 sm:py-24 lg:py-28">
+        <div className="container-site">
+          <SectionHeader
+            eyebrow="Explore"
+            title="Places that stay with you"
+            text="Every kind of trip we run, and every city we run it in."
+            aside={<Link href="/tours" className="arrow-link">All tours <ArrowRight className="size-4" aria-hidden /></Link>}
+          />
+        </div>
+        <ExploreRails top={railCategories} bottom={railDestinations} className="mt-12" />
+      </section>
+
+      {/* ------------------------- Golden Triangle map ------------------------ */}
+      <Section tone="surface" id="route">
+        <SectionHeader
+          eyebrow="The signature route"
+          title={<>Three cities. <em className="text-accent">One story.</em></>}
+          text="Delhi's capital, Agra's Taj Mahal, Jaipur's Pink City. Tap a city to see what we'd show you there."
+          align="center"
+        />
+        <div className="mt-12">
+          <GoldenTriangleMap cities={mapCities} legs={legs} />
         </div>
       </Section>
 

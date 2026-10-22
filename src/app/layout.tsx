@@ -8,6 +8,7 @@ import { ConsentBanner } from "@/components/ConsentBanner";
 import "./globals.css";
 import { site } from "@/config/site";
 import { Header } from "@/components/layout/Header";
+import { TopBar } from "@/components/layout/TopBar";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFloat } from "@/components/layout/WhatsAppFloat";
 import { CurrencyProvider } from "@/context/CurrencyContext";
@@ -91,6 +92,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <CurrencyProvider>
+          <TopBar />
           <Header />
           <main id="main" className="flex-1">{children}</main>
           <Footer />

@@ -1,102 +1,124 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Clock, Users, MapPin, Check, MessageCircle, Star } from "lucide-react";
+import { Clock, MapPin, Star, Sparkles, ArrowRight, ArrowUpRight, BadgeCheck, CalendarCheck, Car, Ticket, Camera, MessageCircle } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import type { Tour } from "@/content/types";
 import { getImage } from "@/content/images";
-import { tourCategories } from "@/content";
+import { destinations } from "@/content";
 import { Price } from "@/components/ui/Price";
 import { WhatsAppLink } from "@/components/WhatsAppLink";
 import { site } from "@/config/site";
 import { cn } from "@/lib/utils";
 
-/** "Free cancellation up to 48 hours before…" → "Free cancellation · 48h". Null if the policy isn't a free one. */
-function cancellationShort(text: string) {
-  if (!/free cancellation/i.test(text)) return null;
-  const h = text.match(/(\d+)\s*hours?/i)?.[1];
-  return h ? `Free cancellation · ${h}h before` : "Free cancellation";
+/**
+ * Up to three benefits, each derived from the tour's own data — never a blanket claim stamped on
+ * every card. A perk appears only if the tour's `inclusions` or `cancellation` text supports it, so
+ * a photoshoot (no car) and a car hire (no guide) show different, accurate lists.
+ */
+function perksFor(tour: Tour): { icon: LucideIcon; label: string }[] {
+  const inc = tour.inclusions.join(" ").toLowerCase();
+  const out: { icon: LucideIcon; label: string }[] = [];
+  if (/photographer/.test(inc)) out.push({ icon: Camera, label: "Professional photographer" });
+  if (/guide/.test(inc)) out.push({ icon: BadgeCheck, label: "Private guide included" });
+  if (/(car|chauffeur|vehicle)/.test(inc) && !/not included/.test(tour.transport.toLowerCase())) out.push({ icon: Car, label: "Private car & driver" });
+  if (/entry ticket/.test(inc) && !/not included|payable separately/.test(inc.match(/[^.]*entry ticket[^.]*/)?.[0] ?? "")) out.push({ icon: Ticket, label: "Monument tickets included" });
+  if (/free cancellation/i.test(tour.cancellation)) {
+    const h = tour.cancellation.match(/(\d+)\s*hours?/i)?.[1];
+    out.push({ icon: CalendarCheck, label: h ? `Free cancellation · ${h}h` : "Free cancellation" });
+  }
+  return out.slice(0, 3);
 }
 
 /**
- * Booking-site card: image on top with badges, then location, title, icon meta, a truthful perk line
- * and a price/CTA footer.
- *
- * The whole card is clickable through a stretched link on the title (`after:absolute inset-0`) rather
- * than by wrapping everything in <a>, because the WhatsApp button inside is a second link and links
- * can't nest. The WhatsApp button sits above the stretched area with `relative z-10`.
- *
- * What it deliberately doesn't copy from OTA cards: invented strike-through "was" prices and star
- * ratings. Stars render only when the tour carries a real `rating`; there's no discount field at all.
+ * Journey card — layout pattern taken from the reference site's best component, content entirely ours:
+ * image with an icon badge and a hover "View tour" pill → duration (+ rating only when real) →
+ * title → tagline → map-pin route → divider → derived benefits → "Starting from" price row with a
+ * round arrow. The whole card is one click target via a stretched title link; the WhatsApp button
+ * sits above it (`relative z-10`) because links cannot nest.
  */
 export function TourCard({ tour, className, preload }: { tour: Tour; className?: string; preload?: boolean }) {
   const img = getImage(tour.heroImage);
-  const category = tourCategories.find((c) => c.key === tour.category)?.label;
-  const perk = cancellationShort(tour.cancellation);
-  const route = tour.endCity !== tour.startCity ? `${tour.startCity} → ${tour.endCity}` : tour.startCity;
+  // Start city first (a Delhi day trip to Agra should read "Delhi · Agra", not just "Agra"), then the
+  // destinations in visiting order, de-duplicated.
+  const route = [...new Set([tour.startCity, ...tour.destinations.map((s) => destinations.find((d) => d.slug === s)?.name ?? s)])]
+    .filter((n) => n && !/anywhere/i.test(n))
+    .join(" · ");
+  const perks = perksFor(tour);
+  const name = tour.shortTitle ?? tour.title;
   return (
-    <article className={cn("group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift", className)}>
-      <div className="relative aspect-[4/3] overflow-hidden bg-surface-2">
+    <article className={cn("group relative flex flex-col overflow-hidden rounded-[1.375rem] border border-border/80 bg-surface shadow-soft transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1.5 hover:shadow-lift", className)}>
+      <div className="relative m-2 aspect-[4/3] overflow-hidden rounded-[1rem] bg-surface-2">
         <Image
           src={img.src}
           alt={img.alt}
           placeholder="blur"
           preload={preload}
           sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 88vw"
-          className="size-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
+          className="size-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
         />
-        <div className="absolute inset-x-0 top-0 flex items-start justify-between gap-2 p-3">
-          {tour.badges?.[0] ? (
-            <span className="rounded-full bg-white/95 px-2.5 py-1 text-[0.6875rem] font-semibold text-ink shadow-sm">{tour.badges[0]}</span>
-          ) : <span />}
-          {category && <span className="rounded-full bg-ink/70 px-2.5 py-1 text-[0.6875rem] font-medium text-white backdrop-blur-sm">{category}</span>}
-        </div>
-        <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-primary px-2.5 py-1 text-[0.6875rem] font-semibold text-primary-fg">
-          <Clock className="size-3" aria-hidden /> {tour.durationLabel}
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink/45 via-transparent to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-100" />
+        {tour.badges?.[0] && (
+          <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1.5 text-[0.6875rem] font-semibold text-ink shadow-sm backdrop-blur">
+            <Sparkles className="size-3 text-accent" aria-hidden /> {tour.badges[0]}
+          </span>
+        )}
+        <span aria-hidden className="absolute bottom-3 right-3 inline-flex translate-y-2 items-center gap-1.5 rounded-full bg-white/90 px-3.5 py-2 text-xs font-semibold text-ink opacity-0 backdrop-blur transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+          View tour <ArrowUpRight className="size-3.5" />
         </span>
       </div>
 
-      <div className="flex flex-1 flex-col p-5">
-        <p className="flex items-center gap-1.5 text-xs text-muted">
-          <MapPin className="size-3.5 text-accent" aria-hidden /> {route}
-        </p>
-        <h3 className="mt-2 line-clamp-2 font-sans text-[1.0625rem] font-semibold leading-snug tracking-tight text-ink">
+      <div className="flex flex-1 flex-col px-5 pb-5 pt-3">
+        <div className="flex items-center gap-4 text-xs text-muted">
+          <span className="inline-flex items-center gap-1.5"><Clock className="size-3.5" aria-hidden /> {tour.durationLabel}</span>
+          {tour.rating && (
+            <span className="inline-flex items-center gap-1">
+              <Star className="size-3.5 fill-highlight text-highlight" aria-hidden />
+              <span className="font-semibold text-ink">{tour.rating.value.toFixed(1)}</span> ({tour.rating.count})
+            </span>
+          )}
+        </div>
+
+        <h3 className="mt-2.5 font-display text-[1.375rem] font-normal leading-tight text-ink">
           <Link href={`/tours/${tour.slug}`} className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none">
-            {tour.shortTitle ?? tour.title}
+            {name}
           </Link>
         </h3>
+        <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted">{tour.tagline}</p>
 
-        {tour.rating && (
-          <p className="mt-2 flex items-center gap-1 text-xs text-muted">
-            <Star className="size-3.5 fill-highlight text-highlight" aria-hidden />
-            <span className="font-semibold text-ink">{tour.rating.value.toFixed(1)}</span> ({tour.rating.count})
+        {route && (
+          <p className="mt-3 flex items-center gap-1.5 text-xs font-medium text-ink/80">
+            <MapPin className="size-3.5 shrink-0 text-accent" aria-hidden /> <span className="truncate">{route}</span>
           </p>
         )}
 
-        <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted">{tour.tagline}</p>
+        {perks.length > 0 && (
+          <ul className="mt-4 space-y-2 border-t border-border pt-4 text-[0.8125rem] text-ink/85">
+            {perks.map((p) => (
+              <li key={p.label} className="flex items-center gap-2.5">
+                <p.icon className="size-4 shrink-0 text-primary" aria-hidden /> {p.label}
+              </li>
+            ))}
+          </ul>
+        )}
 
-        <ul className="mt-4 space-y-1.5 text-xs text-ink/85">
-          <li className="flex min-w-0 items-center gap-2"><Users className="size-3.5 shrink-0 text-muted" aria-hidden /> <span className="truncate">{tour.groupSize.replace(/\s-\s/, " · ")}</span></li>
-          {perk && <li className="flex items-center gap-2 text-success"><Check className="size-3.5" aria-hidden /> {perk}</li>}
-        </ul>
-
-        <div className="mt-auto pt-5" />
-        <div className="flex items-end justify-between gap-3 border-t border-border pt-4">
+        <div className="mt-auto flex items-end justify-between gap-3 pt-5">
           <div>
-            <p className="text-[0.6875rem] uppercase tracking-wider text-muted">From</p>
-            <p className="text-xl font-bold leading-tight text-ink">
+            <p className="text-[0.625rem] font-semibold uppercase tracking-[0.16em] text-muted">Starting from</p>
+            <p className="mt-0.5 text-[1.375rem] font-bold leading-none text-ink">
               <Price usd={tour.priceFrom.usd} /> <span className="text-xs font-normal text-muted">/ person</span>
             </p>
           </div>
           <div className="relative z-10 flex items-center gap-2">
             <WhatsAppLink
-              message={`Hi ${site.name}! I'm interested in "${tour.shortTitle ?? tour.title}". Is it available on my dates?`}
+              message={`Hi ${site.name}! I'm interested in "${name}". Is it available on my dates?`}
               event="whatsapp_click_card"
-              className="inline-flex size-10 items-center justify-center rounded-xl bg-whatsapp-ink text-white transition hover:brightness-110"
-              aria-label={`Ask about ${tour.shortTitle ?? tour.title} on WhatsApp`}
+              className="inline-flex size-11 items-center justify-center rounded-full border border-border bg-bg text-whatsapp-ink transition hover:border-whatsapp-ink hover:bg-whatsapp-ink hover:text-white"
+              aria-label={`Ask about ${name} on WhatsApp`}
             >
-              <MessageCircle className="size-4" aria-hidden />
+              <MessageCircle className="size-[1.125rem]" aria-hidden />
             </WhatsAppLink>
-            <span aria-hidden className="inline-flex h-10 items-center rounded-xl bg-primary px-4 text-sm font-semibold text-primary-fg transition group-hover:bg-primary-hover">
-              View
+            <span aria-hidden className="inline-flex size-11 items-center justify-center rounded-full bg-primary text-primary-fg transition-transform duration-300 group-hover:translate-x-0.5 group-hover:bg-primary-hover">
+              <ArrowRight className="size-[1.125rem]" />
             </span>
           </div>
         </div>
@@ -109,7 +131,7 @@ export function TourCardRow({ tours, className }: { tours: Tour[]; className?: s
   return (
     <div className={cn("-mx-5 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-4 scrollbar-none sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:px-0 lg:grid-cols-3", className)}>
       {tours.map((t) => (
-        <TourCard key={t.slug} tour={t} className="w-[80vw] shrink-0 snap-start sm:w-auto" />
+        <TourCard key={t.slug} tour={t} className="w-[82vw] shrink-0 snap-start sm:w-auto" />
       ))}
     </div>
   );
