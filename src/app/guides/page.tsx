@@ -16,6 +16,7 @@ export default function GuidesPage() {
   return (
     <>
       <PageHeader
+        image="taj-mahal-detail-1"
         crumbs={[{ name: "Guides", path: "/guides" }]}
         eyebrow="The practical reading"
         title="Travel guides"

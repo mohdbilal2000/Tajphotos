@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { destinations, getDestination, toursForDestination, relatedGuides as relatedGuidesFn } from "@/content";
+import { destinations, getDestination, toursForDestination, relatedGuides as relatedGuidesFn, guides as allGuides } from "@/content";
 import { getImage } from "@/content/images";
 import { Hero } from "@/components/sections/Hero";
 import { Section, SectionHeader } from "@/components/ui/Section";
@@ -11,7 +11,8 @@ import { TourCardRow } from "@/components/tours/TourCard";
 import { ArticleCard } from "@/components/guides/ArticleCard";
 import { CtaCard } from "@/components/sections/CtaCard";
 import { JsonLd } from "@/components/JsonLd";
-import { buildMetadata, destinationJsonLd, faqJsonLd, graph } from "@/lib/seo";
+import { buildMetadata, destinationJsonLd, faqJsonLd, graph, webPageJsonLd } from "@/lib/seo";
+import { absoluteUrl, formatDate } from "@/lib/utils";
 import { getImage as img } from "@/content/images";
 
 export function generateStaticParams() {
@@ -32,11 +33,13 @@ export default async function DestinationPage({ params }: { params: Promise<{ sl
 
   const heroImg = getImage(d.heroImage);
   const relatedTours = toursForDestination(d.slug);
-  const guides = relatedGuidesFn(d.relatedGuides ?? []);
+  const explicitGuides = relatedGuidesFn(d.relatedGuides ?? []);
+  // Fallback internal links: guides that point at a tour visiting this destination.
+  const guides = explicitGuides.length ? explicitGuides : allGuides.filter((g) => g.relatedTours.some((s) => relatedTours.some((t) => t.slug === s))).slice(0, 3);
 
   return (
     <>
-      <JsonLd data={graph(destinationJsonLd(d, heroImg.src.src), faqJsonLd(d.faqs))} />
+      <JsonLd data={graph(webPageJsonLd({ path: `/destinations/${d.slug}`, name: d.title, description: d.summary, dateModified: d.dateModified, mainEntityId: `${absoluteUrl(`/destinations/${d.slug}`)}#place` }), destinationJsonLd(d, heroImg.src.src), faqJsonLd(d.faqs))} />
 
       <Hero image={heroImg.src} alt={heroImg.alt} eyebrow={d.region} title={d.title} subtitle={d.tagline} primaryHref={`/tours#${d.slug}`} primaryLabel={`See ${d.name} tours`} />
 
@@ -46,7 +49,12 @@ export default async function DestinationPage({ params }: { params: Promise<{ sl
 
       <Section>
         <div className="grid gap-10 lg:grid-cols-[1fr_20rem]">
-          <RichText blocks={d.intro} />
+          <div className="min-w-0">
+            {/* Answer-first summary for answer engines / voice (see webPageJsonLd speakable). */}
+            <p className="speakable mb-6 max-w-2xl text-lg text-ink/85">{d.summary}</p>
+            <RichText blocks={d.intro} />
+            <p className="mt-6 text-xs text-muted">Updated <time dateTime={d.dateModified}>{formatDate(d.dateModified)}</time></p>
+          </div>
           <dl className="grid h-fit gap-3 rounded-2xl border border-border bg-surface p-6 sm:grid-cols-2 lg:grid-cols-1">
             {d.quickFacts.map((f) => (
               <div key={f.label}>

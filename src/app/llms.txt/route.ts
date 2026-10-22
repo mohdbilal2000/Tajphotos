@@ -28,13 +28,16 @@ export function GET() {
     ...guides.map((g) => `- [${g.title}](${absoluteUrl(`/guides/${g.slug}`)}): ${g.summary}`),
     "",
     "## Company",
-    `- [About](${absoluteUrl("/about")}): Who we are, licences, and how we work.`,
+    `- [About & team](${absoluteUrl("/about")}): Who we are, licences, how we work, and the named guides, photographers and planners who write our guides.`,
+    `- [Contact](${absoluteUrl("/contact")}): WhatsApp, phone and email.`,
     `- [Plan my trip](${absoluteUrl("/plan-my-trip")}): Custom itinerary enquiry form.`,
     `- [FAQ](${absoluteUrl("/faq")}): Answers on tickets, timings, safety, payments and cancellations.`,
     `- [Reviews](${absoluteUrl("/reviews")}): Verified traveller reviews.`,
     "",
     "## Optional",
     `- [Full text version](${absoluteUrl("/llms-full.txt")}): Every page's full content in one file.`,
+    `- [Tours as JSON](${absoluteUrl("/tours.json")}): Structured tour data (price, duration, destinations).`,
+    `- [RSS feed](${absoluteUrl("/feed.xml")}): New and updated travel guides.`,
     `- [Sitemap](${absoluteUrl("/sitemap.xml")})`,
   ];
   return new Response(lines.join("\n"), { headers: { "content-type": "text/plain; charset=utf-8", "cache-control": "public, max-age=3600, s-maxage=86400" } });

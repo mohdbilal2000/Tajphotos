@@ -27,6 +27,7 @@ export default function PlanMyTripPage() {
   return (
     <>
       <PageHeader
+        image="india-private-car-1"
         crumbs={[{ name: "Plan my trip", path: "/plan-my-trip" }]}
         eyebrow="Enquire"
         title="Tell us about your trip"

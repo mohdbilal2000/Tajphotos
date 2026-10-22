@@ -31,12 +31,13 @@ export default async function ToursPage({ searchParams }: PageProps<"/tours">) {
   return (
     <>
       <PageHeader
+        image="taj-mahal-wide-1"
         crumbs={[{ name: "Tours", path: "/tours" }]}
         eyebrow="The journeys"
         title="Every way we do this"
         text={`${tours.length} private, guided tours across Agra, Delhi, Jaipur and Rajasthan — each one priced per person with the drives, closures and monument tickets written in.`}
       >
-        <form action="/tours" className="mt-8 flex max-w-md items-center gap-2 border border-border bg-bg pl-4 py-1.5 pr-1.5 focus-within:border-ink/40">
+        <form action="/tours" className="mt-8 flex max-w-md items-center gap-2 rounded-full border border-border bg-bg pl-4 text-ink py-1.5 pr-1.5 focus-within:border-ink/40">
           <Search className="size-4 shrink-0 text-muted" aria-hidden />
           <label htmlFor="tour-search" className="sr-only">Search tours</label>
           <input

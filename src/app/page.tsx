@@ -8,7 +8,7 @@ import { getImage } from "@/content/images";
 import { Hero } from "@/components/sections/Hero";
 import { FounderNote } from "@/components/sections/FounderNote";
 import { ExploreRails, type RailItem } from "@/components/sections/ExploreRails";
-import { GoldenTriangleMap, type MapCity } from "@/components/sections/GoldenTriangleMap";
+import { IndiaAtlas } from "@/components/sections/IndiaAtlas";
 import { transport, tajMahal } from "@/content/facts";
 import { JourneyStory, type Chapter } from "@/components/sections/JourneyStory";
 import { TripFinder, type FinderTour } from "@/components/sections/TripFinder";
@@ -112,24 +112,6 @@ export default function Home() {
       .slice(0, 2)
       .map((img) => ({ href: `/destinations/${d.slug}`, title: d.name, caption: d.region, image: img.src, alt: img.alt })),
   );
-  const cityCaption: Record<string, string> = { delhi: "The capital", agra: "Eternal romance", jaipur: "Royal heritage" };
-  const mapCities: MapCity[] = ["delhi", "agra", "jaipur"]
-    .map((slug) => destinations.find((d) => d.slug === slug))
-    .filter((d): d is NonNullable<typeof d> => Boolean(d))
-    .map((d) => {
-      const img = getImage(d.heroImage);
-      return {
-        slug: d.slug,
-        name: d.name,
-        caption: cityCaption[d.slug] ?? d.region,
-        tagline: d.tagline,
-        highlights: d.attractions.slice(0, 3).map((a) => a.name.replace(/\s*\(.*\)$/, "")),
-        image: img.src,
-        alt: img.alt,
-        lat: d.geo.latitude,
-        lng: d.geo.longitude,
-      };
-    });
   // The scroll story: one day at the Taj, then onward through the triangle. Every fact is pulled
   // from facts.ts / content so it can't drift from the rest of the site; every chapter links to a
   // city, a guide and a tour so the story doubles as navigation.
@@ -199,7 +181,6 @@ export default function Home() {
       interests, image: img.src, alt: img.alt, udaipur: t.destinations.includes("udaipur"),
     };
   });
-  const legs = `Delhi → Agra ${transport.delhiAgraCar.distanceKm} km · Agra → Jaipur ${transport.agraJaipur.distanceKm} km · Jaipur → Delhi ${transport.delhiJaipur.distanceKm} km`;
   const keyServices = services.filter((s) => ["taj-sunrise-entry", "taj-night-viewing", "private-car-driver", "licensed-guide", "hotel-booking"].includes(s.slug));
 
   return (
@@ -356,13 +337,13 @@ export default function Home() {
       {/* ------------------------- Golden Triangle map ------------------------ */}
       <Section tone="surface" id="route">
         <SectionHeader
-          eyebrow="The signature route"
-          title={<>Three cities. <em className="text-accent">One story.</em></>}
-          text="Delhi's capital, Agra's Taj Mahal, Jaipur's Pink City. Tap a city to see what we'd show you there."
+          eyebrow="The atlas"
+          title={<>Seven places, <em className="text-accent">four ways to join them.</em></>}
+          text="Pick a route to see it drawn on the map with the real drive times from our itineraries. Tap any place for the tours and guides that go there."
           align="center"
         />
         <div className="mt-12">
-          <GoldenTriangleMap cities={mapCities} legs={legs} />
+          <IndiaAtlas />
         </div>
       </Section>
 

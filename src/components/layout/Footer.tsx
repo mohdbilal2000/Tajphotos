@@ -4,6 +4,7 @@ import { TrackedContactLink } from "@/components/TrackedContactLink";
 import { site } from "@/config/site";
 import { tours, destinations, latestGuides } from "@/content";
 import { cn } from "@/lib/utils";
+import { BookingBand } from "./BookingBand";
 
 const year = 2026;
 
@@ -17,7 +18,9 @@ const linkCls = "block py-1.5 text-sm text-muted transition-colors hover:text-in
 export function Footer() {
   const topTours = tours.slice(0, 7);
   return (
-    <footer className="mt-28 border-t border-border bg-bg">
+    <>
+    <section aria-label="Plan your trip" className="mt-28"><BookingBand /></section>
+    <footer className="mt-16 border-t border-border bg-bg">
       <div className="container-site grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr] lg:gap-10">
         <div>
           <p className="text-[0.95rem] font-semibold uppercase tracking-[0.34em] text-ink">Tajphotos</p>
@@ -102,5 +105,6 @@ export function Footer() {
         </div>
       </div>
     </footer>
+    </>
   );
 }

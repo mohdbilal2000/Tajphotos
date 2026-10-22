@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { guides, getGuide, relatedTours as relatedToursFn, relatedGuides as relatedGuidesFn, getTeamMember } from "@/content";
+import { guides, getGuide, relatedTours as relatedToursFn, relatedGuides as relatedGuidesFn, getTeamMember, guidesForCategory } from "@/content";
 import { getImage } from "@/content/images";
 import Image from "next/image";
 import { Section, SectionHeader } from "@/components/ui/Section";
@@ -10,7 +10,8 @@ import { TourCardRow } from "@/components/tours/TourCard";
 import { ArticleCard } from "@/components/guides/ArticleCard";
 import { CtaCard } from "@/components/sections/CtaCard";
 import { JsonLd } from "@/components/JsonLd";
-import { buildMetadata, articleJsonLd, faqJsonLd, graph } from "@/lib/seo";
+import Link from "next/link";
+import { buildMetadata, articleJsonLd, faqJsonLd, graph, webPageJsonLd } from "@/lib/seo";
 import { absoluteUrl, blockWordCount, formatDate, readingTime } from "@/lib/utils";
 import { CalendarClock, RefreshCcw } from "lucide-react";
 
@@ -35,13 +36,16 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
   const author = getTeamMember(g.author);
   const words = blockWordCount(g.body);
   const related = relatedToursFn(g.relatedTours);
-  const relatedArticles = relatedGuidesFn(g.relatedGuides);
+  // Never leave a guide as an internal-linking dead end: fall back to guides in the same category.
+  const explicitRelated = relatedGuidesFn(g.relatedGuides);
+  const relatedArticles = explicitRelated.length ? explicitRelated : guidesForCategory(g.category).filter((x) => x.slug !== g.slug).slice(0, 3);
 
   return (
     <>
       <JsonLd
         data={graph(
-          articleJsonLd(g, { image: heroImg.src.src, author: { name: author.name, url: absoluteUrl(`/about#${author.slug}`), jobTitle: author.role } }),
+          webPageJsonLd({ path: `/guides/${g.slug}`, name: g.title, description: g.summary, datePublished: g.datePublished, dateModified: g.dateModified, mainEntityId: `${absoluteUrl(`/guides/${g.slug}`)}#article` }),
+          articleJsonLd(g, { image: heroImg.src.src, author, wordCount: words }),
           faqJsonLd(g.faqs),
         )}
       />
@@ -53,8 +57,8 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
           <Breadcrumbs items={[{ name: "Guides", path: "/guides" }, { name: g.title, path: `/guides/${g.slug}` }]} light />
           <h1 className="mt-3 max-w-3xl text-shadow-hero text-3xl font-semibold sm:text-5xl">{g.title}</h1>
           <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-white/85">
-            <span>By {author.name}, {author.role}</span>
-            <span className="inline-flex items-center gap-1.5"><RefreshCcw className="size-3.5" aria-hidden /> Updated {formatDate(g.dateModified)}</span>
+            <span>By <Link href={`/about#${author.slug}`} rel="author" className="underline-offset-4 hover:underline">{author.name}</Link>, {author.role}</span>
+            <span className="inline-flex items-center gap-1.5"><RefreshCcw className="size-3.5" aria-hidden /> Updated <time dateTime={g.dateModified}>{formatDate(g.dateModified)}</time></span>
             <span className="inline-flex items-center gap-1.5"><CalendarClock className="size-3.5" aria-hidden /> {readingTime(words)} min read</span>
           </div>
         </div>
@@ -64,7 +68,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
         <article className="min-w-0 max-w-[720px]">
           <div className="rounded-2xl border border-accent/30 bg-accent/5 p-5">
             <p className="text-xs font-semibold uppercase tracking-wide text-accent">Key takeaways</p>
-            <ul className="mt-2.5 space-y-1.5 text-sm text-ink/90">
+            <ul className="speakable mt-2.5 space-y-1.5 text-sm text-ink/90">
               {g.keyTakeaways.map((k, i) => <li key={i}>• {k}</li>)}
             </ul>
           </div>
@@ -89,14 +93,14 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
         <aside className="hidden lg:block">
           <div className="sticky top-24 space-y-6">
             <div className="rounded-2xl border border-border bg-surface p-5">
-              <p className="text-sm font-semibold text-ink">{author.name}</p>
+              <p className="text-sm font-semibold text-ink"><Link href={`/about#${author.slug}`} rel="author" className="hover:underline">{author.name}</Link></p>
               <p className="text-xs text-muted">{author.role} · {author.years} yrs experience</p>
             </div>
             {related.length > 0 && (
               <div className="rounded-2xl border border-border bg-surface p-5">
                 <p className="text-sm font-semibold text-ink">Related tour</p>
                 {related.slice(0, 1).map((t) => (
-                  <a key={t.slug} href={`/tours/${t.slug}`} className="mt-2 block text-sm font-medium text-primary hover:underline">{t.shortTitle ?? t.title} →</a>
+                  <Link key={t.slug} href={`/tours/${t.slug}`} className="mt-2 block text-sm font-medium text-primary hover:underline">{t.shortTitle ?? t.title} →</Link>
                 ))}
               </div>
             )}

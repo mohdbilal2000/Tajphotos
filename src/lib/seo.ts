@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { site, sameAs } from "@/config/site";
 import { absoluteUrl } from "@/lib/utils";
-import type { FAQ, Tour, Destination, Guide, Review } from "@/content/types";
+import type { FAQ, Tour, Destination, Guide, Review, TeamMember } from "@/content/types";
 
 /* ---------------------------------- Metadata --------------------------------- */
 
@@ -17,6 +17,9 @@ interface PageMeta {
   keywords?: string[];
 }
 
+const xProfile: string = site.social.x;
+const xHandle = xProfile ? `@${xProfile.replace(/\/+$/, "").split("/").pop()}` : "";
+
 /** Consistent metadata for every page: canonical, OG, Twitter, robots. */
 export function buildMetadata(m: PageMeta): Metadata {
   const url = absoluteUrl(m.path);
@@ -25,7 +28,9 @@ export function buildMetadata(m: PageMeta): Metadata {
     title: m.title,
     description: m.description,
     keywords: m.keywords,
-    alternates: { canonical: url },
+    // Page-level `alternates` replaces the layout's, so the RSS discovery link and the (single-language)
+    // hreflang pair are repeated here rather than relying on inheritance.
+    alternates: { canonical: url, languages: { en: url, "x-default": url }, types: { "application/rss+xml": absoluteUrl("/feed.xml") } },
     openGraph: {
       type: m.type ?? "website",
       url,
@@ -36,7 +41,7 @@ export function buildMetadata(m: PageMeta): Metadata {
       images,
       ...(m.type === "article" ? { publishedTime: m.publishedTime, modifiedTime: m.modifiedTime } : {}),
     },
-    twitter: { card: "summary_large_image", title: m.title, description: m.description, images: images?.map((i) => i.url) },
+    twitter: { card: "summary_large_image", ...(xHandle ? { site: xHandle, creator: xHandle } : {}), title: m.title, description: m.description, images: images?.map((i) => i.url) },
     robots: m.noIndex
       ? { index: false, follow: false }
       : { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } },
@@ -81,6 +86,7 @@ export function organizationJsonLd(): JsonLd {
     paymentAccepted: "Cash, Credit Card, Bank Transfer, UPI, PayPal",
     knowsLanguage: ["en", "hi"],
     sameAs,
+    hasMap: `https://www.google.com/maps/search/?api=1&query=${site.geo.latitude},${site.geo.longitude}`,
     // Only emit AggregateRating once the figure is verified against a real third-party source
     // (Google's self-serving-reviews policy) — see site.stats.ratingVerified.
     ...(site.stats.ratingVerified
@@ -139,7 +145,9 @@ export function tourJsonLd(tour: Tour, opts: { image: string; destinationNames: 
         item: { "@type": "TouristAttraction", name: d.title, description: stripInline(d.summary) },
       })),
     },
-    subjectOf: opts.destinationNames.map((name) => ({ "@type": "Place", name })),
+    // TouristTrip has no "destination" property; the visited cities go on the itinerary's places and,
+    // for Product consumers, as `areaServed`-style Place references via `about`.
+    about: opts.destinationNames.map((name) => ({ "@type": "Place", name })),
     offers: {
       "@type": "Offer",
       url,
@@ -191,7 +199,7 @@ export function destinationJsonLd(d: Destination, image: string): JsonLd {
   };
 }
 
-export function articleJsonLd(g: Guide, opts: { image: string; author: { name: string; url: string; jobTitle: string } }): JsonLd {
+export function articleJsonLd(g: Guide, opts: { image: string; author: TeamMember; wordCount?: number; about?: string[] }): JsonLd {
   const url = absoluteUrl(`/guides/${g.slug}`);
   return {
     "@type": ["Article", "BlogPosting"],
@@ -203,12 +211,56 @@ export function articleJsonLd(g: Guide, opts: { image: string; author: { name: s
     image: absoluteUrl(opts.image),
     datePublished: g.datePublished,
     dateModified: g.dateModified,
-    author: { "@type": "Person", name: opts.author.name, url: opts.author.url, jobTitle: opts.author.jobTitle, worksFor: { "@id": ORG_ID } },
+    author: personJsonLd(opts.author),
+    isPartOf: { "@id": WEBSITE_ID },
+    ...(opts.wordCount ? { wordCount: opts.wordCount } : {}),
+    ...(opts.about?.length ? { about: opts.about.map((name) => ({ "@type": "Place", name })) } : {}),
     publisher: { "@id": ORG_ID },
     inLanguage: "en",
     keywords: g.keywords.join(", "),
     speakable: { "@type": "SpeakableSpecification", cssSelector: [".speakable"] },
     ...(g.sources?.length ? { citation: g.sources.map((s) => ({ "@type": "CreativeWork", name: s.title, url: s.url })) } : {}),
+  };
+}
+
+export const personId = (slug: string) => `${site.url}/about#${slug}`;
+
+/** A team member as a schema.org Person — the author entity every guide byline points at (E-E-A-T). */
+export function personJsonLd(m: TeamMember): JsonLd {
+  return {
+    "@type": "Person",
+    "@id": personId(m.slug),
+    name: m.name,
+    jobTitle: m.role,
+    description: stripInline(m.bio),
+    url: personId(m.slug),
+    knowsLanguage: m.languages,
+    worksFor: { "@id": ORG_ID },
+    ...(m.credentials?.length ? { hasCredential: m.credentials.map((c) => ({ "@type": "EducationalOccupationalCredential", name: c })) } : {}),
+    ...(m.sameAs?.length ? { sameAs: m.sameAs } : {}),
+  };
+}
+
+/**
+ * WebPage wrapper: ties a page to the WebSite, carries dateModified/breadcrumb and the speakable
+ * selectors (Google only reads `speakable` on WebPage/Article). `.speakable` marks the answer-first
+ * summary and the FAQ answers.
+ */
+export function webPageJsonLd(p: { path: string; name: string; description: string; type?: string; dateModified?: string; datePublished?: string; mainEntityId?: string }): JsonLd {
+  const url = absoluteUrl(p.path);
+  return {
+    "@type": p.type ?? "WebPage",
+    "@id": `${url}#webpage`,
+    url,
+    name: p.name,
+    description: p.description,
+    isPartOf: { "@id": WEBSITE_ID },
+    publisher: { "@id": ORG_ID },
+    inLanguage: "en",
+    ...(p.datePublished ? { datePublished: p.datePublished } : {}),
+    ...(p.dateModified ? { dateModified: p.dateModified } : {}),
+    ...(p.mainEntityId ? { mainEntity: { "@id": p.mainEntityId } } : {}),
+    speakable: { "@type": "SpeakableSpecification", cssSelector: [".speakable"] },
   };
 }
 

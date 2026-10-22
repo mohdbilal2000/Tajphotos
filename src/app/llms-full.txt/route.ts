@@ -1,5 +1,5 @@
 import { site } from "@/config/site";
-import { tours, destinations, guides } from "@/content";
+import { tours, destinations, guides, team, getTeamMember } from "@/content";
 import { absoluteUrl } from "@/lib/utils";
 import { stripInline } from "@/lib/seo";
 import type { Block, FAQ } from "@/content/types";
@@ -34,6 +34,7 @@ export function GET() {
     `Structured tour data (price, duration, group size, destinations) is also available as JSON at ${absoluteUrl("/tours.json")}.`,
     "",
   ];
+  out.push(`---`, `# About ${site.legalName}`, `URL: ${absoluteUrl("/about")}`, `Based in: ${site.address.addressLocality}, ${site.address.addressRegion}, India · Contact: ${site.contact.email}`, "", "## Team", ...team.map((m) => `- ${m.name}, ${m.role} (${m.years} yrs; ${m.languages.join(", ")}): ${stripInline(m.bio)}`), "");
   for (const t of tours) {
     out.push(`---`, `# ${t.title}`, `URL: ${absoluteUrl(`/tours/${t.slug}`)}`, `Duration: ${t.durationLabel} · Starts: ${t.startCity} · Ends: ${t.endCity}`, `Price: from USD ${t.priceFrom.usd} ${t.priceNote}`, "", t.summary, "", "## Highlights", ...t.highlights.map((h) => `- ${h}`), "", blocksToText(t.description), "", "## Itinerary", ...t.itinerary.map((d) => `Day ${d.day}: ${d.title} — ${stripInline(d.summary)}\n${d.details.map((x) => `  - ${stripInline(x)}`).join("\n")}`), "", "## Inclusions", ...t.inclusions.map((x) => `- ${x}`), "## Exclusions", ...t.exclusions.map((x) => `- ${x}`), "", "## FAQ", faqsToText(t.faqs), "");
   }
@@ -41,7 +42,7 @@ export function GET() {
     out.push(`---`, `# ${d.title}`, `URL: ${absoluteUrl(`/destinations/${d.slug}`)}`, "", d.summary, "", ...d.quickFacts.map((q) => `${q.label}: ${stripInline(q.value)}`), "", blocksToText(d.intro), "", "## Top attractions", ...d.attractions.map((a) => `- ${a.name}: ${stripInline(a.summary)}${a.timings ? ` Timings: ${a.timings}.` : ""}${a.tickets ? ` Tickets: ${a.tickets}.` : ""}`), "", "## Best time to visit", blocksToText(d.bestTime), "", "## Getting there", blocksToText(d.gettingThere), "", "## FAQ", faqsToText(d.faqs), "");
   }
   for (const g of guides) {
-    out.push(`---`, `# ${g.title}`, `URL: ${absoluteUrl(`/guides/${g.slug}`)}`, `Updated: ${g.dateModified}`, "", g.summary, "", "Key takeaways:", ...g.keyTakeaways.map((k) => `- ${stripInline(k)}`), "", blocksToText(g.body), "", "## FAQ", faqsToText(g.faqs), "");
+    out.push(`---`, `# ${g.title}`, `URL: ${absoluteUrl(`/guides/${g.slug}`)}`, `Author: ${getTeamMember(g.author).name} (${getTeamMember(g.author).role}) · Published: ${g.datePublished} · Updated: ${g.dateModified}`, "", g.summary, "", "Key takeaways:", ...g.keyTakeaways.map((k) => `- ${stripInline(k)}`), "", blocksToText(g.body), "", "## FAQ", faqsToText(g.faqs), "");
   }
   return new Response(out.join("\n"), { headers: { "content-type": "text/plain; charset=utf-8", "cache-control": "public, max-age=3600, s-maxage=86400" } });
 }

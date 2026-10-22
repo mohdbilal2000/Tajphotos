@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CalendarCheck, ShieldCheck } from "lucide-react";
-import { tours, getTour, destinations, relatedTours as relatedToursFn, relatedGuides as relatedGuidesFn, reviewsForTour } from "@/content";
+import { tours, getTour, destinations, relatedTours as relatedToursFn, relatedGuides as relatedGuidesFn, reviewsForTour, guides as allGuides } from "@/content";
 import { getImage } from "@/content/images";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { Badge } from "@/components/ui/Badge";
@@ -19,7 +19,8 @@ import { ArticleCard } from "@/components/guides/ArticleCard";
 import { TestimonialGrid } from "@/components/sections/Testimonial";
 import { CtaCard } from "@/components/sections/CtaCard";
 import { JsonLd } from "@/components/JsonLd";
-import { buildMetadata, tourJsonLd, faqJsonLd, graph } from "@/lib/seo";
+import { buildMetadata, tourJsonLd, faqJsonLd, graph, webPageJsonLd } from "@/lib/seo";
+import { absoluteUrl, formatDate } from "@/lib/utils";
 import { Stars } from "@/components/ui/Stars";
 
 export function generateStaticParams() {
@@ -51,12 +52,14 @@ export default async function TourPage({ params }: { params: Promise<{ slug: str
   const img = getImage(tour.heroImage);
   const destNames = tour.destinations.map((s) => destinations.find((d) => d.slug === s)?.name).filter((n): n is string => Boolean(n));
   const related = relatedToursFn(tour.relatedTours);
-  const guides = relatedGuidesFn(tour.relatedGuides ?? []);
+  const explicitGuides = relatedGuidesFn(tour.relatedGuides ?? []);
+  // Fallback internal links: any guide that recommends this tour.
+  const guides = explicitGuides.length ? explicitGuides : allGuides.filter((g) => g.relatedTours.includes(tour.slug)).slice(0, 4);
   const tourReviews = reviewsForTour(tour.slug);
 
   return (
     <>
-      <JsonLd data={graph(tourJsonLd(tour, { image: img.src.src, destinationNames: destNames, reviews: tourReviews }), faqJsonLd(tour.faqs))} />
+      <JsonLd data={graph(webPageJsonLd({ path: `/tours/${tour.slug}`, name: tour.title, description: tour.summary, datePublished: tour.datePublished, dateModified: tour.dateModified, mainEntityId: `${absoluteUrl(`/tours/${tour.slug}`)}#trip` }), tourJsonLd(tour, { image: img.src.src, destinationNames: destNames, reviews: tourReviews }), faqJsonLd(tour.faqs))} />
 
       <div className="border-b border-border bg-surface pb-6 pt-5">
         <div className="container-site">
@@ -71,6 +74,7 @@ export default async function TourPage({ params }: { params: Promise<{ slug: str
           </div>
           <h1 className="mt-2 max-w-3xl text-3xl font-semibold sm:text-4xl lg:text-[2.75rem]">{tour.title}</h1>
           <p className="mt-2 max-w-2xl text-lg text-muted">{tour.tagline}</p>
+          <p className="mt-2 text-xs text-muted">Updated <time dateTime={tour.dateModified}>{formatDate(tour.dateModified)}</time></p>
         </div>
       </div>
 
@@ -81,6 +85,8 @@ export default async function TourPage({ params }: { params: Promise<{ slug: str
       <div className="container-site grid gap-12 pb-16 lg:grid-cols-[1fr_22rem]">
         <div className="min-w-0 space-y-12">
           <div>
+            {/* Answer-first summary: the one paragraph answer engines and voice assistants should quote. */}
+            <p className="speakable mb-6 max-w-2xl text-base text-ink/85">{tour.summary}</p>
             <ChipRow tour={tour} />
             <ul className="mt-6 grid gap-2.5 sm:grid-cols-2">
               {tour.highlights.map((h) => (

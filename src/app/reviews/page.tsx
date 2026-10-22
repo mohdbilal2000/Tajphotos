@@ -20,6 +20,7 @@ export default function ReviewsPage() {
   return (
     <>
       <PageHeader
+        image="taj-mahal-sunrise-2"
         crumbs={[{ name: "Reviews", path: "/reviews" }]}
         eyebrow="Reviews"
         title="Traveller reviews"

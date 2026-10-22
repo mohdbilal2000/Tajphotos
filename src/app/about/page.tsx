@@ -5,9 +5,10 @@ import { TeamCard } from "@/components/TeamCard";
 import { TrustWall } from "@/components/sections/TrustWall";
 import { StatStrip } from "@/components/sections/StatStrip";
 import { CtaCard } from "@/components/sections/CtaCard";
-import { team } from "@/content";
+import { team, guides } from "@/content";
+import { JsonLd } from "@/components/JsonLd";
 import { site } from "@/config/site";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, graph, personJsonLd, webPageJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
   title: "About Us — A Small Agra Team of Guides & Photographers",
@@ -18,7 +19,9 @@ export const metadata: Metadata = buildMetadata({
 export default function AboutPage() {
   return (
     <>
+      <JsonLd data={graph(webPageJsonLd({ path: "/about", type: "AboutPage", name: `About ${site.name}`, description: site.description }), ...team.map(personJsonLd))} />
       <PageHeader
+        image="taj-mahal-mist-1"
         crumbs={[{ name: "About", path: "/about" }]}
         eyebrow="Who we are"
         title="A small Agra team of guides, drivers and photographers"
@@ -35,7 +38,7 @@ export default function AboutPage() {
       <Section tone="surface">
         <SectionHeader eyebrow="Our team" title="Who you'll travel with" />
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {team.map((m) => <div key={m.slug} id={m.slug}><TeamCard member={m} /></div>)}
+          {team.map((m) => <div key={m.slug} id={m.slug}><TeamCard member={m} articles={guides.filter((g) => g.author === m.slug).map((g) => ({ slug: g.slug, title: g.title }))} /></div>)}
         </div>
       </Section>
 

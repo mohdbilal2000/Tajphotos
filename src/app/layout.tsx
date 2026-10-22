@@ -59,7 +59,7 @@ export const metadata: Metadata = {
   publisher: site.legalName,
   category: "travel",
   formatDetection: { telephone: true, email: true, address: true },
-  alternates: { canonical: "/", types: { "application/rss+xml": `${site.url}/feed.xml` } },
+  alternates: { canonical: "/", languages: { en: "/", "x-default": "/" }, types: { "application/rss+xml": `${site.url}/feed.xml` } },
   openGraph: { type: "website", siteName: site.name, locale: site.locale, url: site.url },
   twitter: { card: "summary_large_image" },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } },
@@ -67,7 +67,12 @@ export const metadata: Metadata = {
     ...(site.verification.google ? { google: site.verification.google } : {}),
     ...(site.verification.bing ? { other: { "msvalidate.01": site.verification.bing } } : {}),
   },
-  other: { "geo.region": "IN-UP", "geo.placename": "Agra" },
+  other: {
+    "geo.region": "IN-UP",
+    "geo.placename": "Agra",
+    "geo.position": `${site.geo.latitude};${site.geo.longitude}`,
+    ICBM: `${site.geo.latitude}, ${site.geo.longitude}`,
+  },
 };
 
 export const viewport: Viewport = {
