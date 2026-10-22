@@ -1,0 +1,56 @@
+import type { Guide } from "@/content/types";
+
+const guide: Guide = {
+  slug: "golden-triangle-in-summer-and-monsoon",
+  title: "Golden Triangle in Summer and Monsoon: Worth It?",
+  summary: "Yes, with planning. April to June is very hot and July to September brings monsoon rain, but fewer crowds. How to adapt your Golden Triangle trip.",
+  category: "planning",
+  heroImage: "udaipur-monsoon-palace-1",
+  author: "imran-khan",
+  datePublished: "2026-10-22",
+  dateModified: "2026-10-22",
+  keyTakeaways: [
+    "Summer (April to June) often brings daytime highs above 40°C in Delhi, Agra and Jaipur; sightsee only in early morning and late evening.",
+    "The monsoon usually reaches north India in late June or early July and lasts into September, with heavy but intermittent rain and high humidity.",
+    "Both seasons bring far fewer tourists, so the Taj Mahal at sunrise can be strikingly quiet.",
+    "Ranthambore's core zones usually close for the monsoon, roughly July to September (check the Rajasthan Forest Department site).",
+    "Udaipur's lakes are at their fullest after a good monsoon, making late August to September a lovely time to visit.",
+  ],
+  body: [
+    { type: "p", text: "Yes, the Golden Triangle is worth doing in summer or monsoon if you plan around the weather. From April to June daytime highs often pass 40°C, so sightsee at dawn and dusk and rest at midday. From July to September the monsoon brings heavy showers, humidity and green landscapes. Both seasons have far fewer crowds, though Ranthambore's core zones usually close during the monsoon." },
+    { type: "h2", text: "What is the weather like by season?" },
+    { type: "table", caption: "Typical patterns only; weather varies year to year. Check the India Meteorological Department forecast before travel.", headers: ["Season", "Months", "What to expect", "Best for"], rows: [
+      ["Peak", "October to March", "Warm days, cool nights; fog on winter mornings", "Comfort; busiest crowds"],
+      ["Summer", "April to June", "Very hot and dry; highs often above 40°C", "Quiet monuments, tiger sightings"],
+      ["Monsoon", "Late June to September", "Heavy showers, humidity, green countryside", "Lush scenery, lakes in Udaipur"],
+    ] },
+    { type: "h2", text: "How do you handle the summer heat?" },
+    { type: "ul", items: [
+      "Enter the Taj Mahal at opening time, about 30 minutes before sunrise, and be out by 9 AM. See [sunrise vs sunset](/guides/taj-mahal-sunrise-vs-sunset).",
+      "Rest between about 11 AM and 4 PM at your hotel, ideally one with a pool.",
+      "Save drives between cities for the middle of the day, in an air-conditioned car.",
+      "Wear loose, light cotton that covers shoulders and knees; see our [what to wear guide](/guides/what-to-wear-taj-mahal).",
+      "Drink water constantly and carry oral rehydration salts.",
+    ] },
+    { type: "callout", variant: "warning", title: "Hot marble and sandstone", text: "At the Taj Mahal mausoleum platform and the mosque at Fatehpur Sikri, you walk in shoe covers or barefoot. The stone can be painfully hot by late morning in summer. Go early." },
+    { type: "h2", text: "What changes during the monsoon?" },
+    { type: "p", text: "Monsoon rain usually comes in heavy bursts rather than all day, and the Taj Mahal against dark monsoon clouds can be spectacular. Expect waterlogged streets, slower driving and occasional delays. Carry a compact umbrella and quick-dry clothes. Ranthambore's core zones usually close from about July to September, so swap it for Udaipur, where the lakes and Sajjangarh are at their greenest. See our [Udaipur in 3 days](/guides/udaipur-in-3-days) plan." },
+    { type: "h2", text: "Is it cheaper to travel in summer or monsoon?" },
+    { type: "p", text: "Hotel rates in Agra, Jaipur and Udaipur are often lower outside the October to March peak, and good hotels are easier to book at short notice. Monument ticket prices do not change by season. For what drives the cost of a private tour, see our [Golden Triangle tour cost guide](/guides/golden-triangle-tour-cost)." },
+    { type: "h2", text: "Which itinerary works best in the off-season?" },
+    { type: "p", text: "Keep it slow: one city per day of driving, early and late sightseeing, and a longer stay rather than a rush. The [7-day Golden Triangle with Udaipur](/tours/golden-triangle-tour-7-days-with-udaipur) is a good monsoon choice. In April to June, the [Ranthambore extension](/tours/golden-triangle-tour-6-days-with-ranthambore) is popular because tigers are often easier to see near water." },
+    { type: "cta", title: "Plan an off-season trip", text: "We can shape the timings around the heat or the rain.", tour: "golden-triangle-tour-4-days", label: "View the 4-day tour" },
+  ],
+  faqs: [
+    { q: "Is it too hot to visit the Taj Mahal in May or June?", a: "It is very hot, often above 40°C by afternoon, but still very doable if you go at opening time, about 30 minutes before sunrise, and leave by mid-morning. Carry water, wear light covering clothes and rest at midday. The upside is far smaller crowds than in winter." },
+    { q: "Can you visit the Golden Triangle in the monsoon?", a: "Yes. The monsoon, roughly late June to September, brings heavy showers in bursts rather than nonstop rain, plus humidity and green scenery. Monuments stay open. Expect some slow driving on wet roads and pack an umbrella. Ranthambore's core zones usually close in this season." },
+    { q: "When does the monsoon start in Delhi and Agra?", a: "The monsoon usually reaches Delhi and Agra in late June or early July and withdraws in the second half of September. Timing and rainfall vary every year. The India Meteorological Department publishes onset and forecasts, which are worth checking close to your departure." },
+    { q: "Is Ranthambore open in summer?", a: "Yes. Ranthambore is usually open until the end of June, and April to June is often considered good for tiger sightings, as animals gather near shrinking water sources. It is very hot, so morning safaris are more comfortable. Check dates on the Rajasthan Forest Department booking site." },
+    { q: "What should I pack for India in summer?", a: "Pack loose cotton or linen that covers shoulders and knees, a wide hat, sunglasses, high-SPF sunscreen, a refillable bottle and rehydration salts. Socks are useful for hot stone floors at temples and the Taj Mahal. In the monsoon, add a compact umbrella and quick-dry clothes." },
+  ],
+  relatedTours: ["golden-triangle-tour-7-days-with-udaipur", "golden-triangle-tour-6-days-with-ranthambore", "golden-triangle-tour-4-days"],
+  relatedGuides: ["best-time-to-visit-taj-mahal", "golden-triangle-itinerary", "udaipur-in-3-days", "ranthambore-safari-zones-booking"],
+  keywords: ["Golden Triangle in summer", "Golden Triangle in monsoon", "India in June", "Taj Mahal in summer", "Taj Mahal monsoon", "India heat travel tips", "off-season Golden Triangle", "Rajasthan monsoon"],
+  sources: [{ title: "India Meteorological Department", url: "https://mausam.imd.gov.in" }, { title: "Rajasthan Forest Department – safari booking", url: "https://fmdss.forest.rajasthan.gov.in" }],
+};
+export default guide;

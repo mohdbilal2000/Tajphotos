@@ -1,0 +1,55 @@
+import type { Guide } from "@/content/types";
+
+const guide: Guide = {
+  slug: "fatehpur-sikri-guide",
+  title: "Fatehpur Sikri Guide: Is It Worth Visiting?",
+  summary: "Fatehpur Sikri, Akbar's abandoned capital 40 km from Agra, is worth 2 to 3 hours. How to visit, what to see, ticket basics and how to avoid touts.",
+  category: "agra",
+  heroImage: "agra-fatehpur-sikri-1",
+  author: "imran-khan",
+  datePublished: "2026-10-22",
+  dateModified: "2026-10-22",
+  keyTakeaways: [
+    "Fatehpur Sikri is the red sandstone capital Akbar built from about 1571 and largely left within roughly 15 years; it is a UNESCO World Heritage Site.",
+    "It lies about 40 km west of Agra, around an hour by car, and fits naturally on the drive between Agra and Jaipur.",
+    "There are two parts: the ticketed royal palace complex and the Jama Masjid with the tomb of Sheikh Salim Chishti, which is a living mosque.",
+    "The foreigner ticket for the palace area is about ₹610 (as of 2025; check the ASI site). It is open daily, including Fridays.",
+    "Allow 2 to 3 hours, and expect persistent unofficial guides and vendors around the mosque.",
+  ],
+  body: [
+    { type: "p", text: "Yes, Fatehpur Sikri is worth visiting, especially if you are driving between Agra and Jaipur. Akbar built this red sandstone city from about 1571 as his new capital, then largely abandoned it within roughly 15 years, so its palaces, courts and mosque survive almost as he left them. It sits about 40 km from Agra, and 2 to 3 hours is enough to see both halves well." },
+    { type: "h2", text: "Why was Fatehpur Sikri built and abandoned?" },
+    { type: "p", text: "Akbar chose the ridge at Sikri to honour the Sufi saint Sheikh Salim Chishti, who is said to have foretold the birth of his son, the future Jahangir. The name Fatehpur, City of Victory, was added after his Gujarat campaign. The court moved away by the mid-1580s. A shortage of water is the usual explanation, though historians also point to Akbar's military needs in the north-west." },
+    { type: "h2", text: "What should you see at Fatehpur Sikri?" },
+    { type: "ul", items: [
+      "**Buland Darwaza**: the giant victory gate to the mosque courtyard, reached by a steep flight of steps.",
+      "**Jama Masjid**: one of the largest mosques of its time, still used for prayer.",
+      "**Tomb of Sheikh Salim Chishti**: a white marble shrine with fine stone screens, where visitors tie threads to make a wish.",
+      "**Diwan-i-Khas**: the hall with a single carved central pillar supporting a platform, the most photographed interior.",
+      "**Panch Mahal**: a five-storey open pavilion, each floor smaller than the one below.",
+      "**Jodha Bai's palace** and the **Anup Talao** pool in the royal complex.",
+    ] },
+    { type: "table", caption: "The two halves of Fatehpur Sikri. Fees approximate as of 2025; check the ASI site.", headers: ["Area", "Ticket", "Notes"], rows: [
+      ["Royal palace complex", "About ₹610 foreigner, ₹40 Indian", "Diwan-i-Khas, Panch Mahal, Jodha Bai's palace"],
+      ["Jama Masjid and Salim Chishti tomb", "No ASI ticket", "Active mosque; remove shoes, cover shoulders and legs"],
+    ] },
+    { type: "h2", text: "How do you avoid the touts at Fatehpur Sikri?" },
+    { type: "p", text: "Fatehpur Sikri is known for persistent unofficial guides, especially around the mosque entrance, and for vendors selling souvenirs and offerings for the shrine. Agree any guide fee in advance and ask to see an approved guide licence. Offerings are optional; a polite but firm no is enough. Travelling with a licensed guide arranged in advance avoids most of this. Our [travel scams guide](/guides/taj-mahal-scams-how-to-avoid) covers the common tricks." },
+    { type: "callout", variant: "tip", title: "Wear shoes you can slip off", text: "You walk barefoot across the mosque courtyard, and the sandstone gets very hot by midday from April to June. Visit early or late in summer, and carry socks." },
+    { type: "h2", text: "How do you get to Fatehpur Sikri?" },
+    { type: "p", text: "By car it is about an hour from Agra. It is a natural stop on the Agra to Jaipur drive, together with the Chand Baori stepwell at Abhaneri; expect that day to take 4 to 6 hours of driving plus sightseeing. Cars park below the site and a local shuttle or short walk takes you up. Our [Golden Triangle itinerary](/guides/golden-triangle-itinerary) shows where it fits." },
+    { type: "cta", title: "See Fatehpur Sikri on the way to Jaipur", text: "Our Golden Triangle tours can stop at Fatehpur Sikri between Agra and Jaipur.", tour: "golden-triangle-tour-4-days", label: "View the 4-day tour" },
+  ],
+  faqs: [
+    { q: "Is Fatehpur Sikri worth visiting?", a: "Yes. It is one of the best-preserved Mughal cities in India, with palaces, courtyards and a great mosque largely untouched since Akbar left in the 1580s. It is especially worth it if you are driving from Agra to Jaipur, since it sits close to the route and needs only 2 to 3 hours." },
+    { q: "How far is Fatehpur Sikri from Agra?", a: "About 40 km, which takes roughly an hour by car depending on traffic. There is no direct train for visitors from Delhi, so most people visit by road, either as a half-day trip from Agra or as a stop on the drive between Agra and Jaipur." },
+    { q: "Is Fatehpur Sikri open on Friday?", a: "Yes. The ASI-ticketed palace complex is open daily, including Fridays, which makes it a good Friday plan when the Taj Mahal is closed. The Jama Masjid is an active mosque, so expect it to be busy around Friday midday prayers and be respectful of worshippers." },
+    { q: "How much is the Fatehpur Sikri ticket?", a: "As of 2025, entry to the royal palace complex costs about ₹610 for foreign visitors and about ₹40 for Indian citizens. The Jama Masjid and Salim Chishti tomb have no ASI ticket. Fees change, so confirm on the ASI website or the official online ticketing site before visiting." },
+    { q: "What should I wear at Fatehpur Sikri?", a: "Cover shoulders and knees, since part of the visit is an active mosque and shrine. You will remove your shoes at the mosque, so wear slip-on footwear and carry socks for the hot sandstone. Women may wish to carry a scarf to cover their head inside the shrine." },
+  ],
+  relatedTours: ["golden-triangle-tour-4-days", "agra-city-tour", "golden-triangle-tour-6-days-with-ranthambore"],
+  relatedGuides: ["agra-in-one-day", "golden-triangle-itinerary", "is-taj-mahal-closed-on-friday", "delhi-to-agra"],
+  keywords: ["Fatehpur Sikri", "Fatehpur Sikri guide", "Is Fatehpur Sikri worth visiting", "Fatehpur Sikri ticket price", "Buland Darwaza", "Salim Chishti tomb", "Agra to Fatehpur Sikri distance", "Fatehpur Sikri touts"],
+  sources: [{ title: "UNESCO – Fatehpur Sikri", url: "https://whc.unesco.org/en/list/255" }, { title: "ASI Online Ticketing", url: "https://asi.payumoney.com" }],
+};
+export default guide;

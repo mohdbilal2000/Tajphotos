@@ -1,0 +1,63 @@
+import type { Guide } from "@/content/types";
+
+const guide: Guide = {
+  slug: "udaipur-in-3-days",
+  title: "Udaipur in 3 Days: Lakes, Palaces and a Day Trip",
+  summary: "Three days in Udaipur: City Palace and a Lake Pichola boat ride, old-city havelis and Sajjangarh at sunset, then Kumbhalgarh and Ranakpur.",
+  category: "udaipur",
+  heroImage: "udaipur-lake-pichola-1",
+  author: "imran-khan",
+  datePublished: "2026-10-22",
+  dateModified: "2026-10-22",
+  keyTakeaways: [
+    "Three days is ideal for Udaipur: two days in the city and one for a day trip to Kumbhalgarh Fort and the Ranakpur Jain temple.",
+    "The City Palace on Lake Pichola is the main sight; allow 2 to 3 hours.",
+    "Take a late-afternoon boat on Lake Pichola for the palace at golden hour.",
+    "Sajjangarh (the Monsoon Palace) is the classic sunset viewpoint above the city.",
+    "Kumbhalgarh and Ranakpur together make a long day of roughly 5 to 6 hours of driving; Ranakpur has a dress code and limited hours for non-Jain visitors.",
+  ],
+  body: [
+    { type: "p", text: "Three days in Udaipur gives you two relaxed days in the City of Lakes and one day trip. Spend day one at the City Palace and on a sunset boat on Lake Pichola, day two in the old city, Saheliyon ki Bari and Sajjangarh for sunset, and day three driving to Kumbhalgarh Fort and the marble Ranakpur Jain temple." },
+    { type: "h2", text: "What should you do on day 1 in Udaipur?" },
+    { type: "ol", items: [
+      "**Morning, City Palace**: the largest palace complex in Rajasthan, built up over several centuries by the Mewar rulers. Allow 2 to 3 hours for the courtyards, Mor Chowk peacock mosaics and the museum.",
+      "**Lunch** by the lake, near Lal Ghat or Gangaur Ghat.",
+      "**Jagdish Temple**: a 17th-century temple just above the palace, still in daily worship.",
+      "**Late afternoon, Lake Pichola boat ride**: boats leave from the City Palace jetty and usually stop at Jag Mandir island. Go in the last hours before sunset.",
+      "**Evening**: dinner on a rooftop with a view of the Lake Palace.",
+    ] },
+    { type: "h2", text: "What should you do on day 2 in Udaipur?" },
+    { type: "ol", items: [
+      "**Morning walk along the ghats**: Gangaur Ghat and the old city lanes are quiet before 9 AM.",
+      "**Saheliyon ki Bari**: the Garden of the Maidens, with fountains and lotus pools.",
+      "**Fateh Sagar Lake**: a calmer lake north of Pichola, good for a short stroll.",
+      "**Bagore ki Haveli**: an 18th-century mansion on Gangaur Ghat; its evening folk dance show is popular, so check the start time and arrive early.",
+      "**Sunset at Sajjangarh (Monsoon Palace)**: a hilltop palace with views over the lakes and Aravalli hills. It sits inside a wildlife sanctuary with a separate entry fee.",
+    ] },
+    { type: "h2", text: "What is the best day trip from Udaipur?" },
+    { type: "p", text: "Kumbhalgarh Fort and the Ranakpur Jain temple make the best combined day trip. Kumbhalgarh, about two hours away, has walls said to run for more than 30 km, among the longest in the world, and is part of the UNESCO-listed Hill Forts of Rajasthan. Ranakpur is a 15th-century white marble temple famous for its many intricately carved pillars, no two said to be alike." },
+    { type: "callout", variant: "info", title: "Ranakpur rules", text: "Ranakpur is an active Jain temple. Non-Jain visitors are usually admitted only in the afternoon, and leather items, shorts and sleeveless tops are not allowed. Check current hours locally before you set off." },
+    { type: "table", caption: "Three-day Udaipur plan at a glance.", headers: ["Day", "Main sights", "Evening"], rows: [
+      ["1", "City Palace, Jagdish Temple", "Lake Pichola boat ride"],
+      ["2", "Ghats, Saheliyon ki Bari, Fateh Sagar, Bagore ki Haveli", "Sunset at Sajjangarh"],
+      ["3", "Kumbhalgarh Fort and Ranakpur temple", "Return to Udaipur"],
+    ] },
+    { type: "h2", text: "When is the best time to visit Udaipur?" },
+    { type: "p", text: "October to March is the best time, with warm days and cool nights. The lakes are fullest after the monsoon, from about September. April to June is very hot. Read our [Udaipur destination guide](/destinations/udaipur) for more." },
+    { type: "h2", text: "How do you get to Udaipur?" },
+    { type: "p", text: "Udaipur has an airport with direct flights from Delhi and Mumbai. By road it is a long but scenic drive from Jaipur, often broken with a night in Jodhpur or Pushkar. Our [7-day Golden Triangle with Udaipur](/tours/golden-triangle-tour-7-days-with-udaipur) and [Jaipur, Jodhpur and Udaipur tour](/tours/jaipur-jodhpur-udaipur-tour) both include it." },
+    { type: "cta", title: "See Udaipur with a local guide", tour: "udaipur-city-tour", label: "View the Udaipur city tour" },
+  ],
+  faqs: [
+    { q: "Is 3 days enough for Udaipur?", a: "Yes. Three days lets you see the City Palace, take a Lake Pichola boat ride, explore the old city and ghats, watch sunset at Sajjangarh, and do a day trip to Kumbhalgarh and Ranakpur. Two days covers the city alone; add a fourth day for a slower pace." },
+    { q: "What is the best time for a Lake Pichola boat ride?", a: "The last hour or two before sunset is best, when the City Palace and the Lake Palace glow in warm light. Boats leave from the City Palace jetty and other ghats; the City Palace boats usually include a stop at Jag Mandir island. Low water in dry years can affect routes." },
+    { q: "Can you go inside the Lake Palace in Udaipur?", a: "Generally only as a hotel guest or with a dining reservation. The Lake Palace (Jag Niwas) is a luxury hotel, and access is controlled by the hotel. You can photograph it from the City Palace, the ghats or a Lake Pichola boat ride, which is how most visitors see it." },
+    { q: "How far is Kumbhalgarh from Udaipur?", a: "Kumbhalgarh is roughly 80 to 90 km from Udaipur, about two hours by road. Combining it with the Ranakpur Jain temple makes a full day of roughly 5 to 6 hours driving in total. Start early so you reach Ranakpur during its visiting hours for non-Jain visitors." },
+    { q: "What is Udaipur famous for?", a: "Udaipur is famous for its lakes, especially Lake Pichola, and for the City Palace of the Mewar rulers. It is often called the City of Lakes or the Venice of the East, and it is known for miniature painting, havelis and palace hotels." },
+  ],
+  relatedTours: ["udaipur-city-tour", "golden-triangle-tour-7-days-with-udaipur", "jaipur-jodhpur-udaipur-tour"],
+  relatedGuides: ["golden-triangle-itinerary", "golden-triangle-in-summer-and-monsoon", "jaipur-in-2-days"],
+  keywords: ["Udaipur in 3 days", "Udaipur itinerary", "3 day Udaipur itinerary", "things to do in Udaipur", "Lake Pichola boat ride", "Sajjangarh Monsoon Palace sunset", "Kumbhalgarh and Ranakpur day trip", "City Palace Udaipur"],
+  sources: [{ title: "Rajasthan Tourism", url: "https://www.tourism.rajasthan.gov.in" }, { title: "UNESCO – Hill Forts of Rajasthan", url: "https://whc.unesco.org/en/list/247" }],
+};
+export default guide;

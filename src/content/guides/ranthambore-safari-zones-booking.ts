@@ -1,0 +1,55 @@
+import type { Guide } from "@/content/types";
+
+const guide: Guide = {
+  slug: "ranthambore-safari-zones-booking",
+  title: "Ranthambore Safari Zones and Booking: How It Works",
+  summary: "Ranthambore safaris run in numbered zones by jeep or canter, booked on the Rajasthan Forest Department site. Zones, seasons and booking tips explained.",
+  category: "rajasthan",
+  heroImage: "ranthambore-tiger-1",
+  author: "imran-khan",
+  datePublished: "2026-10-22",
+  dateModified: "2026-10-22",
+  keyTakeaways: [
+    "Ranthambore National Park is divided into numbered safari zones; each vehicle is assigned one zone and must stay in it.",
+    "Safaris run twice a day, morning and afternoon, each about three hours, in a 6-seat gypsy (jeep) or a larger canter (open bus).",
+    "Official bookings are made on the Rajasthan Forest Department booking site; zone allocation can depend on availability.",
+    "The core zones usually close during the monsoon, roughly July to September, while some buffer zones may stay open (check the official site).",
+    "Tiger sightings are never guaranteed, in any zone; two or three safaris improve your chances.",
+  ],
+  body: [
+    { type: "p", text: "Ranthambore safaris run in numbered zones, and each jeep (gypsy) or canter is assigned a single zone for a roughly three-hour morning or afternoon drive. You book through the Rajasthan Forest Department's official site, ideally weeks ahead in peak season. The core zones usually close during the monsoon, roughly July to September. No zone guarantees a tiger, so plan two or three drives." },
+    { type: "h2", text: "How are Ranthambore's safari zones organised?" },
+    { type: "p", text: "The park is split into ten zones. Zones 1 to 5 sit mostly in the original core of the park, around the lakes near Ranthambore Fort, and are generally the most requested. Zones 6 to 10 were opened later, largely in buffer areas, and are often more open and less busy. Tigers move across zone boundaries, and sightings shift year to year as territories change, so a zone that is good one season may be quieter the next." },
+    { type: "table", caption: "General patterns only. Zone access, rules and openings change; check the official booking site.", headers: ["Zones", "Character", "Notes"], rows: [
+      ["1 to 5", "Core area, lakes, dense dhok forest, fort views", "Most requested; book earliest"],
+      ["6 to 10", "Newer, largely buffer areas, more open terrain", "Often easier to get; can be good for sightings"],
+    ] },
+    { type: "h2", text: "Gypsy or canter: which should you book?" },
+    { type: "p", text: "A gypsy is an open jeep seating six visitors plus driver and naturalist. It is quieter, more flexible and better for photography, and it is worth booking the whole vehicle for privacy. A canter is an open truck seating around 20; it is cheaper per seat but noisier, and you share it with strangers. Families with young children and photographers usually prefer a gypsy." },
+    { type: "h2", text: "How do you book a Ranthambore safari?" },
+    { type: "ol", items: [
+      "Choose your dates and morning or afternoon slots. Morning safaris are cooler; afternoons can be good in hot months, when tigers come to water.",
+      "Book on the Rajasthan Forest Department booking site (fmdss.forest.rajasthan.gov.in) or through a registered agent. You need the passport details of every passenger.",
+      "Carry the same ID you booked with; names are checked at the gate.",
+      "Your vehicle and zone are allocated by the forest department. Requests for a specific zone are not always possible.",
+    ] },
+    { type: "callout", variant: "warning", title: "Beware unofficial sellers", text: "Fees, quotas and rules are set by the forest department and change often. Be wary of anyone guaranteeing a particular zone or a tiger sighting. Check current fees and the closed season on the official site before you pay." },
+    { type: "h2", text: "When is the best time for a Ranthambore safari?" },
+    { type: "p", text: "The park is usually open from about October to June. October to March is the most comfortable, with mist and soft light on winter mornings. April to June is very hot but is often the best time for sightings, as water sources shrink and vegetation thins. Read our [summer and monsoon guide](/guides/golden-triangle-in-summer-and-monsoon) if you are travelling then." },
+    { type: "h2", text: "How do you add Ranthambore to the Golden Triangle?" },
+    { type: "p", text: "Ranthambore is near Sawai Madhopur, roughly 3 to 4 hours by road from Jaipur, and connected by train on the Delhi–Mumbai line. Two nights allows three safaris. Our [6-day Golden Triangle with Ranthambore](/tours/golden-triangle-tour-6-days-with-ranthambore) includes it; see also our [Golden Triangle itinerary](/guides/golden-triangle-itinerary)." },
+    { type: "cta", title: "Add tigers to your trip", tour: "golden-triangle-tour-6-days-with-ranthambore", label: "View the Ranthambore tour" },
+  ],
+  faqs: [
+    { q: "Which zone is best in Ranthambore?", a: "No zone is guaranteed. Zones 1 to 5, in the original core around the lakes, are historically the most requested, but tigers move and sightings in zones 6 to 10 can be just as good in some seasons. Ask your naturalist about recent sightings, and book two or three safaris to improve your chances." },
+    { q: "How do I book a Ranthambore safari?", a: "Book through the Rajasthan Forest Department's official online booking system or a registered agent, with passport details for every passenger. Peak-season slots, especially gypsies in the core zones, fill weeks ahead. Zones are allocated by the department. Carry the same ID at the gate that you used for the booking." },
+    { q: "Is Ranthambore open in the monsoon?", a: "The core zones usually close for the monsoon, roughly from 1 July to 30 September, while some buffer zones may stay open for safaris. Dates are set by the forest department and can change, so check the official booking site before planning a monsoon visit." },
+    { q: "Is a gypsy or canter better for Ranthambore?", a: "A gypsy is better for most visitors. It seats six, is quieter and can reach narrower tracks, which helps with photography. A canter seats around 20 and is cheaper per seat but noisier and less flexible. Booking a whole gypsy for your group gives you the most comfortable experience." },
+    { q: "How many safaris should I do in Ranthambore?", a: "Two to three is a good balance. One safari gives you a fair chance, but tigers are wild animals and sightings are never guaranteed. Two nights in Ranthambore lets you do an afternoon, a morning and another afternoon drive, which noticeably improves your odds." },
+  ],
+  relatedTours: ["golden-triangle-tour-6-days-with-ranthambore", "golden-triangle-tour-7-days-with-udaipur"],
+  relatedGuides: ["golden-triangle-itinerary", "golden-triangle-in-summer-and-monsoon", "golden-triangle-with-kids"],
+  keywords: ["Ranthambore safari zones", "Ranthambore safari booking", "best zone in Ranthambore", "Ranthambore gypsy vs canter", "Ranthambore monsoon closure", "Ranthambore tiger safari", "Sawai Madhopur", "Golden Triangle with Ranthambore"],
+  sources: [{ title: "Rajasthan Forest Department – safari booking", url: "https://fmdss.forest.rajasthan.gov.in" }, { title: "Rajasthan Tourism", url: "https://www.tourism.rajasthan.gov.in" }],
+};
+export default guide;

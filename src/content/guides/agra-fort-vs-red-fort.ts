@@ -1,0 +1,52 @@
+import type { Guide } from "@/content/types";
+
+const guide: Guide = {
+  slug: "agra-fort-vs-red-fort",
+  title: "Agra Fort vs Red Fort: Which Should You Visit?",
+  summary: "If you can see only one, choose Agra Fort: its palaces are better preserved and it has views of the Taj Mahal. Red Fort matters more for modern history.",
+  category: "planning",
+  heroImage: "agra-fort-1",
+  author: "imran-khan",
+  datePublished: "2026-10-22",
+  dateModified: "2026-10-22",
+  keyTakeaways: [
+    "Agra Fort was rebuilt by Akbar from 1565; the Red Fort in Delhi was built by Shah Jahan between about 1639 and 1648.",
+    "Both are UNESCO World Heritage Sites: Agra Fort since 1983, the Red Fort Complex since 2007.",
+    "Agra Fort has more intact interiors and a view of the Taj Mahal from the Musamman Burj, where Shah Jahan spent his final years.",
+    "The Red Fort is closed on Mondays; Agra Fort is open daily, including Fridays.",
+    "On a Golden Triangle trip you can easily see both, one in each city.",
+  ],
+  body: [
+    { type: "p", text: "If you only have time for one, choose Agra Fort. Its palaces, courtyards and marble pavilions are better preserved than those of Delhi's Red Fort, it is open every day, and from its riverside terraces you can see the Taj Mahal. The Red Fort is the bigger national symbol, because India's Prime Minister raises the flag there every Independence Day, but much of its interior was lost after 1857." },
+    { type: "h2", text: "What is the difference between Agra Fort and the Red Fort?" },
+    { type: "p", text: "Both are red sandstone Mughal citadels on the Yamuna, which is why they are easily confused. Agra Fort is older: Akbar rebuilt it as his capital fortress from 1565, and Jahangir and Shah Jahan later added white marble palaces. The Red Fort, or Lal Qila, was built by Shah Jahan when he moved the capital to Shahjahanabad, the city now called Old Delhi. Many visitors find the Red Fort feels emptier inside, because the British cleared many buildings and used the fort as a garrison after the 1857 uprising." },
+    { type: "table", caption: "Agra Fort and the Red Fort compared. Fees are approximate as of 2025; check the ASI site.", headers: ["", "Agra Fort", "Red Fort (Delhi)"], rows: [
+      ["Built", "Rebuilt by Akbar from 1565", "Shah Jahan, about 1639 to 1648"],
+      ["UNESCO listing", "1983", "2007"],
+      ["Closed", "Open daily", "Mondays"],
+      ["Foreigner ticket", "About ₹650", "Check the ASI site; fees differ"],
+      ["Highlights", "Jahangiri Mahal, Diwan-i-Khas, Musamman Burj, Taj views", "Lahori Gate, Diwan-i-Aam, Diwan-i-Khas, museums"],
+      ["Time needed", "1.5 to 2 hours", "1.5 to 2 hours"],
+      ["Best paired with", "Taj Mahal, Mehtab Bagh, Baby Taj", "Chandni Chowk, Jama Masjid"],
+    ] },
+    { type: "h2", text: "Why do people prefer Agra Fort?" },
+    { type: "p", text: "Agra Fort tells the most human story in Mughal history. Shah Jahan was deposed by his son Aurangzeb in 1658 and held at the fort until his death in 1666, and tradition says he spent those years looking across the river at his wife's tomb from the Musamman Burj, an octagonal marble tower. Standing there with the Taj in view is one of the best moments of an [Agra visit](/destinations/agra). The fort's Jahangiri Mahal also shows the Hindu-Mughal blend of Akbar's era." },
+    { type: "h2", text: "Why visit the Red Fort?" },
+    { type: "p", text: "The Red Fort is central to India's modern identity. The Lahori Gate faces Chandni Chowk, and the Prime Minister's Independence Day speech is given from its ramparts every 15 August. It combines easily with a rickshaw ride through Old Delhi and Jama Masjid. Note that a large part of the visit is the exterior walls and gates, so it suits travellers interested in history more than architecture." },
+    { type: "callout", variant: "info", title: "Watch the day of the week", text: "The Red Fort closes on Mondays and the Taj Mahal on Fridays. On a [Golden Triangle itinerary](/guides/golden-triangle-itinerary), avoid Delhi sightseeing on a Monday and Agra on a Friday." },
+    { type: "h2", text: "Can you see both on one trip?" },
+    { type: "p", text: "Yes. Most Golden Triangle tours include the Red Fort on the Delhi day, often from outside plus Old Delhi, and Agra Fort on the Agra day. Our [Delhi city tour](/tours/delhi-full-day-city-tour) covers Old Delhi, and our [Agra city tour](/tours/agra-city-tour) covers Agra Fort with the Taj." },
+  ],
+  faqs: [
+    { q: "Is Agra Fort or Red Fort better?", a: "For most visitors, Agra Fort is better. Its palaces and marble pavilions are more complete, it is open every day, and it offers views of the Taj Mahal from the Musamman Burj. The Red Fort is historically important for modern India but lost much of its interior after 1857." },
+    { q: "Are Agra Fort and the Red Fort the same?", a: "No. They are two different forts in two cities about 200 km apart. Agra Fort was rebuilt by Akbar from 1565 in Agra; the Red Fort was built by Shah Jahan in Delhi around 1639 to 1648. Both are red sandstone, both sit beside the Yamuna, and both are UNESCO sites." },
+    { q: "Which day is the Red Fort closed?", a: "The Red Fort in Delhi is closed on Mondays. Agra Fort is open every day, including Fridays when the Taj Mahal is closed. Check the Archaeological Survey of India website for current timings, since closures for events such as Independence Day preparations also happen." },
+    { q: "How much time do you need at Agra Fort?", a: "Plan about 1.5 to 2 hours with a guide, enough to see the Amar Singh Gate entry, Jahangiri Mahal, Diwan-i-Aam, Diwan-i-Khas and the Musamman Burj. Much of the fort is still used by the Indian Army and is closed to the public, so the visitable area is smaller than it looks from outside." },
+    { q: "Can you see the Taj Mahal from Agra Fort?", a: "Yes. The riverside terraces and the Musamman Burj look down the Yamuna towards the Taj Mahal, about 2.5 km away. It is a distant view rather than a close-up, best on a clear day and least visible in winter fog." },
+  ],
+  relatedTours: ["agra-city-tour", "delhi-full-day-city-tour", "golden-triangle-tour-4-days"],
+  relatedGuides: ["agra-in-one-day", "golden-triangle-itinerary", "is-taj-mahal-closed-on-friday"],
+  keywords: ["Agra Fort vs Red Fort", "Agra Fort or Red Fort", "difference between Agra Fort and Red Fort", "Red Fort closed Monday", "Musamman Burj", "Agra Fort ticket price", "Lal Qila Delhi", "Mughal forts India"],
+  sources: [{ title: "UNESCO – Agra Fort", url: "https://whc.unesco.org/en/list/251" }, { title: "UNESCO – Red Fort Complex", url: "https://whc.unesco.org/en/list/231" }, { title: "Archaeological Survey of India", url: "https://asi.nic.in" }],
+};
+export default guide;

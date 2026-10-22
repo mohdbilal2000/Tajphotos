@@ -1,0 +1,51 @@
+import type { Guide } from "@/content/types";
+
+const guide: Guide = {
+  slug: "where-to-stay-in-agra",
+  title: "Where to Stay in Agra: The Best Areas Compared",
+  summary: "Stay on Fatehabad Road or near the Taj East Gate for an easy sunrise visit, in Taj Ganj for budget rooftops, or near Agra Cantt for early trains.",
+  category: "agra",
+  heroImage: "taj-mahal-moonlight-1",
+  author: "imran-khan",
+  datePublished: "2026-10-22",
+  dateModified: "2026-10-22",
+  keyTakeaways: [
+    "The East Gate and Fatehabad Road area is the best all-round choice: many large hotels, a short drive to the quickest Taj entrance.",
+    "Taj Ganj, the old neighbourhood just south of the Taj, is the budget area, with guesthouses and rooftop cafes that look at the dome.",
+    "Stay near Agra Cantt station or in the Sadar Bazaar area if you are catching an early train such as the Gatimaan Express.",
+    "A night in Agra lets you see the Taj at sunrise without a 3 AM start from Delhi.",
+    "Petrol and diesel vehicles cannot drive right up to the Taj; even nearby hotels use battery buses, golf carts or a walk for the last stretch.",
+  ],
+  body: [
+    { type: "p", text: "For most visitors, the best place to stay in Agra is near the Taj Mahal's East Gate, along Fatehabad Road and the surrounding streets, where most of the larger hotels are. Budget travellers prefer Taj Ganj, the old quarter by the South and West gates, for its rooftop views. If you have an early train, stay near Agra Cantt station or Sadar Bazaar." },
+    { type: "h2", text: "Which area of Agra is best for you?" },
+    { type: "table", caption: "Agra's main areas for visitors.", headers: ["Area", "Best for", "Pros", "Cons"], rows: [
+      ["East Gate and Fatehabad Road", "Most first-time visitors", "Close to the quickest Taj entrance; many international-standard hotels", "Busy main road; walking is less pleasant"],
+      ["Taj Ganj", "Budget travellers and backpackers", "Walk to the gates; rooftop cafes with Taj views", "Narrow, crowded lanes; basic rooms; persistent touts"],
+      ["Sadar Bazaar and Cantonment", "Early trains, shopping, restaurants", "Near Agra Cantt station; lively market area", "15 to 25 minutes' drive to the Taj"],
+      ["Near Agra Fort and the city centre", "Short stays and transit", "Central for Agra Fort and the old city markets", "Congested traffic; fewer quality hotels"],
+    ] },
+    { type: "h2", text: "Why stay near the East Gate?" },
+    { type: "p", text: "The East Gate is usually the quickest entrance at sunrise, because most tour coaches use the West Gate. Staying on the Fatehabad Road side means a 5 to 10 minute drive, then a short battery bus or walk to the gate. Several luxury hotels sit within a short distance of the Taj; The Oberoi Amarvilas, for example, is known for rooms that look straight at the monument. See our [sunrise vs sunset guide](/guides/taj-mahal-sunrise-vs-sunset) for why the early start matters." },
+    { type: "h2", text: "Is Taj Ganj a good place to stay?" },
+    { type: "p", text: "Taj Ganj is the historic settlement that grew up to house the Taj's builders, and it is the cheapest place to stay within walking distance of the gates. Its rooftop restaurants offer some of the most memorable dome views in the city. The trade-off is narrow, busy lanes, very variable room quality and more touts; read our [scams guide](/guides/taj-mahal-scams-how-to-avoid) first." },
+    { type: "callout", variant: "tip", title: "Ask for a Taj view, carefully", text: "A room with a Taj view can be magical, but views vary widely within the same hotel, and some are partial or distant. Ask for a photo of the actual view from the room category you are booking, and note that winter haze can hide the dome." },
+    { type: "h2", text: "Should you stay near Agra Cantt station?" },
+    { type: "p", text: "Yes, if you are catching an early train. The Gatimaan Express back to Delhi leaves Agra Cantt in the evening, and other trains leave early. The Sadar Bazaar area has good restaurants and shops. See our [Gatimaan Express guide](/guides/gatimaan-express-delhi-agra) for timings." },
+    { type: "h2", text: "Is it worth staying overnight in Agra?" },
+    { type: "p", text: "Yes, for most travellers. It lets you see the Taj at sunrise, Mehtab Bagh at sunset and Agra Fort without rushing, and gives a fog backup in winter. Our [Agra in one day](/guides/agra-in-one-day) plan assumes a night in town. Visit the [Agra destination guide](/destinations/agra) for more." },
+    { type: "cta", title: "Let us handle the hotel", text: "Our Golden Triangle tours include hand-picked Agra hotels close to the Taj.", tour: "golden-triangle-tour-4-days", label: "View the 4-day tour" },
+  ],
+  faqs: [
+    { q: "What is the best area to stay in Agra?", a: "For most visitors, the East Gate and Fatehabad Road area is best, with the widest choice of good hotels and quick access to the Taj Mahal's least crowded entrance at sunrise. Taj Ganj is better for budget travellers, and the Sadar Bazaar area suits those catching early trains." },
+    { q: "Can you walk to the Taj Mahal from your hotel?", a: "From Taj Ganj and some hotels near the East Gate, yes. Petrol and diesel vehicles cannot go right up to the gates, so even with a car you finish by walking or taking a battery bus or golf cart from the parking area. Check the walking distance to the gate when booking." },
+    { q: "Is Taj Ganj safe?", a: "Taj Ganj is generally safe and lively, but its lanes are narrow and crowded, and touts are common. Keep valuables zipped and agree prices upfront. Women travelling alone may prefer a hotel on Fatehabad Road for a quieter base, especially for late-evening returns." },
+    { q: "Should I stay in Agra or do a day trip from Delhi?", a: "Staying a night is better if you can. A day trip needs about 3 to 4 hours each way by car, or the Gatimaan Express, which does not run on Fridays. An overnight lets you see sunrise at the Taj and sunset at Mehtab Bagh, and avoids a 3 AM start." },
+    { q: "Do Agra hotels have Taj Mahal views?", a: "Some do, mainly within about 1 km of the monument, and rooftop restaurants in Taj Ganj also have views. Views vary by room category and can be partial or distant, and winter haze can hide the dome. Ask the hotel for a photo of the exact view before booking." },
+  ],
+  relatedTours: ["golden-triangle-tour-4-days", "agra-city-tour", "taj-mahal-sunrise-tour-from-delhi"],
+  relatedGuides: ["agra-in-one-day", "taj-mahal-sunrise-vs-sunset", "gatimaan-express-delhi-agra", "taj-mahal-scams-how-to-avoid"],
+  keywords: ["where to stay in Agra", "best area to stay in Agra", "hotels near Taj Mahal", "Fatehabad Road hotels", "Taj Ganj guesthouses", "Agra hotels with Taj view", "Agra Cantt hotels", "stay overnight in Agra"],
+  sources: [{ title: "Archaeological Survey of India – Taj Mahal", url: "https://tajmahal.gov.in" }, { title: "Uttar Pradesh Tourism", url: "https://uptourism.gov.in" }],
+};
+export default guide;

@@ -1,0 +1,58 @@
+import type { Guide } from "@/content/types";
+
+const guide: Guide = {
+  slug: "amber-fort-tips",
+  title: "Amber Fort Tips: How to Visit Without the Crowds",
+  summary: "Visit Amber Fort (Amer Fort) at opening time, walk up or take a jeep, see the Sheesh Mahal first and allow 2 to 3 hours. Practical tips for your visit.",
+  category: "jaipur",
+  heroImage: "jaipur-amber-fort-1",
+  author: "imran-khan",
+  datePublished: "2026-10-22",
+  dateModified: "2026-10-22",
+  keyTakeaways: [
+    "Arrive at Amber Fort (Amer Fort) at opening time, around 8 AM, before tour coaches arrive from Jaipur.",
+    "Allow 2 to 3 hours; with a guide, see the Sheesh Mahal (Mirror Palace) and the Ganesh Pol first.",
+    "The foreigner ticket is about ₹500 as of 2025, or use the Jaipur composite ticket (check the Rajasthan tourism site).",
+    "You can reach the main courtyard on foot (10 to 15 minutes uphill), by jeep, or by car to the upper entrance.",
+    "Amber Fort sits about 11 km north of central Jaipur, roughly 30 to 45 minutes by road.",
+  ],
+  body: [
+    { type: "p", text: "The best way to visit Amber Fort (Amer Fort) is to arrive at opening time, around 8 AM, before the tour coaches. Walk up the ramp or take a jeep, head straight to the Sheesh Mahal while it is quiet, then work back through the courtyards. Allow 2 to 3 hours. Buy a composite ticket if you are also visiting other Jaipur monuments." },
+    { type: "h2", text: "When is the best time to visit Amber Fort?" },
+    { type: "p", text: "Opening time is best, all year. By 10 AM the courtyards fill with groups, and from April to June the stone gets very hot by late morning. October to March is the most comfortable season. The evening light and sound show, held at the base of the fort, is a separate ticket; check the current schedule and language times locally." },
+    { type: "h2", text: "How do you get up to Amber Fort?" },
+    { type: "table", caption: "Ways to reach the main courtyard (Jaleb Chowk).", headers: ["Option", "Time", "Notes"], rows: [
+      ["Walk the ramp", "10 to 15 minutes uphill", "Free; lovely views over Maota Lake; steep cobbles"],
+      ["Jeep from the base", "About 5 minutes", "Fixed fare at the jeep stand; agree the return trip upfront"],
+      ["Car to the upper entrance", "Depends on traffic", "Your driver can drop you closer; parking is limited"],
+      ["Elephant ride", "About 10 minutes", "Not recommended by many welfare groups; see below"],
+    ] },
+    { type: "callout", variant: "warning", title: "About elephant rides", text: "Elephant rides up the ramp are still offered, but animal welfare organisations have raised serious concerns about the conditions of working elephants. We do not include them in our tours. Walking or a jeep is just as quick." },
+    { type: "h2", text: "What should you see inside Amber Fort?" },
+    { type: "ul", items: [
+      "**Sheesh Mahal**: the Mirror Palace, a hall inlaid with thousands of small mirror pieces that glitter in candlelight. Go here first.",
+      "**Ganesh Pol**: the painted gateway to the private royal quarters.",
+      "**Diwan-i-Aam**: the hall of public audience with its double row of columns.",
+      "**Sukh Niwas**: a pavilion where water channels once cooled the air.",
+      "**Man Singh I palace**: the oldest part of the fort, with a central pavilion and zenana (women's quarters).",
+      "**Maota Lake and Kesar Kyari**: the saffron garden below, best photographed from the ramp.",
+    ] },
+    { type: "h2", text: "Do you need a guide at Amber Fort?" },
+    { type: "p", text: "A guide helps a lot. The fort is a maze of courtyards, and the stories of the Kachwaha rulers and their alliances with the Mughals are what bring it to life. Hire only licensed guides; at the entrance, ask to see an approved guide card and agree the fee before you start. Our [Jaipur city tour](/tours/jaipur-full-day-city-tour) includes a licensed guide." },
+    { type: "h2", text: "Can you combine Amber Fort with Jaigarh and Nahargarh?" },
+    { type: "p", text: "Yes. Jaigarh Fort sits on the hill directly above and is linked by a fortified wall, and Nahargarh is a short drive along the ridge. A good half-day is Amber at opening, Panna Meena ka Kund stepwell nearby, then Jaigarh. Save Nahargarh for sunset. See our full [Jaipur in 2 days](/guides/jaipur-in-2-days) plan and the [Jaipur destination guide](/destinations/jaipur)." },
+    { type: "cta", title: "See Amber Fort at opening time", tour: "jaipur-full-day-city-tour", label: "View the Jaipur city tour" },
+  ],
+  faqs: [
+    { q: "How much time do you need at Amber Fort?", a: "Plan 2 to 3 hours with a guide. That covers the walk or jeep up, the Sheesh Mahal, Ganesh Pol, Diwan-i-Aam and the older Man Singh palace. Add an hour if you also want Jaigarh Fort above, and 15 minutes for the nearby Panna Meena ka Kund stepwell." },
+    { q: "What time does Amber Fort open?", a: "Amber Fort typically opens around 8 AM and closes in the early evening, with a separate evening light and sound show. Hours can change, so confirm on the Rajasthan tourism website or with your guide the day before. Arriving at opening time is the best way to avoid crowds." },
+    { q: "How much is the Amber Fort ticket?", a: "As of 2025, the foreigner ticket is about ₹500 and the Indian ticket about ₹100. A Jaipur composite ticket covers Amber Fort and several other state monuments over about two days. Fees change, so check the official Rajasthan tourism site before visiting." },
+    { q: "Should I ride an elephant at Amber Fort?", a: "We recommend not doing so. Animal welfare organisations have raised concerns about how working elephants are kept and used. The walk up the ramp takes only 10 to 15 minutes and gives you better views, and jeeps run from the base for those who prefer not to walk." },
+    { q: "Is Amber Fort the same as Amer Fort?", a: "Yes. Amber and Amer are two spellings of the same fort in the town of Amer, about 11 km north of central Jaipur. It was the seat of the Kachwaha rulers before they founded Jaipur in 1727, and it is part of the UNESCO-listed Hill Forts of Rajasthan." },
+  ],
+  relatedTours: ["jaipur-full-day-city-tour", "jaipur-day-trip-from-delhi", "golden-triangle-tour-4-days"],
+  relatedGuides: ["jaipur-in-2-days", "delhi-to-jaipur-by-road", "golden-triangle-itinerary"],
+  keywords: ["Amber Fort tips", "Amer Fort", "Amber Fort timings", "Amber Fort ticket price", "Sheesh Mahal Jaipur", "Amber Fort elephant ride", "how to reach Amber Fort", "Jaipur composite ticket"],
+  sources: [{ title: "Rajasthan Tourism", url: "https://www.tourism.rajasthan.gov.in" }, { title: "UNESCO – Hill Forts of Rajasthan", url: "https://whc.unesco.org/en/list/247" }],
+};
+export default guide;

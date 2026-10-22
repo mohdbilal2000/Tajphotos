@@ -1,0 +1,63 @@
+import type { Guide } from "@/content/types";
+
+const guide: Guide = {
+  slug: "jaipur-in-2-days",
+  title: "Jaipur in 2 Days: The Itinerary That Works",
+  summary: "Two days in Jaipur: Amber Fort early, Jaigarh and Nahargarh, then City Palace, Jantar Mantar and Hawa Mahal. A day-by-day plan with timing tips.",
+  category: "jaipur",
+  heroImage: "jaipur-hawa-mahal-1",
+  author: "imran-khan",
+  datePublished: "2026-10-22",
+  dateModified: "2026-10-22",
+  keyTakeaways: [
+    "Two days is the right length for Jaipur: one day for the hill forts (Amber, Jaigarh, Nahargarh), one for the Pink City (City Palace, Jantar Mantar, Hawa Mahal, bazaars).",
+    "Go to Amber Fort (Amer Fort) at opening time to beat the tour groups and the heat.",
+    "A composite ticket covers several state monuments, including Amber Fort, Hawa Mahal, Jantar Mantar and Nahargarh, over two days (check current coverage on the Rajasthan tourism site).",
+    "The City Palace is privately run and needs its own ticket.",
+    "See Hawa Mahal from the cafes opposite in the morning, when the sun hits the facade.",
+  ],
+  body: [
+    { type: "p", text: "Two days in Jaipur is enough to see the city well. Spend day one on the hill forts: Amber Fort at opening time, then Jaigarh and sunset at Nahargarh. Spend day two in the old Pink City: Hawa Mahal in the morning light, the City Palace, Jantar Mantar and the bazaars of Johari and Bapu. A composite ticket covers several of these sights." },
+    { type: "h2", text: "What should you do on day 1 in Jaipur?" },
+    { type: "ol", items: [
+      "**8:00 AM, Amber Fort (Amer Fort)**: arrive at opening, walk up or take a jeep, and see the Sheesh Mahal before the crowds. Allow 2 to 3 hours. See our [Amber Fort tips](/guides/amber-fort-tips).",
+      "**Panna Meena ka Kund**: a symmetrical stepwell a few minutes from Amber, best before the sun is high.",
+      "**Lunch** in Amer village or back in town.",
+      "**Jaigarh Fort**: above Amber, home to the Jaivana cannon and long views over the Aravallis.",
+      "**Jal Mahal**: a quick roadside stop to see the palace in Man Sagar Lake.",
+      "**Sunset at Nahargarh Fort**: the best view over the city as the lights come on.",
+    ] },
+    { type: "h2", text: "What should you do on day 2 in Jaipur?" },
+    { type: "ol", items: [
+      "**8:00 AM, Hawa Mahal**: the honeycomb facade faces east and glows in early light. Photograph it from a rooftop cafe across the road, then go inside.",
+      "**City Palace**: still partly the royal family's residence; see the courtyards, the Pritam Niwas Chowk peacock gates and the textile collection.",
+      "**Jantar Mantar**: the UNESCO-listed 18th-century observatory next door. A guide makes the instruments come alive.",
+      "**Lunch** at a traditional thali restaurant.",
+      "**Albert Hall Museum** or the **bazaars**: Johari Bazaar for jewellery, Bapu Bazaar for textiles and mojari shoes.",
+      "**Evening**: dinner at a heritage hotel or a block-printing workshop in Sanganer if arranged in advance.",
+    ] },
+    { type: "table", caption: "Tickets in Jaipur. Prices change; check the official sites before visiting.", headers: ["Sight", "Ticket", "Notes"], rows: [
+      ["Amber Fort, Hawa Mahal, Jantar Mantar, Nahargarh, Albert Hall", "Composite ticket or individual entry", "Composite is valid for about two days; confirm coverage on the Rajasthan tourism site"],
+      ["City Palace", "Separate ticket", "Run by the royal family's trust, not the state"],
+      ["Jaigarh Fort", "Separate ticket", "Privately managed"],
+    ] },
+    { type: "callout", variant: "tip", title: "Monday and holidays", text: "Rules change, but some museums and sections close on certain days or public holidays. Ask your guide to check the day before, and expect Amber Fort to be busiest at weekends and on Indian holidays." },
+    { type: "h2", text: "Is one day in Jaipur enough?" },
+    { type: "p", text: "One day covers Amber Fort and a quick look at the Pink City, which is what our [Jaipur day trip from Delhi](/tours/jaipur-day-trip-from-delhi) does. It feels rushed, though. Two days lets you see the forts at the best times of day and leaves room for shopping." },
+    { type: "h2", text: "How does Jaipur fit into the Golden Triangle?" },
+    { type: "p", text: "Jaipur is usually the third city after Delhi and Agra, about 4 to 6 hours from Agra by road via Fatehpur Sikri. See our [Golden Triangle itinerary](/guides/golden-triangle-itinerary) and the [Jaipur destination guide](/destinations/jaipur). If you are coming straight from Delhi, read [Delhi to Jaipur by road](/guides/delhi-to-jaipur-by-road)." },
+    { type: "cta", title: "Explore Jaipur with a local guide", tour: "jaipur-full-day-city-tour", label: "View the Jaipur city tour" },
+  ],
+  faqs: [
+    { q: "Is 2 days enough for Jaipur?", a: "Yes. Two days is ideal for first-time visitors: one day for Amber Fort, Jaigarh and Nahargarh, and one for Hawa Mahal, the City Palace, Jantar Mantar and the bazaars. Add a third day for Sanganer block printing, a cooking class or a slower pace." },
+    { q: "What is the best order to see Jaipur's sights?", a: "See Amber Fort first thing in the morning, because it gets crowded and hot by late morning. Do Hawa Mahal early the next day while the sun lights the facade. Leave Nahargarh for sunset. The City Palace and Jantar Mantar sit side by side, so do them together." },
+    { q: "Does the Jaipur composite ticket include the City Palace?", a: "No. The composite ticket covers several state-run monuments, such as Amber Fort, Hawa Mahal, Jantar Mantar, Nahargarh and Albert Hall, but the City Palace is run by the royal family's trust and needs its own ticket. Jaigarh Fort is also separate. Check current coverage before buying." },
+    { q: "Where is the best view of Hawa Mahal?", a: "The best view is from the rooftop cafes directly opposite on the main road, where you can see the whole facade at eye level. Go in the morning, when the east-facing windows catch the sun. Inside, the upper floors look out over the old city." },
+    { q: "What should I buy in Jaipur?", a: "Jaipur is known for block-printed textiles, blue pottery, gemstones and silver jewellery, and mojari leather shoes. Bapu Bazaar and Johari Bazaar are the main markets. Be cautious with gemstones and be wary of anyone offering a resale scheme; buy for enjoyment, not investment." },
+  ],
+  relatedTours: ["jaipur-full-day-city-tour", "jaipur-day-trip-from-delhi", "golden-triangle-tour-4-days"],
+  relatedGuides: ["amber-fort-tips", "delhi-to-jaipur-by-road", "golden-triangle-itinerary"],
+  keywords: ["Jaipur in 2 days", "2 day Jaipur itinerary", "Jaipur itinerary", "things to do in Jaipur", "Jaipur composite ticket", "Hawa Mahal best time", "Nahargarh sunset", "Pink City Jaipur"],
+  sources: [{ title: "Rajasthan Tourism", url: "https://www.tourism.rajasthan.gov.in" }, { title: "UNESCO – Jantar Mantar, Jaipur", url: "https://whc.unesco.org/en/list/1338" }],
+};
+export default guide;
