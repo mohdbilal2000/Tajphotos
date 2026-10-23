@@ -4,6 +4,7 @@ import type { Tour } from "@/content/types";
 import { Price } from "@/components/ui/Price";
 import { WhatsAppLink } from "@/components/WhatsAppLink";
 import { site } from "@/config/site";
+import { cancellationShort } from "@/lib/tour";
 
 /** Mobile-only sticky booking bar. Sits above safe-area, replaces the global WhatsApp FAB on tour pages. */
 export function StickyMobileBar({ tour }: { tour: Tour }) {
@@ -21,7 +22,7 @@ export function StickyMobileBar({ tour }: { tour: Tour }) {
       </div>
       {/* Parity with the desktop sidebar's identical line — mobile visitors got no availability
           reassurance at all since this bar is the only booking UI most of them ever see. */}
-      <p className="mt-1.5 text-center text-[0.7rem] text-muted">Next available: check on WhatsApp</p>
+      <p className="mt-1.5 text-center text-[0.7rem] text-muted">{cancellationShort(tour) ?? "Next available: check on WhatsApp"}</p>
     </div>
   );
 }

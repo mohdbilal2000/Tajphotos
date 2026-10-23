@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { site, sameAs } from "@/config/site";
 import { absoluteUrl } from "@/lib/utils";
 import type { FAQ, Tour, Destination, Guide, Review, TeamMember } from "@/content/types";
+import { entities, entitySameAs, entityForAttraction, destinationEntity, knowsAboutKeys } from "@/content/entities";
+import { cancellationWindowHours, priceRange, tierQuantity } from "@/lib/tour";
 
 /* ---------------------------------- Metadata --------------------------------- */
 
@@ -15,6 +17,9 @@ interface PageMeta {
   modifiedTime?: string;
   noIndex?: boolean;
   keywords?: string[];
+  imageAlt?: string;
+  authors?: string[];
+  section?: string;
 }
 
 const xProfile: string = site.social.x;
@@ -23,11 +28,12 @@ const xHandle = xProfile ? `@${xProfile.replace(/\/+$/, "").split("/").pop()}` :
 /** Consistent metadata for every page: canonical, OG, Twitter, robots. */
 export function buildMetadata(m: PageMeta): Metadata {
   const url = absoluteUrl(m.path);
-  const images = m.image ? [{ url: absoluteUrl(m.image), width: 1200, height: 630, alt: m.title }] : undefined;
+  const images = m.image ? [{ url: absoluteUrl(m.image), width: 1200, height: 630, alt: m.imageAlt ?? m.title }] : undefined;
   return {
     title: m.title,
     description: m.description,
     keywords: m.keywords,
+    ...(m.authors ? { authors: m.authors.map((name) => ({ name })) } : {}),
     // Page-level `alternates` replaces the layout's, so the RSS discovery link and the (single-language)
     // hreflang pair are repeated here rather than relying on inheritance.
     alternates: { canonical: url, languages: { en: url, "x-default": url }, types: { "application/rss+xml": absoluteUrl("/feed.xml") } },
@@ -39,7 +45,7 @@ export function buildMetadata(m: PageMeta): Metadata {
       siteName: site.name,
       locale: site.locale,
       images,
-      ...(m.type === "article" ? { publishedTime: m.publishedTime, modifiedTime: m.modifiedTime } : {}),
+      ...(m.type === "article" ? { publishedTime: m.publishedTime, modifiedTime: m.modifiedTime, ...(m.authors ? { authors: m.authors } : {}), ...(m.section ? { section: m.section } : {}) } : {}),
     },
     twitter: { card: "summary_large_image", ...(xHandle ? { site: xHandle, creator: xHandle } : {}), title: m.title, description: m.description, images: images?.map((i) => i.url) },
     robots: m.noIndex
@@ -85,6 +91,7 @@ export function organizationJsonLd(): JsonLd {
     currenciesAccepted: "INR, USD, EUR, GBP",
     paymentAccepted: "Cash, Credit Card, Bank Transfer, UPI, PayPal",
     knowsLanguage: ["en", "hi"],
+    knowsAbout: knowsAboutKeys.map((k) => ({ "@type": "Thing", name: entities[k].name, sameAs: entitySameAs(k) })),
     sameAs,
     hasMap: `https://www.google.com/maps/search/?api=1&query=${site.geo.latitude},${site.geo.longitude}`,
     // Only emit AggregateRating once the figure is verified against a real third-party source
@@ -147,22 +154,12 @@ export function tourJsonLd(tour: Tour, opts: { image: string; destinationNames: 
     },
     // TouristTrip has no "destination" property; the visited cities go on the itinerary's places and,
     // for Product consumers, as `areaServed`-style Place references via `about`.
-    about: opts.destinationNames.map((name) => ({ "@type": "Place", name })),
-    offers: {
-      "@type": "Offer",
-      url,
-      price: tour.priceFrom.usd,
-      priceCurrency: "USD",
-      priceSpecification: { "@type": "UnitPriceSpecification", price: tour.priceFrom.usd, priceCurrency: "USD", unitText: "per person" },
-      availability: "https://schema.org/InStock",
-      // Search/AI-answer consumers of this field need a freshness signal on a price that can move
-      // with fuel/hotel/monument-ticket costs; a rolling ~120-day window (refreshed on every
-      // rebuild/deploy) is more honest than an unbounded implicit "forever" price.
-      priceValidUntil: priceValidUntil(),
-      validFrom: tour.datePublished,
-      category: "Tour",
-      seller: { "@id": ORG_ID },
-    },
+    about: tour.destinations.map((slug, i) => {
+      const key = destinationEntity[slug];
+      return key ? { "@type": "City", name: entities[key].name, sameAs: entitySameAs(key) } : { "@type": "Place", name: opts.destinationNames[i] ?? slug };
+    }),
+    ...(tour.startTime ? { additionalProperty: [{ "@type": "PropertyValue", name: "Start time", value: tour.startTime }, { "@type": "PropertyValue", name: "Cancellation policy", value: tour.cancellation }, { "@type": "PropertyValue", name: "Group size", value: tour.groupSize }] } : {}),
+    offers: tourOffers(tour, url),
     // Same rule as above: tour.rating only ever comes from real imported reviews (see reviewsForTour),
     // never fabricated — safe to emit whenever it's present.
     ...(tour.rating
@@ -193,8 +190,20 @@ export function destinationJsonLd(d: Destination, image: string): JsonLd {
     url,
     image: absoluteUrl(image),
     geo: { "@type": "GeoCoordinates", ...d.geo },
-    containedInPlace: { "@type": "Country", name: "India" },
-    includesAttraction: d.attractions.map((a) => ({ "@type": "TouristAttraction", name: a.name, description: stripInline(a.summary) })),
+    ...(destinationEntity[d.slug] ? { sameAs: entitySameAs(destinationEntity[d.slug]) } : {}),
+    containedInPlace: { "@type": "Country", name: "India", sameAs: entitySameAs("india") },
+    includesAttraction: d.attractions.map((a) => {
+      const key = entityForAttraction(a.name, d.slug);
+      const closed = key ? (entities[key] as { closedOn?: string }).closedOn : undefined;
+      return {
+        "@type": "TouristAttraction",
+        name: a.name,
+        description: stripInline(a.summary),
+        ...(key ? { sameAs: entitySameAs(key) } : {}),
+        ...(closed ? { openingHoursSpecification: { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].filter((day) => day !== closed) } } : {}),
+        ...(a.tickets ? { isAccessibleForFree: /^free/i.test(a.tickets) } : {}),
+      };
+    }),
     touristType: ["Culture lovers", "Photographers", "Families", "Couples"],
   };
 }
@@ -214,7 +223,9 @@ export function articleJsonLd(g: Guide, opts: { image: string; author: TeamMembe
     author: personJsonLd(opts.author),
     isPartOf: { "@id": WEBSITE_ID },
     ...(opts.wordCount ? { wordCount: opts.wordCount } : {}),
-    ...(opts.about?.length ? { about: opts.about.map((name) => ({ "@type": "Place", name })) } : {}),
+    articleSection: g.category.replace(/-/g, " "),
+    about: guideEntities(g).map((k) => ({ "@type": entities[k].type, name: entities[k].name, sameAs: entitySameAs(k) })),
+    ...(opts.about?.length ? { mentions: opts.about.map((name) => ({ "@type": "Place", name })) } : {}),
     publisher: { "@id": ORG_ID },
     inLanguage: "en",
     keywords: g.keywords.join(", "),
@@ -283,4 +294,70 @@ export function stripInline(text: string) {
     .replace(/\*\*([^*]+)\*\*/g, "$1")
     .replace(/\*([^*]+)\*/g, "$1")
     .replace(/`([^`]+)`/g, "$1");
+}
+
+/**
+ * One Offer per group-size tier (each a per-person UnitPriceSpecification), wrapped in an
+ * AggregateOffer so search and AI engines see the real low/high range rather than only the
+ * best-case two-traveller price. Cancellation terms ride along as a machine-readable property.
+ */
+function tourOffers(tour: Tour, url: string) {
+  const { low, high } = priceRange(tour);
+  const hours = cancellationWindowHours(tour);
+  const base = {
+    priceCurrency: "USD",
+    availability: "https://schema.org/InStock",
+    priceValidUntil: priceValidUntil(),
+    validFrom: tour.datePublished,
+    url,
+    seller: { "@id": ORG_ID },
+  };
+  const tiers = tour.priceTiers ?? [{ label: tour.priceNote, usd: tour.priceFrom.usd }];
+  return {
+    "@type": "AggregateOffer",
+    lowPrice: low,
+    highPrice: high,
+    offerCount: tiers.length,
+    ...base,
+    ...(hours ? { description: tour.cancellation } : {}),
+    offers: tiers.map((t) => {
+      const q = tierQuantity(t.label);
+      return {
+        "@type": "Offer",
+        name: t.label,
+        ...(t.note ? { description: t.note } : {}),
+        price: t.usd,
+        ...base,
+        priceSpecification: {
+          "@type": "UnitPriceSpecification",
+          price: t.usd,
+          priceCurrency: "USD",
+          unitText: /per day/i.test(tour.priceNote) ? "per vehicle per day" : "per person",
+          ...(q && !/per day/i.test(tour.priceNote) ? { eligibleQuantity: { "@type": "QuantitativeValue", minValue: q.min, ...(q.max ? { maxValue: q.max } : { maxValue: q.min }), unitText: "travellers" } } : {}),
+        },
+      };
+    }),
+  };
+}
+
+/** Entities a guide is about, inferred from its slug, title and keywords against the registry. */
+function guideEntities(g: Guide) {
+  const text = `${g.slug} ${g.title} ${g.keywords.join(" ")}`;
+  const keys = new Set<keyof typeof entities>();
+  for (const k of Object.keys(entities) as (keyof typeof entities)[]) {
+    if (["india", "uttar-pradesh", "rajasthan"].includes(k)) continue;
+    const name = entities[k].name.replace(/\s*\(.*\)|,.*$/g, "");
+    if (new RegExp(`\\b${name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "i").test(text) || text.toLowerCase().includes(k)) keys.add(k);
+  }
+  return [...keys].slice(0, 6);
+}
+
+/** ItemList of links for hub pages (tours, guides, destinations). */
+export function itemListJsonLd(name: string, items: { name: string; path: string }[]): JsonLd {
+  return {
+    "@type": "ItemList",
+    name,
+    numberOfItems: items.length,
+    itemListElement: items.map((it, i) => ({ "@type": "ListItem", position: i + 1, name: it.name, url: absoluteUrl(it.path) })),
+  };
 }

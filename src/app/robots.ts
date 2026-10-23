@@ -2,27 +2,54 @@ import type { MetadataRoute } from "next";
 import { site } from "@/config/site";
 
 /**
- * GPTBot and ClaudeBot (the OpenAI/Anthropic model crawlers) are allowed deliberately: being in the
- * models' knowledge is part of GEO for a small operator, not just being fetched live at answer time.
+ * Crawler policy, reviewed October 2026.
  *
- * Crawler policy for 2026: explicitly allow the search + AI answer-engine crawlers that drive
- * citations (Googlebot, Bingbot, OAI-SearchBot/ChatGPT-User, PerplexityBot/Perplexity-User,
- * Claude-SearchBot/Claude-User, Applebot, DuckAssistBot, Amazonbot) rather than leaving them to a
- * wildcard; explicitly block training-only scrapers with a poor citation-to-cost ratio (Bytespider
- * in particular does not reliably honour robots.txt and should also be blocked at the WAF/edge).
+ * The goal is to be findable and citable everywhere travellers ask questions, so every search and
+ * AI answer-engine crawler is allowed by name. Naming them matters: some operators read only their
+ * own group, and an explicit allow survives a future tightening of the wildcard rule.
  *
- * Google-Extended specifically (distinct from Googlebot) is the toggle for whether Google may use
- * this content for AI Overviews/Gemini grounding and model training — it's already implicitly
- * allowed via the wildcard rule below, but named explicitly here too since it's the crawler that
- * actually gates AI-citation eligibility for Google's surfaces, not just a training-data detail
- * worth burying in the default rule.
+ * - Search + AI answers: Googlebot (also feeds AI Overviews and AI Mode), Bingbot (also feeds
+ *   Copilot), OAI-SearchBot and ChatGPT-User, Claude-SearchBot and Claude-User, PerplexityBot and
+ *   Perplexity-User, Applebot, DuckAssistBot, Amazonbot, MistralAI-User, Meta-ExternalFetcher.
+ * - Model training and grounding tokens: GPTBot, ClaudeBot, Google-Extended, Applebot-Extended,
+ *   Meta-ExternalAgent, Google-CloudVertexBot. Allowed on purpose, because being inside the models'
+ *   knowledge helps a small operator get named in answers. Remove a token here to opt out of one
+ *   vendor's training without losing its search visibility.
+ * - Blocked: Bytespider and CCBot, which have a poor citation-to-cost ratio. Bytespider does not
+ *   reliably honour robots.txt, so also block it at the edge.
+ *
+ * Opting out of Google AI Overviews alone is done with the Search Console AI control, not here.
  */
 export default function robots(): MetadataRoute.Robots {
   const disallow = ["/api/", "/thank-you", "/_next/", "/plan-my-trip/success"];
   return {
     rules: [
       { userAgent: "*", allow: "/", disallow },
-      { userAgent: ["Googlebot", "Google-Extended", "Bingbot", "GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "PerplexityBot", "Perplexity-User", "Claude-SearchBot", "Claude-User", "Applebot", "DuckAssistBot", "Amazonbot"], allow: "/", disallow },
+      {
+        userAgent: [
+          "Googlebot",
+          "Google-Extended",
+          "Google-CloudVertexBot",
+          "Bingbot",
+          "OAI-SearchBot",
+          "ChatGPT-User",
+          "GPTBot",
+          "Claude-SearchBot",
+          "Claude-User",
+          "ClaudeBot",
+          "PerplexityBot",
+          "Perplexity-User",
+          "Applebot",
+          "Applebot-Extended",
+          "DuckAssistBot",
+          "Amazonbot",
+          "MistralAI-User",
+          "Meta-ExternalAgent",
+          "Meta-ExternalFetcher",
+        ],
+        allow: "/",
+        disallow,
+      },
       { userAgent: ["Bytespider", "CCBot"], disallow: "/" },
     ],
     sitemap: `${site.url}/sitemap.xml`,

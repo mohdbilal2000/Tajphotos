@@ -41,7 +41,7 @@ const destination: Destination = {
   relatedTours: ["udaipur-city-tour", "jaipur-jodhpur-udaipur-tour"],
   relatedGuides: [],
   keywords: ["Udaipur travel guide", "City Palace Udaipur", "Lake Pichola boat ride", "Udaipur Rajasthan itinerary", "Monsoon Palace Sajjangarh", "Jag Mandir island palace", "best time to visit Udaipur", "Udaipur from Delhi", "Golden Triangle Udaipur extension", "Bagore ki Haveli dance show", "Udaipur ghats", "Udaipur airport UDR"],
-  datePublished: "",
-  dateModified: "",
+  datePublished: "2026-09-03",
+  dateModified: "2026-09-03",
 };
 export default destination;

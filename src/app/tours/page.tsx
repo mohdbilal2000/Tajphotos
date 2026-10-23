@@ -6,7 +6,8 @@ import type { Tour } from "@/content/types";
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { TourCard } from "@/components/tours/TourCard";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, graph, itemListJsonLd, webPageJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = buildMetadata({
   title: "All Tours — Golden Triangle, Taj Mahal, Jaipur & Udaipur",
@@ -30,6 +31,7 @@ export default async function ToursPage({ searchParams }: PageProps<"/tours">) {
 
   return (
     <>
+      <JsonLd data={graph(webPageJsonLd({ path: "/tours", type: "CollectionPage", name: "All tours", description: "Private, guided tours of Agra, Delhi, Jaipur and Udaipur." }), itemListJsonLd("Tours", tours.map((t) => ({ name: t.title, path: `/tours/${t.slug}` }))))} />
       <PageHeader
         image="taj-mahal-wide-1"
         crumbs={[{ name: "Tours", path: "/tours" }]}

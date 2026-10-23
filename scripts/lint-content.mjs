@@ -38,8 +38,15 @@ function checkBlocksImages(blocks, label) {
   }
 }
 
+const ISO = /^\d{4}-\d{2}-\d{2}$/;
+function checkDates(c, label) {
+  for (const k of ["datePublished", "dateModified"]) if (!ISO.test(c[k] ?? "")) warn(`${label}: ${k} must be YYYY-MM-DD (got "${c[k]}")`);
+  if (c.dateModified < c.datePublished) warn(`${label}: dateModified is before datePublished`);
+}
+
 for (const t of tours) {
   const label = `tour/${t.slug}`;
+  checkDates(t, label);
   checkImageRefs([t.heroImage, ...t.gallery], label);
   checkBlocksImages(t.description, label);
   checkFaqs(t.faqs, label);
@@ -52,6 +59,7 @@ for (const t of tours) {
 }
 for (const d of destinations) {
   const label = `destination/${d.slug}`;
+  checkDates(d, label);
   checkImageRefs([d.heroImage, ...d.gallery], label);
   checkBlocksImages(d.intro, label);
   checkBlocksImages(d.bestTime, label);
@@ -62,6 +70,7 @@ for (const d of destinations) {
 }
 for (const g of guides) {
   const label = `guide/${g.slug}`;
+  checkDates(g, label);
   checkImageRefs([g.heroImage], label);
   checkBlocksImages(g.body, label);
   checkFaqs(g.faqs, label);

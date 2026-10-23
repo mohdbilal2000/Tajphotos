@@ -41,7 +41,7 @@ const destination: Destination = {
   relatedTours: ["jaipur-full-day-city-tour", "jaipur-day-trip-from-delhi"],
   relatedGuides: ["golden-triangle-itinerary"],
   keywords: ["Jaipur travel guide", "Pink City Rajasthan", "Amber Fort", "City Palace Jaipur", "Hawa Mahal", "Jantar Mantar Jaipur", "Golden Triangle India", "Jaipur best time to visit", "Delhi to Jaipur distance", "Agra to Jaipur road", "Nahargarh Fort", "Jaipur itinerary"],
-  datePublished: "",
-  dateModified: "",
+  datePublished: "2026-09-03",
+  dateModified: "2026-09-03",
 };
 export default destination;

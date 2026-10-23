@@ -40,7 +40,7 @@ const destination: Destination = {
   relatedTours: ["same-day-taj-mahal-tour-by-car", "agra-city-tour", "taj-mahal-sunrise-tour-with-photographer"],
   relatedGuides: ["taj-mahal-tickets", "is-taj-mahal-closed-on-friday", "best-time-to-visit-taj-mahal"],
   keywords: ["Agra travel guide", "Taj Mahal", "Agra Fort", "Fatehpur Sikri", "Golden Triangle India", "Delhi to Agra", "Gatimaan Express", "Taj Mahal tickets", "Taj Mahal timings", "Agra day trip from Delhi", "Itimad-ud-Daulah", "Mehtab Bagh"],
-  datePublished: "",
-  dateModified: "",
+  datePublished: "2026-09-03",
+  dateModified: "2026-09-03",
 };
 export default destination;

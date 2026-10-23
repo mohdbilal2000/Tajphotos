@@ -4,7 +4,8 @@ import { Section } from "@/components/ui/Section";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { DestinationCard } from "@/components/destinations/DestinationCard";
 import { IndiaAtlas } from "@/components/sections/IndiaAtlas";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, graph, itemListJsonLd, webPageJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = buildMetadata({
   title: "Destinations — Agra, Delhi, Jaipur, Udaipur & Rajasthan",
@@ -15,6 +16,7 @@ export const metadata: Metadata = buildMetadata({
 export default function DestinationsPage() {
   return (
     <>
+      <JsonLd data={graph(webPageJsonLd({ path: "/destinations", type: "CollectionPage", name: "Destinations", description: "Agra, Delhi, Jaipur and Udaipur travel guides." }), itemListJsonLd("Destinations", destinations.map((d) => ({ name: d.name, path: `/destinations/${d.slug}` }))))} />
       <PageHeader
         image="jaipur-amber-fort-1"
         crumbs={[{ name: "Destinations", path: "/destinations" }]}

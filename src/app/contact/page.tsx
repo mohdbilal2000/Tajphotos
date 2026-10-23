@@ -6,13 +6,15 @@ import { WhatsAppLink } from "@/components/WhatsAppLink";
 import { TrackedContactLink } from "@/components/TrackedContactLink";
 import { ButtonLink } from "@/components/ui/Button";
 import { site, defaultWhatsappMessage } from "@/config/site";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, graph, webPageJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = buildMetadata({ title: "Contact Us", description: `Reach ${site.name} by WhatsApp, phone or email — or use our trip-planning form.`, path: "/contact" });
 
 export default function ContactPage() {
   return (
     <>
+      <JsonLd data={graph({ ...webPageJsonLd({ path: "/contact", type: "ContactPage", name: `Contact ${site.name}`, description: `Reach ${site.name} by WhatsApp, phone or email.` }), mainEntity: { "@id": `${site.url}/#organization` } })} />
       <PageHeader
         crumbs={[{ name: "Contact", path: "/contact" }]}
         eyebrow="Get in touch"

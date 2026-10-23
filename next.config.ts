@@ -22,7 +22,7 @@ const securityHeaders = [
 // pattern verbatim below and only ever add to it, never replace it outright.
 const NEXT_DEFAULT_HTML_LIMITED_BOTS =
   /[\w-]+-Google|Google-[\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight/i;
-const AI_CRAWLER_UAS = "OAI-SearchBot|ChatGPT-User|OAI-AdsBot|GPTBot|PerplexityBot|Perplexity-User|Claude-SearchBot|Claude-User|ClaudeBot|DuckAssistBot|Amazonbot";
+const AI_CRAWLER_UAS = "OAI-SearchBot|ChatGPT-User|OAI-AdsBot|GPTBot|PerplexityBot|Perplexity-User|Claude-SearchBot|Claude-User|ClaudeBot|DuckAssistBot|Amazonbot|MistralAI-User|meta-externalagent|meta-externalfetcher";
 const htmlLimitedBots = new RegExp(`${NEXT_DEFAULT_HTML_LIMITED_BOTS.source}|${AI_CRAWLER_UAS}`, "i");
 
 const nextConfig: NextConfig = {

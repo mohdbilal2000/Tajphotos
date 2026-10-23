@@ -11,6 +11,7 @@ import { Price } from "@/components/ui/Price";
 import { WhatsAppLink } from "@/components/WhatsAppLink";
 import { site } from "@/config/site";
 import { cn } from "@/lib/utils";
+import { cancellationShort, priceBasis } from "@/lib/tour";
 
 /**
  * Up to three benefits, each derived from the tour's own data — never a blanket claim stamped on
@@ -24,11 +25,11 @@ function perksFor(tour: Tour): { icon: LucideIcon; label: string }[] {
   if (/guide/.test(inc)) out.push({ icon: BadgeCheck, label: "Private guide included" });
   if (/(car|chauffeur|vehicle)/.test(inc) && !/not included/.test(tour.transport.toLowerCase())) out.push({ icon: Car, label: "Private car & driver" });
   if (/entry ticket/.test(inc) && !/not included|payable separately/.test(inc.match(/[^.]*entry ticket[^.]*/)?.[0] ?? "")) out.push({ icon: Ticket, label: "Monument tickets included" });
-  if (/free cancellation/i.test(tour.cancellation)) {
-    const h = tour.cancellation.match(/(\d+)\s*hours?/i)?.[1];
-    out.push({ icon: CalendarCheck, label: h ? `Free cancellation · ${h}h` : "Free cancellation" });
-  }
-  return out.slice(0, 3);
+  const cancel = cancellationShort(tour);
+  // Cancellation is the purchase-risk answer, so it always keeps a slot when the tour offers it.
+  const top = out.slice(0, cancel ? 2 : 3);
+  if (cancel) top.push({ icon: CalendarCheck, label: cancel });
+  return top;
 }
 
 /**
@@ -119,8 +120,9 @@ export function TourCard({ tour, className, preload }: { tour: Tour; className?:
           <div>
             <p className="text-[0.625rem] font-semibold uppercase tracking-[0.16em] text-muted">Starting from</p>
             <p className="mt-0.5 text-[1.375rem] font-bold leading-none text-ink">
-              <Price usd={tour.priceFrom.usd} /> <span className="text-xs font-normal text-muted">/ person</span>
+              <Price usd={tour.priceFrom.usd} /> <span className="text-xs font-normal text-muted">{/per day/i.test(tour.priceNote) ? "/ day" : "/ person"}</span>
             </p>
+            {priceBasis(tour) && priceBasis(tour) !== "per day" && <p className="mt-1 text-[0.6875rem] text-muted">Based on {priceBasis(tour)}</p>}
           </div>
           <div className="relative z-10 flex items-center gap-2">
             <WhatsAppLink

@@ -3,7 +3,7 @@ import { Section } from "@/components/ui/Section";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { FaqList } from "@/components/content/RichText";
 import { JsonLd } from "@/components/JsonLd";
-import { buildMetadata, faqJsonLd } from "@/lib/seo";
+import { buildMetadata, faqJsonLd, graph, webPageJsonLd } from "@/lib/seo";
 import { tajMahal, transport, visa } from "@/content/facts";
 
 const faqs = [
@@ -20,7 +20,7 @@ export const metadata: Metadata = buildMetadata({ title: "FAQ — Taj Mahal Tick
 export default function FaqPage() {
   return (
     <>
-      <JsonLd data={{ "@context": "https://schema.org", ...faqJsonLd(faqs) }} />
+      <JsonLd data={graph(webPageJsonLd({ path: "/faq", name: "Frequently asked questions", description: "Answers on Taj Mahal tickets, timings, Friday closures, visas and booking." }), faqJsonLd(faqs))} />
       <PageHeader
         crumbs={[{ name: "FAQ", path: "/faq" }]}
         eyebrow="Questions"

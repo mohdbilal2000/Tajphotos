@@ -3,7 +3,8 @@ import { guides, latestGuides } from "@/content";
 import { Section } from "@/components/ui/Section";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ArticleCard } from "@/components/guides/ArticleCard";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, graph, itemListJsonLd, webPageJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = buildMetadata({
   title: "Travel Guides — Tickets, Timings & Practical Tips",
@@ -15,6 +16,7 @@ export default function GuidesPage() {
   const ordered = latestGuides(guides.length);
   return (
     <>
+      <JsonLd data={graph(webPageJsonLd({ path: "/guides", type: "CollectionPage", name: "Travel guides", description: "Practical guides on Taj Mahal tickets, timings and Golden Triangle planning." }), itemListJsonLd("Travel guides", ordered.map((g) => ({ name: g.title, path: `/guides/${g.slug}` }))))} />
       <PageHeader
         image="taj-mahal-detail-1"
         crumbs={[{ name: "Guides", path: "/guides" }]}

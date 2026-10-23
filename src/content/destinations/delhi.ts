@@ -44,7 +44,7 @@ const destination: Destination = {
   relatedTours: ["delhi-full-day-city-tour", "same-day-taj-mahal-tour-by-car"],
   relatedGuides: ["delhi-to-agra", "india-e-visa"],
   keywords: ["Delhi travel guide", "Delhi tourist places", "Red Fort Delhi", "Humayun's Tomb", "Qutub Minar", "Delhi to Agra distance", "Gatimaan Express", "Golden Triangle India", "Delhi Agra Jaipur tour", "best time to visit Delhi", "India Gate Delhi", "Old Delhi Chandni Chowk"],
-  datePublished: "",
-  dateModified: "",
+  datePublished: "2026-09-03",
+  dateModified: "2026-09-03",
 };
 export default destination;
