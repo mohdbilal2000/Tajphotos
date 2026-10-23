@@ -10,6 +10,6 @@ import { site, whatsappLink } from "@/config/site";
  * local-search ranking weight.
  */
 export function GET() {
-  const destination = site.social.tripadvisor || site.social.googleBusiness || whatsappLink(`Hi ${site.name}! I had a great trip and would love to leave you a review — where should I post it?`);
+  const destination = site.social.googleReview || site.social.tripadvisor || site.social.googleBusiness || whatsappLink(`Hi ${site.name}! I had a great trip and would love to leave you a review — where should I post it?`);
   return Response.redirect(destination, 302);
 }

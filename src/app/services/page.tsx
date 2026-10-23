@@ -129,7 +129,7 @@ export default function ServicesPage() {
         <SectionHeader
           eyebrow="The fleet"
           title="Cars, and the one train worth taking"
-          text="Every car in the fleet is under three years old, air-conditioned, with seatbelts in every seat and a driver who does this route for a living. Tolls, parking, fuel and the driver's own costs are ours."
+          text="Every car is air-conditioned and confirmed by registration before you pay, with seatbelts in every seat and a driver who does this route for a living. Tolls, parking, fuel and the driver's own costs are ours."
         />
         <FleetList fleet={fleet} className="mt-14" />
         <div className="mt-10 grid gap-8 border-t border-border pt-8 sm:grid-cols-2 lg:gap-16">

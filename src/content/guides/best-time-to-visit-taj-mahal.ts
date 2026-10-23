@@ -6,7 +6,7 @@ const guide: Guide = {
   summary: "The best time to visit the Taj Mahal is October to March at sunrise: soft light, thin crowds, and clear views before winter fog sets in.",
   category: "taj-mahal",
   heroImage: "taj-mahal-sunrise-1",
-  author: "imran-khan",
+  author: "tajphotos-team",
   datePublished: "2026-09-03",
   dateModified: "2026-09-03",
   keyTakeaways: ["Sunrise (gates open 30 minutes before sunrise) offers the softest light, coolest temperatures, and the thinnest crowds at the Taj Mahal.", "October to March is the best season, with average daytime temperatures of roughly 8-33°C across the season, mildest from November to February, and mostly clear skies outside the December-January fog window.", "Night viewing runs only 5 nights a month around the full moon, from 8:30 PM to 12:30 AM, and is never offered on Fridays or during Ramzan.", "Foreigners pay ₹1,300 (₹1,100 entry + ₹200 mausoleum) for daytime visits and ₹750 for night viewing; the Taj Mahal is closed to visitors every Friday.", "Book night-viewing tickets as soon as travel dates are confirmed, since only 400 tickets are sold per night in batches of 50."],

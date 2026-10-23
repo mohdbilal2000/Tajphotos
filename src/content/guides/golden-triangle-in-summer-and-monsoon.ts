@@ -6,7 +6,7 @@ const guide: Guide = {
   summary: "Yes, with planning. April to June is very hot and July to September brings monsoon rain, but fewer crowds. How to adapt your Golden Triangle trip.",
   category: "planning",
   heroImage: "udaipur-monsoon-palace-1",
-  author: "imran-khan",
+  author: "tajphotos-team",
   datePublished: "2026-10-22",
   dateModified: "2026-10-22",
   keyTakeaways: [

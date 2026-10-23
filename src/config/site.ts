@@ -18,9 +18,9 @@ export const site = {
   url: env("NEXT_PUBLIC_SITE_URL", "https://tajphotos.com"),
   locale: "en_IN",
   language: "en",
-  foundingYear: 2016, // TODO: confirm
+  // A new business (launched 2026). Never back-date this: it feeds foundingDate in the schema.
+  foundingYear: 2026,
   contact: {
-    // TODO: replace with real numbers before launch (E.164 format without "+" for WhatsApp links)
     whatsapp: env("NEXT_PUBLIC_WHATSAPP_NUMBER", "918909741833"),
     phoneDisplay: env("NEXT_PUBLIC_PHONE_DISPLAY", "+91 89097 41833"),
     phoneE164: env("NEXT_PUBLIC_PHONE_E164", "+918909741833"),
@@ -28,14 +28,15 @@ export const site = {
     hoursNote: "We reply on WhatsApp within minutes, 7 days a week (7 AM – 11 PM IST)",
   },
   address: {
-    // TODO: real office address (used for LocalBusiness schema + Google Business Profile consistency)
-    streetAddress: "Fatehabad Road, Tajganj",
+    // Street and PIN stay empty until there is a real, verifiable office. They must match the
+    // Google Business Profile exactly once it exists; a made-up street hurts more than none.
+    streetAddress: "",
     addressLocality: "Agra",
     addressRegion: "Uttar Pradesh",
-    postalCode: "282001",
+    postalCode: "",
     addressCountry: "IN",
   },
-  geo: { latitude: 27.1638, longitude: 78.0421 }, // Tajganj, Agra (TODO: refine to office)
+  geo: { latitude: 27.1767, longitude: 78.0081 }, // Agra city centre until there is an office pin
   openingHours: ["Mo-Su 07:00-23:00"],
   priceRange: "$$",
   currencies: ["USD", "INR", "EUR", "GBP"] as const,
@@ -47,27 +48,26 @@ export const site = {
   fxRates: { USD: 1, INR: 95, EUR: 0.86, GBP: 0.74 } as Record<"USD" | "INR" | "EUR" | "GBP", number>,
   social: {
     // TODO: fill real profiles — they become schema.org sameAs links (entity signals for Google/AI engines)
-    instagram: "https://www.instagram.com/tajphotos",
-    facebook: "https://www.facebook.com/tajphotos",
-    youtube: "https://www.youtube.com/@tajphotos",
+    // Only profiles that actually exist and belong to this business. Unclaimed handles would point
+    // Google's entity graph at someone else's account.
+    instagram: "",
+    facebook: "",
+    youtube: "",
     tripadvisor: "",
     googleBusiness: "",
+    /** The "Ask for reviews" short link from the Google Business Profile (g.page/r/…/review). Not a sameAs. */
+    googleReview: env("NEXT_PUBLIC_GOOGLE_REVIEW_URL", ""),
     x: "",
     pinterest: "",
     linkedin: "",
   },
   credentials: [
-    // TODO: confirm each before launch; remove any that do not apply
-    { label: "Licensed local guides (Ministry of Tourism, Govt. of India)", short: "Licensed guides" },
-    { label: "Registered Agra-based tour operator", short: "Registered operator" },
-    { label: "GST-registered business", short: "GST registered" },
-  ],
+    // Add each one only once the certificate exists (Udyam, GST, Ministry of Tourism approval…).
+    // Every surface that lists credentials hides itself while this is empty.
+  ] as { label: string; short: string }[],
   stats: {
-    // TODO: use real numbers. These feed trust bars and the About page.
-    travellersServed: "12,000+",
-    yearsOperating: "10+",
-    rating: { value: 4.9, count: 1_150, source: "Google & TripAdvisor" },
-    countries: "60+",
+    // Fill rating from the Google Business Profile once real reviews exist, then flip the flag.
+    rating: { value: 0, count: 0, source: "Google" },
     // Google's self-serving-reviews policy: only emit AggregateRating JSON-LD once this rating
     // is a real, independently-verifiable figure (e.g. pulled from your Google Business Profile
     // or TripAdvisor listing) — never mark up your own placeholder/testimonial numbers as schema.
@@ -85,7 +85,7 @@ export const site = {
 
 export type Currency = (typeof site.currencies)[number];
 
-export const sameAs = Object.values(site.social).filter(Boolean) as string[];
+export const sameAs = Object.entries(site.social).filter(([k, v]) => v && k !== "googleReview").map(([, v]) => v) as string[];
 
 /** wa.me deep link with a prefilled, URL-encoded message. */
 export function whatsappLink(message?: string) {

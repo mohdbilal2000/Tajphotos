@@ -6,7 +6,7 @@ const guide: Guide = {
   summary: "There's no official dress code at the Taj Mahal, but modest clothing covering shoulders and knees, plus comfortable shoes, works best for the visit.",
   category: "practical",
   heroImage: "taj-mahal-sunrise-2",
-  author: "imran-khan",
+  author: "tajphotos-team",
   datePublished: "2026-09-03",
   dateModified: "2026-09-03",
   keyTakeaways: ["No official dress code exists at the Taj Mahal; modest, shoulder-and-knee-covering clothing is a courtesy, not a rule.", "Free cloth shoe covers are provided at the mausoleum platform and worn over your own shoes, no barefoot walking required.", "Visitors walk roughly 1-1.5 km within a 3-hour entry time limit, so comfortable closed shoes or strapped sandals matter more than formality.", "Jewel tones and pastels photograph better against the white marble than pure white, which tends to blend in except at sunrise.", "Tripods, monopods, drones and video cameras are banned throughout the complex regardless of what you wear."],

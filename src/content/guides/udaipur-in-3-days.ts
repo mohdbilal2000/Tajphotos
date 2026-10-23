@@ -6,7 +6,7 @@ const guide: Guide = {
   summary: "Three days in Udaipur: City Palace and a Lake Pichola boat ride, old-city havelis and Sajjangarh at sunset, then Kumbhalgarh and Ranakpur.",
   category: "udaipur",
   heroImage: "udaipur-lake-pichola-1",
-  author: "imran-khan",
+  author: "tajphotos-team",
   datePublished: "2026-10-22",
   dateModified: "2026-10-22",
   keyTakeaways: [

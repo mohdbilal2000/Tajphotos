@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 
 /** The credentials, set as a ruled list rather than three green-ticked boxes. */
 export function TrustWall({ className }: { className?: string }) {
+  if (!site.credentials.length) return null;
   return (
     <ul className={cn("grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-3", className)}>
       {site.credentials.map((c, i) => (

@@ -6,7 +6,7 @@ const guide: Guide = {
   summary: "Visit Amber Fort (Amer Fort) at opening time, walk up or take a jeep, see the Sheesh Mahal first and allow 2 to 3 hours. Practical tips for your visit.",
   category: "jaipur",
   heroImage: "jaipur-amber-fort-1",
-  author: "imran-khan",
+  author: "tajphotos-team",
   datePublished: "2026-10-22",
   dateModified: "2026-10-22",
   keyTakeaways: [

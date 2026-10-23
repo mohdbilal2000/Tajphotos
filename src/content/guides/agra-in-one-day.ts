@@ -6,7 +6,7 @@ const guide: Guide = {
   summary: "One day in Agra: Taj Mahal at sunrise, Agra Fort, lunch, the Baby Taj and sunset at Mehtab Bagh. Timings, order and tips for a day that isn't rushed.",
   category: "agra",
   heroImage: "taj-mahal-wide-1",
-  author: "imran-khan",
+  author: "tajphotos-team",
   datePublished: "2026-10-22",
   dateModified: "2026-10-22",
   keyTakeaways: [

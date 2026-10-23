@@ -6,7 +6,7 @@ const guide: Guide = {
   summary: "Phones and handheld cameras are allowed at the Taj Mahal, but tripods, drones, and video cameras are banned, and photography is barred inside the mausoleum.",
   category: "taj-mahal",
   heroImage: "taj-mahal-detail-1",
-  author: "imran-khan",
+  author: "tajphotos-team",
   datePublished: "2026-09-03",
   dateModified: "2026-09-03",
   keyTakeaways: ["Phones and handheld cameras (DSLR or mirrorless, without a tripod) are allowed throughout the Taj Mahal complex, except inside the mausoleum itself.", "Tripods, monopods, drones, and video cameras are banned across the entire complex, with no exceptions at the security checkpoint.", "No photography of any kind, including phone photos, is permitted inside the main mausoleum chamber.", "Professional or commercial shoots — weddings, film crews, lighting rigs — need Archaeological Survey of India permission arranged at least 15 days in advance.", "Entry costs ₹1,300 for foreign visitors (₹1,100 ticket plus ₹200 mausoleum add-on) and includes standard handheld photography at no extra charge.", "Night viewing follows the same camera rules and runs on five nights a month around the full moon, excluding Fridays and Ramzan, from 8:30 PM to 12:30 AM."],

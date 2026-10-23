@@ -6,7 +6,7 @@ const guide: Guide = {
   summary: "Four days covers Delhi, Agra and Jaipur at a comfortable pace; 6-7 days lets you add Fatehpur Sikri, Ranthambore or Udaipur without rushing.",
   category: "planning",
   heroImage: "jaipur-city-palace-1",
-  author: "imran-khan",
+  author: "tajphotos-team",
   datePublished: "2026-09-03",
   dateModified: "2026-09-03",
   keyTakeaways: ["4 days is the practical minimum for Delhi, Agra and Jaipur; 6-7 days is the comfortable range with extensions.", "Delhi to Agra is 230-240 km — 3-4 hours by car via the Yamuna Expressway, or 1h40m on the Gatimaan Express (dep. 08:10, no Friday service).", "The Taj Mahal is closed every Friday and visits are capped at 3 hours from entry, so plan the Agra day around this first.", "Jaipur's 5-monument composite ticket (₹500) stays valid for 2 days, matching a standard 2-day Jaipur stop.", "A 7-day itinerary adds a full extra day for Ranthambore National Park or a short flight extension to Udaipur."],

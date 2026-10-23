@@ -33,7 +33,7 @@ export const fleet: FleetVehicle[] = [
     seats: "1–4 travellers",
     luggage: "3 large cases",
     bestFor: "The default Golden Triangle car",
-    note: "A seven-seater we sell as a four, because four people and four suitcases in a seven-seater is a long day. Ground clearance for Rajasthan back roads, and every one in our fleet is under three years old.",
+    note: "A seven-seater we sell as a four, because four people and four suitcases in a seven-seater is a long day. Ground clearance for Rajasthan back roads. The exact car and its registration are confirmed with your booking.",
   },
   {
     slug: "innova-hycross",

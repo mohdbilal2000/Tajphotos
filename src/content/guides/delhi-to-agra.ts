@@ -6,7 +6,7 @@ const guide: Guide = {
   summary: "The Gatimaan Express is fastest at 1h40m, a private car takes 3-4 hours door to door, and regular trains cost less but take longer to reach Agra.",
   category: "practical",
   heroImage: "india-train-1",
-  author: "imran-khan",
+  author: "tajphotos-team",
   datePublished: "2026-09-03",
   dateModified: "2026-09-03",
   keyTakeaways: ["The Gatimaan Express (train 12050) covers Delhi to Agra in 1 hour 40 minutes, departing Hazrat Nizamuddin at 08:10 and arriving Agra Cantt at 09:50.", "A private car covers the 230-240 km road distance via the Yamuna Expressway in 3-4 hours, door-to-door.", "The Gatimaan Express does not run on Fridays, the same day the Taj Mahal is closed to visitors.", "Gatimaan Express fares range from about ₹765 (AC Chair Car) to ₹1,530 (Executive Class), including a meal.", "Regular express trains are the cheapest rail option, with sleeper fares from around ₹150, but take 3-4+ hours with more stops."],

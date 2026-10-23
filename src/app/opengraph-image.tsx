@@ -22,7 +22,7 @@ export default function OgImage() {
               rating into a confident claim until site.stats.ratingVerified is real — this image
               gets cached by every platform it's shared on, so a placeholder number here is the
               hardest of all of them to walk back once shipped. */}
-          <span>{site.stats.ratingVerified ? `Rated ${site.stats.rating.value}/5 · ` : ""}{site.stats.travellersServed} travellers</span>
+          <span>{site.stats.ratingVerified ? `Rated ${site.stats.rating.value}/5` : "Private tours from Agra"}</span>
         </div>
       </div>
     ),

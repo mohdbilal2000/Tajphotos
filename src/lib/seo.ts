@@ -69,7 +69,7 @@ export function organizationJsonLd(): JsonLd {
     foundingDate: String(site.foundingYear),
     telephone: site.contact.phoneE164,
     email: site.contact.email,
-    address: { "@type": "PostalAddress", ...site.address },
+    address: { "@type": "PostalAddress", ...Object.fromEntries(Object.entries(site.address).filter(([, v]) => v)) },
     geo: { "@type": "GeoCoordinates", ...site.geo },
     areaServed: ["Agra", "Delhi", "Jaipur", "Udaipur", "Rajasthan", "Uttar Pradesh", "India"].map((name) => ({ "@type": "Place", name })),
     openingHoursSpecification: site.openingHours.map((h) => {
@@ -211,7 +211,7 @@ export function articleJsonLd(g: Guide, opts: { image: string; author: TeamMembe
     image: absoluteUrl(opts.image),
     datePublished: g.datePublished,
     dateModified: g.dateModified,
-    author: personJsonLd(opts.author),
+    author: opts.author.organisation ? { "@id": ORG_ID } : personJsonLd(opts.author),
     isPartOf: { "@id": WEBSITE_ID },
     ...(opts.wordCount ? { wordCount: opts.wordCount } : {}),
     ...(opts.about?.length ? { about: opts.about.map((name) => ({ "@type": "Place", name })) } : {}),

@@ -6,7 +6,7 @@ const guide: Guide = {
   summary: "Sunrise is better for most visitors: fewer crowds, softer light and cooler air. Sunset works best from Mehtab Bagh, since the Taj closes before dusk.",
   category: "taj-mahal",
   heroImage: "taj-mahal-sunrise-1",
-  author: "imran-khan",
+  author: "tajphotos-team",
   datePublished: "2026-10-22",
   dateModified: "2026-10-22",
   keyTakeaways: [

@@ -6,7 +6,7 @@ const guide: Guide = {
   summary: "Fatehpur Sikri, Akbar's abandoned capital 40 km from Agra, is worth 2 to 3 hours. How to visit, what to see, ticket basics and how to avoid touts.",
   category: "agra",
   heroImage: "agra-fatehpur-sikri-1",
-  author: "imran-khan",
+  author: "tajphotos-team",
   datePublished: "2026-10-22",
   dateModified: "2026-10-22",
   keyTakeaways: [

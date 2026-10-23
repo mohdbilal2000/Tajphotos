@@ -16,7 +16,7 @@ export function TeamCard({ member, articles }: { member: TeamMember; articles?: 
       <h3 className="text-lg font-semibold text-ink">{member.name}</h3>
       <p className="text-sm font-medium text-accent">{member.role}</p>
       <p className="mt-3 text-sm leading-relaxed text-muted"><InlineText text={member.bio} /></p>
-      <p className="mt-3 text-xs text-muted">{member.years} years experience · {member.languages.join(", ")}</p>
+      <p className="mt-3 text-xs text-muted">{member.years > 0 ? `${member.years} years experience · ` : ""}{member.languages.join(", ")}</p>
       {member.credentials && (
         <ul className="mt-2 space-y-1 text-xs text-muted">
           {member.credentials.map((c) => <li key={c}>✓ {c}</li>)}
@@ -24,7 +24,7 @@ export function TeamCard({ member, articles }: { member: TeamMember; articles?: 
       )}
       {articles && articles.length > 0 && (
         <div className="mt-4 border-t border-border pt-3">
-          <p className="text-xs font-semibold text-ink">Guides by {member.name.split(" ")[0]}</p>
+          <p className="text-xs font-semibold text-ink">Guides by {member.organisation ? "the team" : member.name.split(" ")[0]}</p>
           <ul className="mt-1.5 space-y-1 text-xs">
             {articles.map((a) => <li key={a.slug}><Link href={`/guides/${a.slug}`} className="link">{a.title}</Link></li>)}
           </ul>

@@ -12,7 +12,7 @@ export const metadata: Metadata = buildMetadata({
   title: "Reviews",
   description: site.stats.ratingVerified
     ? "Genuine traveller reviews from Google and TripAdvisor."
-    : "We're a young website with an established local business behind it — real reviews are on the way.",
+    : "TajPhotos is a new Agra tour company. Reviews from our first travellers will appear here, unedited.",
   path: "/reviews",
 });
 

@@ -181,6 +181,8 @@ export interface TeamMember {
   image?: ImageId;
   credentials?: string[];
   sameAs?: string[];
+  /** True for the business-level byline: emitted as the Organization, not a Person. */
+  organisation?: boolean;
 }
 
 /* ------------------------------- Stays & services ------------------------------- */

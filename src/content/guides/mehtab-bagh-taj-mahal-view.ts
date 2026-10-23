@@ -6,7 +6,7 @@ const guide: Guide = {
   summary: "Mehtab Bagh, the Mughal garden across the Yamuna, gives the best crowd-free Taj Mahal view, especially at sunset and on Fridays when the Taj is closed.",
   category: "agra",
   heroImage: "taj-mahal-mist-1",
-  author: "imran-khan",
+  author: "tajphotos-team",
   datePublished: "2026-10-22",
   dateModified: "2026-10-22",
   keyTakeaways: [

@@ -6,7 +6,7 @@ const guide: Guide = {
   summary: "Foreign visitors pay ₹1,300 total (₹1,100 + ₹200 mausoleum) for a Taj Mahal ticket, booked at asi.payumoney.com. See full prices, timings and entry rules.",
   category: "taj-mahal",
   heroImage: "taj-mahal-wide-1",
-  author: "imran-khan",
+  author: "tajphotos-team",
   datePublished: "2026-09-03",
   dateModified: "2026-09-03",
   keyTakeaways: ["Foreign tourists pay ₹1,300 total for a Taj Mahal ticket: ₹1,100 entry + ₹200 mausoleum add-on.", "Indian citizens pay ₹250 total (₹50 + ₹200); SAARC/BIMSTEC nationals pay ₹740 (₹540 + ₹200).", "The Taj Mahal is closed every Friday and enforces a 3-hour visit limit from the time of entry.", "Book official tickets online at asi.payumoney.com to skip the gate queue.", "Night viewing (5 nights/month, 8:30 PM-12:30 AM) costs ₹750 for foreigners and ₹510 for Indians."],

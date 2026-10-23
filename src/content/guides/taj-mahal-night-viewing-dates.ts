@@ -6,7 +6,7 @@ const guide: Guide = {
   summary: "Taj Mahal night viewing runs 5 nights a month around the full moon, 8:30 PM-12:30 AM, ₹750 for foreigners. See the confirmed 2026-27 dates and how to book.",
   category: "taj-mahal",
   heroImage: "taj-mahal-moonlight-1",
-  author: "imran-khan",
+  author: "tajphotos-team",
   datePublished: "2026-09-03",
   dateModified: "2026-09-03",
   keyTakeaways: ["Night viewing happens on 5 nights a month: 2 nights before the full moon, the full moon night, and 2 nights after — minus any Friday.", "Tickets cost ₹750 for foreign nationals and ₹510 for Indian nationals, separate from the daytime Taj Mahal ticket.", "Viewing runs 8:30 PM to 12:30 AM in 30-minute batches of up to 50 people, capped at 400 visitors a night.", "Confirmed windows: 24-28 Sep 2026, 24-28 Oct 2026, 22-26 Nov 2026, 21-25 Dec 2026, 20-24 Jan 2027.", "September 2026, December 2026, and January 2027 each lose a night because 25 Sep 2026, 25 Dec 2026, and 22 Jan 2027 all fall on a Friday, when the Taj Mahal is closed."],

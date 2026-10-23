@@ -6,7 +6,7 @@ const guide: Guide = {
   summary: "India's fastest train, the Gatimaan Express, covers Delhi-Agra in 1h40m at up to 160 km/h. Full timings, fares, classes, and station tips inside.",
   category: "practical",
   heroImage: "india-train-1",
-  author: "imran-khan",
+  author: "tajphotos-team",
   datePublished: "2026-09-03",
   dateModified: "2026-09-03",
   keyTakeaways: ["Gatimaan Express: Hazrat Nizamuddin dep 08:10 to Agra Cantt arr 09:50, and Agra Cantt dep 17:50 to Hazrat Nizamuddin arr 19:30 — 1h40m each way.", "India's fastest train, reaching up to 160 km/h, versus 3-4 hours by car via the Yamuna Expressway.", "No Friday service in either direction, matching the Taj Mahal's own weekly Friday closure.", "Two classes: AC Chair Car (approx. ₹750-800) and AC Executive Chair Car (approx. ₹1,500-1,550), both with meals included.", "Agra Cantt station is about 6 km (15-20 minutes) from the Taj Mahal East Gate; book via IRCTC, trains 12049/12050."],

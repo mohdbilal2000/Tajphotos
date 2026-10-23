@@ -6,7 +6,7 @@ const guide: Guide = {
   summary: "Yes, the Taj Mahal is closed to tourists every Friday, reserved for local Muslims attending prayers. Here's what to do instead and when it reopens.",
   category: "taj-mahal",
   heroImage: "taj-mahal-mist-1",
-  author: "imran-khan",
+  author: "tajphotos-team",
   datePublished: "2026-09-03",
   dateModified: "2026-09-03",
   keyTakeaways: ["The Taj Mahal is closed to tourists every single Friday, with entry limited to local Muslims attending prayers at the on-site mosque.", "It reopens the next day, Saturday, at the standard hours of 30 minutes before sunrise to 30 minutes before sunset.", "Agra Fort (₹650), Fatehpur Sikri (₹610), Itimad-ud-Daulah (₹310) and Mehtab Bagh (₹300) all stay open on Fridays for foreigner-ticket visitors.", "The Gatimaan Express (trains 12050/12049) between Delhi and Agra also does not run on Fridays.", "Taj Mahal night viewing (5 nights/month near the full moon, ₹750 foreigner) is separately scheduled to exclude Fridays and all of Ramzan."],

@@ -6,7 +6,7 @@ const guide: Guide = {
   summary: "The India e-Tourist Visa gives US, UK, Canada and Australia travellers 30 days from $25, applied for only at indianvisaonline.gov.in — beware look-alike sites.",
   category: "practical",
   heroImage: "delhi-india-gate-1",
-  author: "imran-khan",
+  author: "tajphotos-team",
   datePublished: "2026-09-03",
   dateModified: "2026-09-03",
   keyTakeaways: ["The 30-day e-Tourist Visa costs from $25 for most US, UK, Canadian and Australian applicants, paid online in USD.", "Apply only at indianvisaonline.gov.in — the sole official portal; look-alike commercial sites charge inflated fees.", "India also issues 1-year and 5-year multiple-entry e-Tourist Visas for travellers making repeat trips.", "Your passport needs at least 6 months' validity from arrival and 2 blank pages to qualify.", "Apply 4-7 days before departure; the e-Visa covers entry only at designated airports and seaports, not land borders."],

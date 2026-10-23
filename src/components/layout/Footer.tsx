@@ -28,8 +28,8 @@ export function Footer() {
             Private Taj Mahal and Golden Triangle journeys, photographed by the people who live there.
           </p>
           <address className="mt-6 space-y-1 text-sm not-italic text-muted">
-            <p>{site.address.streetAddress}</p>
-            <p>{site.address.addressLocality} {site.address.postalCode}, {site.address.addressRegion}, India</p>
+            {site.address.streetAddress && <p>{site.address.streetAddress}</p>}
+            <p>{[site.address.addressLocality, site.address.postalCode].filter(Boolean).join(" ")}, {site.address.addressRegion}, India</p>
             <p className="pt-3">
               <TrackedContactLink event="tel_click" href={`tel:${site.contact.phoneE164}`} className="tabular-nums transition-colors hover:text-ink">{site.contact.phoneDisplay}</TrackedContactLink>
             </p>
@@ -84,11 +84,11 @@ export function Footer() {
             <li><Link href="/terms" className={linkCls}>Terms &amp; cancellation</Link></li>
             <li><Link href="/credits" className={linkCls}>Photo credits</Link></li>
           </ul>
-          <ul className="mt-7 space-y-2 border-t border-border pt-5 text-xs leading-relaxed text-muted">
+          {site.credentials.length > 0 && <ul className="mt-7 space-y-2 border-t border-border pt-5 text-xs leading-relaxed text-muted">
             {site.credentials.map((c) => (
               <li key={c.short} className="flex gap-2"><span aria-hidden className="mt-2 h-px w-2.5 shrink-0 bg-accent" />{c.label}</li>
             ))}
-          </ul>
+          </ul>}
         </div>
       </div>
 

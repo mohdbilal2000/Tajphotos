@@ -6,7 +6,7 @@ const guide: Guide = {
   summary: "A Golden Triangle tour costs $35-70 per day budget, $80-150 mid-range, and $180-400+ luxury per person, driven by hotel class, car type and guides.",
   category: "planning",
   heroImage: "india-private-car-1",
-  author: "imran-khan",
+  author: "tajphotos-team",
   datePublished: "2026-09-03",
   dateModified: "2026-09-03",
   keyTakeaways: ["Budget Golden Triangle trips run $35-70 per person per day; mid-range $80-150; luxury $180-400 and up.", "Taj Mahal entry for foreigners is ₹1,300 total (₹1,100 gate ticket plus ₹200 mausoleum fee), about $16.", "A private AC car with driver for the Delhi-Agra-Jaipur circuit costs roughly $35-55 per day depending on vehicle class.", "The Gatimaan Express covers Delhi-Agra in 1 hour 40 minutes, versus 3-4 hours by road on the Yamuna Expressway.", "Local English-speaking guides typically charge $25-40 per site or per day, on top of the base tour price."],

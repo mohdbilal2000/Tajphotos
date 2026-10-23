@@ -6,7 +6,7 @@ const guide: Guide = {
   summary: "Two days in Jaipur: Amber Fort early, Jaigarh and Nahargarh, then City Palace, Jantar Mantar and Hawa Mahal. A day-by-day plan with timing tips.",
   category: "jaipur",
   heroImage: "jaipur-hawa-mahal-1",
-  author: "imran-khan",
+  author: "tajphotos-team",
   datePublished: "2026-10-22",
   dateModified: "2026-10-22",
   keyTakeaways: [

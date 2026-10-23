@@ -44,7 +44,7 @@ export function Hero({
     { label: primaryLabel, href: primaryHref },
   ];
   const rail = meta ?? [
-    { label: "Based in", value: "Tajganj, Agra" },
+    { label: "Based in", value: "Agra, India" },
     { label: "Reply time", value: "About 15 minutes" },
     { label: "Deposit", value: "Balance on arrival" },
   ];

@@ -6,7 +6,7 @@ const guide: Guide = {
   summary: "Ranthambore safaris run in numbered zones by jeep or canter, booked on the Rajasthan Forest Department site. Zones, seasons and booking tips explained.",
   category: "rajasthan",
   heroImage: "ranthambore-tiger-1",
-  author: "imran-khan",
+  author: "tajphotos-team",
   datePublished: "2026-10-22",
   dateModified: "2026-10-22",
   keyTakeaways: [

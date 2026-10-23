@@ -6,7 +6,7 @@ const guide: Guide = {
   summary: "Most Taj Mahal scams involve fake guides, fake ticket sites, commission shops and the gem resale trick. How each works and how to avoid it in Agra.",
   category: "practical",
   heroImage: "taj-mahal-sunrise-2",
-  author: "imran-khan",
+  author: "tajphotos-team",
   datePublished: "2026-10-22",
   dateModified: "2026-10-22",
   keyTakeaways: [

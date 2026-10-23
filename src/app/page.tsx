@@ -6,7 +6,6 @@ import { site } from "@/config/site";
 import { guides, tours, destinations, latestGuides, reviews, featuredTours, tourCategories, toursByCategory, stays, services, fleet, staysDisclosure } from "@/content";
 import { getImage } from "@/content/images";
 import { Hero } from "@/components/sections/Hero";
-import { FounderNote } from "@/components/sections/FounderNote";
 import { ExploreRails, type RailItem } from "@/components/sections/ExploreRails";
 import { IndiaAtlas } from "@/components/sections/IndiaAtlas";
 import { transport, tajMahal } from "@/content/facts";
@@ -67,7 +66,7 @@ const homeFaqs = [
   { q: "How far is Agra from Delhi, and how do you get there?", a: "Agra is about 230 km from Delhi, roughly 3–4 hours by private car on the Yamuna Expressway, or 1 hour 40 minutes on the Gatimaan Express train (which does not run on Fridays)." },
   { q: "Do you really include a professional photographer?", a: "On our photography and sunrise tours, yes — a local photographer walks with you at the Taj Mahal and hands over edited photos afterwards. It's optional on standard tours and can always be added." },
   { q: "Can you book palace hotels like Rambagh or the Lake Palace?", a: "Yes. We hold and confirm rooms at palace, heritage and modern luxury properties across Agra, Delhi, Jaipur, Udaipur and Jodhpur before you pay anything. We are not the hotel and take no affiliate fee — if a property is full on your dates we say so and offer the nearest equivalent." },
-  { q: "Is it safe to book directly instead of through a marketplace?", a: "We're a registered Agra-based operator with licensed guides and named team members, not an anonymous listing. You can reach us on WhatsApp before paying anything, and we take a modest deposit with the balance due on arrival." },
+  { q: "Is it safe to book directly instead of through a marketplace?", a: "We're a new Agra-based company, so judge us on what you can check: you talk to a real person on WhatsApp, you get your driver's and guide's details before the trip, and nothing is paid in full up front. You can reach us on WhatsApp before paying anything, and we take a modest deposit with the balance due on arrival." },
 ];
 
 function CardGrid({ list }: { list: typeof tours }) {
@@ -190,9 +189,9 @@ export default function Home() {
       <Hero
         image={hero.src}
         alt={hero.alt}
-        eyebrow="Agra · Est. 2016"
+        eyebrow="Agra · Private travel"
         title="The Taj Mahal, at the hour it is worth waking up for."
-        subtitle="Private Golden Triangle journeys, same-day trips from Delhi, palace hotels and a photographer who knows where the light lands — planned by the people who grew up in its shadow."
+        subtitle="Private Golden Triangle journeys, same-day trips from Delhi, palace hotels and a photographer who knows where the light lands — planned from Agra, around the hours the light is best."
         primaryHref="/tours"
         primaryLabel="See the journeys"
       />
@@ -348,7 +347,6 @@ export default function Home() {
       </Section>
 
       {/* ----------------------------- The letter ---------------------------- */}
-      <FounderNote />
 
       {/* ---------------------------- Photography ---------------------------- */}
       <Section tone="ink" className="overflow-hidden">

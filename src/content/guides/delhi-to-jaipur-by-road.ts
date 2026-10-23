@@ -6,7 +6,7 @@ const guide: Guide = {
   summary: "Delhi to Jaipur by road is about 270 to 280 km and takes 3 to 5.5 hours. Compare NH48 and the expressway route, best departure times and stops.",
   category: "practical",
   heroImage: "india-private-car-1",
-  author: "imran-khan",
+  author: "tajphotos-team",
   datePublished: "2026-10-22",
   dateModified: "2026-10-22",
   keyTakeaways: [

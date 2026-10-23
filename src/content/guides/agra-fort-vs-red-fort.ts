@@ -6,7 +6,7 @@ const guide: Guide = {
   summary: "If you can see only one, choose Agra Fort: its palaces are better preserved and it has views of the Taj Mahal. Red Fort matters more for modern history.",
   category: "planning",
   heroImage: "agra-fort-1",
-  author: "imran-khan",
+  author: "tajphotos-team",
   datePublished: "2026-10-22",
   dateModified: "2026-10-22",
   keyTakeaways: [

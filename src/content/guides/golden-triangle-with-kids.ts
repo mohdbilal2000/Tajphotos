@@ -6,7 +6,7 @@ const guide: Guide = {
   summary: "The Golden Triangle works well with kids if you slow down: 6 to 7 days, short drives, early starts and afternoon rest. Tips on food, health and sights.",
   category: "planning",
   heroImage: "jaipur-city-palace-1",
-  author: "imran-khan",
+  author: "tajphotos-team",
   datePublished: "2026-10-22",
   dateModified: "2026-10-22",
   keyTakeaways: [

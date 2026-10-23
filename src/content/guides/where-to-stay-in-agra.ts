@@ -6,7 +6,7 @@ const guide: Guide = {
   summary: "Stay on Fatehabad Road or near the Taj East Gate for an easy sunrise visit, in Taj Ganj for budget rooftops, or near Agra Cantt for early trains.",
   category: "agra",
   heroImage: "taj-mahal-moonlight-1",
-  author: "imran-khan",
+  author: "tajphotos-team",
   datePublished: "2026-10-22",
   dateModified: "2026-10-22",
   keyTakeaways: [
