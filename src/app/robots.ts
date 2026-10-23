@@ -18,7 +18,9 @@ import { site } from "@/config/site";
  * worth burying in the default rule.
  */
 export default function robots(): MetadataRoute.Robots {
-  const disallow = ["/api/", "/thank-you", "/_next/", "/plan-my-trip/success"];
+  // Never disallow /_next/: Googlebot renders pages and needs the CSS/JS there; blocking it makes
+  // every page look broken or empty to the renderer.
+  const disallow = ["/api/", "/thank-you", "/plan-my-trip/success"];
   return {
     rules: [
       { userAgent: "*", allow: "/", disallow },

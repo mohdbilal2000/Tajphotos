@@ -103,7 +103,7 @@ export function PhotoGallery({ images }: { images: ImageId[] }) {
               return (
                 <figure className="relative flex max-h-full max-w-4xl flex-col items-center">
                   <div className="relative max-h-[70vh] w-full overflow-hidden rounded-xl">
-                    <Image src={img.src} alt={img.alt} sizes="90vw" className="max-h-[70vh] w-full object-contain" />
+                    <Image key={images[openAt]} src={img.src} alt={img.alt} sizes="90vw" className="max-h-[70vh] w-full object-contain" />
                   </div>
                   <figcaption className="mt-3 text-center text-sm text-white/80">{img.alt}</figcaption>
                 </figure>

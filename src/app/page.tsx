@@ -155,7 +155,7 @@ export default function Home() {
       guide: guideLink("golden-triangle-itinerary"), tour: tourLink("golden-triangle-tour-4-days", "Golden Triangle, 4 days"),
     },
     {
-      time: "Day 6", place: "Udaipur", title: "And then, if you can, the lakes.",
+      time: "Day 5", place: "Udaipur", title: "And then, if you can, the lakes.",
       body: "A palace on its own island, sunset from a boat on Lake Pichola. The week most people say they should have planned from the start.",
       fact: "Udaipur is the usual Rajasthan extension after Jaipur — the 7-day Golden Triangle adds it with a Lake Pichola sunset cruise.",
       image: ch("udaipur-lake-pichola-1").src, alt: ch("udaipur-lake-pichola-1").alt,
