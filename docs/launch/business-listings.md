@@ -24,7 +24,7 @@ Create it at business.google.com, signed in with the Google account that will ow
 - **Opening date:** the month you start (2026), not earlier
 - **Verification:** usually a short continuous video showing the street or building, your workspace, and something proving the business, such as a business card, a banner or the WhatsApp Business app with the name. Have these ready before you start.
 
-**Description (708 characters, paste as is):**
+**Description (about 690 characters, paste as is):**
 
 > TajPhotos plans private Taj Mahal and Golden Triangle trips from Agra, built around the hours the
 > light is best. Same-day Taj Mahal tours from Delhi by car or Gatimaan Express, sunrise visits with
