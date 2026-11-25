@@ -1,0 +1,49 @@
+name: SEO engine
+
+# Every Monday: find new keywords, draft up to 7 guides (~30 a month), validate them, and open a
+# pull request. Nothing is published until a person reviews and merges it.
+on:
+  schedule:
+    - cron: "17 3 * * 1" # 08:47 IST, Monday
+  workflow_dispatch:
+    inputs:
+      count:
+        description: "How many guides to draft"
+        default: "7"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  draft:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Discover keywords
+        run: pnpm exec tsx scripts/seo-engine/discover.mjs || true
+      - name: Draft guides
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: pnpm exec tsx scripts/seo-engine/write.mjs --count ${{ github.event.inputs.count || '7' }}
+      - name: Register and check
+        run: |
+          node scripts/gen-content-index.mjs
+          pnpm run content:lint
+          pnpm exec tsc --noEmit
+      - name: Build
+        run: pnpm run build
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          branch: seo-engine/drafts
+          title: "SEO engine: new guide drafts"
+          commit-message: "Add SEO engine guide drafts"
+          body-path: data/seo/last-run.md
+          labels: seo-engine

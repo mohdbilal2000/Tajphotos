@@ -62,8 +62,10 @@ export const site = {
     linkedin: "",
   },
   credentials: [
-    // Add each one only once the certificate exists (Udyam, GST, Ministry of Tourism approval…).
-    // Every surface that lists credentials hides itself while this is empty.
+    // Confirmed by the owner (Nov 2026). Add licence/registration numbers here as they are shared:
+    // a numbered credential is far stronger for trust and E-E-A-T than a bare claim.
+    { label: "Government-licensed tour guides", short: "Licensed guides" },
+    { label: "Government-authorised photographers", short: "Authorised photographers" },
   ] as { label: string; short: string }[],
   stats: {
     // Fill rating from the Google Business Profile once real reviews exist, then flip the flag.
