@@ -13,7 +13,7 @@ import { JourneyStory, type Chapter } from "@/components/sections/JourneyStory";
 import { TripFinder, type FinderTour } from "@/components/sections/TripFinder";
 import { SlideDeck } from "@/components/ui/SlideDeck";
 import { Section, SectionHeader } from "@/components/ui/Section";
-import { TourCard } from "@/components/tours/TourCard";
+import { TourCardGrid } from "@/components/tours/TourCardGrid";
 import { TourTabs } from "@/components/tours/TourTabs";
 import { DestinationCard } from "@/components/destinations/DestinationCard";
 import { ArticleCard } from "@/components/guides/ArticleCard";
@@ -27,9 +27,12 @@ import { CtaCard } from "@/components/sections/CtaCard";
 import { FaqList } from "@/components/content/RichText";
 import { JsonLd } from "@/components/JsonLd";
 import { buildMetadata } from "@/lib/seo";
+import { withoutBlur } from "@/lib/utils";
+
+const homeTitle = `Private Taj Mahal & Golden Triangle Tours | ${site.name}`;
 
 export const metadata: Metadata = buildMetadata({
-  title: `${site.name} — Private Taj Mahal & Golden Triangle Journeys, by Agra Locals`,
+  title: homeTitle, // already branded; buildMetadata emits it without a second suffix
   description: site.description,
   path: "/",
 });
@@ -41,7 +44,7 @@ export const metadata: Metadata = buildMetadata({
 const promises = [
   { icon: CalendarCheck, title: "Free cancellation", body: "Cancel free up to 48 hours before most tours. The exact window is on every tour card." },
   { icon: Wallet, title: "Small deposit, balance on arrival", body: "A deposit holds your car, guide and hotels. The rest is paid in Agra, in cash, card or transfer." },
-  { icon: BadgeCheck, title: "Licensed local guides", body: "Ministry of Tourism-licensed guides, not drivers doubling as guides. No commission stops, ever." },
+  { icon: BadgeCheck, title: "Licensed local guides", body: "Government-licensed guides and Government-authorised photographers, not drivers doubling as either. No commission stops, ever." },
   { icon: MessageCircle, title: "A reply in about 15 minutes", body: `A real person on WhatsApp, ${site.contact.hoursNote.match(/\((.*)\)/)?.[1] ?? "7 AM – 11 PM IST"}. No ticket numbers.` },
 ];
 
@@ -69,14 +72,6 @@ const homeFaqs = [
   { q: "Is it safe to book directly instead of through a marketplace?", a: "We're a new Agra-based company, so judge us on what you can check: you talk to a real person on WhatsApp, you get your driver's and guide's details before the trip, and nothing is paid in full up front. You can reach us on WhatsApp before paying anything, and we take a modest deposit with the balance due on arrival." },
 ];
 
-function CardGrid({ list }: { list: typeof tours }) {
-  return (
-    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {list.map((t) => <TourCard key={t.slug} tour={t} />)}
-    </div>
-  );
-}
-
 export default function Home() {
   const hero = getImage("taj-mahal-sunrise-1");
   // A curated six that tells the whole story — a same-day taster, the photography pair, the two
@@ -99,7 +94,7 @@ export default function Home() {
     .filter(({ t }) => Boolean(t))
     .map(({ c, t }) => {
       const img = getImage(t.heroImage);
-      return { href: `/tours#${c.key}`, title: c.label, caption: c.blurb, image: img.src, alt: img.alt };
+      return { href: `/tours#${c.key}`, title: c.label, caption: c.blurb, image: withoutBlur(img.src), alt: img.alt };
     });
   // Bottom rail: each city's photos, skipping any image already used on the top rail so the same
   // picture never scrolls past twice. Caption is the region, not the long photo description.
@@ -109,7 +104,7 @@ export default function Home() {
       .map((id) => getImage(id))
       .filter((img) => !usedOnTop.has(img.src.src))
       .slice(0, 2)
-      .map((img) => ({ href: `/destinations/${d.slug}`, title: d.name, caption: d.region, image: img.src, alt: img.alt })),
+      .map((img) => ({ href: `/destinations/${d.slug}`, title: d.name, caption: d.region, image: withoutBlur(img.src), alt: img.alt })),
   );
   // The scroll story: one day at the Taj, then onward through the triangle. Every fact is pulled
   // from facts.ts / content so it can't drift from the rest of the site; every chapter links to a
@@ -125,7 +120,7 @@ export default function Home() {
       time: "5:30 AM", place: "Taj Mahal, Agra", title: "The gate opens before the sun does.",
       body: "We are already in the queue when the east gate opens. The first twenty minutes are the only time the reflecting pool is empty and the marble turns pink before it turns white.",
       fact: `${tajMahal.hours}. Closed every ${tajMahal.closedDay}. Entry allows ${tajMahal.visitTimeLimit}.`,
-      image: ch("taj-mahal-sunrise-2").src, alt: ch("taj-mahal-sunrise-2").alt,
+      image: withoutBlur(ch("taj-mahal-sunrise-2").src), alt: ch("taj-mahal-sunrise-2").alt,
       destination: { href: "/destinations/agra", label: "Agra guide" },
       guide: guideLink("best-time-to-visit-taj-mahal"), tour: tourLink("taj-mahal-sunrise-tour-from-delhi", "Sunrise tour"),
     },
@@ -133,7 +128,7 @@ export default function Home() {
       time: "9:00 AM", place: "Agra Fort", title: "The window Shah Jahan looked through.",
       body: "Across the river bend, the red sandstone fort where the emperor who built the Taj spent his last years — with the dome framed in a marble window. Most day trips rush it. We don't.",
       fact: "Agra Fort is a separate UNESCO World Heritage Site, a short drive from the Taj Mahal. Tickets are bought separately.",
-      image: ch("taj-mahal-couple-1").src, alt: ch("taj-mahal-couple-1").alt,
+      image: withoutBlur(ch("taj-mahal-couple-1").src), alt: ch("taj-mahal-couple-1").alt,
       destination: { href: "/destinations/agra", label: "Agra guide" },
       guide: guideLink("taj-mahal-tickets"), tour: tourLink("agra-city-tour", "Agra city tour"),
     },
@@ -141,7 +136,7 @@ export default function Home() {
       time: "Day 2", place: "Delhi", title: "Seven cities stacked into one.",
       body: "Humayun's Tomb, often called the blueprint for the Taj. Old Delhi's lanes by cycle rickshaw. Then the fastest way back to Agra is a train, not the road.",
       fact: `The ${transport.gatimaanExpress.train} runs Delhi to Agra in ${transport.gatimaanExpress.duration}. ${transport.gatimaanExpress.note}.`,
-      image: ch("delhi-humayun-tomb-1").src, alt: ch("delhi-humayun-tomb-1").alt,
+      image: withoutBlur(ch("delhi-humayun-tomb-1").src), alt: ch("delhi-humayun-tomb-1").alt,
       destination: { href: "/destinations/delhi", label: "Delhi guide" },
       guide: guideLink("gatimaan-express-delhi-agra"), tour: tourLink("delhi-full-day-city-tour", "Delhi day tour"),
     },
@@ -149,7 +144,7 @@ export default function Home() {
       time: "Day 3", place: "Jaipur", title: "The Pink City, from the windows of the wind.",
       body: "Hawa Mahal at first light, Amber Fort by jeep, the bazaars after dark. The third corner of the Golden Triangle, and the one people wish they'd given another day.",
       fact: `Agra to Jaipur is ${transport.agraJaipur.distanceKm} km by road — ${transport.agraJaipur.note.charAt(0).toLowerCase() + transport.agraJaipur.note.slice(1)}, and worth it.`,
-      image: ch("jaipur-hawa-mahal-1").src, alt: ch("jaipur-hawa-mahal-1").alt,
+      image: withoutBlur(ch("jaipur-hawa-mahal-1").src), alt: ch("jaipur-hawa-mahal-1").alt,
       destination: { href: "/destinations/jaipur", label: "Jaipur guide" },
       guide: guideLink("golden-triangle-itinerary"), tour: tourLink("golden-triangle-tour-4-days", "Golden Triangle, 4 days"),
     },
@@ -157,7 +152,7 @@ export default function Home() {
       time: "Day 5", place: "Udaipur", title: "And then, if you can, the lakes.",
       body: "A palace on its own island, sunset from a boat on Lake Pichola. The week most people say they should have planned from the start.",
       fact: "Udaipur is the usual Rajasthan extension after Jaipur — the 7-day Golden Triangle adds it with a Lake Pichola sunset cruise.",
-      image: ch("udaipur-lake-pichola-1").src, alt: ch("udaipur-lake-pichola-1").alt,
+      image: withoutBlur(ch("udaipur-lake-pichola-1").src), alt: ch("udaipur-lake-pichola-1").alt,
       destination: { href: "/destinations/udaipur", label: "Udaipur guide" },
       guide: guideLink("golden-triangle-tour-cost"), tour: tourLink("golden-triangle-tour-7-days-with-udaipur", "7 days with Udaipur"),
     },
@@ -177,17 +172,17 @@ export default function Home() {
       slug: t.slug, name: t.shortTitle ?? t.title, tagline: t.tagline, usd: t.priceFrom.usd, durationLabel: t.durationLabel,
       // a few tours store minutes in durationDays (e.g. a 30-minute photoshoot); anything implausible counts as a day trip
       days: t.durationDays > 21 ? 1 : t.durationDays,
-      interests, image: img.src, alt: img.alt, udaipur: t.destinations.includes("udaipur"),
+      interests, image: withoutBlur(img.src), alt: img.alt, udaipur: t.destinations.includes("udaipur"),
     };
   });
   const keyServices = services.filter((s) => ["taj-sunrise-entry", "taj-night-viewing", "private-car-driver", "licensed-guide", "hotel-booking"].includes(s.slug));
 
   return (
     <>
-      <JsonLd data={{ "@context": "https://schema.org", "@type": "WebPage", name: metadata.title, url: site.url, description: site.description }} />
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "WebPage", name: homeTitle, url: site.url, description: site.description }} />
 
       <Hero
-        image={hero.src}
+        image={withoutBlur(hero.src)}
         alt={hero.alt}
         eyebrow="Agra · Private travel"
         title="The Taj Mahal, at the hour it is worth waking up for."
@@ -235,7 +230,7 @@ export default function Home() {
                 {tajFeed.map((f) => (
                   <figure key={f.id} className="mr-1">
                     <div className="relative aspect-[4/5] overflow-hidden rounded-[1.25rem]">
-                      <Image src={f.img.src} alt={f.img.alt} fill sizes="(min-width:1024px) 34vw, 92vw" placeholder="blur" className="object-cover" />
+                      <Image src={withoutBlur(f.img.src)} alt={f.img.alt} fill sizes="(min-width:1024px) 34vw, 92vw" className="object-cover" />
                       <span className="absolute left-3 top-3 rounded-full bg-black/55 px-3 py-1 text-xs font-medium text-white backdrop-blur">{f.when}</span>
                     </div>
                     <figcaption className="px-1 pt-3 text-sm leading-relaxed">
@@ -262,7 +257,7 @@ export default function Home() {
             return (
               <Link key={d.slug} href={`/destinations/${d.slug}` as "/destinations"} className="group flex min-w-0 items-center gap-3 rounded-full border border-border bg-surface p-1.5 pr-4 shadow-soft transition hover:-translate-y-0.5 hover:border-ink/25">
                 <span className="relative size-14 shrink-0 overflow-hidden rounded-full">
-                  <Image src={img.src} alt="" fill sizes="56px" className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <Image src={withoutBlur(img.src)} alt="" width={56} height={56} className="size-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 </span>
                 <span className="min-w-0 flex-1">
                   <span className="flex items-center gap-1 text-sm font-semibold text-ink"><MapPin className="size-3.5 text-accent" aria-hidden /> {d.name}</span>
@@ -310,12 +305,12 @@ export default function Home() {
         <div className="mt-12">
           <TourTabs
             tabs={[
-              { key: "popular", label: "Most booked", count: journeys.length, content: <CardGrid list={journeys} /> },
+              { key: "popular", label: "Most booked", count: journeys.length },
               ...tourCategories
-                .map((c) => ({ c, list: toursByCategory(c.key) }))
-                .filter(({ list }) => list.length > 0)
-                .map(({ c, list }) => ({ key: c.key, label: c.label, count: list.length, content: <CardGrid list={list} /> })),
+                .map((c) => ({ key: c.key, label: c.label, count: toursByCategory(c.key).length }))
+                .filter(({ count }) => count > 0),
             ]}
+            initial={<TourCardGrid list={journeys} />}
           />
         </div>
       </Section>
@@ -377,7 +372,7 @@ export default function Home() {
               const img = getImage(id);
               return (
                 <div key={id} className={`figure rounded-2xl ${i === 0 ? "row-span-2 h-full min-h-[22rem]" : "aspect-[4/3]"}`}>
-                  <Image src={img.src} alt={img.alt} placeholder="blur" sizes="(min-width: 1024px) 28vw, 45vw" />
+                  <Image src={withoutBlur(img.src)} alt={img.alt} sizes="(min-width: 1024px) 28vw, 45vw" />
                 </div>
               );
             })}
@@ -394,7 +389,7 @@ export default function Home() {
           aside={<Link href="/stays" className="arrow-link">All {stays.length} hotels <ArrowRight className="size-4" aria-hidden /></Link>}
         />
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {featuredStays.map((s) => <StayCard key={s.slug} stay={s} />)}
+          {featuredStays.map((s) => <StayCard key={s.slug} stay={s} blur={false} />)}
         </div>
         <p className="mt-12 max-w-3xl border-t border-border pt-5 text-xs leading-relaxed text-muted">{staysDisclosure}</p>
       </Section>
@@ -423,7 +418,7 @@ export default function Home() {
           aside={<Link href="/destinations" className="arrow-link">All destinations <ArrowRight className="size-4" aria-hidden /></Link>}
         />
         <div className="mt-14 grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6">
-          {destinations.map((d) => <DestinationCard key={d.slug} destination={d} />)}
+          {destinations.map((d) => <DestinationCard key={d.slug} destination={d} blur={false} />)}
         </div>
       </Section>
 
@@ -459,7 +454,7 @@ export default function Home() {
           aside={<Link href="/guides" className="arrow-link">All guides <ArrowRight className="size-4" aria-hidden /></Link>}
         />
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {latestGuides(3).map((g) => <ArticleCard key={g.slug} guide={g} />)}
+          {latestGuides(3).map((g) => <ArticleCard key={g.slug} guide={g} blur={false} />)}
         </div>
       </Section>
 

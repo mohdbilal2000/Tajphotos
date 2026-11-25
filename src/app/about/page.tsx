@@ -11,7 +11,7 @@ import { site } from "@/config/site";
 import { buildMetadata, graph, personJsonLd, webPageJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
-  title: "About Us — A Small Agra Team of Guides & Photographers",
+  title: "About Us: Agra Guides & Photographers",
   description: `${site.legalName} is a small, Agra-based team of licensed guides, drivers and photographers running private Golden Triangle and Taj Mahal tours, launched in ${site.foundingYear}.`,
   path: "/about",
 });

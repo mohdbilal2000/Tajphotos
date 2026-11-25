@@ -7,7 +7,7 @@ import { IndiaAtlas } from "@/components/sections/IndiaAtlas";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Destinations — Agra, Delhi, Jaipur, Udaipur & Rajasthan",
+  title: "Destinations: Agra, Delhi, Jaipur & Udaipur",
   description: "Travel guides and tours for Agra, Delhi, Jaipur, Udaipur and the wider Rajasthan and Golden Triangle region.",
   path: "/destinations",
 });

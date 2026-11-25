@@ -43,13 +43,16 @@ const display = Newsreader({
   axes: ["opsz"],
   weight: "variable",
   style: ["normal", "italic"],
+  // Not preloaded: the two Newsreader files are ~280 KB and, preloaded, competed with the hero
+  // photograph (the LCP element) for bandwidth on mobile. `display: swap` still paints text at once.
+  preload: false,
 });
 const archivo = Archivo({ subsets: ["latin"], variable: "--font-archivo", display: "swap", weight: "variable" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — Golden Triangle Tours & Taj Mahal Photography, by Agra Locals`,
+    default: `Golden Triangle Tours & Taj Mahal Photography | ${site.name}`,
     template: `%s | ${site.name}`,
   },
   description: site.description,

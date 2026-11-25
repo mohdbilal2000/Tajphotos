@@ -4,6 +4,7 @@ const destination: Destination = {
   slug: "agra",
   name: "Agra",
   title: "Agra Travel Guide: Taj Mahal, Agra Fort & Fatehpur Sikri",
+  seoTitle: "Agra Travel Guide: Taj Mahal & Agra Fort",
   tagline: "Home to the Taj Mahal, Agra Fort and Fatehpur Sikri on India's Golden Triangle.",
   summary: "Agra is home to the Taj Mahal, Agra Fort and Fatehpur Sikri, 230 km from Delhi. Get opening hours, ticket prices, and the best way to visit in a day.",
   heroImage: "taj-mahal-wide-1",

@@ -2,6 +2,7 @@ import { destinations, guides, tours } from "@/content";
 import { getImage } from "@/content/images";
 import { site } from "@/config/site";
 import { JsonLd } from "@/components/JsonLd";
+import { withoutBlur } from "@/lib/utils";
 import { AtlasClient, type AtlasStop, type AtlasRoute } from "./AtlasClient";
 
 /**
@@ -63,7 +64,7 @@ export function IndiaAtlas() {
     const re = new RegExp(s.name.split(" ")[0], "i");
     return {
       ...s,
-      image: img.src,
+      image: withoutBlur(img.src),
       alt: img.alt,
       tours: tours
         .filter((t) => t.destinations.includes(s.key) || t.slug.includes(s.key))

@@ -9,7 +9,7 @@ import { TourCard } from "@/components/tours/TourCard";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
-  title: "All Tours — Golden Triangle, Taj Mahal, Jaipur & Udaipur",
+  title: "Golden Triangle, Taj Mahal & Rajasthan Tours",
   description: "Private, guided tours of Agra, Delhi, Jaipur and Udaipur, from same-day Taj Mahal trips to multi-day Golden Triangle and Rajasthan itineraries. Priced honestly, per person.",
   path: "/tours",
 });

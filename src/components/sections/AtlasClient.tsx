@@ -167,7 +167,7 @@ export function AtlasClient({ stops, routes }: { stops: AtlasStop[]; routes: Atl
               >
                 {active ? (
                   <span className={cn("relative block size-9 overflow-hidden rounded-full shadow-lift ring-[3px] ring-accent sm:size-14", !below && "-m-2.5")}>
-                    <Image src={s.image} alt="" fill sizes="64px" className="object-cover" />
+                    <Image src={s.image} alt="" width={56} height={56} className="size-full object-cover" />
                   </span>
                 ) : (
                   <span className={cn("block size-3.5 rounded-full ring-4 transition sm:size-4", on ? "bg-primary ring-primary/20 group-hover:ring-primary/35" : "bg-surface ring-ink/15 group-hover:ring-ink/30")} />
@@ -209,7 +209,7 @@ export function AtlasClient({ stops, routes }: { stops: AtlasStop[]; routes: Atl
       {/* the place you tapped */}
       <article key={stop.key} className="flex min-w-0 flex-col overflow-hidden rounded-[1.75rem] border border-border bg-surface shadow-soft motion-safe:animate-[fade-up_0.5s_cubic-bezier(0.16,1,0.3,1)_both]">
         <div className="relative aspect-[16/11] overflow-hidden">
-          <Image src={stop.image} alt={stop.alt} fill placeholder="blur" sizes="(min-width: 1024px) 36vw, 92vw" className="object-cover" />
+          <Image src={stop.image} alt={stop.alt} fill sizes="(min-width: 1024px) 36vw, 92vw" className="object-cover" />
           <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
           <div className="absolute inset-x-5 bottom-4 text-white">
             <p className="text-[0.625rem] font-semibold uppercase tracking-[0.22em] text-white/75">{stop.caption} · {stop.lat.toFixed(2)}°N {stop.lng.toFixed(2)}°E</p>

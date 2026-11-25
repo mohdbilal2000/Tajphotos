@@ -26,7 +26,7 @@ function Rail({ items, reverse }: { items: RailItem[]; reverse?: boolean }) {
               tabIndex={copy === 1 ? -1 : undefined}
               className="group relative isolate mr-4 block h-[13rem] w-[19rem] shrink-0 overflow-hidden rounded-[1.25rem] shadow-soft sm:h-[15rem] sm:w-[23rem]"
             >
-              <Image src={it.image} alt={copy === 1 ? "" : it.alt} placeholder="blur" sizes="368px" className="absolute inset-0 -z-10 size-full object-cover transition-transform duration-[900ms] group-hover:scale-[1.06]" />
+              <Image src={it.image} alt={copy === 1 ? "" : it.alt} width={368} height={240} className="absolute inset-0 -z-10 size-full object-cover transition-transform duration-[900ms] group-hover:scale-[1.06]" />
               <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-ink/90 from-15% via-ink/45 via-45% to-transparent" />
               <span aria-hidden className="absolute right-3 top-3 flex size-9 items-center justify-center rounded-full bg-white/20 text-white ring-1 ring-white/40 backdrop-blur transition group-hover:bg-white group-hover:text-ink">
                 <ArrowUpRight className="size-4" />

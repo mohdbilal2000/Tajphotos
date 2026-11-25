@@ -3,14 +3,14 @@ import Image from "next/image";
 import { CalendarDays } from "lucide-react";
 import type { Guide } from "@/content/types";
 import { getImage } from "@/content/images";
-import { formatDate, cn } from "@/lib/utils";
+import { formatDate, cn, withoutBlur } from "@/lib/utils";
 
-export function ArticleCard({ guide, className }: { guide: Guide; className?: string }) {
+export function ArticleCard({ guide, className, blur = true }: { guide: Guide; className?: string; blur?: boolean }) {
   const img = getImage(guide.heroImage);
   return (
     <Link href={`/guides/${guide.slug}`} className={cn("group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift", className)}>
       <div className="relative aspect-[16/10] overflow-hidden bg-surface-2">
-        <Image src={img.src} alt={img.alt} placeholder="blur" sizes="(min-width: 1024px) 30vw, 88vw" className="size-full object-cover transition-transform duration-700 group-hover:scale-[1.05]" />
+        <Image src={blur ? img.src : withoutBlur(img.src)} alt={img.alt} placeholder={blur ? "blur" : "empty"} sizes="(min-width: 1024px) 30vw, 88vw" className="size-full object-cover transition-transform duration-700 group-hover:scale-[1.05]" />
         <span className="absolute left-3 top-3 rounded-full bg-white/95 px-2.5 py-1 text-[0.6875rem] font-semibold capitalize text-ink shadow-sm">{guide.category.replace(/-/g, " ")}</span>
       </div>
       <div className="flex flex-1 flex-col p-5">

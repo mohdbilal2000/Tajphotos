@@ -56,7 +56,7 @@ export function SlideDeck({
       {slides.map((_, i) => (
         <span key={i} className="h-[3px] flex-1 overflow-hidden rounded-full bg-current/20">
           <span
-            className={cn("block h-full rounded-full bg-current", i <= index ? "w-full" : "w-0")}
+            className={cn("block h-full origin-left rounded-full bg-current", i <= index ? "w-full" : "w-0")}
             style={i === index && autoplay && !paused ? { animation: `deck-fill ${autoplay}ms linear both` } : undefined}
           />
         </span>

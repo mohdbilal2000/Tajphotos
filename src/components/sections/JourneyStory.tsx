@@ -57,7 +57,6 @@ export function JourneyStory({ chapters }: { chapters: Chapter[] }) {
                 src={c.image}
                 alt={c.alt}
                 fill
-                placeholder="blur"
                 sizes="55vw"
                 className={cn("object-cover transition-transform duration-[6000ms] ease-out motion-reduce:transition-none", i === active ? "scale-110" : "scale-100")}
               />
@@ -93,7 +92,7 @@ export function JourneyStory({ chapters }: { chapters: Chapter[] }) {
             className={cn("rounded-[1.75rem] border bg-surface p-6 shadow-soft transition-all duration-700 sm:p-8", i === active ? "border-accent/30 lg:shadow-lift" : "border-border lg:opacity-50")}
           >
             <div className="relative mb-6 aspect-[16/10] overflow-hidden rounded-[1.25rem] lg:hidden">
-              <Image src={c.image} alt={c.alt} fill placeholder="blur" sizes="92vw" className="object-cover" />
+              <Image src={c.image} alt={c.alt} fill sizes="92vw" className="object-cover" />
               <span className="absolute left-3 top-3 rounded-full bg-ink/60 px-3 py-1 text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-white backdrop-blur">{c.time}</span>
             </div>
             <p className="flex items-center gap-2 text-label font-semibold uppercase text-accent">

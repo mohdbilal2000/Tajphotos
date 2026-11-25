@@ -9,7 +9,7 @@ interface PageMeta {
   title: string; // without brand suffix (template adds it)
   description: string;
   path: string; // "/tours/golden-triangle-tour-4-days"
-  image?: string; // absolute or site-relative; defaults to route OG image
+  image?: string; // absolute or site-relative; defaults to the root OG image (app/opengraph-image.tsx)
   type?: "website" | "article";
   publishedTime?: string;
   modifiedTime?: string;
@@ -20,12 +20,39 @@ interface PageMeta {
 const xProfile: string = site.social.x;
 const xHandle = xProfile ? `@${xProfile.replace(/\/+$/, "").split("/").pop()}` : "";
 
+/** Longest `<title>` we emit, brand suffix included — roughly what Google shows before truncating. */
+export const MAX_TITLE_LENGTH = 60;
+const TITLE_SUFFIX = ` | ${site.name}`;
+
+/**
+ * Fit a page title into MAX_TITLE_LENGTH once the layout's "%s | TajPhotos" template is applied.
+ * Content titles double as H1s and often run longer, so, in order of preference:
+ *   1. the title as is, with the brand suffix;
+ *   2. the part before a ":" or " — " (the primary keyword leads), with the suffix;
+ *   3. the full title without the suffix;
+ *   4. the title cut at a word boundary.
+ */
+export function fitTitle(title: string): Metadata["title"] {
+  const max = MAX_TITLE_LENGTH;
+  if (title.length + TITLE_SUFFIX.length <= max) return title;
+  const head = title.split(/:\s| — | – /)[0].trim();
+  if (head !== title && head.length >= 20 && head.length + TITLE_SUFFIX.length <= max) return head;
+  if (title.length <= max) return { absolute: title };
+  const cut = title.slice(0, max + 1);
+  return { absolute: cut.slice(0, cut.lastIndexOf(" ")).replace(/[\s,:;—–&-]+$/, "") };
+}
+
 /** Consistent metadata for every page: canonical, OG, Twitter, robots. */
 export function buildMetadata(m: PageMeta): Metadata {
   const url = absoluteUrl(m.path);
-  const images = m.image ? [{ url: absoluteUrl(m.image), width: 1200, height: 630, alt: m.title }] : undefined;
+  // A page-level `openGraph`/`twitter` object replaces the layout's (and the file-based root
+  // opengraph-image) wholesale, so a page without its own image must name the fallback explicitly or
+  // it ships with no og:image / twitter:image at all.
+  const images = m.image
+    ? [{ url: absoluteUrl(m.image), width: 1200, height: 630, alt: m.title }]
+    : [{ url: absoluteUrl("/opengraph-image"), width: 1200, height: 630, alt: site.name }];
   return {
-    title: m.title,
+    title: fitTitle(m.title),
     description: m.description,
     keywords: m.keywords,
     // Page-level `alternates` replaces the layout's, so the RSS discovery link and the (single-language)
@@ -41,7 +68,7 @@ export function buildMetadata(m: PageMeta): Metadata {
       images,
       ...(m.type === "article" ? { publishedTime: m.publishedTime, modifiedTime: m.modifiedTime } : {}),
     },
-    twitter: { card: "summary_large_image", ...(xHandle ? { site: xHandle, creator: xHandle } : {}), title: m.title, description: m.description, images: images?.map((i) => i.url) },
+    twitter: { card: "summary_large_image", ...(xHandle ? { site: xHandle, creator: xHandle } : {}), title: m.title, description: m.description, images: images.map((i) => i.url) },
     robots: m.noIndex
       ? { index: false, follow: false }
       : { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } },

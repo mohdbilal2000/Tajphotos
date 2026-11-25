@@ -6,7 +6,7 @@ import { ArticleCard } from "@/components/guides/ArticleCard";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Travel Guides — Tickets, Timings & Practical Tips",
+  title: "Taj Mahal Travel Guides: Tickets, Timings & Tips",
   description: "Practical, up-to-date guides on Taj Mahal tickets, Delhi–Agra logistics, best times to visit, and planning your Golden Triangle trip.",
   path: "/guides",
 });

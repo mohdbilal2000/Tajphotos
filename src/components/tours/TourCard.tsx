@@ -10,7 +10,7 @@ import { ShortlistButton } from "@/components/shortlist/ShortlistButton";
 import { Price } from "@/components/ui/Price";
 import { WhatsAppLink } from "@/components/WhatsAppLink";
 import { site } from "@/config/site";
-import { cn } from "@/lib/utils";
+import { cn, withoutBlur } from "@/lib/utils";
 
 /**
  * Up to three benefits, each derived from the tour's own data — never a blanket claim stamped on
@@ -38,7 +38,8 @@ function perksFor(tour: Tour): { icon: LucideIcon; label: string }[] {
  * round arrow. The whole card is one click target via a stretched title link; the WhatsApp button
  * sits above it (`relative z-10`) because links cannot nest.
  */
-export function TourCard({ tour, className, preload }: { tour: Tour; className?: string; preload?: boolean }) {
+/** `blur={false}` drops the inlined blur placeholder — use it for cards that render below the fold. */
+export function TourCard({ tour, className, preload, blur = true }: { tour: Tour; className?: string; preload?: boolean; blur?: boolean }) {
   const img = getImage(tour.heroImage);
   // Start city first (a Delhi day trip to Agra should read "Delhi · Agra", not just "Agra"), then the
   // destinations in visiting order, de-duplicated.
@@ -55,9 +56,9 @@ export function TourCard({ tour, className, preload }: { tour: Tour; className?:
     <article className={cn("group relative flex h-full flex-col overflow-hidden rounded-[1.375rem] border border-border/80 bg-surface shadow-soft transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-lift")}>
       <div className="relative m-2 aspect-[4/3] overflow-hidden rounded-[1rem] bg-surface-2">
         <Image
-          src={img.src}
+          src={blur ? img.src : withoutBlur(img.src)}
           alt={img.alt}
-          placeholder="blur"
+          placeholder={blur ? "blur" : "empty"}
           preload={preload}
           sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 88vw"
           className="size-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"

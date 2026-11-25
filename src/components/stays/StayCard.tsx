@@ -3,7 +3,7 @@ import { MapPin } from "lucide-react";
 import type { Stay } from "@/content/types";
 import { stayTierLabel } from "@/content/stays";
 import { getImage } from "@/content/images";
-import { cn } from "@/lib/utils";
+import { cn, withoutBlur } from "@/lib/utils";
 
 /**
  * Hotels are not linked out and not priced. Both are deliberate: we are not an affiliate and we are
@@ -19,15 +19,15 @@ import { cn } from "@/lib/utils";
  * client supplies real property imagery, the caption should stay — it is how a magazine credits a
  * picture — and simply name the property instead.
  */
-export function StayCard({ stay, className, eager }: { stay: Stay; className?: string; eager?: boolean }) {
+export function StayCard({ stay, className, eager, blur = true }: { stay: Stay; className?: string; eager?: boolean; blur?: boolean }) {
   const img = getImage(stay.image);
   return (
     <article className={cn("group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift", className)}>
       <div className="figure relative aspect-[4/3] w-full">
         <Image
-          src={img.src}
+          src={blur ? img.src : withoutBlur(img.src)}
           alt={img.alt}
-          placeholder="blur"
+          placeholder={blur ? "blur" : "empty"}
           loading={eager ? "eager" : undefined}
           sizes="(min-width: 1024px) 31vw, (min-width: 640px) 45vw, 88vw"
         />

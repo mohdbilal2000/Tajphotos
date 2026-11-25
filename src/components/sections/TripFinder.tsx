@@ -109,7 +109,7 @@ export function TripFinder({ tours }: { tours: FinderTour[] }) {
             <li key={t.slug}>
               <Link href={`/tours/${t.slug}` as "/tours"} className="group flex gap-4 rounded-2xl bg-white/5 p-3 transition hover:bg-white/10">
                 <span className="relative size-20 shrink-0 overflow-hidden rounded-xl sm:size-24">
-                  <Image src={t.image} alt={t.alt} fill sizes="96px" className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <Image src={t.image} alt={t.alt} width={96} height={96} className="size-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 </span>
                 <span className="min-w-0 flex-1 py-1">
                   {t.partial && <span className="mb-1 block text-[0.625rem] font-semibold uppercase tracking-[0.18em] text-white/45">Also fits your time</span>}

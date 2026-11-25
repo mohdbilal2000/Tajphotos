@@ -4,6 +4,7 @@ const destination: Destination = {
   slug: "jaipur",
   name: "Jaipur",
   title: "Jaipur Travel Guide: Attractions, Best Time & Getting There",
+  seoTitle: "Jaipur Travel Guide: Top Sights & Best Time",
   tagline: "The Pink City of Rajasthan — forts, palaces and bazaars, 280 km from Delhi and Agra.",
   summary: "Plan your Jaipur trip: Amber Fort, City Palace, Hawa Mahal and Jantar Mantar, best months to visit, and how to reach Jaipur from Delhi by road, rail or air.",
   heroImage: "jaipur-hawa-mahal-1",

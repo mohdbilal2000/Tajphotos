@@ -1,5 +1,15 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import type { StaticImageData } from "next/image";
+
+/**
+ * A static image import without its inlined `blurDataURL`. Passing the full import object to
+ * next/image (a client component) serializes the base64 placeholder into the RSC payload even when
+ * `placeholder="blur"` is not used — use this for below-the-fold images and client-component props.
+ */
+export function withoutBlur(img: StaticImageData): StaticImageData {
+  return { src: img.src, width: img.width, height: img.height };
+}
 
 /** Merge Tailwind classes safely. */
 export function cn(...inputs: ClassValue[]) {

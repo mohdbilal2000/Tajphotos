@@ -4,6 +4,7 @@ const destination: Destination = {
   slug: "delhi",
   name: "Delhi",
   title: "Delhi Travel Guide: Top Attractions & Best Time to Visit",
+  seoTitle: "Delhi Travel Guide: Top Sights & When to Go",
   tagline: "Mughal forts, colonial avenues, and the gateway to your Golden Triangle trip",
   summary: "Plan your Delhi visit: top attractions like Red Fort and Humayun's Tomb, best months to go, and how to reach Agra by Gatimaan Express or road.",
   heroImage: "delhi-red-fort-1",

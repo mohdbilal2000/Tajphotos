@@ -4,6 +4,7 @@ const destination: Destination = {
   slug: "udaipur",
   name: "Udaipur",
   title: "Udaipur Travel Guide: Lake Palaces & City of Lakes",
+  seoTitle: "Udaipur Travel Guide: Lakes & Palaces",
   tagline: "Rajasthan's romantic lake city of palaces, ghats and Rajput heritage",
   summary: "Udaipur is Rajasthan's City of Lakes: Lake Pichola, the 1559 City Palace and Aravalli hilltop views make it a scenic add-on to any Golden Triangle trip.",
   heroImage: "udaipur-lake-pichola-1",

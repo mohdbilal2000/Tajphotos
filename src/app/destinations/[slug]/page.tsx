@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const d = getDestination(slug);
   if (!d) return {};
-  return buildMetadata({ title: d.title, description: d.summary, path: `/destinations/${d.slug}`, image: img(d.heroImage).src.src, keywords: d.keywords });
+  return buildMetadata({ title: d.seoTitle ?? d.title, description: d.summary, path: `/destinations/${d.slug}`, image: img(d.heroImage).src.src, keywords: d.keywords });
 }
 
 export default async function DestinationPage({ params }: { params: Promise<{ slug: string }> }) {

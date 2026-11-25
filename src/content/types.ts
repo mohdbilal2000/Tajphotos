@@ -117,6 +117,7 @@ export interface Destination {
   slug: string; // URL: /destinations/[slug]
   name: string; // "Agra"
   title: string; // H1: "Agra Travel Guide: Taj Mahal, Agra Fort & Beyond"
+  seoTitle?: string; // <title> when the H1 is too long for "%s | TajPhotos" in 60 characters
   tagline: string;
   summary: string; // meta description
   heroImage: ImageId;
