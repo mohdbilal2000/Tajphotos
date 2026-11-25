@@ -35,7 +35,7 @@ const tour: Tour = {
   startTime: "09:00 AM",
   cancellation: "Free cancellation up to 48 hours before the tour start date",
   badges: ["Sunrise Taj Mahal", "Private Tour"],
-  relatedTours: ["golden-triangle-tour-6-days-with-ranthambore", "golden-triangle-tour-7-days-with-udaipur"],
+  relatedTours: ["golden-triangle-tour-6-days-with-ranthambore", "golden-triangle-tour-7-days-with-udaipur", "last-minute-golden-triangle-tour"],
   relatedGuides: ["golden-triangle-itinerary", "golden-triangle-tour-cost"],
   keywords: ["Golden Triangle tour", "Delhi Agra Jaipur tour package", "4 day Golden Triangle itinerary", "Taj Mahal sunrise tour", "Agra Fort tickets", "Amber Fort Jaipur", "private India tour", "Yamuna Expressway Delhi to Agra", "Gatimaan Express", "Golden Triangle tour cost", "Jaipur City Palace", "Fatehpur Sikri detour"],
   description: [

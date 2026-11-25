@@ -40,6 +40,7 @@ export function Hero({
   const quick = [
     { label: "Same-day Taj", href: "/tours#same-day" },
     { label: "Golden Triangle", href: "/tours#golden-triangle" },
+    { label: "Last-minute", href: "/tours/last-minute-golden-triangle-tour" },
     { label: "Photoshoots", href: "/tours#photography" },
     { label: primaryLabel, href: primaryHref },
   ];

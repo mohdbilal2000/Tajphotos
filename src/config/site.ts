@@ -65,6 +65,7 @@ export const site = {
     // Confirmed by the owner (Nov 2026). Add licence/registration numbers here as they are shared:
     // a numbered credential is far stronger for trust and E-E-A-T than a bare claim.
     { label: "Government-licensed tour guides", short: "Licensed guides" },
+    { label: "Professional chauffeur-drivers", short: "Professional drivers" },
     { label: "Government-authorised photographers", short: "Authorised photographers" },
   ] as { label: string; short: string }[],
   stats: {

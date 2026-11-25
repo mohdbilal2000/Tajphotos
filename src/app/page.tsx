@@ -12,6 +12,7 @@ import { transport, tajMahal } from "@/content/facts";
 import { JourneyStory, type Chapter } from "@/components/sections/JourneyStory";
 import { TripFinder, type FinderTour } from "@/components/sections/TripFinder";
 import { SlideDeck } from "@/components/ui/SlideDeck";
+import { WhatsAppLink } from "@/components/WhatsAppLink";
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { TourCardGrid } from "@/components/tours/TourCardGrid";
 import { TourTabs } from "@/components/tours/TourTabs";
@@ -44,7 +45,7 @@ export const metadata: Metadata = buildMetadata({
 const promises = [
   { icon: CalendarCheck, title: "Free cancellation", body: "Cancel free up to 48 hours before most tours. The exact window is on every tour card." },
   { icon: Wallet, title: "Small deposit, balance on arrival", body: "A deposit holds your car, guide and hotels. The rest is paid in Agra, in cash, card or transfer." },
-  { icon: BadgeCheck, title: "Licensed local guides", body: "Government-licensed guides and Government-authorised photographers, not drivers doubling as either. No commission stops, ever." },
+  { icon: BadgeCheck, title: "Licensed local guides", body: "Government-licensed guides, professional chauffeur-drivers and Government-authorised photographers, not drivers doubling as guides. No commission stops, ever." },
   { icon: MessageCircle, title: "A reply in about 15 minutes", body: `A real person on WhatsApp, ${site.contact.hoursNote.match(/\((.*)\)/)?.[1] ?? "7 AM – 11 PM IST"}. No ticket numbers.` },
 ];
 
@@ -224,7 +225,7 @@ export default function Home() {
                   <span className="block text-sm font-semibold">tajphotos</span>
                   <span className="block text-xs opacity-70">The Taj, hour by hour</span>
                 </span>
-                <a href={site.social.instagram} target="_blank" rel="noopener noreferrer" className="rounded-full bg-bg px-3.5 py-1.5 text-xs font-semibold text-ink transition hover:opacity-85">Follow</a>
+                {site.social.instagram && <a href={site.social.instagram} target="_blank" rel="noopener noreferrer" className="rounded-full bg-bg px-3.5 py-1.5 text-xs font-semibold text-ink transition hover:opacity-85">Follow</a>}
               </div>
               <SlideDeck label="The Taj Mahal through the day" autoplay={4500}>
                 {tajFeed.map((f) => (
@@ -269,6 +270,29 @@ export default function Home() {
           })}
         </div>
       </Section>
+
+      {/* --------------------------- Last-minute strip ------------------------ */}
+      <section aria-labelledby="last-minute" className="pb-16 sm:pb-20">
+        <div className="container-site">
+          <div className="grid items-center gap-6 rounded-[2rem] border border-border bg-surface p-6 shadow-soft sm:p-8 lg:grid-cols-[1fr_auto] lg:gap-10 lg:p-10">
+            <div>
+              <p className="eyebrow">Plans changed?</p>
+              <h2 id="last-minute" className="mt-3 font-display text-3xl font-normal leading-tight text-ink sm:text-4xl">Landing in a day or two? We take late bookings.</h2>
+              <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted">
+                A Government-licensed guide, a professional chauffeur-driver and, on request, the hotels and a
+                Government-authorised photographer, arranged even 1–2 days before you start. Everything is subject
+                to availability and we tell you before you pay if anything is full, but we usually have it all available.
+              </p>
+            </div>
+            <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
+              <Link href={"/tours/last-minute-golden-triangle-tour" as "/tours"} className="btn-primary justify-center">See the last-minute tour</Link>
+              <WhatsAppLink message="Hi TajPhotos! I'm arriving in India soon and would like a Golden Triangle tour at short notice. My dates: " event="whatsapp_click_last_minute" className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-semibold text-ink transition hover:border-ink/40">
+                <MessageCircle className="size-4" aria-hidden /> Ask on WhatsApp
+              </WhatsAppLink>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ------------------------------ The story ---------------------------- */}
       <Section id="story">

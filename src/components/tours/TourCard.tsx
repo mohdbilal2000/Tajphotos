@@ -21,8 +21,8 @@ function perksFor(tour: Tour): { icon: LucideIcon; label: string }[] {
   const inc = tour.inclusions.join(" ").toLowerCase();
   const out: { icon: LucideIcon; label: string }[] = [];
   if (/photographer/.test(inc)) out.push({ icon: Camera, label: "Professional photographer" });
-  if (/guide/.test(inc)) out.push({ icon: BadgeCheck, label: "Private guide included" });
-  if (/(car|chauffeur|vehicle)/.test(inc) && !/not included/.test(tour.transport.toLowerCase())) out.push({ icon: Car, label: "Private car & driver" });
+  if (/guide/.test(inc)) out.push({ icon: BadgeCheck, label: "Licensed guide included" });
+  if (/(car|chauffeur|vehicle)/.test(inc) && !/not included/.test(tour.transport.toLowerCase())) out.push({ icon: Car, label: "Private car, professional driver" });
   if (/entry ticket/.test(inc) && !/not included|payable separately/.test(inc.match(/[^.]*entry ticket[^.]*/)?.[0] ?? "")) out.push({ icon: Ticket, label: "Monument tickets included" });
   if (/free cancellation/i.test(tour.cancellation)) {
     const h = tour.cancellation.match(/(\d+)\s*hours?/i)?.[1];
