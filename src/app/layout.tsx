@@ -11,6 +11,7 @@ import { Header } from "@/components/layout/Header";
 import { TopBar } from "@/components/layout/TopBar";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFloat } from "@/components/layout/WhatsAppFloat";
+import { MobileTabBar } from "@/components/layout/MobileTabBar";
 import { CurrencyProvider } from "@/context/CurrencyContext";
 import { ShortlistProvider } from "@/context/ShortlistContext";
 import { ShortlistBar } from "@/components/shortlist/ShortlistBar";
@@ -39,7 +40,9 @@ import { graph, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 const display = Newsreader({
   subsets: ["latin"],
   variable: "--font-display-serif",
-  display: "swap",
+  // "optional": the very first visit paints headings in the metric-matched fallback serif and the
+  // brand serif takes over from cache on every visit after — the app-like instant first paint.
+  display: "optional",
   axes: ["opsz"],
   weight: "variable",
   style: ["normal", "italic"],
@@ -47,7 +50,7 @@ const display = Newsreader({
   // photograph (the LCP element) for bandwidth on mobile. `display: swap` still paints text at once.
   preload: false,
 });
-const archivo = Archivo({ subsets: ["latin"], variable: "--font-archivo", display: "swap", weight: "variable" });
+const archivo = Archivo({ subsets: ["latin"], variable: "--font-archivo", display: "optional", weight: "variable" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -109,6 +112,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
           <ShortlistBar />
           <WhatsAppFloat />
+          <MobileTabBar />
           <ConsentBanner />
         </ShortlistProvider>
         </CurrencyProvider>
