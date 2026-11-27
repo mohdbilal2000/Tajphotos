@@ -77,6 +77,7 @@ export function Footer() {
           <ul className="mt-3">
             <li><Link href="/about" className={linkCls}>About us</Link></li>
             <li><Link href="/reviews" className={linkCls}>Reviews</Link></li>
+            <li><Link href="/tools" className={linkCls}>Free planning tools</Link></li>
             <li><Link href="/faq" className={linkCls}>FAQ</Link></li>
             <li><Link href="/plan-my-trip" className={linkCls}>Plan my trip</Link></li>
             <li><Link href="/contact" className={linkCls}>Contact</Link></li>

@@ -33,6 +33,10 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: pnpm exec tsx scripts/seo-engine/write.mjs --count ${{ github.event.inputs.count || '7' }}
+      - name: Draft social posts for new guides
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: pnpm exec tsx scripts/seo-engine/social.mjs --days 8 || true
       - name: Register and check
         run: |
           node scripts/gen-content-index.mjs

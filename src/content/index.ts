@@ -40,7 +40,7 @@ export const latestContentDate = () =>
 
 /** Static list of all crawlable routes (used by sitemap + llms.txt). */
 export function allRoutes() {
-  const staticPages = ["/", "/tours", "/stays", "/services", "/destinations", "/guides", "/plan-my-trip", "/about", "/contact", "/reviews", "/faq", "/credits", "/privacy", "/terms"];
+  const staticPages = ["/", "/tours", "/stays", "/services", "/destinations", "/guides", "/tools", "/tools/taj-mahal-sunrise-time", "/tools/taj-mahal-full-moon-calendar", "/plan-my-trip", "/about", "/contact", "/reviews", "/faq", "/credits", "/privacy", "/terms"];
   return {
     staticPages,
     tourPaths: tours.map((t) => `/tours/${t.slug}`),
