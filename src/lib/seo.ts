@@ -84,7 +84,7 @@ const WEBSITE_ID = `${site.url}/#website`;
 
 export function organizationJsonLd(): JsonLd {
   return {
-    "@type": ["TravelAgency", "TourOperator", "LocalBusiness", "Organization"],
+    "@type": ["TravelAgency", "LocalBusiness", "Organization"],
     "@id": ORG_ID,
     name: site.name,
     legalName: site.legalName,

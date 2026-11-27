@@ -1,0 +1,62 @@
+import type { Guide } from "@/content/types";
+
+const guide: Guide = {
+  slug: "india-honeymoon-golden-triangle-itinerary",
+  title: "India Honeymoon: A 7-Day Golden Triangle Itinerary",
+  summary: "A 7-day Golden Triangle honeymoon: Delhi, sunrise at the Taj Mahal, Jaipur, then two nights in Udaipur on Lake Pichola. Day-by-day plan and costs.",
+  category: "planning",
+  heroImage: "udaipur-lake-pichola-1",
+  author: "tajphotos-team",
+  datePublished: "2026-11-27",
+  dateModified: "2026-11-27",
+  keyTakeaways: [
+    "Seven days covers Delhi, Agra, Jaipur and Udaipur without rushing: the classic Golden Triangle plus India's most romantic city.",
+    "Sleep in Agra the night before your Taj Mahal visit — sunrise entry is the only way to see it at its quietest, and it is impossible on a same-day drive from Delhi.",
+    "Fly from Jaipur to Udaipur: about an hour in the air replaces a 6–7 hour drive and buys you a full extra afternoon on Lake Pichola.",
+    "Plan the week so your Agra day is not a Friday, when the Taj Mahal is closed to visitors.",
+    "The private 7-day tour this itinerary follows is published from $780 per person for two travellers sharing.",
+  ],
+  body: [
+    { type: "p", text: "The ideal India honeymoon itinerary spends 7 days on the Golden Triangle with Udaipur: two nights in Delhi, sunrise at the Taj Mahal from Agra, two nights in Jaipur, then a short flight to Udaipur for two nights on Lake Pichola. October to March gives the most reliable weather." },
+    { type: "h2", text: "Why is the Golden Triangle with Udaipur the best honeymoon route?" },
+    { type: "p", text: "The Delhi–Agra–Jaipur triangle packs India's three most famous cities into short drives, and Udaipur fixes the one thing the triangle lacks: a slow, romantic finish. Agra delivers the Taj Mahal at sunrise; Jaipur adds Amber Fort (Amer Fort) and the pink old city; Udaipur ends the week with palaces on the water and a sunset boat ride. Because the route is one-way — Delhi to Udaipur — you never backtrack, and Udaipur's airport connects onward to Delhi or Mumbai for your flight home." },
+    { type: "h2", text: "What does the 7-day honeymoon itinerary look like day by day?" },
+    { type: "table", caption: "A 7-day Golden Triangle honeymoon, Delhi to Udaipur.", headers: ["Day", "Where", "The plan"], rows: [
+      ["1", "Delhi", "Land, settle into the hotel, gentle evening start — Humayun's Tomb or India Gate at dusk"],
+      ["2", "Delhi → Agra", "Old Delhi in the morning (Jama Masjid, a rickshaw through Chandni Chowk), then the 3–4 hour drive to Agra via the Yamuna Expressway"],
+      ["3", "Agra → Jaipur", "Taj Mahal at gate opening, 30 minutes before sunrise; breakfast; Agra Fort; drive to Jaipur via Fatehpur Sikri"],
+      ["4", "Jaipur", "Amber Fort early, then City Palace, Jantar Mantar and the Hawa Mahal facade"],
+      ["5", "Jaipur → Udaipur", "Morning flight (about an hour); afternoon walk through the old city ghats"],
+      ["6", "Udaipur", "City Palace, Jagdish Temple, then a sunset boat ride on Lake Pichola past Jag Mandir"],
+      ["7", "Udaipur", "Slow morning, fly out via Delhi or Mumbai"],
+    ] },
+    { type: "p", text: "This is the same shape as our [7-day Golden Triangle tour with Udaipur](/tours/golden-triangle-tour-7-days-with-udaipur), which runs it as a private tour — car and driver for the road legs, the Jaipur–Udaipur flight, and local guides in each city — published from $780 per person for two travellers sharing." },
+    { type: "h2", text: "How do you make the Taj Mahal morning special?" },
+    { type: "p", text: "Sleep in Agra the night before. Gates open 30 minutes before sunrise, and the first hour — soft pink light, thin crowds, the dome mirrored in the reflecting pool — is the honeymoon photograph everyone wants. A Government-authorised photographer can shoot the visit handheld and deliver edited photos within days; sessions are published from $49. If there is a question still to be asked, read our [Taj Mahal proposal guide](/guides/taj-mahal-proposal-guide) first, and for poses and outfits see the [couple photoshoot guide](/guides/taj-mahal-couple-photoshoot-guide)." },
+    { type: "callout", variant: "warning", title: "Check the Friday rule before booking flights", text: "The Taj Mahal is closed to visitors every Friday. Anchor the week so day 3 is not a Friday — shift the whole itinerary by a day rather than lose the sunrise visit." },
+    { type: "h2", text: "Why end in Udaipur instead of looping back to Delhi?" },
+    { type: "p", text: "Udaipur is the change of pace a honeymoon needs after three sightseeing-heavy cities: whitewashed lanes, rooftop dinners facing the lake, and the City Palace rising straight from the water. Two nights is the honeymoon minimum; three is better if you can stretch the trip — see [Udaipur in 3 days](/guides/udaipur-in-3-days) and our [Udaipur destination guide](/destinations/udaipur) for what the extra day adds. The Jaipur–Udaipur flight is the trick that makes it fit in a week: roughly an hour in the air against 6–7 hours by road." },
+    { type: "h2", text: "When should a honeymoon do this route?" },
+    { type: "p", text: "October to March is the season this itinerary is built for: dry, clear days of roughly 8–33°C, mildest from November to February, with Udaipur's lakes full after the monsoon. December and January bring morning fog to Agra, so keep the sunrise plan flexible in those months. April to June is very hot and July to September humid and wet — doable, but a compromise. The month-by-month detail is in our [best time for an India honeymoon](/guides/best-time-for-honeymoon-in-india) guide." },
+    { type: "h2", text: "What does a 7-day honeymoon cost?" },
+    { type: "p", text: "The published private tour price is from $780 per person for two sharing, covering hotels with breakfast, the car and driver, the Jaipur–Udaipur flight leg, and local guides. On top of that, budget the $25 e-Visa each, monument tickets (the Taj Mahal is ₹1,300, about $16, for foreign nationals), meals beyond breakfast, and tips. International flights are the biggest variable — our [India trip cost from the USA](/guides/india-trip-cost-from-usa) guide builds full example budgets, and [where to stay in Agra](/guides/where-to-stay-in-agra) covers the room-with-a-Taj-view question." },
+    { type: "cta", title: "Make the honeymoon effortless", text: "One WhatsApp message, and the 7-day route — hotels, car, flight leg, guides and a sunrise photographer — is confirmed piece by piece before you pay.", tour: "golden-triangle-tour-7-days-with-udaipur", label: "See the 7-day tour with Udaipur" },
+  ],
+  faqs: [
+    { q: "Is 7 days enough for a Golden Triangle honeymoon with Udaipur?", a: "Yes, if you fly the Jaipur–Udaipur leg. Seven days gives two nights in Delhi, a night in Agra for sunrise at the Taj Mahal, two nights in Jaipur and two in Udaipur. It is full but not frantic; couples who want slower mornings should stretch to 10 days, which adds a third Udaipur night and breathing room in Jaipur." },
+    { q: "Should a honeymoon start in Delhi or end in Delhi?", a: "Start in Delhi and end in Udaipur. Delhi has the main international airport and makes a practical landing point while you shake off jet lag; Udaipur is the romantic high note, so finishing there means the trip crescendos instead of winding down. Udaipur's airport connects back to Delhi or Mumbai for most onward international flights." },
+    { q: "Can you see the Taj Mahal at sunrise on a day trip from Delhi?", a: "Not realistically. The drive is 3–4 hours via the Yamuna Expressway, and gates open 30 minutes before sunrise, so you would need to leave Delhi around 2 AM. Sleeping in Agra the night before is the honeymoon-friendly answer: a short ride to the gate, the quietest hour inside, and breakfast afterwards." },
+    { q: "Is the Golden Triangle too touristy for a honeymoon?", a: "The headline monuments are busy, but timing beats crowds: enter the Taj Mahal at gate opening, do Amber Fort first thing, and keep evenings for quieter spots — Mehtab Bagh at sunset, rooftop dinners in Udaipur. A private itinerary also means you move on your own clock rather than a coach group's, which changes the feel of the same route entirely." },
+    { q: "What should couples book in advance for this itinerary?", a: "The e-Visa (from $25 at indianvisaonline.gov.in, ideally 1–2 weeks out), Taj Mahal tickets at asi.payumoney.com, the Jaipur–Udaipur flight, and hotels in the October–March season, when the best rooms in Agra and Udaipur fill weeks ahead. A photographer for the sunrise visit is worth reserving early too, since sunrise slots are the first to go." },
+  ],
+  relatedTours: ["golden-triangle-tour-7-days-with-udaipur", "taj-mahal-photoshoot", "taj-mahal-sunrise-tour-with-photographer"],
+  relatedGuides: ["best-time-for-honeymoon-in-india", "10-day-india-itinerary-for-couples", "taj-mahal-proposal-guide", "udaipur-in-3-days", "golden-triangle-itinerary"],
+  keywords: ["India honeymoon itinerary", "Golden Triangle honeymoon", "7 day India honeymoon", "Taj Mahal honeymoon", "Udaipur honeymoon", "romantic India itinerary", "Delhi Agra Jaipur Udaipur itinerary", "India honeymoon packages for couples"],
+  sources: [
+    { title: "Archaeological Survey of India – Taj Mahal official site", url: "https://www.tajmahal.gov.in" },
+    { title: "India e-Visa official government portal", url: "https://indianvisaonline.gov.in" },
+    { title: "ASI Online Ticketing (Taj Mahal day tickets)", url: "https://asi.payumoney.com" },
+  ],
+};
+
+export default guide;

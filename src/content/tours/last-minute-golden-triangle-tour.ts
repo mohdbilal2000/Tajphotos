@@ -75,7 +75,7 @@ const tour: Tour = {
   cancellation: "Terms confirmed on WhatsApp when you book; the standard 48-hour window may not apply to bookings made 1–2 days ahead",
   badges: ["Last-minute", "Private Tour"],
   relatedTours: ["golden-triangle-tour-4-days", "same-day-taj-mahal-tour-by-car", "taj-mahal-sunrise-tour-with-photographer"],
-  relatedGuides: ["last-minute-golden-triangle-booking", "golden-triangle-itinerary", "is-taj-mahal-closed-on-friday"],
+  relatedGuides: ["last-minute-golden-triangle-booking", "golden-triangle-itinerary", "is-taj-mahal-closed-on-friday", "taj-mahal-layover-tour-from-delhi-airport", "india-travel-checklist-for-americans"],
   keywords: ["last minute Golden Triangle tour", "book Golden Triangle tour at short notice", "same week Taj Mahal tour", "Golden Triangle tour from Delhi", "last minute Agra tour", "licensed guide Agra", "private driver Delhi Agra Jaipur", "last minute India tour", "Delhi Agra Jaipur 4 days"],
   description: [
     { type: "p", text: "Plans change, flights get rebooked and layovers turn into free days. This is the Golden Triangle, Delhi, Agra and Jaipur in 4 days, for travellers who need it arranged 1–2 days ahead: a licensed guide, a professional chauffeur-driver and, on request, the hotels." },

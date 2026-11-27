@@ -33,7 +33,7 @@ const tour: Tour = {
   cancellation: "Free cancellation up to 24 hours before departure. Once your ASI night viewing ticket is booked in your name it cannot be changed, transferred or refunded, as this is fixed by ASI policy rather than by TajPhotos.",
   badges: ["Night Viewing", "Full Moon"],
   relatedTours: ["agra-city-tour", "same-day-taj-mahal-tour-by-car"],
-  relatedGuides: ["taj-mahal-night-viewing-dates"],
+  relatedGuides: ["taj-mahal-night-viewing-dates", "best-time-for-honeymoon-in-india"],
   keywords: ["Taj Mahal night viewing", "full moon Taj Mahal tour", "Taj Mahal moonlight visit", "ASI night viewing tickets", "Taj Mahal Friday closure", "Agra full moon nights", "22 Mall Road Agra", "Taj Mahal batch entry", "Ramzan Taj Mahal closure", "night viewing ticket price"],
   description: [
     { type: "p", text: "Taj Mahal night viewing lets you see the marble mausoleum under moonlight from a garden viewpoint, on 5 fixed nights each month. Entry runs in 30-minute batches between 8:30 PM and 12:30 AM, and tickets must be booked at least 24 hours in advance through the Archaeological Survey of India (ASI)." },

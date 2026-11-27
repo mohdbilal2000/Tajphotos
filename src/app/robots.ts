@@ -20,7 +20,7 @@ import { site } from "@/config/site";
 export default function robots(): MetadataRoute.Robots {
   // Never disallow /_next/: Googlebot renders pages and needs the CSS/JS there; blocking it makes
   // every page look broken or empty to the renderer.
-  const disallow = ["/api/", "/thank-you", "/plan-my-trip/success"];
+  const disallow = ["/api/"];
   return {
     rules: [
       { userAgent: "*", allow: "/", disallow },

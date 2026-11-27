@@ -34,7 +34,7 @@ export function GET() {
     `Structured tour data (price, duration, group size, destinations) is also available as JSON at ${absoluteUrl("/tours.json")}.`,
     "",
   ];
-  out.push(`---`, `# About ${site.legalName}`, `URL: ${absoluteUrl("/about")}`, `Based in: ${site.address.addressLocality}, ${site.address.addressRegion}, India · Contact: ${site.contact.email}`, "", "## Team", ...team.map((m) => `- ${m.name}, ${m.role} (${m.years} yrs; ${m.languages.join(", ")}): ${stripInline(m.bio)}`), "");
+  out.push(`---`, `# About ${site.legalName}`, `URL: ${absoluteUrl("/about")}`, `Based in: ${site.address.addressLocality}, ${site.address.addressRegion}, India · Contact: ${site.contact.email}`, "", "## Team", ...team.map((m) => `- ${m.name}, ${m.role} (${m.years > 0 ? `${m.years} yrs; ` : ""}${m.languages.join(", ")}): ${stripInline(m.bio)}`), "");
   for (const t of tours) {
     out.push(`---`, `# ${t.title}`, `URL: ${absoluteUrl(`/tours/${t.slug}`)}`, `Duration: ${t.durationLabel} · Starts: ${t.startCity} · Ends: ${t.endCity}`, `Price: from USD ${t.priceFrom.usd} ${t.priceNote}`, "", t.summary, "", "## Highlights", ...t.highlights.map((h) => `- ${h}`), "", blocksToText(t.description), "", "## Itinerary", ...t.itinerary.map((d) => `Day ${d.day}: ${d.title} — ${stripInline(d.summary)}\n${d.details.map((x) => `  - ${stripInline(x)}`).join("\n")}`), "", "## Inclusions", ...t.inclusions.map((x) => `- ${x}`), "## Exclusions", ...t.exclusions.map((x) => `- ${x}`), "", "## FAQ", faqsToText(t.faqs), "");
   }

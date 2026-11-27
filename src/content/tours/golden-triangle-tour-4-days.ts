@@ -36,7 +36,7 @@ const tour: Tour = {
   cancellation: "Free cancellation up to 48 hours before the tour start date",
   badges: ["Sunrise Taj Mahal", "Private Tour"],
   relatedTours: ["golden-triangle-tour-6-days-with-ranthambore", "golden-triangle-tour-7-days-with-udaipur", "last-minute-golden-triangle-tour"],
-  relatedGuides: ["golden-triangle-itinerary", "golden-triangle-tour-cost"],
+  relatedGuides: ["golden-triangle-itinerary", "golden-triangle-tour-cost", "india-trip-cost-from-usa", "india-travel-checklist-for-americans"],
   keywords: ["Golden Triangle tour", "Delhi Agra Jaipur tour package", "4 day Golden Triangle itinerary", "Taj Mahal sunrise tour", "Agra Fort tickets", "Amber Fort Jaipur", "private India tour", "Yamuna Expressway Delhi to Agra", "Gatimaan Express", "Golden Triangle tour cost", "Jaipur City Palace", "Fatehpur Sikri detour"],
   description: [
     { type: "p", text: "The Golden Triangle tour links Delhi, Agra and Jaipur in 4 days and 3 nights, covering India's three most-visited imperial cities in one private itinerary. A dedicated air-conditioned car and driver handle every transfer, so the only fixed points in your day are monument opening times." },

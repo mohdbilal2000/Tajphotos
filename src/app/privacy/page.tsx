@@ -12,7 +12,8 @@ export default function PrivacyPage() {
       <div className="border-b border-border bg-surface py-8"><div className="container-site"><Breadcrumbs items={[{ name: "Privacy", path: "/privacy" }]} /><h1 className="mt-2 text-3xl font-semibold sm:text-4xl">Privacy policy</h1></div></div>
       <Section>
         <div className="prose-site max-w-[720px]">
-          <p><em>Last updated: 3 September 2026. TODO: have this reviewed by a lawyer familiar with India&apos;s DPDP Act 2023 and, if you serve EU visitors, UK/EU GDPR, before launch.</em></p>
+          {/* TODO before scaling: have this page reviewed by a lawyer (DPDP Act 2023 / GDPR; deposit, refund and force-majeure wording). */}
+          <p><em>Last updated: 3 September 2026.</em></p>
           <h2>What we collect</h2>
           <p>When you use our plan-my-trip form, we collect your name, contact details, travel dates, and anything else you choose to share, in order to reply with an itinerary and price. We use Google Analytics and Microsoft Clarity to understand how visitors use this site, and Vercel Analytics for performance monitoring.</p>
           <h2>How we use it</h2>

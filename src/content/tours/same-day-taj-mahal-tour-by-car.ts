@@ -33,7 +33,7 @@ const tour: Tour = {
   cancellation: "Free cancellation up to 48 hours before the tour start time",
   badges: ["Private Tour", "Free Cancellation"],
   relatedTours: ["taj-mahal-tour-by-gatimaan-express", "taj-mahal-sunrise-tour-from-delhi", "agra-city-tour"],
-  relatedGuides: ["taj-mahal-tickets", "is-taj-mahal-closed-on-friday", "delhi-to-agra"],
+  relatedGuides: ["taj-mahal-tickets", "is-taj-mahal-closed-on-friday", "delhi-to-agra", "taj-mahal-layover-tour-from-delhi-airport"],
   keywords: ["Taj Mahal tour from Delhi", "same day Taj Mahal tour", "Delhi to Agra by car", "Agra Fort tour", "Yamuna Expressway", "private car Taj Mahal", "Taj Mahal day trip", "Gatimaan Express", "Itimad-ud-Daulah", "Baby Taj", "Golden Triangle India", "Agra day tour"],
   description: [
     { type: "h2", text: "What's Included in This Day Trip" },

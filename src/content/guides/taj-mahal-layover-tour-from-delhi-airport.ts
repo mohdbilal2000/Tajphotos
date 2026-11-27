@@ -1,0 +1,62 @@
+import type { Guide } from "@/content/types";
+
+const guide: Guide = {
+  slug: "taj-mahal-layover-tour-from-delhi-airport",
+  title: "Can You See the Taj Mahal on a Delhi Layover?",
+  summary: "With a 12–14 hour Delhi layover you can see the Taj Mahal: minimum safe hours, car vs Gatimaan Express timings, visa rules and the Friday closure.",
+  category: "planning",
+  heroImage: "taj-mahal-sunrise-2",
+  author: "tajphotos-team",
+  datePublished: "2026-11-27",
+  dateModified: "2026-11-27",
+  keyTakeaways: [
+    "Treat 12–14 hours at Delhi airport as the practical minimum for a Taj Mahal layover by car; 16+ hours is comfortable.",
+    "The drive is 3–4 hours each way on the Yamuna Expressway, the visit takes 2–3 hours, and you should hold 3 hours in reserve for international re-check-in.",
+    "You need a visa to leave the airport, even for a few hours — the e-Tourist Visa (from $25) must be approved before you fly.",
+    "A private car beats the Gatimaan Express for layovers: it leaves the terminal the minute you clear immigration and carries your luggage all day.",
+    "The Taj Mahal is closed on Fridays, and the Gatimaan Express does not run that day either — a Friday layover means Agra Fort and Mehtab Bagh instead.",
+  ],
+  body: [
+    { type: "p", text: "Yes — with a layover of roughly 12–14 hours or more at Delhi's Indira Gandhi International Airport, you can see the Taj Mahal and be back for your onward flight. The drive is 3–4 hours each way, the visit takes 2–3 hours, and you need an approved visa and a non-Friday arrival." },
+    { type: "h2", text: "How many layover hours do you need for the Taj Mahal?" },
+    { type: "p", text: "Count backwards from your onward departure. You need to be back at the terminal about 3 hours before an international flight, immigration and customs on arrival take time, and the road leg runs 3–4 hours each way depending on Delhi traffic. Stack those honestly and the arithmetic looks like this:" },
+    { type: "table", caption: "A realistic Taj Mahal layover timeline by private car.", headers: ["Leg", "Time to allow"], rows: [
+      ["Arrival formalities: immigration, customs, meeting the driver", "1–1.5 hours"],
+      ["Drive Delhi airport → Agra (Yamuna Expressway, 230–240 km)", "3–4 hours"],
+      ["Taj Mahal visit (security, battery bus to the gate, 2 hours inside)", "2.5–3 hours"],
+      ["Lunch or a quick Agra Fort stop (optional)", "1–1.5 hours"],
+      ["Drive Agra → Delhi airport", "3.5–4 hours (evening traffic)"],
+      ["International re-check-in buffer", "3 hours"],
+      ["Total", "about 13–17 hours, so 12–14 hours is the bare minimum, 16+ comfortable"],
+    ] },
+    { type: "p", text: "With less than about 12 hours on the ground, the honest answer is no — one accident on the expressway or a slow immigration hall and you are sprinting for a missed connection. With 10–12 hours, see Delhi instead: Humayun's Tomb and Qutub Minar make a fine short loop from the airport — see our [Delhi destination guide](/destinations/delhi)." },
+    { type: "h2", text: "Is a car or the Gatimaan Express better for a layover?" },
+    { type: "p", text: "For a layover, a private car wins on every axis that matters. It leaves the terminal the moment you clear immigration — including pre-dawn, which puts you at the Taj Mahal for sunrise — your luggage rides with you, and the schedule flexes around delays. The Gatimaan Express is faster city-to-city (Hazrat Nizamuddin 08:10 to Agra Cantt 09:50, 1 hour 40 minutes), but it adds an airport-to-station transfer across Delhi traffic, runs on its own fixed clock with the return at 17:50 arriving 19:30, does not run on Fridays, and leaves you handling bags on platforms. Full timings are in our [Gatimaan Express guide](/guides/gatimaan-express-delhi-agra); the road option is covered in [Delhi to Agra](/guides/delhi-to-agra)." },
+    { type: "h2", text: "Do you need a visa for a layover Taj Mahal tour?" },
+    { type: "p", text: "Yes. Leaving the airport means clearing Indian immigration, and that requires a visa, however short the excursion. For most Western nationalities the practical route is the e-Tourist Visa, from $25, applied for at indianvisaonline.gov.in and approved before you fly — see our [India e-Visa guide](/guides/india-e-visa). Transiting without a visa is generally only possible if you remain airside in the international transit area, and transit rules vary by nationality and change without notice, so confirm your case on the official portal or with your airline before relying on it. There is no visa-on-arrival counter to count on for this." },
+    { type: "callout", variant: "warning", title: "A Friday layover changes the plan", text: "The Taj Mahal is closed to visitors every Friday, and the Gatimaan Express does not run that day either. If your layover lands on a Friday, Agra still works — Agra Fort, Itimad-ud-Daulah and the Taj Mahal view from [Mehtab Bagh](/guides/mehtab-bagh-taj-mahal-view) across the river are all open — or swap to a Delhi city loop." },
+    { type: "h2", text: "What happens to your luggage?" },
+    { type: "p", text: "If your airline checks bags through to your final destination, you carry only a day bag — ideal, because large bags are not allowed inside the Taj Mahal complex. If you must collect and re-check luggage, a private car solves it: suitcases stay locked in the vehicle with the driver while you are inside the monument, which is one more reason the car beats the train for layovers. Note what else cannot go in with you — tripods, drones, food — in our [Taj Mahal tickets guide](/guides/taj-mahal-tickets)." },
+    { type: "h2", text: "What does a layover tour cost, and how do you time sunrise?" },
+    { type: "p", text: "Our published same-day prices: the [same-day Taj Mahal tour by car](/tours/same-day-taj-mahal-tour-by-car) from $85 per person (two sharing) and the sunrise version from $99, both including the car, driver and a licensed guide — the Taj Mahal ticket (₹1,300, about $16, for foreign nationals) is extra. An overnight-arriving flight is the layover jackpot: land late evening or around midnight, drive while the roads are empty, reach Agra for gate opening 30 minutes before sunrise, and be back at the airport by early afternoon with the best light of the day already on your memory card." },
+    { type: "cta", title: "Landing in Delhi with a long layover?", text: "Send your flight numbers on WhatsApp. We confirm whether the hours genuinely work, then meet you at arrivals with the car and your name board.", tour: "same-day-taj-mahal-tour-by-car", label: "See the same-day Taj Mahal tour" },
+  ],
+  faqs: [
+    { q: "How long a layover do you need in Delhi to see the Taj Mahal?", a: "Plan on 12–14 hours on the ground as the practical minimum, and 16 or more for comfort. The journey is 3–4 hours each way by car, the visit itself takes 2–3 hours including security, and you should keep 3 hours in hand for international re-check-in. With under 12 hours, stay in Delhi — Humayun's Tomb and Qutub Minar fit a short layover far more safely." },
+    { q: "Do I need an Indian visa just for a layover tour?", a: "Yes. Stepping out of the airport means clearing immigration, which requires an approved visa even for a few hours. The e-Tourist Visa starts at $25 at indianvisaonline.gov.in and must be approved before you fly. Staying airside in transit generally needs no visa, but transit rules vary by nationality and change, so confirm your specific case on the official portal or with your airline." },
+    { q: "Can you do a sunrise Taj Mahal visit on a layover?", a: "Yes, if your flight lands in the late evening or around midnight. The night drive to Agra runs on empty roads, you enter at gate opening — 30 minutes before sunrise — see the monument at its quietest, and return to Delhi airport by early afternoon. It is the best version of the layover tour: cooler, emptier, and with the most forgiving traffic in both directions." },
+    { q: "Is the Gatimaan Express or a car better for a layover tour?", a: "A car, almost always. The Gatimaan Express is quick — 1 hour 40 minutes from Hazrat Nizamuddin, departing 08:10 — but you must first cross Delhi from the airport, the return only leaves Agra at 17:50, it does not run on Fridays, and your luggage travels with you on platforms. A private car departs the terminal when you do and keeps your bags locked and minded while you are inside." },
+    { q: "What if my layover falls on a Friday?", a: "The Taj Mahal is closed to visitors on Fridays, and the Gatimaan Express does not run. You can still make Agra worthwhile — Agra Fort, Itimad-ud-Daulah (the Baby Taj) and the full Taj Mahal view from Mehtab Bagh across the river all stay open — or spend the hours on a Delhi loop instead. If the Taj Mahal itself is the point, it has to be another day of the week." },
+  ],
+  relatedTours: ["same-day-taj-mahal-tour-by-car", "taj-mahal-sunrise-tour-from-delhi", "taj-mahal-tour-by-gatimaan-express"],
+  relatedGuides: ["delhi-to-agra", "gatimaan-express-delhi-agra", "india-e-visa", "is-taj-mahal-closed-on-friday", "india-travel-checklist-for-americans"],
+  keywords: ["Taj Mahal layover tour", "Taj Mahal from Delhi airport", "Delhi layover Taj Mahal", "how long layover for Taj Mahal", "Taj Mahal day trip from Delhi airport", "Delhi airport to Agra", "transit visa India layover", "sunrise Taj Mahal layover"],
+  sources: [
+    { title: "India e-Visa official government portal", url: "https://indianvisaonline.gov.in" },
+    { title: "Bureau of Immigration, Government of India", url: "https://boi.gov.in" },
+    { title: "Archaeological Survey of India – Taj Mahal official site", url: "https://www.tajmahal.gov.in" },
+    { title: "Indian Railways / IRCTC (Gatimaan Express schedule)", url: "https://www.irctc.co.in" },
+  ],
+};
+
+export default guide;

@@ -1,0 +1,61 @@
+import type { Guide } from "@/content/types";
+
+const guide: Guide = {
+  slug: "is-india-safe-for-couples",
+  title: "Is India Safe for Couples? An Honest Answer",
+  summary: "India is broadly safe for couples on the Golden Triangle: the real risks are scams and overcharging, not violence. Honest notes for women and night travel.",
+  category: "practical",
+  heroImage: "jaipur-hawa-mahal-1",
+  author: "tajphotos-team",
+  datePublished: "2026-11-27",
+  dateModified: "2026-11-27",
+  keyTakeaways: [
+    "Couples travel the Delhi–Agra–Jaipur circuit routinely; the Taj Mahal alone drew 6.9 million visitors in FY2024–25, and the realistic problems are scams and overcharging, not violent crime.",
+    "Check the current U.S. State Department advisory at travel.state.gov before you book — conditions change, and no operator can promise otherwise.",
+    "Women travellers report the most hassle as staring and unwanted attention; modest dress, pre-arranged transport and confident refusals handle most of it.",
+    "Keep road transfers in daylight — the roads are fine by day, and there is simply no itinerary reason to drive between cities at night.",
+    "Book through a registered operator with licensed guides and get the plan in writing; almost every bad tourist story starts with an offer from a stranger.",
+  ],
+  body: [
+    { type: "p", text: "Yes — the Golden Triangle is India's busiest tourist circuit and couples travel it routinely. The realistic risks are scams, overcharging, petty theft and night-time road travel rather than violent crime. A registered operator, a licensed guide and a few simple habits deal with most of it; check travel.state.gov for the current advisory." },
+    { type: "h2", text: "Is the Golden Triangle safe for Western couples?" },
+    { type: "p", text: "The Delhi–Agra–Jaipur route is where India is most practised at hosting foreign visitors: the Taj Mahal alone recorded 6.9 million visitors in FY2024–25, monument complexes are heavily secured with screening at every gate, and tourist police operate in all three cities. What that infrastructure does not remove is the low-level friction aimed at obvious newcomers — inflated prices, commission detours, self-appointed 'guides' — which is a money problem, not a safety problem. We catalogue every common trick in our [Taj Mahal scams guide](/guides/taj-mahal-scams-how-to-avoid); read it once and you will recognise each one in the wild." },
+    { type: "p", text: "We will not tell you India is risk-free, because nowhere is, and a tour operator promising safety should lower your confidence, not raise it. What we can say: the problems couples actually bring back from this route are stories about a pushy shop, not about danger." },
+    { type: "h2", text: "What are the actual risks — and what aren't?" },
+    { type: "table", caption: "Common worries versus what couples actually encounter on the Golden Triangle.", headers: ["Worry", "Reality on this route", "What to do"], rows: [
+      ["Violent crime against tourists", "Rare on the tourist circuit; not the realistic concern", "Normal city sense: lit areas at night, valuables out of sight"],
+      ["Scams and overcharging", "The genuine, everyday risk", "Agree prices first; buy tickets on official sites; decline strangers' offers"],
+      ["Pickpocketing in crowds", "Possible in bazaars, stations and queues", "Zipped cross-body bag worn in front; phone never in a back pocket"],
+      ["Road accidents", "The statistically serious risk, worst at night", "Daylight transfers, a professional driver, seatbelts on"],
+      ["Food and water illness", "Common but usually mild and avoidable", "Sealed bottled water, busy restaurants, caution with raw food"],
+      ["Harassment of women", "Staring and attention happen; assault on the tourist circuit is rare", "Modest dress, pre-arranged transport, firm refusals, trust instincts"],
+    ] },
+    { type: "h2", text: "Is India safe for women travellers?" },
+    { type: "p", text: "Honestly: most Western women on this route experience staring, occasional photo requests and persistent vendors — wearying, not dangerous — and women travelling as part of a couple generally report less of it than women travelling solo. The habits that help are unglamorous: shoulders-and-knees-covered dress (which also matches monument norms — see [what to wear at the Taj Mahal](/guides/what-to-wear-taj-mahal)), transport arranged in advance rather than hailed, hotel doors locked, and a flat 'no' delivered without apology, repeated as needed. The U.S. State Department publishes specific guidance for women travellers; read it alongside the current India advisory at travel.state.gov rather than relying on any operator's summary, ours included." },
+    { type: "h2", text: "Should couples travel by road at night?" },
+    { type: "p", text: "No — and you never need to. Night driving is where India's genuine road-safety problem concentrates: unlit vehicles, wrong-way traffic on shortcuts, fatigue. Every leg of a sensible itinerary fits comfortably in daylight — Delhi–Agra is 3–4 hours on the Yamuna Expressway, Agra–Jaipur 4–6 — which is exactly how our [10-day couples itinerary](/guides/10-day-india-itinerary-for-couples) schedules them. The one defensible night drive is the pre-dawn run to Agra for sunrise on a layover, on an empty expressway with a professional driver; even then, it is a trade-off you should make knowingly." },
+    { type: "h2", text: "How do you pick a trustworthy operator?" },
+    { type: "p", text: "Three checks separate real operators from the gate-side economy: a registered company with a traceable address and phone number, Government-licensed guides (ask to see the ID — approved guides carry one), and the full plan in writing before you pay anything. A real operator tells you when something is unavailable instead of quietly substituting it, and never recruits you in a parking lot. The same logic applies to hotels — [where to stay in Agra](/guides/where-to-stay-in-agra) covers picking the well-reviewed, well-located ones — and to every 'special deal' that begins with a stranger's approach." },
+    { type: "callout", variant: "info", title: "Two five-minute precautions", text: "Before you fly, check the current India advisory at travel.state.gov, and US citizens can enrol in the free Smart Traveler Enrollment Program (STEP) so the embassy can reach you in an emergency. Both take minutes and cost nothing." },
+    { type: "h2", text: "What about public affection and local norms?" },
+    { type: "p", text: "India is socially conservative in public: holding hands draws no attention in tourist areas, but kissing and embracing in public are frowned upon, especially at religious sites — save it for the rooftop restaurant. Hotels that host international guests routinely accommodate unmarried couples; every foreign guest completes a passport registration form at check-in, which is routine, not scrutiny. For honeymooners the practical conclusion is simple: plan the romance into private settings — a lake-view room in Udaipur, a sunrise with a photographer at the Taj Mahal — as our [honeymoon itinerary](/guides/india-honeymoon-golden-triangle-itinerary) does, and let the monuments be monuments." },
+    { type: "cta", title: "Travel with people who are accountable", text: "Private car, professional driver, Government-licensed guides, daylight transfers and the whole plan in writing before you pay — that is the safety system that actually works.", tour: "golden-triangle-tour-4-days", label: "See the 4-day private tour" },
+  ],
+  faqs: [
+    { q: "Is India safe for American tourists right now?", a: "The Golden Triangle circuit hosts millions of visitors a year and is well policed and well practised with foreigners; the everyday risks are scams, overcharging and petty theft rather than violence. Conditions change, though, so check the current U.S. State Department advisory for India at travel.state.gov before booking, and enrol in STEP so the embassy can contact you if something develops during your trip." },
+    { q: "Is Agra safe at night for couples?", a: "The main tourist zones — hotel districts, the areas around the Taj Mahal's gates — are fine for an evening meal out, with normal city precautions. What to avoid is not Agra after dark but driving between cities after dark, where India's road risk concentrates. Plan intercity transfers in daylight and keep evenings for rooftop restaurants with the floodlit fort on the skyline." },
+    { q: "Can unmarried couples share hotel rooms in India?", a: "Foreign couples sharing a room is routine in hotels that host international guests, and no Golden Triangle hotel we work with asks about marital status. Every foreign guest fills in a passport-based registration form at check-in, which is a standard legal formality, not a judgement. The occasional news stories about couples refused rooms almost always involve local guests at budget properties, not international travellers." },
+    { q: "Is the Taj Mahal area safe?", a: "Yes — the complex itself is one of the most secured sites in India, with screening at every gate, and the surrounding tourist zone is heavily policed. The nuisance is commercial: unofficial guides, inflated 'helper' fees and commission-driven shop detours in the approach streets. Buy tickets only at asi.payumoney.com or official counters, use a licensed guide, and the area is simply busy, not risky." },
+    { q: "Is street food safe to eat in India?", a: "It can be, with judgement: choose stalls with fast turnover where food is cooked fresh in front of you, and skip anything raw, pre-cut or sitting out, including salads and unpeeled fruit. Drink only sealed bottled or properly filtered water. Stomach upsets are the most common tourist ailment and usually mild; the CDC's India page has the medical detail, and your own doctor beats any travel guide." },
+  ],
+  relatedTours: ["golden-triangle-tour-4-days", "golden-triangle-tour-7-days-with-udaipur", "same-day-taj-mahal-tour-by-car"],
+  relatedGuides: ["taj-mahal-scams-how-to-avoid", "india-travel-checklist-for-americans", "tipping-in-india-guide", "india-honeymoon-golden-triangle-itinerary", "what-to-wear-taj-mahal"],
+  keywords: ["is India safe for couples", "is India safe for American tourists", "is Agra safe", "India safety for women travellers", "Golden Triangle safety", "is the Taj Mahal safe", "India travel safety tips", "night travel India safety"],
+  sources: [
+    { title: "U.S. Department of State – India International Travel Information", url: "https://travel.state.gov/content/travel/en/international-travel/International-Travel-Country-Information-Pages/India.html" },
+    { title: "CDC Travelers' Health – India", url: "https://wwwnc.cdc.gov/travel/destinations/traveler/none/india" },
+    { title: "Incredible India (Ministry of Tourism, Government of India)", url: "https://www.incredibleindia.gov.in" },
+  ],
+};
+
+export default guide;

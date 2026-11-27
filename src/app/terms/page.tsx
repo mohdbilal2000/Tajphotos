@@ -12,7 +12,8 @@ export default function TermsPage() {
       <div className="border-b border-border bg-surface py-8"><div className="container-site"><Breadcrumbs items={[{ name: "Terms", path: "/terms" }]} /><h1 className="mt-2 text-3xl font-semibold sm:text-4xl">Terms &amp; cancellation policy</h1></div></div>
       <Section>
         <div className="prose-site max-w-[720px]">
-          <p><em>Last updated: 3 September 2026. TODO: have this reviewed by a lawyer before launch, and confirm deposit percentages, refund windows and force-majeure wording against how the business actually operates.</em></p>
+          {/* TODO before scaling: have this page reviewed by a lawyer (DPDP Act 2023 / GDPR; deposit, refund and force-majeure wording). */}
+          <p><em>Last updated: 3 September 2026.</em></p>
           <h2>Booking &amp; payment</h2>
           <p>A deposit (typically 20% of the tour price) confirms your booking; the balance is due on arrival, payable by cash or card. Prices are quoted per person in USD by default; other currencies shown are indicative, converted at the rate in effect when you book.</p>
           <h2>Cancellation</h2>

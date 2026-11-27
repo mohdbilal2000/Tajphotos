@@ -33,7 +33,7 @@ const tour: Tour = {
   cancellation: "Free cancellation up to 48 hours before the tour start time",
   badges: ["Sunrise", "Private Photographer"],
   relatedTours: ["taj-mahal-photoshoot", "taj-mahal-sunrise-tour-from-delhi"],
-  relatedGuides: ["what-to-wear-taj-mahal", "best-time-to-visit-taj-mahal"],
+  relatedGuides: ["what-to-wear-taj-mahal", "best-time-to-visit-taj-mahal", "taj-mahal-couple-photoshoot-guide", "taj-mahal-proposal-guide"],
   keywords: ["Taj Mahal sunrise tour", "Taj Mahal photographer", "Taj Mahal photography tour", "private Taj Mahal tour from Delhi", "Taj Mahal sunrise photography", "professional Taj Mahal photoshoot", "Golden Triangle photography tour", "Agra day trip from Delhi", "Taj Mahal crowd-free visit", "edited Taj Mahal photos", "Yamuna Expressway Agra tour", "Agra Fort and Taj Mahal tour"],
   description: [
     { type: "p", text: "This full-day tour pairs a sunrise visit to the Taj Mahal with a professional local photographer who stays with you for the entire visit, then delivers edited, high-resolution photos within 3 days. You leave Delhi before dawn, reach the Taj Mahal gates as they open 30 minutes before sunrise, and photograph the monument in its softest light, before the day's crowds and heat arrive." },

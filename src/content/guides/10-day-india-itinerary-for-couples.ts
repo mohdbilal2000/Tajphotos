@@ -1,0 +1,63 @@
+import type { Guide } from "@/content/types";
+
+const guide: Guide = {
+  slug: "10-day-india-itinerary-for-couples",
+  title: "10 Days in India for Couples: The Ideal Itinerary",
+  summary: "Ten days for couples in India: Delhi, sunrise Taj Mahal, Jaipur, then three slow nights in Udaipur. Day-by-day pacing and where to linger.",
+  category: "planning",
+  heroImage: "udaipur-city-palace-1",
+  author: "tajphotos-team",
+  datePublished: "2026-11-27",
+  dateModified: "2026-11-27",
+  keyTakeaways: [
+    "The 10-day shape that works: Delhi (2 nights), Agra (1), Jaipur (2), Udaipur (3), and a final night in Delhi before the flight home.",
+    "Ten days beats seven mainly in pace — one sight per morning instead of two, afternoons free, and a third Udaipur night that turns the finale into an actual rest.",
+    "Front-load the fixed points: the Taj Mahal cannot be on a Friday, and the sunrise visit needs the previous night in Agra.",
+    "Fly Jaipur–Udaipur (about an hour) rather than driving 6–7 hours; use the Yamuna Expressway for Delhi–Agra and break Agra–Jaipur at Fatehpur Sikri.",
+    "Udaipur is where to slow down: boat ride one evening, no alarm the next morning, and an unplanned day that always fills itself.",
+  ],
+  body: [
+    { type: "p", text: "With 10 days in India, couples can do the Golden Triangle without rushing and still slow down in Udaipur: two nights in Delhi, one in Agra for sunrise at the Taj Mahal, two in Jaipur, three in Udaipur, and a final night back in Delhi before flying home." },
+    { type: "h2", text: "How should couples split 10 days across India?" },
+    { type: "p", text: "The route is the classic Golden Triangle — Delhi, Agra, Jaipur — extended to Udaipur, but the extra three days over a one-week version go into pace, not more cities. The rhythm that works for couples: one headline sight per morning, lunch without a watch, and afternoons that are allowed to be a pool, a bazaar or a nap. Here is the day-by-day shape:" },
+    { type: "table", caption: "A 10-day India itinerary for couples: 9 nights, 5 stops.", headers: ["Day", "Where", "The plan"], rows: [
+      ["1", "Delhi", "Land, recover, short golden-hour outing — India Gate or Humayun's Tomb"],
+      ["2", "Delhi", "Old Delhi morning: Jama Masjid, Chandni Chowk by rickshaw; New Delhi in the afternoon"],
+      ["3", "Delhi → Agra", "Drive the Yamuna Expressway (3–4 hours) after breakfast; sunset view of the Taj Mahal from Mehtab Bagh"],
+      ["4", "Agra → Jaipur", "Taj Mahal at gate opening; breakfast; Agra Fort; on to Jaipur via Fatehpur Sikri"],
+      ["5", "Jaipur", "Amber Fort (Amer Fort) early, City Palace and Jantar Mantar after lunch"],
+      ["6", "Jaipur", "Slow day: Hawa Mahal facade at dawn, bazaars, a block-printing or cooking session"],
+      ["7", "Jaipur → Udaipur", "Morning flight (about 1 hour); afternoon amble through the ghats and old-city lanes"],
+      ["8", "Udaipur", "City Palace and Jagdish Temple, sunset boat ride on Lake Pichola"],
+      ["9", "Udaipur", "No alarm. Sajjangarh (Monsoon Palace) viewpoint, rooftop dinner — or nothing at all"],
+      ["10", "Udaipur → Delhi", "Fly back for the onward connection, or fly home via Mumbai"],
+    ] },
+    { type: "h2", text: "Where should you slow down — and where shouldn't you?" },
+    { type: "p", text: "Slow down in Udaipur and in your second Jaipur day. Udaipur rewards idleness: the lake changes colour through the day, and the best hours are the unscheduled ones — this is why it gets three nights, one of them deliberately empty, as our [Udaipur in 3 days](/guides/udaipur-in-3-days) guide argues. Do not slow down in Agra: it is a one-night, one-morning city for most couples — sunset across the river, sunrise inside the complex, Agra Fort, and away. Delhi sits in between; two nights at the start absorb jet lag, and [the capital's highlights](/destinations/delhi) fit comfortably into a day and a half." },
+    { type: "h2", text: "How do you handle the travel days?" },
+    { type: "p", text: "Three transfers do the work. Delhi–Agra is 230–240 km, 3–4 hours on the Yamuna Expressway — details in our [Delhi to Agra guide](/guides/delhi-to-agra). Agra–Jaipur is around 240 km and 4–6 hours, broken ideally at Fatehpur Sikri, the abandoned Mughal capital, which turns a transfer into a sight. Jaipur–Udaipur is the leg to fly: about an hour airborne against 6–7 hours by road. Keep every drive in daylight; the roads are fine, but night driving in India is a stress no honeymoon needs." },
+    { type: "callout", variant: "warning", title: "Anchor the week around Friday", text: "The Taj Mahal is closed to visitors every Friday. In this plan the visit falls on day 4, so count the calendar before booking flights and shift the start a day if needed — everything else is movable; the Friday closure is not." },
+    { type: "h2", text: "What does the 10-day version cost?" },
+    { type: "p", text: "There is no fixed published 10-day price, because the extra nights are quoted to your hotel taste; the published [7-day Golden Triangle tour with Udaipur](/tours/golden-triangle-tour-7-days-with-udaipur) — same route, tighter pace — starts at $780 per person for two sharing, and a 10-day private version is built from it with three added hotel nights and the same car, driver and guides. Budget the e-Visa (from $25 each), monument tickets (about $16 for the Taj Mahal, less elsewhere) and meals beyond breakfast on top; our [India trip cost from the USA](/guides/india-trip-cost-from-usa) guide turns all of it into example totals." },
+    { type: "h2", text: "When is the best time for this itinerary?" },
+    { type: "p", text: "October to March, with February the pick of the window: dry days, 8–33°C across the route, and Udaipur's lakes full after the monsoon. December and January bring Agra fog at dawn, so keep the sunrise morning flexible. April to June is punishingly hot for a pace this relaxed, and July to September trades crowds for humidity and rain. The month-by-month verdicts are in our [best time for an India honeymoon](/guides/best-time-for-honeymoon-in-india) guide — and if you can only manage a week, the same route compresses into our [7-day honeymoon itinerary](/guides/india-honeymoon-golden-triangle-itinerary)." },
+    { type: "cta", title: "Want this exact trip, priced for your dates?", text: "We run the 7-day version as a published tour and quote the 10-day pace on request — hotels, flight leg, guides and a sunrise photographer, confirmed before you pay.", tour: "golden-triangle-tour-7-days-with-udaipur", label: "Start from the 7-day tour" },
+  ],
+  faqs: [
+    { q: "Is 10 days enough for a first trip to India as a couple?", a: "Yes. Ten days covers Delhi, Agra, Jaipur and Udaipur at a genuinely relaxed pace: 9 nights, four cities, one flight and two daylight drives. You will not see South India, Varanasi or the Himalayas — and should not try. A first trip that does the Golden Triangle plus Udaipur well beats one that races through six regions." },
+    { q: "Should couples spend more time in Jaipur or Udaipur?", a: "Udaipur, by one night. Jaipur has bigger sights — Amber Fort, City Palace, Jantar Mantar — and earns two full days, but it is a working city of traffic and bazaars. Udaipur is the one built for lingering: lake views, rooftop dinners and walkable lanes. Three nights there turns the end of the trip into a rest instead of a sprint finish." },
+    { q: "Can you do this 10-day itinerary by train instead of car?", a: "Partly. The Gatimaan Express covers Delhi–Agra in 1 hour 40 minutes (it does not run on Fridays), but Agra–Jaipur by rail misses Fatehpur Sikri, and Jaipur–Udaipur is far quicker flown. Most couples use a private car for the road legs and the one flight — the car also carries luggage between hotels, which trains do not." },
+    { q: "Is 10 days in India tiring?", a: "Not built this way. The itinerary moves hotels only four times in 9 nights, keeps every drive under 6 hours and in daylight, and leaves two afternoons plus one whole day unscheduled. The tiring version is the opposite shape — six cities, nightly repacking, dawn starts every day. If you want even more slack, drop the second Delhi day and add a fourth Udaipur night." },
+    { q: "What should you book first for a 10-day India trip?", a: "In order: international flights, the e-Visa at indianvisaonline.gov.in (from $25, allow 4–7 days), hotels or a tour for October–March dates, the Jaipur–Udaipur flight, and Taj Mahal tickets at asi.payumoney.com once your Agra morning is fixed and is not a Friday. A sunrise photographer, if you want one, books out earliest in peak season." },
+  ],
+  relatedTours: ["golden-triangle-tour-7-days-with-udaipur", "golden-triangle-tour-4-days", "udaipur-city-tour"],
+  relatedGuides: ["india-honeymoon-golden-triangle-itinerary", "best-time-for-honeymoon-in-india", "udaipur-in-3-days", "india-trip-cost-from-usa", "golden-triangle-itinerary"],
+  keywords: ["10 day India itinerary for couples", "10 days in India", "India itinerary Golden Triangle Udaipur", "two week India trip", "romantic India itinerary 10 days", "Golden Triangle with Udaipur itinerary", "India trip for couples", "where to slow down in India"],
+  sources: [
+    { title: "Archaeological Survey of India – Taj Mahal official site", url: "https://www.tajmahal.gov.in" },
+    { title: "India e-Visa official government portal", url: "https://indianvisaonline.gov.in" },
+    { title: "ASI Online Ticketing (Taj Mahal day tickets)", url: "https://asi.payumoney.com" },
+  ],
+};
+
+export default guide;

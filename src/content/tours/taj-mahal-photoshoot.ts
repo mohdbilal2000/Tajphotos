@@ -35,7 +35,7 @@ const tour: Tour = {
   cancellation: "Free cancellation up to 48 hours before your session; one free date change permitted",
   badges: ["Sunrise", "Private Session"],
   relatedTours: ["taj-mahal-sunrise-tour-with-photographer", "agra-city-tour"],
-  relatedGuides: ["what-to-wear-taj-mahal", "taj-mahal-camera-rules"],
+  relatedGuides: ["what-to-wear-taj-mahal", "taj-mahal-camera-rules", "taj-mahal-couple-photoshoot-guide", "taj-mahal-proposal-guide"],
   keywords: ["Taj Mahal photoshoot", "Taj Mahal photographer", "Taj Mahal couple photoshoot", "Taj Mahal pre-wedding shoot", "Taj Mahal proposal photography", "Agra photographer", "Taj Mahal sunrise photography", "Taj Mahal family photoshoot", "professional Taj Mahal photos", "Taj Mahal photography permit", "Mehtab Bagh photography", "Taj Mahal engagement shoot"],
   description: [
     { type: "h2", text: "A Private Photoshoot at the Taj Mahal" },

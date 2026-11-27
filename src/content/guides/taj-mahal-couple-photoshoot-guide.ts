@@ -1,0 +1,66 @@
+import type { Guide } from "@/content/types";
+
+const guide: Guide = {
+  slug: "taj-mahal-couple-photoshoot-guide",
+  title: "Taj Mahal Couple Photoshoot: Poses, Spots and Rules",
+  summary: "Plan a Taj Mahal couple photoshoot: best benches and angles, poses, outfits, sunrise timing, and what an authorised photographer can and cannot do.",
+  category: "photography",
+  heroImage: "taj-mahal-couple-1",
+  author: "tajphotos-team",
+  datePublished: "2026-11-27",
+  dateModified: "2026-11-27",
+  keyTakeaways: [
+    "A Government-authorised photographer may shoot your visit handheld; tripods, monopods, gimbals, drones and video cameras are banned inside the complex.",
+    "The four classic couple frames are the marble bench, the reflecting pool, the Charbagh garden pathways and the dome framed in the great gate's arch.",
+    "Book the first slot: gates open 30 minutes before sunrise, and the bench queue builds within the hour.",
+    "Solid jewel tones and flowing fabrics photograph best against the white marble; shoe covers go over your footwear on the main platform.",
+    "Published private sessions run $49 (30 minutes), $99 (1-hour sunrise) and $199 (2-hour couple package with an outfit change).",
+  ],
+  body: [
+    { type: "p", text: "A Taj Mahal couple photoshoot works best at gate opening, 30 minutes before sunrise, with a Government-authorised photographer shooting handheld — tripods, drones and video cameras are banned inside. The classic frames are the marble bench, the reflecting pool and the Charbagh gardens, and published private sessions start at $49." },
+    { type: "h2", text: "What can a photographer do at the Taj Mahal — and what can't they?" },
+    { type: "p", text: "A photographer accompanying you is allowed to shoot handheld stills anywhere in the gardens and on the platforms, pose you, and deliver edited images afterwards. What the Archaeological Survey of India (ASI) does not allow inside the complex: tripods, monopods, gimbals, drones, video cameras, and any photography inside the main mausoleum. A produced shoot — lighting stands, outfit racks, a crew — counts as professional/commercial work and needs ASI permission arranged at least 15 days ahead. A couple session that stays handheld and prop-free sits comfortably inside the ordinary visitor rules; the complete list is in our [camera rules guide](/guides/taj-mahal-camera-rules)." },
+    { type: "h2", text: "Where are the best photo spots and angles?" },
+    { type: "table", caption: "The classic couple frames inside the Taj Mahal complex.", headers: ["Spot", "The shot", "Timing note"], rows: [
+      ["Marble bench", "The front-on portrait everyone recognises, dome centred behind you", "Longest queue of any spot; go straight there at opening"],
+      ["Reflecting pool", "Symmetry shot with the monument doubled in the water", "Best before the breeze picks up and ripples the surface"],
+      ["Charbagh pathways", "Walking shots under the trees, dome off-centre", "Quiet all morning; good for candids"],
+      ["Darwaza-i-Rauza (great gate)", "The dome framed in the sandstone arch — the reveal shot", "Shoot it on the way in, before the forecourt fills"],
+      ["Side platforms by the mosque", "Low sun raking across the marble, fewer people", "Golden light in the first 30 minutes"],
+      ["Mehtab Bagh (across the river)", "The Taj Mahal over the Yamuna at sunset", "Separate ₹300 ticket; open on Fridays"],
+    ] },
+    { type: "h2", text: "What poses actually work?" },
+    { type: "ul", items: [
+      "**The bench classic:** sit close, hands stacked, photographer low and centred so the dome rises directly between you.",
+      "**The walk-away:** hold hands and walk the Charbagh path away from camera, then glance back on a count of three.",
+      "**The frame-within-a-frame:** stand in the great gate's arch as a silhouette, dome glowing behind.",
+      "**The veil or dupatta lift:** fabric catching the breeze adds motion; bring a scarf even with Western outfits.",
+      "**The quiet one:** forehead to forehead at the reflecting pool — the shot that looks like nobody was watching.",
+    ] },
+    { type: "p", text: "Trust the photographer's sequence: the light moves fast after sunrise, so the usual order is bench and pool first, gardens and gate after. If the proposal is still a surprise, coordinate the signal in advance — our [Taj Mahal proposal guide](/guides/taj-mahal-proposal-guide) covers that choreography, including getting the ring through security." },
+    { type: "h2", text: "What should couples wear for a Taj Mahal shoot?" },
+    { type: "p", text: "Solid jewel tones — deep red, emerald, royal blue, mustard — stand out against white marble far better than white, cream or busy prints. Flowing fabrics move well in the morning breeze; shoulders and knees covered is the respectful norm at an active mosque site; and comfortable shoes matter because shoe covers go over them on the main platform. Saris and lehengas photograph beautifully but take practice to walk in, so wear one only if you have worn one before. Full detail, including what the heat does to fabric choices, is in [what to wear at the Taj Mahal](/guides/what-to-wear-taj-mahal)." },
+    { type: "callout", variant: "tip", title: "No changing rooms inside", text: "There are no changing facilities in the complex. For a two-outfit session, wear layers you can swap discreetly, or plan the second look for Mehtab Bagh afterwards. Large bags are not allowed in, so keep everything to a small shoulder bag." },
+    { type: "h2", text: "How much does a couple photoshoot cost?" },
+    { type: "p", text: "Published prices for a private session with a Government-authorised photographer: $49 for a 30-minute Quick Capture at one spot with 15 edited photos, $99 for a one-hour Sunrise Session across two to three spots with 30 edited photos, and $199 for the two-hour Couple/Pre-Wedding package — multiple locations, one outfit change, a photographer plus assistant and 50+ edited photos. Every package delivers high-resolution files within 24–48 hours; the tiers are on the [Taj Mahal photoshoot](/tours/taj-mahal-photoshoot) page. Your Taj Mahal entry ticket (₹1,300 for foreign nationals) is always separate, bought at asi.payumoney.com or the gate." },
+    { type: "h2", text: "When should you schedule the shoot?" },
+    { type: "p", text: "Book the first entry of the day, any day except Friday, when the Taj Mahal is closed. Sunrise light is soft and directional, crowds are at their thinnest and the 3-hour visit limit leaves time to explore afterwards — the trade-offs against an evening slot are laid out in [sunrise vs sunset at the Taj Mahal](/guides/taj-mahal-sunrise-vs-sunset). October to March is the dependable season; in December and January have a fog plan: shoot the gardens first and let the dome emerge. Many couples build the shoot into day 3 of a [Golden Triangle honeymoon](/guides/india-honeymoon-golden-triangle-itinerary)." },
+    { type: "cta", title: "Book your Taj Mahal couple session", text: "Three published tiers — $49, $99 and $199 — all with edited photos delivered within 48 hours. Sunrise slots go first.", tour: "taj-mahal-photoshoot", label: "See photoshoot packages" },
+  ],
+  faqs: [
+    { q: "Can you hire a photographer inside the Taj Mahal?", a: "Yes. A Government-authorised photographer can accompany your visit and shoot handheld stills in the gardens and platform areas, then deliver edited images afterwards. Equipment is the limit, not the photographer: tripods, drones, gimbals and video cameras are banned inside, and nothing can be photographed inside the main mausoleum. Published private sessions start at $49 for 30 minutes." },
+    { q: "What is the best spot for couple photos at the Taj Mahal?", a: "The marble bench facing the dome is the signature shot, followed by the reflecting pool for symmetry, the Charbagh garden paths for candids and the great gate arch for the reveal frame. The bench draws the longest queue, so go straight to it at gate opening — 30 minutes before sunrise — and work outward from there." },
+    { q: "What should we wear for a Taj Mahal photoshoot?", a: "Solid jewel tones — deep red, emerald, royal blue — photograph best against the white marble; avoid white, cream and busy prints that disappear into it. Keep shoulders and knees covered, choose flowing fabrics that move in the breeze, and wear comfortable shoes, since shoe covers go over them on the main platform. Bring a scarf or dupatta for motion shots." },
+    { q: "Can we do an outfit change during the shoot?", a: "Only within limits: the complex has no changing rooms, so the published 2-hour couple package schedules one discreet outfit change using layers, and large bags are not allowed through security. Couples who want a full second look usually shoot it at Mehtab Bagh across the river afterwards, where the Taj Mahal forms the backdrop at sunset." },
+    { q: "Is video allowed for a couple shoot at the Taj Mahal?", a: "No. Video cameras, drones and gimbals are banned inside the complex, so a couple session there is stills-only, shot handheld. If you want moving footage of the two of you with the monument, plan it from Mehtab Bagh or another viewpoint outside the complex, and confirm the current rules for that site locally before counting on it." },
+  ],
+  relatedTours: ["taj-mahal-photoshoot", "taj-mahal-sunrise-tour-with-photographer", "agra-city-tour"],
+  relatedGuides: ["taj-mahal-proposal-guide", "what-to-wear-taj-mahal", "taj-mahal-camera-rules", "taj-mahal-sunrise-vs-sunset", "india-honeymoon-golden-triangle-itinerary"],
+  keywords: ["Taj Mahal couple photoshoot", "Taj Mahal photoshoot poses", "Taj Mahal photography spots", "Taj Mahal photographer for couples", "Taj Mahal photoshoot price", "what to wear Taj Mahal photoshoot", "Taj Mahal bench photo", "Mehtab Bagh couple photos"],
+  sources: [
+    { title: "Archaeological Survey of India – Taj Mahal official site (photography rules)", url: "https://www.tajmahal.gov.in" },
+    { title: "ASI Online Ticketing (Taj Mahal day tickets)", url: "https://asi.payumoney.com" },
+  ],
+};
+
+export default guide;

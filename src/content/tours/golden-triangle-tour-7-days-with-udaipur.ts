@@ -39,7 +39,7 @@ const tour: Tour = {
   cancellation: "Free cancellation up to 48 hours before the tour start date",
   badges: ["Sunrise Taj Mahal", "7 Days"],
   relatedTours: ["golden-triangle-tour-4-days", "jaipur-jodhpur-udaipur-tour"],
-  relatedGuides: ["golden-triangle-itinerary", "golden-triangle-tour-cost"],
+  relatedGuides: ["golden-triangle-itinerary", "golden-triangle-tour-cost", "india-honeymoon-golden-triangle-itinerary", "10-day-india-itinerary-for-couples", "best-time-for-honeymoon-in-india"],
   keywords: ["Golden Triangle tour with Udaipur", "Delhi Agra Jaipur Udaipur tour", "7 day India tour itinerary", "Taj Mahal sunrise tour", "Jaipur to Udaipur flight tour", "Lake Pichola sunset boat ride", "Amber Fort jeep tour", "Udaipur City Palace tour", "Rajasthan extension tour", "Golden Triangle plus Rajasthan", "Agra Fort and Fatehpur Sikri tour", "private India tour with driver"],
   description: [
     { type: "p", text: "This 7-day, 6-night tour extends the classic Golden Triangle - Delhi, Agra, Jaipur - south to Udaipur, connected by a short domestic flight rather than a full day on the road. It is built for a first, comprehensive trip to India: two UNESCO-listed monuments, three City Palaces, and a sunset boat ride on Lake Pichola, all on a fixed, guided itinerary with a private car throughout." },

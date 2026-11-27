@@ -1,0 +1,61 @@
+import type { Guide } from "@/content/types";
+
+const guide: Guide = {
+  slug: "taj-mahal-proposal-guide",
+  title: "Proposing at the Taj Mahal: Rules, Spots and Timing",
+  summary: "Yes, you can propose at the Taj Mahal: no permit for a simple proposal, handheld photos only, never on a Friday. Best spots, timing and ring tips.",
+  category: "taj-mahal",
+  heroImage: "taj-mahal-wide-1",
+  author: "tajphotos-team",
+  datePublished: "2026-11-27",
+  dateModified: "2026-11-27",
+  keyTakeaways: [
+    "A simple proposal with handheld photos needs no permit; tripods, drones, video cameras and anything staged or commercial-looking do need ASI permission, arranged 15+ days ahead.",
+    "The classic spots are the marble bench facing the dome, the reflecting pool and the Charbagh garden pathways; Mehtab Bagh across the river is the sunset alternative.",
+    "Go at gate opening, 30 minutes before sunrise, on any day except Friday, when the Taj Mahal is closed to visitors.",
+    "Carry the ring loose in a zipped pocket, not in a boxed shopping bag: security screens men and women in separate lanes, which conveniently keeps the surprise intact.",
+    "Each ticket allows 3 hours inside, so plan the proposal for the first 30–45 minutes while the light is soft and the crowds are thin.",
+  ],
+  body: [
+    { type: "p", text: "Yes, you can propose at the Taj Mahal: no permit is needed for a simple proposal with handheld photos in the gardens and platform areas. Arrive at gate opening, 30 minutes before sunrise, avoid Fridays when the monument is closed, and carry the ring loose in a zipped pocket through security." },
+    { type: "h2", text: "Is proposing at the Taj Mahal allowed?" },
+    { type: "p", text: "A quiet proposal is treated like any other visit: you buy a normal ticket (₹1,100 plus the ₹200 mausoleum add-on for foreign nationals), walk to your chosen spot and ask the question. What the Archaeological Survey of India (ASI) regulates is equipment and staging, not the moment itself. Tripods, monopods, gimbals, drones and video cameras are banned inside the complex, and anything that looks like a produced shoot — signs, decorations, changing outfits on site, a crew — falls under commercial photography, which needs ASI permission arranged at least 15 days in advance." },
+    { type: "p", text: "That is why most couples keep it simple: one Government-authorised photographer shooting handheld, no props, no banner. Photography is also prohibited inside the main mausoleum, so plan the moment outside, with the dome behind you. The full equipment list is in our [Taj Mahal camera rules guide](/guides/taj-mahal-camera-rules)." },
+    { type: "h2", text: "Where are the best proposal spots inside the complex?" },
+    { type: "table", caption: "Proposal spots inside the Taj Mahal complex, and when each works best.", headers: ["Spot", "Why it works", "Best time"], rows: [
+      ["The marble bench (the famous photo bench)", "Front-on view of the dome; the shot everyone recognises", "First 30 minutes after gate opening, before queues form"],
+      ["The reflecting pool", "Symmetry, with the monument mirrored in the water", "Sunrise, while the water is still"],
+      ["Charbagh garden pathways", "Quieter side angles, trees framing the dome", "Any time; least contested spot"],
+      ["Darwaza-i-Rauza (great gate)", "The dome framed in the arch as you enter — a natural reveal", "The moment you walk through at opening"],
+      ["Mehtab Bagh (outside, across the river)", "The Taj Mahal across the Yamuna, far fewer people", "Sunset; also open on Fridays"],
+    ] },
+    { type: "p", text: "The bench is the most contested spot in the complex, which is the strongest argument for being inside at gate opening. If you would rather not have an audience at all, [Mehtab Bagh](/guides/mehtab-bagh-taj-mahal-view) — the Mughal garden directly across the river — gives you the monument as a backdrop, a ₹300 ticket and a fraction of the crowd." },
+    { type: "h2", text: "What time should you plan the proposal?" },
+    { type: "p", text: "Gates open 30 minutes before sunrise, and the first 45 minutes are the quietest and best-lit of the day: soft pink-gold light on the marble and room to stand at the bench or pool without strangers in the frame. Each ticket allows a maximum of 3 hours inside, so an early entry also leaves time to simply enjoy the place afterwards. October to March is the most reliable season, though December and January mornings can bring fog — our [best time to visit the Taj Mahal](/guides/best-time-to-visit-taj-mahal) guide has the month-by-month picture." },
+    { type: "callout", variant: "warning", title: "Never plan the proposal for a Friday", text: "The Taj Mahal is closed to visitors every Friday, with entry only for local Muslims attending prayers. If your only Agra day is a Friday, propose at [Mehtab Bagh](/guides/mehtab-bagh-taj-mahal-view) or from Agra Fort's river-facing pavilions instead — both stay open." },
+    { type: "h2", text: "How do you get the ring through security?" },
+    { type: "p", text: "Every visitor passes a metal detector, a pat-down and a bag check, with separate lanes for men and women — which quietly works in your favour, since your partner will not see your pockets checked. Keep the ring loose or in a soft pouch in a zipped pocket rather than in a branded box inside a bag, where it is more likely to be opened and discussed in the X-ray line. A small personal item like a ring is not a prohibited article; if a guard does ask, a quiet word is normally the end of it. Large bags, food and smoking materials are banned, so carry as little as possible." },
+    { type: "h2", text: "Can a photographer capture the proposal?" },
+    { type: "p", text: "Yes — a Government-authorised photographer can walk with you, shoot the moment handheld and deliver edited photos afterwards; what they cannot do is fly a drone, set up a tripod or film video inside the complex. Published private sessions start at $49 for a 30-minute shoot, $99 for a one-hour sunrise session and $199 for a two-hour couple package on the [Taj Mahal photoshoot](/tours/taj-mahal-photoshoot) page. Brief the photographer in advance on the exact spot and signal, so they are already in position when you go down on one knee. Poses, outfits and angles are covered in our [couple photoshoot guide](/guides/taj-mahal-couple-photoshoot-guide)." },
+    { type: "h2", text: "How do you fit the proposal into a bigger trip?" },
+    { type: "p", text: "Most couples make the proposal the centrepiece of a Golden Triangle route: Delhi, the proposal at sunrise in Agra, then Jaipur, with Udaipur's lakes as the celebration stop. Our [7-day honeymoon itinerary](/guides/india-honeymoon-golden-triangle-itinerary) is built around exactly that shape. Dress for the occasion but also for the setting — see [what to wear at the Taj Mahal](/guides/what-to-wear-taj-mahal) for fabric and modesty pointers that keep you comfortable through security and the morning heat." },
+    { type: "cta", title: "Planning a Taj Mahal proposal?", text: "Our sunrise tour includes a private photographer who shoots the whole visit handheld — in position before the question is asked. From $149 per person.", tour: "taj-mahal-sunrise-tour-with-photographer", label: "See the sunrise photo tour" },
+  ],
+  faqs: [
+    { q: "Do you need permission to propose at the Taj Mahal?", a: "No permit is needed for a simple proposal with handheld photos in the gardens and platform areas — it is treated as a normal visit. Permission from the ASI, arranged at least 15 days ahead, is only required for commercial-style shoots involving tripods, video, props or a crew. Keep it to one photographer shooting handheld and you are within the rules." },
+    { q: "Can you bring an engagement ring into the Taj Mahal?", a: "Yes. A ring is a personal item, not a prohibited article. Carry it loose or in a soft pouch in a zipped pocket rather than in a boxed bag, since bags go through an X-ray and may be opened. Security screens men and women in separate lanes, so your partner will not see your pockets checked — the surprise survives the gate." },
+    { q: "What is the best time of day to propose at the Taj Mahal?", a: "Gate opening, 30 minutes before sunrise. The first 45 minutes give the softest light on the marble and the thinnest crowds at the bench and reflecting pool, and the 3-hour visit limit leaves time to celebrate inside afterwards. Sunset is the fallback, but expect far more people in the frame, especially from October to March." },
+    { q: "Can a photographer film a proposal video at the Taj Mahal?", a: "No. Video cameras, drones, gimbals and tripods are banned inside the complex under ASI rules, so a proposal there is captured in photographs, shot handheld. If moving footage matters to you, plan a second session at Mehtab Bagh across the river, and confirm current filming rules for that site locally before promising anyone a film." },
+    { q: "Where can you propose if your Agra day falls on a Friday?", a: "The Taj Mahal is closed to visitors every Friday, so propose at Mehtab Bagh, the Mughal garden directly across the Yamuna with a full view of the monument, or from Agra Fort's river-facing pavilions. Both stay open on Fridays, and Mehtab Bagh at sunset is quieter than the main complex on any day of the week." },
+  ],
+  relatedTours: ["taj-mahal-sunrise-tour-with-photographer", "taj-mahal-photoshoot", "same-day-taj-mahal-tour-by-car"],
+  relatedGuides: ["taj-mahal-couple-photoshoot-guide", "india-honeymoon-golden-triangle-itinerary", "mehtab-bagh-taj-mahal-view", "best-time-to-visit-taj-mahal", "what-to-wear-taj-mahal"],
+  keywords: ["Taj Mahal proposal", "proposing at the Taj Mahal", "Taj Mahal engagement", "Taj Mahal proposal rules", "Taj Mahal proposal photographer", "best place to propose at the Taj Mahal", "Mehtab Bagh proposal", "Taj Mahal proposal ideas"],
+  sources: [
+    { title: "Archaeological Survey of India – Taj Mahal official site (visitor rules)", url: "https://www.tajmahal.gov.in" },
+    { title: "ASI Online Ticketing (Taj Mahal day tickets)", url: "https://asi.payumoney.com" },
+    { title: "Archaeological Survey of India", url: "https://asi.nic.in" },
+  ],
+};
+
+export default guide;

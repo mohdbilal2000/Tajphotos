@@ -1,0 +1,70 @@
+import type { Guide } from "@/content/types";
+
+const guide: Guide = {
+  slug: "india-travel-checklist-for-americans",
+  title: "India Travel Checklist for Americans: First Trip",
+  summary: "First trip to India from the USA? The checklist: e-Visa from the official site, passport validity, plug types, money, SIM cards, health and what to download.",
+  category: "practical",
+  heroImage: "india-private-car-1",
+  author: "tajphotos-team",
+  datePublished: "2026-11-27",
+  dateModified: "2026-11-27",
+  keyTakeaways: [
+    "US citizens need a visa for India; the e-Tourist Visa starts from USD 25 on the official site, indianvisaonline.gov.in.",
+    "Apply only on the official site: many look-alike sites charge extra fees.",
+    "India uses 230V power with Type C, D and M sockets; bring a universal adapter.",
+    "Health advice changes: check the CDC's India page and talk to your doctor well before you fly.",
+    "The Taj Mahal is closed every Friday, so fix your Agra day before booking anything else.",
+  ],
+  body: [
+    { type: "p", text: "For a first trip to India from the USA, sort five things in this order: the e-Visa from the official government site, a passport with enough validity, a universal plug adapter for 230V sockets, a payment plan that mixes cards and cash, and health advice from the CDC and your doctor. Everything else is detail." },
+    { type: "h2", text: "What documents do Americans need for India?" },
+    { type: "ul", items: [
+      "**Visa.** US citizens need one. The e-Tourist Visa is applied for online; fees start from USD 25 for the 30-day visa, with 1-year (USD 40) and 5-year (USD 80) options, as listed on the official portal. Fees and rules change, so confirm there. Step by step: our [India e-Visa guide](/guides/india-e-visa).",
+      "**Official site only.** Apply at indianvisaonline.gov.in. Look-alike sites charge extra fees for the same form.",
+      "**Passport.** Check the validity and blank-page requirements on the official e-Visa site before you apply, and travel with the same passport you applied on.",
+      "**Printouts.** Carry a printed copy of the e-Visa approval and your hotel or tour confirmations; phones run out of battery at immigration desks.",
+    ] },
+    { type: "callout", variant: "warning", title: "Apply before you book tight connections", text: "The e-Visa must be approved before you board. Do not leave it to the airport, and do not assume a layover tour is possible without one: leaving the airport means entering India." },
+    { type: "h2", text: "What plugs and voltage does India use?" },
+    { type: "p", text: "India runs on 230V at 50Hz, with Type C, D and M sockets. Phone and laptop chargers are almost always dual-voltage (check the label says 100–240V), so a universal adapter is enough. US-only appliances such as some hair tools are 110V and need a voltage converter or should stay home." },
+    { type: "h2", text: "How should we handle money?" },
+    { type: "table", headers: ["Method", "Where it works", "Tip"], rows: [
+      ["Credit/debit cards", "Hotels, larger restaurants, many shops", "Tell your bank you are travelling; carry two cards"],
+      ["ATM cash (rupees)", "Cities and towns", "Withdraw in the daytime at bank-branch ATMs"],
+      ["Small cash", "Tips, tea, rickshaws, small shops", "Keep small notes; see our tipping guide"],
+    ] },
+    { type: "p", text: "The rupee is a closed currency, so you get it in India, not at home. For what and when to tip, read the [tipping in India guide](/guides/tipping-in-india-guide), and for a full budget see [what the trip costs from the USA](/guides/india-trip-cost-from-usa)." },
+    { type: "h2", text: "Phone, SIM and apps: what works?" },
+    { type: "ul", items: [
+      "**Connectivity.** Check your US carrier's international plan first; an eSIM or a local SIM (passport and visa needed to buy one) is usually cheaper for a longer trip.",
+      "**WhatsApp.** It is how India communicates: drivers, guides and hotels all use it, including us.",
+      "**Maps offline.** Download Delhi, Agra and Jaipur in Google Maps before you fly.",
+      "**Tickets.** Taj Mahal tickets are sold on the official ASI portal; details in our [Taj Mahal tickets guide](/guides/taj-mahal-tickets).",
+    ] },
+    { type: "h2", text: "What about health and water?" },
+    { type: "p", text: "Health recommendations for India, including routine and travel vaccines, are published by the CDC and change over time, so read the CDC's India page and see your doctor or a travel clinic well before departure. On the ground, drink sealed bottled or filtered water, be careful with ice and raw salads from street stalls, and carry any prescription medicines in their original packaging." },
+    { type: "h2", text: "What should we pack and wear?" },
+    { type: "p", text: "Light, breathable clothing that covers shoulders and knees works for monuments and mosques; add a warm layer for sunrise from November to February. Details, including what is not allowed inside the Taj Mahal, are in [what to wear to the Taj Mahal](/guides/what-to-wear-taj-mahal). Leave drones at home: they are banned at the monuments." },
+    { type: "h2", text: "What should we plan before anything else?" },
+    { type: "p", text: "Your Agra day. The Taj Mahal is closed every Friday, so fix that date first and build the route around it; see [is the Taj Mahal closed on Friday](/guides/is-taj-mahal-closed-on-friday). First-time visitors usually start with the classic [Golden Triangle itinerary](/guides/golden-triangle-itinerary), and couples can skip straight to our [safety guide for couples](/guides/is-india-safe-for-couples)." },
+    { type: "cta", title: "Want it handled end to end?", text: "A private car, a Government-licensed guide and the Taj Mahal at sunrise, planned around your flight.", tour: "golden-triangle-tour-4-days", label: "See the 4-day Golden Triangle" },
+  ],
+  faqs: [
+    { q: "Do US citizens need a visa for India?", a: "Yes. Most American tourists use the e-Tourist Visa, applied for online at indianvisaonline.gov.in, with fees from USD 25 for the 30-day option. It must be approved before you fly. Use only the official site, since look-alike sites charge extra for the same application." },
+    { q: "Will my American phone charger work in India?", a: "Almost certainly, with a plug adapter. India uses 230V with Type C, D and M sockets, and modern phone and laptop chargers are dual-voltage (100–240V, printed on the charger). Single-voltage 110V appliances need a converter or should be left at home." },
+    { q: "Can I use US dollars in India?", a: "Not for everyday spending. Prices are in rupees, which you obtain in India from ATMs or exchange counters. Cards work at hotels and larger businesses; small cash is needed for tips, rickshaws and small shops. Some tour operators quote in dollars for convenience." },
+    { q: "What vaccines do I need for India?", a: "Recommendations change and depend on your health and itinerary, so we do not give medical advice. Check the CDC's destination page for India and consult your doctor or a travel clinic several weeks before departure." },
+    { q: "Is tap water safe to drink in India?", a: "Stick to sealed bottled or properly filtered water, including for brushing teeth if you have a sensitive stomach. Most hotels provide bottled water daily. Be cautious with ice and uncooked food from street stalls, especially in your first days." },
+  ],
+  relatedTours: ["golden-triangle-tour-4-days", "same-day-taj-mahal-tour-by-car", "last-minute-golden-triangle-tour"],
+  relatedGuides: ["india-e-visa", "india-trip-cost-from-usa", "tipping-in-india-guide", "is-india-safe-for-couples"],
+  keywords: ["India travel checklist for Americans", "first trip to India from USA", "India visa for US citizens", "India plug type voltage", "what to pack for India", "India travel tips for Americans", "India SIM card for tourists"],
+  sources: [
+    { title: "Indian e-Visa official portal", url: "https://indianvisaonline.gov.in" },
+    { title: "CDC Travelers' Health: India", url: "https://wwwnc.cdc.gov/travel/destinations/traveler/none/india" },
+    { title: "U.S. Department of State: India travel information", url: "https://travel.state.gov/content/travel/en/international-travel/International-Travel-Country-Information-Pages/India.html" },
+  ],
+};
+
+export default guide;
