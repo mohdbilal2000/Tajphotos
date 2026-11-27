@@ -27,7 +27,7 @@ import { TestimonialGrid } from "@/components/sections/Testimonial";
 import { CtaCard } from "@/components/sections/CtaCard";
 import { FaqList } from "@/components/content/RichText";
 import { JsonLd } from "@/components/JsonLd";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, faqJsonLd, graph, webPageJsonLd } from "@/lib/seo";
 import { withoutBlur } from "@/lib/utils";
 
 const homeTitle = `Private Taj Mahal & Golden Triangle Tours | ${site.name}`;
@@ -180,7 +180,7 @@ export default function Home() {
 
   return (
     <>
-      <JsonLd data={{ "@context": "https://schema.org", "@type": "WebPage", name: homeTitle, url: site.url, description: site.description }} />
+      <JsonLd data={graph({ ...webPageJsonLd({ path: "/", name: homeTitle, description: site.description }), about: { "@id": `${site.url}/#organization` } }, faqJsonLd(homeFaqs))} />
 
       <Hero
         image={withoutBlur(hero.src)}

@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const g = getGuide(slug);
   if (!g) return {};
   const img = getImage(g.heroImage);
-  return buildMetadata({ title: g.title, description: g.summary, path: `/guides/${g.slug}`, image: img.src.src, type: "article", publishedTime: g.datePublished, modifiedTime: g.dateModified, keywords: g.keywords });
+  return buildMetadata({ title: g.title, description: g.summary, path: `/guides/${g.slug}`, image: img.src.src, imageAlt: img.alt, type: "article", publishedTime: g.datePublished, modifiedTime: g.dateModified, keywords: g.keywords, authors: [getTeamMember(g.author).name], section: g.category.replace(/-/g, " ") });
 }
 
 export default async function GuidePage({ params }: { params: Promise<{ slug: string }> }) {
